@@ -9,6 +9,16 @@
 (tool-bar-mode -1)
 (menu-bar-mode 1)
 
+;; Inhibit startup/splash screen
+(setq inhibit-splash-screen   t)
+(setq ingibit-startup-message t
+
+;; Delete selection
+      (delete-selection-mode t)
+
+      ;;disable scrollbar
+      (scroll-bar-mode   -1)
+
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
@@ -72,8 +82,32 @@
 ;;ruby
 (require 'ruby-tools)
 
-;;tabs 4
-(setq tab-width 4)
+;; Indent settings
+(setq-default indent-tabs-mode nil) ;; отключить возможность ставить отступы TAB'ом
+(setq-default tab-width          4) ;; ширина табуляции - 4 пробельных символа
+(setq-default c-basic-offset     4)
+(setq-default standart-indent    4) ;; стандартная ширина отступа - 4 пробельных символа
+(setq-default lisp-body-indent   4) ;; сдвигать Lisp-выражения на 4 пробельных символа
+(global-set-key (kbd "RET") 'newline-and-indent) ;; при нажатии Enter перевести каретку и сделать отступ
+(setq lisp-indent-function  'common-lisp-indent-function)
+
+;; Clipboard settings
+(setq x-select-enable-clipboard t)
+
+;; Easy transition between buffers: M-arrow-keys
+(if (equal nil (equal major-mode 'org-mode))
+    (windmove-default-keybindings 'meta))
+
+;; Delete trailing whitespaces, format buffer and untabify when save buffer
+(defun format-current-buffer()
+    (indent-region (point-min) (point-max)))
+(defun untabify-current-buffer()
+    (if (not indent-tabs-mode)
+        (untabify (point-min) (point-max)))
+    nil)
+(add-to-list 'write-file-functions 'format-current-buffer)
+(add-to-list 'write-file-functions 'untabify-current-buffer)
+(add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
 ;;slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
