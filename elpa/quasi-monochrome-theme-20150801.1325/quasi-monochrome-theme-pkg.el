@@ -1,0 +1,1 @@
+(define-package "quasi-monochrome-theme" "20150801.1325" "High contrast quasi monochrome color theme" 'nil :url "https://github.com/lbolla/emacs-quasi-monochrome" :keywords '("color-theme" "monochrome" "high contrast"))
