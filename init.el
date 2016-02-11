@@ -1,8 +1,8 @@
 (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.org/packages/")
+ t)
 (package-initialize)
 
 ;;toolbar and menu
@@ -11,46 +11,46 @@
 
 ;; Inhibit startup/splash screen
 (setq inhibit-splash-screen   t)
-(setq ingibit-startup-message t
+(setq ingibit-startup-message t)
 
 ;; Delete selection
-      (delete-selection-mode t)
+(delete-selection-mode t)
 
-      ;;disable scrollbar
-      (scroll-bar-mode   -1)
+;;disable scrollbar
+(scroll-bar-mode   -1)
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
-  (interactive (if mark-active (list (region-beginning) (region-end)) (message
-  "Copied line") (list (line-beginning-position) (line-beginning-position
-  2)))))
+           (interactive (if mark-active (list (region-beginning) (region-end)) (message
+                                                                                "Copied line") (list (line-beginning-position) (line-beginning-position
+                                                                                                                                2)))))
 (defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single line instead."
-  (interactive
-    (if mark-active (list (region-beginning) (region-end))
-      (list (line-beginning-position)
-	    (line-beginning-position 2)))))
+    "When called interactively with no active region, kill a single line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+         (list (line-beginning-position)
+               (line-beginning-position 2)))))
 
 ;;paren mode
 (setq show-paren-style 'expression)
 (show-paren-mode 1)
 (defadvice show-paren-function
-      (after show-matching-paren-offscreen activate)
-      "If the matching paren is offscreen, show the matching line in the
+    (after show-matching-paren-offscreen activate)
+    "If the matching paren is offscreen, show the matching line in the
         echo area. Has no effect if the character before point is not of
         the syntax class ')'."
-      (interactive)
-      (let* ((cb (char-before (point)))
-             (matching-text (and cb
-                                 (char-equal (char-syntax cb) ?\) )
-                                 (blink-matching-open))))
+    (interactive)
+    (let* ((cb (char-before (point)))
+           (matching-text (and cb
+                               (char-equal (char-syntax cb) ?\) )
+                               (blink-matching-open))))
         (when matching-text (message matching-text))))
 
 ;;sexy mode line
 (sml/setup t)
-(setq sml/theme 'light)
 (setq sml/no-confirm-load-theme t)
+(setq sml/theme 'light)
 (nyan-mode t)
 
 ;; show buffers
@@ -116,51 +116,50 @@
 ;;sr-speedbar
 (require 'sr-speedbar)
 (global-set-key (kbd "<f12>") 'sr-speedbar-toggle)
-(setq speedbar-supported-extension-expressions '(
-  ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?"
-  ".tex\\(i\\(nfo\\)?\\)?"
-  ".todo"
-  ".done"
-  ".md"
-  ".el"
-  ".emacs"
-  ".l"
-  ".lsp"
-  ".p"
-  ".java"
-  ".js"
-  ".f\\(90\\|77\\|or\\)?"
-  ".ad[abs]"
-  ".p[lm]"
-  ".tcl"
-  ".m"
-  ".scm"
-  ".pm"
-  ".py"
-  ".g"
-  ".rb"
-  "\\.\\(inc\\|php[s345]?\\|phtml\\)"
-  ".s?html"
-  ".ma?k"
-  "[Mm]akefile\\(\\.in\\)?"))
+
+))
 (add-hook 'speedbar-mode-hook
           (lambda()
-            (speedbar-add-supported-extension "\\.rb")
-            (speedbar-add-supported-extension "\\.ru")
-            (speedbar-add-supported-extension "\\.erb")
-            (speedbar-add-supported-extension "\\.rjs")
-            (speedbar-add-supported-extension "\\.rhtml")
-            (speedbar-add-supported-extension "\\.rake")
-	    (speedbar-add-supported-extension "\\.md")
-	    (speedbar-add-supported-extension "\\.py")
-	    (speedbar-add-supported-extension "\\.html")
-	    (speedbar-add-supported-extension "\\.css")))
+              (speedbar-add-supported-extension "\\.rb")
+              (speedbar-add-supported-extension "\\.ru")
+              (speedbar-add-supported-extension "\\.erb")
+              (speedbar-add-supported-extension "\\.rjs")
+              (speedbar-add-supported-extension "\\.rhtml")
+              (speedbar-add-supported-extension "\\.rake")
+              (speedbar-add-supported-extension "\\.md")
+              (speedbar-add-supported-extension "\\.py")
+              (speedbar-add-supported-extension "\\.html")
+              (speedbar-add-supported-extension "\\.css")
+              (speedbar-add-supported-extension  ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?")
+              (speedbar-add-supported-extension  ".tex\\(i\\(nfo\\)?\\)?")
+              (speedbar-add-supported-extension  "\\.todo")
+              (speedbar-add-supported-extension  "\\.done")
+              (speedbar-add-supported-extension  "\\.el")
+              (speedbar-add-supported-extension  ".emacs")
+              (speedbar-add-supported-extension  "\\.l")
+              (speedbar-add-supported-extension  "\\.lsp")
+              (speedbar-add-supported-extension  "\\.p")
+              (speedbar-add-supported-extension  "\\.java")
+              (speedbar-add-supported-extension  "\\.js")
+              (speedbar-add-supported-extension  ".f\\(90\\|77\\|or\\)?")
+              (speedbar-add-supported-extension  ".ad[abs]")
+              (speedbar-add-supported-extension  ".p[lm]")
+              (speedbar-add-supported-extension  "\\.tcl")
+              (speedbar-add-supported-extension  ".m")
+              (speedbar-add-supported-extension  "\\.scm")
+              (speedbar-add-supported-extension  ".pm")
+              (speedbar-add-supported-extension  "\\.g")
+              (speedbar-add-supported-extension  "\\.\\(inc\\|php[s345]?\\|phtml\\)")
+              (speedbar-add-supported-extension  ".s?html")
+              (speedbar-add-supported-extension  ".ma?k")
+              (speedbar-add-supported-extension  "[Mm]akefile\\(\\.in\\)?")
+              (speedbar-add-supported-extension  "\\.rs")))
 
 ;;yanisppet
 (require 'yasnippet)
 (yas-global-mode 1)
 (add-to-list 'load-path
-              "~/.emacs.d/plugins/yasnippet")
+             "~/.emacs.d/plugins/yasnippet")
 ;;(yas/load-directory "~/.emacs.d/yasnippet/snippets")
 
 (package-install 'flycheck)
@@ -175,7 +174,7 @@
 
 ;;Markdown
 (autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
+    "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -186,7 +185,9 @@
 ;;autopair
 (require 'autopair)
 (autopair-global-mode)
+;;gutter
 (global-git-gutter-mode +1)
+(git-gutter:linum-setup)
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
 
@@ -210,23 +211,21 @@
 (setq web-mode-code-indent-offset 2)
 
 ;;сниппеты и автозакрытие парных скобок
-(setq web-mode-extra-nippets '(("erb" . (("name" . ("beg" . "end"))))
-                                ))
-(setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))
-                                  ))
+(setq web-mode-extra-nippets '(("erb" . (("name" . ("beg" . "end"))))))
+(setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
 
-;;autocomplete
-(ac-config-default)
-
+;;company mode
+(global-company-mode t)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;map
-   (global-set-key (kbd "<f8>") 'visit-tags-table)
+(global-set-key (kbd "<f8>") 'visit-tags-table)
 
-  ;; | Combo | Function         | Description                |
-  ;; |-------+------------------+----------------------------|
-  ;; | <f3>  | visit-tags-table | Loads tags                 |
-  ;; | M-.   | find-tag         | Jumps to the specified tag |
-  ;; | C-M-. | pop-tag-mark     | Jumps back                 |
+;; | Combo | Function         | Description                |
+;; |-------+------------------+----------------------------|
+;; | <f3>  | visit-tags-table | Loads tags                 |
+;; | M-.   | find-tag         | Jumps to the specified tag |
+;; | C-M-. | pop-tag-mark     | Jumps back                 |
 
 (global-set-key (kbd "C-M-b") 'bookmark-set)
 (global-set-key (kbd "M-C-b") 'bookmark-jump)
@@ -238,7 +237,7 @@
 
 ;;line nunbersppp
 (global-linum-mode 1)
-(setq linum-format " %d ")
+(setq linum-format "%d ")
 
 ;;autopair
 (require 'autopair)
@@ -253,6 +252,10 @@
 (require 'ido)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+
+;;racer
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
