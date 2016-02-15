@@ -79,6 +79,9 @@
 (setq sml/theme 'dark)
 (nyan-mode t)
 
+;;magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; show buffers
 (require 'bs)
 (setq bs-configurations
