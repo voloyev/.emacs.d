@@ -2,8 +2,9 @@
 
 ;; ----- ido-last-directory-list -----
 (
+("/home/" . "lost+found/")
 ("/home/nuncostans/Mega/git/ruby/" . "betty/")
-("/home/nuncostans/Mega/git/" . "ruby/")
+("/home/nuncostans/Mega/git/" . "notes/")
 ("/home/nuncostans/Mega/" . "git/")
 ("/home/nuncostans/" . ".emacs.d/")
 )
@@ -11,28 +12,37 @@
 ;; ----- ido-work-directory-list -----
 (
 "/home/nuncostans/.emacs.d/"
+"/home/nuncostans/Mega/git/notes/"
+"/home/nuncostans/"
 "/home/nuncostans/Mega/git/ruby/betty/"
 )
 
 ;; ----- ido-work-file-list -----
 (
 "init.el"
+"main.org"
+".wl"
+".gnus.el"
 "install.rb"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
-("/home/nuncostans/.emacs.d/" (22202 2570 730561 196000) "ido.last" "snippets/" "projectile-bookmarks.eld" "elpa/" "session.2bc1f1956-a051-4544-be1c-d21a91269df5" "../" ".git/" "auto-save-list/" "init.el~" "init.el" "ac-comphist.dat" "./")
+("/home/nuncostans/.emacs.d/" (22210 17120 125026 535000) "ido.last" "snippets/" "projectile-bookmarks.eld" "elpa/" "session.2bc1f1956-a051-4544-be1c-d21a91269df5" "smex-items" "ido.last~" "../" ".git/" "auto-save-list/" "init.el~" "init.el" ".mc-lists.el" "ac-comphist.dat" "./")
 
-("/home/nuncostans/" (22202 1584 310583 206000) ".mkshrc" ".zlogin" "Pictures/" ".mozilla/" ".gemrc" ".xsession-errors" "Downloads/" "Videos/" ".fonts/" ".bash_logout" ".ICEauthority" ".gnome/" "Desktop/" ".gconf/" ".xscreensaver" "Public/" ".rbenv/" "Mega/" "Documents/" ".tixati/" ".adobe/" ".bash_history" "../" "Games/" ".ssh/" ".cmus/" ".bash_profile" ".emacs.d/" ".Xauthority" ".sudo_as_admin_successful" ".config/" ".themes/" ".apport-ignore.xml" ".local/" ".nano/" ".viminfo" ".zshrc" ".dmrc" "Templates/" ".VeraCrypt/" ".gem/" ".gnupg/" ".cache/" ".macromedia/" ".gitconfig" ".profile" ".thumbnails/" "www/" ".xsession-errors.old" ".bashrc" ".Xdefaults" "./" "Music/")
+("/home/" (22201 48224 423068 806000) "nuncostans/" "lost+found/" "../" "./")
 
-("/home/nuncostans/Mega/git/ruby/betty/" (22201 50674 699370 459000) "autocomplete.rb" "spec/" "changelog.txt" "Gemfile" "ROADMAP.md" "main.rb" "NOTICE.md" "install.rb" "../" "Rakefile" "README.md" "lib/" "main.rb~" "circle.yml" "./" "Gemfile.lock" "new_releases.md")
+("/home/nuncostans/Mega/git/notes/" (22210 16976 406244 399000) "Python/" "mynote.org" "FTP/" "servers/" "ПроекЯк_це_працює.md" "Interviev whith Linus Torvalds[20150421-162204].md" "Ruby/" "../" "main.org" "Todo[20150519-113751].md" "linux/" "Дослідження_ЕОМ.md" "sticky.md" "./")
+
+("/home/nuncostans/Mega/git/" (22204 26908 378416 38000) "prometheus/" "workspace/" "aikibujutsu/" "the-art-of-command-line-master/" "the-art-of-command-line/" "notes/" "boolen.md" "c/" "git_test/" "index.html" "ruby/" "history_philosophy/" "php/" "../" "rust/" "betty/" "floobits/" "text.txt" "meow/" "python/" "README.md" "writings/" "go/" "boolen.html" "first/" "closure/" "org/" "gitlab/" "Нове сховище.kdbx" "js/" "uemacs/" "websandbox/" "./")
+
+("/home/nuncostans/Mega/" (22201 63146 874117 193000) "git/" "mysnippets/" "Korra Trainer/" "aikibujutsu/" "mounted/" "passwords/" "../" ".debris/" "MEGA-MASTERKEY.txt" "interesting-snippets/" "screenshots/" "./" "pic" "Гераклит Эфесский - Всё наследие На языках оригинала и в русском переводе -2012.pdf")
+
+("/home/nuncostans/" (22210 15915 449371 729000) ".mkshrc" ".dbus/" ".zlogin" "Pictures/" ".mozilla/" ".furiusisomount/" ".gemrc" ".xsession-errors" "Downloads/" "Videos/" ".steam/" "ispell.tmp" ".fonts/" ".bash_logout" ".betty_history" ".goldendict/" ".ICEauthority" ".gnome/" "News/" "Desktop/" ".mtab.fuseiso" ".quake4/" ".gconf/" ".xscreensaver" "Programs/" "Public/" ".rbenv/" ".joe_state" "Mail/" ".elmo/" ".thunderbird/" ".Skype/" "Steam/" "Mega/" ".newsrc-dribble" ".xonotic/" "Documents/" ".wine/" ".wl~" ".pki/" ".loki/" ".tixati/" ".adobe/" "#.gnus.el#" ".bash_history" ".activestate/" "../" ".klei/" ".pulse-cookie" ".aptitude/" "Games/" "betty/" ".ssh/" ".sauerbraten/" ".cmus/" ".bash_profile" ".emacs.d/" ".Xauthority" ".sudo_as_admin_successful" ".config/" ".mohaa/" ".steampid" ".themes/" "90145-axiom.tar.gz" ".wl" ".apport-ignore.xml" ".local/" ".nano/" ".viminfo" ".mu/" ".steampath" ".zshrc" ".dmrc" "Templates/" ".VeraCrypt/" ".heroku/" ".gem/" ".gnupg/" ".cache/" ".macromedia/" ".gitconfig" ".q3a/" ".profile" ".thumbnails/" ".gnome2/" ".TelegramDesktop/" "www/" "FiraxisLive/" ".xsession-errors.old" ".bashrc" "tmp/" ".netrc" ".komodoedit/" ".Xdefaults" ".textadept/" "./" "Music/")
+
+("/home/nuncostans/Mega/git/ruby/betty/" (22204 26825 868583 832000) "autocomplete.rb" "spec/" "changelog.txt" "#new_releases.md#" "Gemfile" "ROADMAP.md" "main.rb" "NOTICE.md" "install.rb" "../" "Rakefile" "README.md" "lib/" "main.rb~" "#main.rb#" "circle.yml" "./" "Gemfile.lock" "new_releases.md")
 
 ("/home/nuncostans/Mega/git/ruby/" (22201 50673 667361 703000) "exercises/" "test.rb" "blog/" "TAGS" "text2.rb" "hasbrains/" "project/" "koans/" "my_test/" "zadacha" "../" "rails_test/" "betty/" "sametest.rb" "wikiexemplruby/" "lol.rb" "udamy/" "./" "book_exercise/")
-
-("/home/nuncostans/Mega/git/" (22201 50638 211057 378000) "prometheus/" "workspace/" "aikibujutsu/" "the-art-of-command-line-master/" "the-art-of-command-line/" "notes/" "boolen.md" "c/" "git_test/" "index.html" "ruby/" "history_philosophy/" "php/" "../" "rust/" "floobits/" "text.txt" "meow/" "python/" "README.md" "writings/" "go/" "boolen.html" "first/" "closure/" "org/" "gitlab/" "Нове сховище.kdbx" "js/" "uemacs/" "websandbox/" "./")
-
-("/home/nuncostans/Mega/" (22201 50868 97815 438000) "git/" "mysnippets/" "Korra Trainer/" "aikibujutsu/" "mounted/" "passwords/" "../" ".debris/" "interesting-snippets/" "screenshots/" "./" "pic" "Гераклит Эфесский - Всё наследие На языках оригинала и в русском переводе -2012.pdf")
 
 ("/home/nuncostans/MEGAsync/" (22201 50342 496092 419000) "../" "./")
 )

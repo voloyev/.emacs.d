@@ -5,6 +5,28 @@
  t)
 (package-initialize)
 
+(defun init--install-packages ()
+    (packages-install
+     '(magit
+       projectile
+       ruby-tools
+       sr-speedbar
+       yasnippet
+       flycheck
+       git-gutter
+       company
+       markdown-mode
+       popup
+       racer
+       rinari-cap
+       multiple-cursors
+       )))
+
+;; Emacs server
+(require 'server)
+(unless (server-running-p)
+    (server-start))
+
 ;;toolbar and menu
 (tool-bar-mode -1)
 (menu-bar-mode 1)
@@ -18,6 +40,10 @@
 
 ;;disable scrollbar
 (scroll-bar-mode   -1)
+
+;; Smart M-x is smart
+(require 'smex)
+(smex-initialize)
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -48,9 +74,9 @@
         (when matching-text (message matching-text))))
 
 ;;sexy mode line
+(setq sml/no-confirm-load-theme 1)
 (sml/setup t)
-(setq sml/no-confirm-load-theme t)
-(setq sml/theme 'light)
+(setq sml/theme 'dark)
 (nyan-mode t)
 
 ;; show buffers
@@ -83,12 +109,12 @@
 (require 'ruby-tools)
 
 ;; Indent settings
-(setq-default indent-tabs-mode nil) ;; отключить возможность ставить отступы TAB'ом
-(setq-default tab-width          4) ;; ширина табуляции - 4 пробельных символа
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width          4)
 (setq-default c-basic-offset     4)
-(setq-default standart-indent    4) ;; стандартная ширина отступа - 4 пробельных символа
-(setq-default lisp-body-indent   4) ;; сдвигать Lisp-выражения на 4 пробельных символа
-(global-set-key (kbd "RET") 'newline-and-indent) ;; при нажатии Enter перевести каретку и сделать отступ
+(setq-default standart-indent    4)
+(setq-default lisp-body-indent   4)
+(global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
 ;; Clipboard settings
@@ -116,8 +142,6 @@
 ;;sr-speedbar
 (require 'sr-speedbar)
 (global-set-key (kbd "<f12>") 'sr-speedbar-toggle)
-
-))
 (add-hook 'speedbar-mode-hook
           (lambda()
               (speedbar-add-supported-extension "\\.rb")
@@ -162,6 +186,7 @@
              "~/.emacs.d/plugins/yasnippet")
 ;;(yas/load-directory "~/.emacs.d/yasnippet/snippets")
 
+;;flycheck
 (package-install 'flycheck)
 (global-flycheck-mode)
 
@@ -185,6 +210,7 @@
 ;;autopair
 (require 'autopair)
 (autopair-global-mode)
+
 ;;gutter
 (global-git-gutter-mode +1)
 (git-gutter:linum-setup)
@@ -232,10 +258,11 @@
 (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
 
 ;;fonts
-(set-face-attribute 'default nil :font "Terminus Re33 13" )
-(set-frame-font "Terminus Re33 13" nil t)
+(set-face-attribute 'default nil :font "Terminus Re33 12" )
+(set-frame-font "Terminus Re33 12" nil t)
 
-;;line nunbersppp
+;;line nunber
+;;(add-hook 'prog-mode-hook 'linum-mode)
 (global-linum-mode 1)
 (setq linum-format "%d ")
 
@@ -257,6 +284,21 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
+;;wanderlust
+(autoload 'wl "wl" "Wanderlust" t)
+
+;;org-mode
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+(custom-set-variables
+ '(org-agenda-files (quote ("~/Mega/git/note/main.org")))
+ '(org-default-notes-file "~/Mega/git/note")
+ '(org-directory "~/Mega/git/note")
+ )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -265,9 +307,3 @@
  '(custom-safe-themes
    (quote
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
