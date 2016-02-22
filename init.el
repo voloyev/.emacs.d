@@ -7,8 +7,7 @@
 
 (defun init--install-packages ()
     (packages-install
-     '(magit
-       projectile
+     '(projectile
        ruby-tools
        sr-speedbar
        yasnippet
@@ -61,6 +60,8 @@
 ;;paren mode
 (setq show-paren-style 'expression)
 (show-paren-mode 1)
+(set-face-foreground 'show-paren-match "black")
+
 (defadvice show-paren-function
     (after show-matching-paren-offscreen activate)
     "If the matching paren is offscreen, show the matching line in the
@@ -76,11 +77,8 @@
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
 (sml/setup t)
-(setq sml/theme 'dark)
+(setq sml/theme 'respectful)
 (nyan-mode t)
-
-;;magit
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; show buffers
 (require 'bs)
@@ -210,9 +208,19 @@
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
 
-;;autopair
-(require 'autopair)
-(autopair-global-mode)
+
+;; Default setup of smartparens
+(require 'smartparens-config)
+(--each '(restclient-mode-hook
+          js-mode-hook
+          python-mode-hook
+          web-mode-hoo
+          ruby-mode-hook
+          markdown-mode-hook
+          org-mode-hook
+          rust-mode-hook
+          cc-mode-hook)
+    (add-hook it 'turn-on-smartparens-mode))
 
 ;;gutter
 (global-git-gutter-mode +1)
@@ -262,16 +270,12 @@
 
 ;;fonts
 (set-face-attribute 'default nil :font "Terminus Re33 12" )
-(set-frame-font "Terminus Re33 12" nil t)
+(set-frame-font "Terminus Re33 12")
 
 ;;line nunber
 ;;(add-hook 'prog-mode-hook 'linum-mode)
 (global-linum-mode 1)
 (setq linum-format "%d ")
-
-;;autopair
-(require 'autopair)
-(autopair-global-mode t)
 
 ;;whichkey
 (package-install 'which-key)
@@ -297,11 +301,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
-(custom-set-variables
- '(org-agenda-files (quote ("~/Mega/git/note/main.org")))
- '(org-default-notes-file "~/Mega/git/note")
- '(org-directory "~/Mega/git/note")
- )
+(setq org-agenda-files (list "~/Mega/git/note/main.org"
+                             "~/Mega/git/note/todo.org"))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
