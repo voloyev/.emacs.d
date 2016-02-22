@@ -28,7 +28,7 @@
 
 ;;toolbar and menu
 (tool-bar-mode -1)
-(menu-bar-mode 1)
+(menu-bar-mode -1)
 
 ;; Inhibit startup/splash screen
 (setq inhibit-splash-screen   t)
