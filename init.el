@@ -196,7 +196,8 @@
 (setq query-replace-highlight t)
 
 ;;themes
-(load-theme 'quasi-monochrome t)
+;;(load-theme 'quasi-monochrome t)
+(load-theme 'sanityinc-solarized-dark t)
 
 ;;Markdown
 (autoload 'markdown-mode "markdown-mode"
@@ -303,6 +304,8 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
                              "~/Mega/git/note/todo.org"))
+(setq backup-directory-alist `(("." . "~/.saves")))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
