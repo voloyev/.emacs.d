@@ -182,9 +182,9 @@
 
 ;;yanisppet
 (require 'yasnippet)
-(yas-global-mode 1)
+(yas-global-mode t)
 (add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet")
+             "~/.emacs.d/snippets")
 ;;(yas/load-directory "~/.emacs.d/yasnippet/snippets")
 
 ;;flycheck
@@ -304,7 +304,9 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
                              "~/Mega/git/note/todo.org"))
-(setq backup-directory-alist `(("." . "~/.saves")))
+
+;;move backups
+(setq backup-directory-alist '(("." . "~/.saves")))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
