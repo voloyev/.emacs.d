@@ -1,4 +1,4 @@
-### My emacs config
+# My emacs config
 
 ## TODO
 
