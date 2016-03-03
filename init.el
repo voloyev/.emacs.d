@@ -19,6 +19,8 @@
        racer
        rinari-cap
        multiple-cursors
+       emmet-mode
+       sml
        )))
 
 ;; Emacs server
@@ -197,7 +199,10 @@
 
 ;;themes
 ;;(load-theme 'quasi-monochrome t)
-(load-theme 'sanityinc-solarized-dark t)
+(load-theme 'material t)
+;;(load-theme 'sanityinc-solarized-dark t)
+(set-frame-parameter nil 'background-mode 'dark)
+(set-terminal-parameter nil 'background-mode 'dark)
 
 ;;Markdown
 (autoload 'markdown-mode "markdown-mode"
@@ -205,10 +210,13 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;; Use visual-line-mode in gfm-mode
+(defun my-gfm-mode-hook ()
+    (visual-line-mode 1))
+(add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
 
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
-
 
 ;; Default setup of smartparens
 (require 'smartparens-config)
@@ -220,7 +228,8 @@
           markdown-mode-hook
           org-mode-hook
           rust-mode-hook
-          cc-mode-hook)
+          cc-mode-hook
+          lisp-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;gutter
@@ -231,7 +240,6 @@
 
 ;;web-mode
 (require 'web-mode)
-
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
@@ -258,7 +266,6 @@
 
 ;;map
 (global-set-key (kbd "<f8>") 'visit-tags-table)
-
 ;; | Combo | Function         | Description                |
 ;; |-------+------------------+----------------------------|
 ;; | <f3>  | visit-tags-table | Loads tags                 |
@@ -305,8 +312,15 @@
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
                              "~/Mega/git/note/todo.org"))
 
+;;whitespace
+(global-set-key (kbd "<f5>") 'whitespace-mode)
+
 ;;move backups
 (setq backup-directory-alist '(("." . "~/.saves")))
+
+;;github markdown preview
+(custom-set-variables
+ '(markdown-command "/home/nuncostans/Programs/flavor.rb"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -316,3 +330,16 @@
  '(custom-safe-themes
    (quote
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))))
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
+(custom-set-variables
+ '(livedown:autostart nil) ; automatically open preview when opening markdown files
+ '(livedown:open t)        ; automatically open the browser window
+ '(livedown:port 1337))    ; port for livedown server
+
+(require 'livedown)
+(global-set-key (kbd "C-M-m") 'livedown:preview)
+
+;;emmet mode
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
