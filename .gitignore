@@ -13,3 +13,6 @@ themes/
 session*
 emacs*
 *ido
+\#*
+ido.*
+mc*
