@@ -7,20 +7,63 @@
 
 (defun init--install-packages ()
     (packages-install
-     '(projectile
-       ruby-tools
-       sr-speedbar
-       yasnippet
-       flycheck
-       git-gutter
+     '(achievements
+       apel
+       async
        company
-       markdown-mode
-       popup
-       racer
-       rinari-cap
-       multiple-cursors
+       dash
+       dired+
        emmet-mode
-       sml
+       epl
+       f
+       findr
+       flim
+       flycheck
+       git-commit
+       git-gutter
+       imenu-list
+       inf-ruby
+       inflections
+       jump
+       keyfreq
+       let-alist
+       macrostep
+       markdown-mode
+       material-theme
+       monochrome-theme
+       multiple-cursors
+       nyan-mode
+       php-mode
+       pkg-info
+       popup
+       projectile
+       quasi-monochrom..
+       racer
+       rich-minority
+       rinari
+       rspec-mode
+       ruby-additional
+       ruby-block
+       ruby-compilation
+       ruby-dev
+       ruby-hash-syntax
+       ruby-tools
+       rust-mode
+       s
+       semi
+       seq
+       slime
+       smart-mode-line
+       smartparens
+       smex
+       sr-speedbar
+       ssh
+       wanderlust
+       web-mode
+       which-key
+       with-editor
+       xcscope
+       yasnippet
        )))
 
 ;; Emacs server
@@ -110,6 +153,7 @@
 
 ;;ruby
 (require 'ruby-tools)
+(setq ruby-indent-level 2)
 
 ;; Indent settings
 (setq-default indent-tabs-mode nil)
@@ -198,8 +242,8 @@
 (setq query-replace-highlight t)
 
 ;;themes
-;;(load-theme 'quasi-monochrome t)
-(load-theme 'material t)
+(load-theme 'quasi-monochrome t)
+;;(load-theme 'material t)
 ;;(load-theme 'sanityinc-solarized-dark t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
