@@ -4,6 +4,7 @@
 (setq mc/cmds-to-run-for-all
       '(
         autopair-skip-close-maybe
+        sp-remove-active-pair-overlay
         yas-expand
         ))
 

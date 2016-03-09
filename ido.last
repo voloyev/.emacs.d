@@ -2,57 +2,84 @@
 
 ;; ----- ido-last-directory-list -----
 (
-("/home/" . "lost+found/")
-("/home/nuncostans/Mega/git/ruby/" . "betty/")
-("/home/nuncostans/Mega/git/" . "c/")
+("/home/nuncostans/Mega/git/python/" . "prometheus/")
+("/home/nuncostans/Mega/git/js/" . "orelly/")
+("/home/" . "nuncostans/")
+("/home/nuncostans/Mega/git/ruby/" . "orelly_ruby/")
+("/home/nuncostans/Mega/git/" . "ruby/")
 ("/home/nuncostans/Mega/" . "git/")
 ("/home/nuncostans/" . "Mega/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+"/home/nuncostans/Mega/git/ruby/orelly_ruby/"
+"/home/nuncostans/Mega/git/ruby/notes/"
+"/home/nuncostans/.emacs.d/"
+"/home/nuncostans/"
+"/home/nuncostans/Mega/git/python/prometheus/"
+"/home/nuncostans/Mega/git/ruby/betty/"
+"/home/nuncostans/Mega/git/js/orelly/"
+"/home/nuncostans/Mega/git/ruby/cli/"
 "/home/nuncostans/Mega/git/c/"
 "/home/nuncostans/Mega/git/ruby/"
-"/home/nuncostans/.emacs.d/"
 "/home/nuncostans/Mega/git/ruby/my_test/"
 "/home/nuncostans/Mega/git/note/"
 "/home/nuncostans/Downloads/"
-"/home/nuncostans/"
 "/home/nuncostans/Mega/git/notes/"
-"/home/nuncostans/Mega/git/ruby/betty/"
 )
 
 ;; ----- ido-work-file-list -----
 (
-"blackjack.c"
-"blackjack"
-"test.rb"
+"fuzzy.rb"
+"attributes.md"
 "init.el"
-"todo.org"
-"torvalds_jast_for_fun.txt"
-"Kniga_Just_For_Fun_Rasskaz_nechayannogo_revolyutsionera__Linus_Torvalds.pdf"
-"ac-comphist.dat"
-"magit.org"
-"org.pdf"
+"notes.md"
+"get_number.rb"
+"game_todo.md"
+"game_todo.html"
+"index.html"
+"game_first.rb"
+".test.py.swp"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
+("/home/nuncostans/Mega/git/ruby/orelly_ruby/" (22236 14573 256173 43000) "mage.rb" "notes.md" "test.rb" "fuzzy.rb" "get_number.rb" "../" ".git/" "methods_try.rb" "./" "game_todo.md")
+
+("/home/nuncostans/" (22237 53723 172886 119000) ".gksu.lock" ".rbdoom3bfg/" ".mkshrc" ".dbus/" ".zlogin" "Pictures/" ".mozilla/" ".furiusisomount/" ".gemrc" "#index.html#" ".hardinfo/" ".kingsoft/" ".xsession-errors" "Downloads/" "Videos/" ".steam/" "ispell.tmp" ".fonts/" ".bash_logout" "GitBook/" ".betty_history" ".goldendict/" ".ICEauthority" ".PlayOnLinux/" "kdenlive/" ".gnome/" "News/" "Desktop/" ".MyWM/" ".mtab.fuseiso" ".quake4/" ".gconf/" ".xscreensaver" ".saves/" "Programs/" "Public/" ".rbenv/" ".joe_state" ".dropbox-dist/" "Mail/" ".elmo/" ".thunderbird/" ".Skype/" "Steam/" ".gnome2_private/" "Mega/" ".newsrc-dribble" ".xonotic/" "Documents/" ".wine/" "2016-03-02 13-15-55.flv" "2016-03-02 13-15-05.flv" ".wl~" ".pki/" ".loki/" ".tixati/" ".phoronix-test-suite/" ".java/" ".adobe/" ".gstreamer-0.10/" ".vim/" ".scummvm/" ".bash_history" ".godot/" ".installjammerinfo/" ".weblaf/" ".vortex_launcher.conf" ".activestate/" "../" ".klei/" ".pulse-cookie" ".aptitude/" ".openshot/" "Games/" "betty/" ".mplayer/" ".ssh/" ".sauerbraten/" ".cmus/" ".bash_profile" ".emacs.d/" ".Xauthority" "mozilla.pdf" ".sudo_as_admin_successful" ".vimrc" ".bashrc~" ".config/" "PlayOnLinux's virtual drives/" ".mohaa/" "Cloud/" ".steampid" ".themes/" ".davfs2/" ".subsurface/" "90145-axiom.tar.gz" ".wl" "BioWare" ".install4j" ".apport-ignore.xml" ".local/" ".nano/" ".viminfo" ".mu/" ".steampath" ".zshrc" ".dmrc" "Templates/" ".VeraCrypt/" ".heroku/" ".gem/" ".gnupg/" ".cache/" ".macromedia/" ".npm/" ".gitconfig" ".synaptic/" ".q3a/" ".profile" ".thumbnails/" "Calibre Library/" ".gnome2/" ".TelegramDesktop/" "www/" "FiraxisLive/" ".xsession-errors.old" ".bashrc" "FoxitSoftware/" ".dropbox/" "tmp/" ".netrc" ".paradoxinteractive/" ".unvanquished/" ".komodoedit/" ".Xdefaults" ".textadept/" "./" "Share/" ".desura/" ".bashrc.lock~" "Music/" ".renpy/" ".gscan2pdf" "Dropbox/")
+
+("/home/nuncostans/Mega/git/ruby/notes/" (22237 33275 932219 141000) "#attributes.md#" "attributes.md" "../" ".#attributes.md" "./")
+
+("/home/nuncostans/.emacs.d/" (22237 32928 976199 7000) "ido.last" "snippets/" "session.106ebae09e6a488a6145668497625503400000016320048" "projectile-bookmarks.eld" "elpa/" "session.2e987b198-9c5a-48b2-8b21-6d36f5b79c9a" "session.2bc1f1956-a051-4544-be1c-d21a91269df5" "emmet_README.md" "smex-items" "ido.last~" "emacs-livedown/" "../" ".git/" "auto-save-list/" "README.md" "init.el~" "themes/" ".gitignore" "init.el" ".achievements" "session.10c2b5bc6746e272f414565034348808600000017730064" ".mc-lists.el" "ac-comphist.dat" "./")
+
+("/home/nuncostans/Mega/git/ruby/" (22237 32962 288200 940000) "exercises/" "test.rb" "blog/" "notes/" "orelly_ruby/" "TAGS" "text2.rb" "hasbrains/" "project/" "koans/" "my_test/" "zadacha" "../" "rails_test/" "betty/" "sametest.rb" "test.rb~" "wikiexemplruby/" "cli/" "lol.rb" "udamy/" "./" "book_exercise/")
+
+("/home/nuncostans/Mega/" (22233 26801 738294 199000) "git/" "mysnippets/" "BHB-ReMastered-3.00-linux.tar.bz2" "dfdfdff.mp4" "Korra Trainer/" "aikibujutsu/" "hdhfjdhfjdhfjdfh.mp4" "mounted/" "passwords/" "fdfdfdfdfdfdfffvv.webm" "HOWTO/" "../" ".debris/" "videoplayback_002" "Reported Speech 1 ‏ - YouTube [360p].webm" "MEGA-MASTERKEY.txt" "interesting-snippets/" "screenshots/" "./" "pic" "videoplayback_003" "Гераклит Эфесский - Всё наследие На языках оригинала и в русском переводе -2012.pdf")
+
+("/home/nuncostans/Downloads/" (22232 15310 952754 462000) "12714309_1265108583503885_901116136_n.jpg" "12652126_210378102650235_990461768_n.mp4" "PM324image001_001.jpg" "goshin_jutsu.pdf" "caffeine-plus_2.7.4+git20150326-1~webupd8~wily1_all.deb" "temp/" "aikido.webm" "org.pdf" "comix-4.0.4/" "FoxitReader.enu.setup.x64.1.0.1.0925(r189237).run" ".miow/" "UnvUpdaterLinux64_0.46.0.tar.xz" "torvalds_jast_for_fun.txt" "kime_no_kata.pdf" "12776738_1274847149196695_382951927_o.jpg" "12788336_939053412810715_308419243_o.jpg" "12788646_1272975902717153_850265731_o.jpg" "videoplayback_001" "ju_no_kata.pdf" "videoplayback" "12735828_1266568483357895_1021495852_n(1).jpg" "PM324image001.jpg" "[rutracker.org].t3652750.torrent" "torrents/" "stenogr.pdf" "[pornolab.net].t2140223.torrent" "Eko_Pyat-esse-na-temy-etiki.402066.fb2.zip" "flashplayer_20_sa.exe" "12735828_1266568483357895_1021495852_n.jpg" "../" "[pornolab.net].t2141690.torrent" "linux/" "12809858_1276381995709877_1968556395_o.jpg" "Лимонные пирожные — Все буде смачно. Выпуск от 20.02.16. Часть 1.webm" "12754829_1266568470024563_1027299609_o.jpg" "Tekhnosfera_-_Analiz_algoritmov_Vvodny_kurs_20.pdf" "[pornolab.net].t2127117.torrent" "12732487_587268528087301_1369584886_n.mp4" "Лимонные пирожные — Все буде смачно. Выпуск от 20.02.16. Часть 2.webm" "mywm_linux_amd64.sh" "yazy-ki-programmirovaniya.ai-01_1435612177.png" "12714288_1151466951538776_1977560562_n.jpg" "pandoc-1.16.0.2-1-amd64.deb" "[pornolab.net].t2141716.torrent" "Pikover_K_-_Velikaya_fizika_Ot_Bolshogo_vzryva_do_Kvantovogo_voskreshenia_Velikie_nauki_-_2015.pdf" "katame_no_kata.pdf" "Poster_35_10.jpg" "12596287_1274214922593251_873213772_n.jpg" "People In Planes - Beyond The Horizon.mp3" "12825227_1276382089043201_446378859_n.jpg" "12722342_1264535163561227_381784546_o.jpg" "orgguide.pdf" "general_information.pdf" "12810060_1274846965863380_1872576935_o.jpg" "./" "Kata textbook Nage no Kata 2nd 20150415.pdf" "XnViewMP-linux-x64.deb")
+
+("/home/nuncostans/Mail/" (22204 31671 969446 828000) "lost+found/" "../" "queue/" "./")
+
+("/home/nuncostans/.elmo/" (22204 31856 407672 395000) "../" "queue" "./")
+
+("/home/nuncostans/Mega/git/python/prometheus/" (22230 50212 815485 31000) "test.py" "../" ".test.py.swp" "./")
+
+("/home/nuncostans/Mega/git/python/" (22230 49932 519497 528000) "sametest.py" "prometheus/" "first.py" "becon.py" "password/" "test.py" "song.py" "cezar.py" "reverselist.py" "relly.py~" "python.md" "tickets.py" "relly/" "englishNumber.py" "my_charm/" "Release.key" "battleship.py~" "brackets.py" "../" "python_koans/" "lucky.py" "second.py" "nones.org" "python.html" "test.txt" "becon2.py" "triangle.py" "fibodacci.py" "test.py~" "new_list.py" "__pycache__/" "myPython/" "./" "piglatin.py" "clean_list.py")
+
+("/home/nuncostans/Mega/git/js/orelly/" (22229 36320 996814 876000) "node_modules/" "main.css" "index.html" "main.js~" "../" "main.js" ".git/" "index.html~" ".gitignore" "paper-full.min.js" "jquery-2.1.1.min.js" "./")
+
+("/home/nuncostans/Mega/git/js/" (22227 16342 348592 78000) "fizzbuzz.js" "game.html" "orelly/" "../" "dd.js" "dd" "game2.html" "First/" "./")
+
+("/home/nuncostans/Mega/git/ruby/my_test/" (22212 17156 942078 968000) "test.rb" "main.rb" "gladiator.rb" "init.rb" "../" "test.rb~" "yielding.rb" "./")
+
+("/home/nuncostans/Mega/git/ruby/cli/" (22224 292 593802 407000) "big_client_20160225.sql" "../" "main.rb~" "db_backup.rb" "./")
+
+("/home/nuncostans/Mega/git/js/First/" (22201 50737 37490 914000) "lurk.js" "outfile.txt" "qwer" "../" "s.js" "i.php" "op.py" "./")
+
 ("/home/nuncostans/Mega/git/c/" (22201 50675 743379 311000) "test_string.c" "hello.c" "myfirct.c" "blackjack.c" "myfirct" "hello" "blackjack" "../" "a.out" "./")
 
-("/home/nuncostans/" (22212 35043 762192 448000) ".gksu.lock" ".rbdoom3bfg/" ".mkshrc" ".dbus/" ".zlogin" "Pictures/" "#temp.c#" ".mozilla/" ".furiusisomount/" ".gemrc" ".xsession-errors" "Downloads/" "Videos/" ".steam/" "ispell.tmp" ".fonts/" ".bash_logout" ".betty_history" ".goldendict/" ".ICEauthority" ".gnome/" "News/" "Desktop/" ".mtab.fuseiso" ".quake4/" ".gconf/" ".xscreensaver" "Programs/" "Public/" ".rbenv/" ".joe_state" "Mail/" ".elmo/" ".thunderbird/" ".Skype/" "Steam/" ".gnome2_private/" "Mega/" ".newsrc-dribble" ".xonotic/" "Documents/" ".wine/" ".wl~" ".pki/" ".loki/" ".tixati/" ".phoronix-test-suite/" ".adobe/" "#.gnus.el#" ".bash_history" ".activestate/" "../" ".klei/" ".pulse-cookie" ".aptitude/" "Games/" "betty/" ".ssh/" ".sauerbraten/" ".cmus/" ".bash_profile" ".emacs.d/" ".Xauthority" ".sudo_as_admin_successful" ".bashrc~" ".config/" ".mohaa/" "Cloud/" ".steampid" ".themes/" ".davfs2/" "90145-axiom.tar.gz" ".wl" ".apport-ignore.xml" ".local/" ".nano/" ".viminfo" ".mu/" ".steampath" ".zshrc" ".dmrc" "Templates/" ".VeraCrypt/" ".heroku/" ".gem/" ".gnupg/" ".cache/" ".macromedia/" ".gitconfig" ".q3a/" ".profile" ".thumbnails/" ".gnome2/" ".TelegramDesktop/" "www/" "FiraxisLive/" ".xsession-errors.old" ".bashrc" "tmp/" ".netrc" ".komodoedit/" ".Xdefaults" ".textadept/" "./" "Music/")
-
-("/home/nuncostans/Mega/git/ruby/" (22212 16728 149711 918000) "exercises/" "test.rb" "blog/" "TAGS" "text2.rb" "hasbrains/" "project/" "koans/" "my_test/" "zadacha" "../" "rails_test/" "betty/" "sametest.rb" "test.rb~" "wikiexemplruby/" "lol.rb" "udamy/" "./" "book_exercise/")
-
-("/home/nuncostans/Mega/git/ruby/my_test/" (22212 15766 528706 121000) "test.rb" "main.rb" "gladiator.rb" "init.rb" "../" "yielding.rb" "./")
-
-("/home/nuncostans/.emacs.d/" (22212 15465 381125 708000) "ido.last" "snippets/" "projectile-bookmarks.eld" "elpa/" "session.2bc1f1956-a051-4544-be1c-d21a91269df5" "smex-items" "ido.last~" "../" ".git/" "auto-save-list/" "init.el~" "init.el" ".achievements" ".mc-lists.el" "ac-comphist.dat" "./")
-
-("/home/nuncostans/Downloads/" (22212 14902 87200 770000) "12714309_1265108583503885_901116136_n.jpg" "head-first-ruby.pdf" "vivaldi-beta_1.0.344.37-1_amd64.deb" "org.pdf" "sample_app_rails_4-master.zip" ".miow/" "torvalds_jast_for_fun.txt" "12735828_1266568483357895_1021495852_n(1).jpg" "torrents/" "12735828_1266568483357895_1021495852_n.jpg" "../" "slack-desktop-1.2.6-amd64.deb" "wr741nv4_en_3_12_11_up(120320).bin" "linux/" "12754829_1266568470024563_1027299609_o.jpg" "#torvalds_jast_for_fun.txt#" "Tekhnosfera_-_Analiz_algoritmov_Vvodny_kurs_20.pdf" "zile-2.4.11/" "yazy-ki-programmirovaniya.ai-01_1435612177.png" "12714288_1151466951538776_1977560562_n.jpg" "tixati_2.34-1_amd64.deb" "linux-0.01.tar.gz" "Pikover_K_-_Velikaya_fizika_Ot_Bolshogo_vzryva_do_Kvantovogo_voskreshenia_Velikie_nauki_-_2015.pdf" "sample_app-master.zip" "12722342_1264535163561227_381784546_o.jpg" "orgguide.pdf" "uemacs/" "mu-0.9.16.tar.gz.html" "./")
-
 ("/home/nuncostans/Mega/git/note/" (22211 35677 617989 639000) "Python/" "magit.org~" "mynote.org" "FTP/" "todo.org" "servers/" "ПроекЯк_це_працює.md" "Interviev whith Linus Torvalds[20150421-162204].md" "Ruby/" "../" "main.org" "Todo[20150519-113751].md" "linux/" "Дослідження_ЕОМ.md" "sticky.md" "magit.org" "./")
-
-("/home/nuncostans/Mega/" (22211 32822 521300 227000) "git/" "mysnippets/" "Korra Trainer/" "aikibujutsu/" "mounted/" "passwords/" "../" ".debris/" "MEGA-MASTERKEY.txt" "interesting-snippets/" "screenshots/" "./" "pic" "Гераклит Эфесский - Всё наследие На языках оригинала и в русском переводе -2012.pdf")
 
 ("/home/nuncostans/.emacs.d/elpa/flycheck-20160216.138/" (22211 21188 501137 323000) "flycheck-ert.el" "flycheck-autoloads.el" "flycheck-buttercup.el" "flycheck-autoloads.el~" "flycheck-ert.elc" "flycheck.elc" "../" "flycheck.info" "macros.info" "flycheck.el" "flycheck-pkg.el" "fdl-1.3.info" "./" "dir")
 
