@@ -103,8 +103,8 @@
                (line-beginning-position 2)))))
 
 ;;paren mode
-(setq show-paren-style 'expression)
 (show-paren-mode 1)
+(setq show-paren-style 'expression)
 (set-face-foreground 'show-paren-match "black")
 
 (defadvice show-paren-function
@@ -122,7 +122,7 @@
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
 (sml/setup t)
-(setq sml/theme 'respectful)
+(setq sml/theme 'dark)
 (nyan-mode t)
 
 ;; show buffers
@@ -243,6 +243,7 @@
 
 ;;themes
 (load-theme 'quasi-monochrome t)
+;;(load-theme 'monochrome t)
 ;;(load-theme 'material t)
 ;;(load-theme 'sanityinc-solarized-dark t)
 (set-frame-parameter nil 'background-mode 'dark)
@@ -364,22 +365,24 @@
 
 ;;github markdown preview
 (custom-set-variables
- '(markdown-command "/home/nuncostans/Programs/flavor.rb"))
-
-(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))))
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(livedown:autostart nil)
+ '(livedown:open t)
+ '(livedown:port 1337)
+ '(markdown-command "/home/nuncostans/Programs/flavor.rb")
+ '(show-paren-mode t)
+ '(show-paren-style (quote expression)))
+
+
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
-(custom-set-variables
- '(livedown:autostart nil) ; automatically open preview when opening markdown files
- '(livedown:open t)        ; automatically open the browser window
- '(livedown:port 1337))    ; port for livedown server
+                                        ; port for livedown server
 
 (require 'livedown)
 (global-set-key (kbd "C-M-m") 'livedown:preview)
@@ -387,3 +390,9 @@
 ;;emmet mode
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(show-paren-match ((t (:background "dark gray" :foreground "black")))))
