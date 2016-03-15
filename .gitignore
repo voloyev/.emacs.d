@@ -7,13 +7,17 @@
 # Autosaver
 *~:w
 
+#directories
+/elpa/
+/themes/
+/auto-save-list/
+
 #files
-elpa*
-themes/
 session*
 emacs*
 \#*
 ido.*
 mc*
 ido.last
-.eld
+*.eld
+*.swp
