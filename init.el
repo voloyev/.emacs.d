@@ -19,6 +19,7 @@
        findr
        flim
        flycheck
+       ggtags
        git-commit
        git-gutter
        imenu-list
