@@ -2,7 +2,9 @@
 
 ## TODO
 
-- [ ] Make autoinstall plugins in new system
-- [ ] backup files in safe place
+- [x] Make autoinstall plugins in new system
+- [x] backup files in safe place
 - [ ] clean and comment config
-- [ ] setup achievments mod!
+- [x] setup achievments mod!
+
+## Added vim config named .vimrc :)
