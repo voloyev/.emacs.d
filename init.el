@@ -67,6 +67,22 @@
        yasnippet
        )))
 
+;;themes
+(load-theme 'quasi-monochrome t)
+;;(load-theme 'monochrome t)
+;;(load-theme 'material t)
+;;(load-theme 'sanityinc-solarized-dark t)
+(set-frame-parameter nil 'background-mode 'dark)
+(set-terminal-parameter nil 'background-mode 'dark)
+
+;; Disable backup/autosave files
+(setq make-backup-files        nil)
+(setq auto-save-default        nil)
+(setq auto-save-list-file-name nil)
+
+;;move backups
+(setq backup-directory-alist '(("." . "~/.saves")))
+
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -122,8 +138,8 @@
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
-(sml/setup t)
 (setq sml/theme 'dark)
+(sml/setup t)
 (nyan-mode t)
 
 ;; show buffers
@@ -242,13 +258,7 @@
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 
-;;themes
-(load-theme 'quasi-monochrome t)
-;;(load-theme 'monochrome t)
-;;(load-theme 'material t)
-;;(load-theme 'sanityinc-solarized-dark t)
-(set-frame-parameter nil 'background-mode 'dark)
-(set-terminal-parameter nil 'background-mode 'dark)
+
 
 ;;Markdown
 (autoload 'markdown-mode "markdown-mode"
@@ -303,7 +313,7 @@
 (setq web-mode-code-indent-offset 2)
 
 ;;сниппеты и автозакрытие парных скобок
-(setq web-mode-extra-nippets '(("erb" . (("name" . ("beg" . "end"))))))
+(setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
 
 ;;company mode
@@ -327,8 +337,13 @@
 (set-frame-font "Terminus Re33 12")
 
 ;;line nunber
-;;(add-hook 'prog-mode-hook 'linum-mode)
-(global-linum-mode 1)
+(linum-mode 1)
+(add-hook 'ruby-mode 'linum-mode)
+(add-hook 'lisp-mode 'linum-mode)
+(add-hook 'python-mode 'linum-mode)
+(add-hook 'rust-mode 'linum-mode)
+(add-hook 'c-mode 'linum-mode)
+
 (setq linum-format "%d ")
 
 ;;whichkey
@@ -361,13 +376,6 @@
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 
-;; Disable backup/autosave files
-(setq make-backup-files        nil)
-(setq auto-save-default        nil)
-(setq auto-save-list-file-name nil)
-
-;;move backups
-(setq backup-directory-alist '(("." . "~/.saves")))
 
 ;;github markdown preview
 (custom-set-variables
