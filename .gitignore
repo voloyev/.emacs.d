@@ -12,9 +12,8 @@ elpa*
 themes/
 session*
 emacs*
-*ido
 \#*
 ido.*
 mc*
-.last
+ido.last
 .eld
