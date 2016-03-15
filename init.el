@@ -139,13 +139,18 @@
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
 (setq sml/theme 'dark)
+(setq sml/name-width '40)
+(setq sml/shorten-modes 'full)
 (sml/setup t)
 (nyan-mode t)
+(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; show buffers
 (require 'bs)
 (setq bs-configurations
       '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last)))
+(require 'ibuffer)
+(defalias 'list-buffers 'ibuffer)
 (global-set-key (kbd "<f2>") 'bs-show)
 
 (require 'multiple-cursors)
@@ -327,10 +332,15 @@
 ;; | <f3>  | visit-tags-table | Loads tags                 |
 ;; | M-.   | find-tag         | Jumps to the specified tag |
 ;; | C-M-. | pop-tag-mark     | Jumps back                 |
-
+;; Bookmark settings
+(require 'bookmark)
+(setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
+(when (file-exists-p (concat user-emacs-directory "bookmarks"))
+    (bookmark-load bookmark-default-file t))
 (global-set-key (kbd "C-M-b") 'bookmark-set)
 (global-set-key (kbd "M-C-b") 'bookmark-jump)
 (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
+(setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
 ;;fonts
 (set-face-attribute 'default nil :font "Terminus Re33 12" )
@@ -354,6 +364,9 @@
 ;;ido
 (require 'ido)
 (ido-mode t)
+(icomplete-mode                t)
+(ido-everywhere                t)
+(setq ido-vitrual-buffers      t)
 (setq ido-enable-flex-matching t)
 
 ;;racer
