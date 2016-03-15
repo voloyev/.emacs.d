@@ -1,1 +1,0 @@
-("~/Mega/git/ruby/orelly_ruby/" "~/.emacs.d/" "~/Mega/git/ruby/" "~/Mega/git/betty/" "~/Mega/git/js/orelly/" "~/Mega/git/ruby/betty/")
