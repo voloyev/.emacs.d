@@ -361,6 +361,11 @@
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 
+;; Disable backup/autosave files
+(setq make-backup-files        nil)
+(setq auto-save-default        nil)
+(setq auto-save-list-file-name nil)
+
 ;;move backups
 (setq backup-directory-alist '(("." . "~/.saves")))
 
@@ -373,20 +378,9 @@
  '(custom-safe-themes
    (quote
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(livedown:autostart nil)
- '(livedown:open t)
- '(livedown:port 1337)
  '(markdown-command "/home/nuncostans/Programs/flavor.rb")
  '(show-paren-mode t)
  '(show-paren-style (quote expression)))
-
-
-
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
-                                        ; port for livedown server
-
-(require 'livedown)
-(global-set-key (kbd "C-M-m") 'livedown:preview)
 
 ;;emmet mode
 (add-hook 'web-mode-hook 'emmet-mode)
