@@ -16,4 +16,5 @@ emacs*
 \#*
 ido.*
 mc*
-ido.last
+.last
+.eld
