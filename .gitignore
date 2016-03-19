@@ -11,7 +11,7 @@
 /elpa/
 /themes/
 /auto-save-list/
-/snippets/
+
 #files
 session*
 emacs*
