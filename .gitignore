@@ -1,0 +1,23 @@
+#compiled
+*.elc
+
+# Packaging
+.cask
+
+# Autosaver
+*~:w
+
+#directories
+/elpa/
+/themes/
+/auto-save-list/
+/snippets/
+#files
+session*
+emacs*
+\#*
+ido.*
+mc*
+ido.last
+*.eld
+*.swp
