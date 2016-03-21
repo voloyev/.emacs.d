@@ -1,64 +1,64 @@
 (setq package-list '(
-		    achievements
-       apel
-       async
-       company
-       dash
-       dired+
-       emmet-mode
-       epl
-       f
-       findr
-       flim
-       flycheck
-       ggtags
-       git-commit
-       git-gutter
-       imenu-list
-       inf-ruby
-       inflections
-       jump
-       keyfreq
-       let-alist
-       macrostep
-       markdown-mode
-       material-theme
-       monochrome-theme
-       multiple-cursors
-       nyan-mode
-       php-mode
-       pkg-info
-       popup
-       projectile
-       ;;quasi-monochrome
-       racer
-       rich-minority
-       rinari
-       rspec-mode
-       ruby-additional
-       ruby-block
-       ruby-compilation
-       ruby-dev
-       ruby-hash-syntax
-       ruby-tools
-       rust-mode
-       s
-       semi
-       seq
-       slime
-       smart-mode-line
-       smartparens
-       smex
-       sr-speedbar
-       ssh
-       wanderlust
-       web-mode
-       which-key
-       with-editor
-       xcscope
-       yasnippet
-       
-       ))
+                     achievements
+                     apel
+                     async
+                     company
+                     dash
+                     dired+
+                     emmet-mode
+                     epl
+                     f
+                     findr
+                     flim
+                     flycheck
+                     ggtags
+                     git-commit
+                     git-gutter
+                     imenu-list
+                     inf-ruby
+                     inflections
+                     jump
+                     keyfreq
+                     let-alist
+                     macrostep
+                     markdown-mode
+                     material-theme
+                     monochrome-theme
+                     multiple-cursors
+                     nyan-mode
+                     php-mode
+                     pkg-info
+                     popup
+                     projectile
+                     ;;quasi-monochrome
+                     racer
+                     rich-minority
+                     rinari
+                     rspec-mode
+                     ruby-additional
+                     ruby-block
+                     ruby-compilation
+                     ruby-dev
+                     ruby-hash-syntax
+                     ruby-tools
+                     rust-mode
+                     s
+                     semi
+                     seq
+                     slime
+                     smart-mode-line
+                     smartparens
+                     smex
+                     sr-speedbar
+                     ssh
+                     wanderlust
+                     web-mode
+                     which-key
+                     with-editor
+                     xcscope
+                     yasnippet
+
+                     ))
 (require 'package)
 (add-to-list
  'package-archives
@@ -69,14 +69,14 @@
 ;;(defun init--install-packages ()
 ;;    (packages-install
 
-; fetch the list of packages available 
+                                        ; fetch the list of packages available
 (unless package-archive-contents
-  (package-refresh-contents))
+    (package-refresh-contents))
 
-; install the missing packages
+                                        ; install the missing packages
 (dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+    (unless (package-installed-p package)
+        (package-install package)))
 
 ;;------------------------------;;
 ;;themes
@@ -359,8 +359,8 @@
 (set-frame-font "Terminus Re33 12")
 
 ;;line nunber
-(linum-mode 1)
-(add-hook 'ruby-mode 'linum-mode)
+(linum-mode t)
+(add-hook 'ruby-mode 'linum-mode 1)
 (add-hook 'lisp-mode 'linum-mode)
 (add-hook 'python-mode 'linum-mode)
 (add-hook 'rust-mode 'linum-mode)
