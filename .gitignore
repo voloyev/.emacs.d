@@ -21,3 +21,4 @@ mc*
 ido.last
 *.eld
 *.swp
+.mc-lists.el
