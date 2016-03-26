@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -62,8 +61,7 @@
                      xcscope
                      yasnippet
                      ))
-=======
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
+
 (require 'package)
 (add-to-list
  'package-archives
@@ -71,7 +69,6 @@
  t)
 (package-initialize)
 
-<<<<<<< HEAD
                                         ; fetch the list of packages available
 (unless package-archive-contents
     (package-refresh-contents))
@@ -82,7 +79,7 @@
         (package-install package)))
 
 ;;------------------------------;;
-=======
+
 (defun init--install-packages ()
     (packages-install
      '(achievements
@@ -144,7 +141,6 @@
        xcscope
        yasnippet
        )))
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 
 ;;themes
 (load-theme 'quasi-monochrome t)
@@ -233,10 +229,9 @@
 (defalias 'list-buffers 'ibuffer)
 (global-set-key (kbd "<f2>") 'bs-show)
 
-<<<<<<< HEAD
+
 ;;multiple cursors
-=======
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
+
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -261,11 +256,7 @@
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
 
-<<<<<<< HEAD
 ;;Indent settings
-=======
-;; Indent settings
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width          4)
 (setq-default c-basic-offset     4)
@@ -341,11 +332,7 @@
 (yas-global-mode t)
 (add-to-list 'load-path
              "~/.emacs.d/snippets")
-<<<<<<< HEAD
 (yas-load-directory "~/.emacs.d/snippets")
-=======
-;;(yas/load-directory "~/.emacs.d/yasnippet/snippets")
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 
 ;;flycheck
 (package-install 'flycheck)
@@ -355,22 +342,14 @@
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 
-<<<<<<< HEAD
-;; Markdown
-=======
-
 
 ;;Markdown
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 (autoload 'markdown-mode "markdown-mode"
     "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-<<<<<<< HEAD
 
-=======
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 ;; Use visual-line-mode in gfm-mode
 (defun my-gfm-mode-hook ()
     (visual-line-mode 1))
@@ -384,11 +363,7 @@
 (--each '(restclient-mode-hook
           js-mode-hook
           python-mode-hook
-<<<<<<< HEAD
           web-mode-hook
-=======
-          web-mode-hoo
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
           ruby-mode-hook
           markdown-mode-hook
           org-mode-hook
@@ -397,7 +372,6 @@
           lisp-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 
-<<<<<<< HEAD
 ;;line number
 (require 'linum)
 ;;(global-set-key "\C-c l" 'linum-mode)
@@ -415,8 +389,6 @@
 ;; format linum
 (setq linum-format "%d ")
 
-=======
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 ;;gutter
 (global-git-gutter-mode +1)
 (git-gutter:linum-setup)
@@ -456,10 +428,7 @@
 ;; | <f3>  | visit-tags-table | Loads tags                 |
 ;; | M-.   | find-tag         | Jumps to the specified tag |
 ;; | C-M-. | pop-tag-mark     | Jumps back                 |
-<<<<<<< HEAD
 
-=======
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 ;; Bookmark settings
 (require 'bookmark)
 (setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
@@ -473,19 +442,6 @@
 ;;fonts
 (set-face-attribute 'default nil :font "Terminus Re33 12" )
 (set-frame-font "Terminus Re33 12")
-
-<<<<<<< HEAD
-=======
-;;line nunber
-(linum-mode 1)
-(add-hook 'ruby-mode 'linum-mode)
-(add-hook 'lisp-mode 'linum-mode)
-(add-hook 'python-mode 'linum-mode)
-(add-hook 'rust-mode 'linum-mode)
-(add-hook 'c-mode 'linum-mode)
-
-(setq linum-format "%d ")
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 
 ;;whichkey
 (package-install 'which-key)
@@ -515,16 +471,12 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
-<<<<<<< HEAD
                              "~/Mega/git/note/todo.org"
-                             "~/Mega/git/note/aikisite.org"))
-=======
+                             "~/Mega/git/note/aikisite.org"
                              "~/Mega/git/note/todo.org"))
->>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
-
 
 ;;github markdown preview
 (custom-set-variables
