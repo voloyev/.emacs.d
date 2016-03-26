@@ -21,4 +21,7 @@ mc*
 ido.last
 *.eld
 *.swp
+<<<<<<< HEAD
 .mc-lists.el
+=======
+>>>>>>> 7321f30472b023bdfe191ba0f949781c389342e7

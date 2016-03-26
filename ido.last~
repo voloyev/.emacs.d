@@ -1,0 +1,76 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+("/home/" . "lost+found/")
+("/home/nuncostans/Mega/git/ruby/" . "cli/")
+("/home/nuncostans/Mega/git/" . "ruby/")
+("/home/nuncostans/Mega/" . "git/")
+("/home/nuncostans/" . "Mega/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+"/home/nuncostans/Mega/git/ruby/cli/"
+"/home/nuncostans/.emacs.d/"
+"/home/nuncostans/Mega/git/c/"
+"/home/nuncostans/Mega/git/ruby/"
+"/home/nuncostans/Mega/git/ruby/my_test/"
+"/home/nuncostans/Mega/git/note/"
+"/home/nuncostans/Downloads/"
+"/home/nuncostans/"
+"/home/nuncostans/Mega/git/notes/"
+"/home/nuncostans/Mega/git/ruby/betty/"
+)
+
+;; ----- ido-work-file-list -----
+(
+"main.rb"
+"init.el"
+"blackjack.c"
+"blackjack"
+"test.rb"
+"todo.org"
+"torvalds_jast_for_fun.txt"
+"Kniga_Just_For_Fun_Rasskaz_nechayannogo_revolyutsionera__Linus_Torvalds.pdf"
+"ac-comphist.dat"
+"magit.org"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+("/home/nuncostans/Mega/git/ruby/cli/" (22222 49765 966004 350000) "big_client_20160225.sql" "main.rb" "../" "main.rb~" "./")
+
+("/home/nuncostans/" (22223 62696 945942 29000) ".gksu.lock" ".rbdoom3bfg/" ".mkshrc" ".dbus/" ".zlogin" "Pictures/" ".mozilla/" ".furiusisomount/" ".gemrc" ".hardinfo/" ".xsession-errors" "Downloads/" "Videos/" ".steam/" "ispell.tmp" ".fonts/" ".bash_logout" "GitBook/" ".betty_history" ".goldendict/" ".ICEauthority" "kdenlive/" ".gnome/" "News/" "Desktop/" ".mtab.fuseiso" ".quake4/" ".gconf/" ".xscreensaver" "Programs/" "Public/" ".rbenv/" ".joe_state" "Mail/" ".elmo/" ".thunderbird/" ".Skype/" "Steam/" ".gnome2_private/" "Mega/" ".newsrc-dribble" ".xonotic/" "Documents/" ".wine/" ".wl~" ".pki/" ".loki/" ".tixati/" ".phoronix-test-suite/" ".adobe/" ".gstreamer-0.10/" ".vim/" ".scummvm/" ".bash_history" ".installjammerinfo/" ".activestate/" "../" ".klei/" ".pulse-cookie" ".aptitude/" ".openshot/" "Games/" "betty/" ".mplayer/" ".ssh/" ".sauerbraten/" ".cmus/" ".bash_profile" ".emacs.d/" ".Xauthority" ".sudo_as_admin_successful" ".vimrc" ".bashrc~" ".config/" ".mohaa/" "Cloud/" ".steampid" ".themes/" ".davfs2/" ".subsurface/" "90145-axiom.tar.gz" ".wl" "BioWare" ".apport-ignore.xml" ".local/" ".nano/" ".viminfo" ".mu/" ".steampath" ".zshrc" ".dmrc" "Templates/" ".VeraCrypt/" ".heroku/" ".gem/" ".gnupg/" ".cache/" ".macromedia/" ".gitconfig" ".synaptic/" ".q3a/" ".profile" ".thumbnails/" ".gnome2/" ".TelegramDesktop/" "www/" "FiraxisLive/" ".xsession-errors.old" ".bashrc" "tmp/" ".netrc" ".komodoedit/" ".Xdefaults" ".textadept/" "./" "Share/" ".desura/" "Music/" ".renpy/")
+
+("/home/nuncostans/Mega/git/ruby/" (22222 48085 782079 260000) "exercises/" "test.rb" "blog/" "TAGS" "text2.rb" "hasbrains/" "project/" "koans/" "my_test/" "zadacha" "../" "rails_test/" "betty/" "sametest.rb" "test.rb~" "wikiexemplruby/" "cli/" "lol.rb" "udamy/" "./" "book_exercise/")
+
+("/home/nuncostans/Mega/" (22222 45719 74184 778000) "git/" "mysnippets/" "BHB-ReMastered-3.00-linux.tar.bz2" "Korra Trainer/" "aikibujutsu/" "mounted/" "passwords/" "../" ".debris/" "MEGA-MASTERKEY.txt" "interesting-snippets/" "screenshots/" "./" "pic" "Гераклит Эфесский - Всё наследие На языках оригинала и в русском переводе -2012.pdf")
+
+("/home/nuncostans/.emacs.d/" (22222 9715 852328 344000) "ido.last" "snippets/" "projectile-bookmarks.eld" "elpa/" "session.2bc1f1956-a051-4544-be1c-d21a91269df5" "smex-items" "ido.last~" "../" ".git/" "auto-save-list/" "init.el~" "themes/" "init.el" ".achievements" ".mc-lists.el" "ac-comphist.dat" "./")
+
+("/home/nuncostans/Mega/git/c/" (22201 50675 743379 311000) "test_string.c" "hello.c" "myfirct.c" "blackjack.c" "myfirct" "hello" "blackjack" "../" "a.out" "./")
+
+("/home/nuncostans/Mega/git/ruby/my_test/" (22212 15766 528706 121000) "test.rb" "main.rb" "gladiator.rb" "init.rb" "../" "yielding.rb" "./")
+
+("/home/nuncostans/Downloads/" (22212 14902 87200 770000) "12714309_1265108583503885_901116136_n.jpg" "head-first-ruby.pdf" "vivaldi-beta_1.0.344.37-1_amd64.deb" "org.pdf" "sample_app_rails_4-master.zip" ".miow/" "torvalds_jast_for_fun.txt" "12735828_1266568483357895_1021495852_n(1).jpg" "torrents/" "12735828_1266568483357895_1021495852_n.jpg" "../" "slack-desktop-1.2.6-amd64.deb" "wr741nv4_en_3_12_11_up(120320).bin" "linux/" "12754829_1266568470024563_1027299609_o.jpg" "#torvalds_jast_for_fun.txt#" "Tekhnosfera_-_Analiz_algoritmov_Vvodny_kurs_20.pdf" "zile-2.4.11/" "yazy-ki-programmirovaniya.ai-01_1435612177.png" "12714288_1151466951538776_1977560562_n.jpg" "tixati_2.34-1_amd64.deb" "linux-0.01.tar.gz" "Pikover_K_-_Velikaya_fizika_Ot_Bolshogo_vzryva_do_Kvantovogo_voskreshenia_Velikie_nauki_-_2015.pdf" "sample_app-master.zip" "12722342_1264535163561227_381784546_o.jpg" "orgguide.pdf" "uemacs/" "mu-0.9.16.tar.gz.html" "./")
+
+("/home/nuncostans/Mega/git/note/" (22211 35677 617989 639000) "Python/" "magit.org~" "mynote.org" "FTP/" "todo.org" "servers/" "ПроекЯк_це_працює.md" "Interviev whith Linus Torvalds[20150421-162204].md" "Ruby/" "../" "main.org" "Todo[20150519-113751].md" "linux/" "Дослідження_ЕОМ.md" "sticky.md" "magit.org" "./")
+
+("/home/nuncostans/.emacs.d/elpa/flycheck-20160216.138/" (22211 21188 501137 323000) "flycheck-ert.el" "flycheck-autoloads.el" "flycheck-buttercup.el" "flycheck-autoloads.el~" "flycheck-ert.elc" "flycheck.elc" "../" "flycheck.info" "macros.info" "flycheck.el" "flycheck-pkg.el" "fdl-1.3.info" "./" "dir")
+
+("/home/nuncostans/.emacs.d/elpa/smartparens-20160211.1437/" (22211 20659 875474 413000) "smartparens.elc" "smartparens-pkg.el" "smartparens-python.elc" "smartparens-haskell.elc" "smartparens-html.elc" "smartparens-haskell.el" "smartparens-rust.el" "smartparens-ruby.elc" "smartparens-lua.elc" "smartparens-lua.el" "smartparens-ruby.el" "smartparens-config.el" "smartparens-scala.elc" "smartparens-latex.elc" "smartparens-racket.elc" "smartparens-latex.el" "../" "smartparens-autoloads.el" "smartparens-rust.elc" "smartparens.el" "smartparens-racket.el" "smartparens-html.el" "smartparens-autoloads.el~" "smartparens-python.el" "smartparens-scala.el" "./" "smartparens-config.elc")
+
+("/home/nuncostans/Mega/git/" (22210 17649 751463 250000) "prometheus/" "workspace/" "aikibujutsu/" "the-art-of-command-line-master/" "the-art-of-command-line/" "boolen.md" "c/" "git_test/" "index.html" "note/" "ruby/" "history_philosophy/" "php/" "../" "rust/" "betty/" "floobits/" "text.txt" "meow/" "python/" "README.md" "writings/" "go/" "boolen.html" "first/" "closure/" "org/" "gitlab/" "Нове сховище.kdbx" "js/" "uemacs/" "websandbox/" "./")
+
+("/home/" (22201 48224 423068 806000) "nuncostans/" "lost+found/" "../" "./")
+
+("/home/nuncostans/Mega/git/notes/" (22210 16976 406244 399000) "Python/" "mynote.org" "FTP/" "servers/" "ПроекЯк_це_працює.md" "Interviev whith Linus Torvalds[20150421-162204].md" "Ruby/" "../" "main.org" "Todo[20150519-113751].md" "linux/" "Дослідження_ЕОМ.md" "sticky.md" "./")
+
+("/home/nuncostans/Mega/git/ruby/betty/" (22204 26825 868583 832000) "autocomplete.rb" "spec/" "changelog.txt" "#new_releases.md#" "Gemfile" "ROADMAP.md" "main.rb" "NOTICE.md" "install.rb" "../" "Rakefile" "README.md" "lib/" "main.rb~" "#main.rb#" "circle.yml" "./" "Gemfile.lock" "new_releases.md")
+
+("/home/nuncostans/MEGAsync/" (22201 50342 496092 419000) "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
