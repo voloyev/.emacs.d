@@ -79,68 +79,8 @@
         (package-install package)))
 
 ;;------------------------------;;
-
-(defun init--install-packages ()
-    (packages-install
-     '(achievements
-       apel
-       async
-       company
-       dash
-       dired+
-       emmet-mode
-       epl
-       f
-       findr
-       flim
-       flycheck
-       ggtags
-       git-commit
-       git-gutter
-       imenu-list
-       inf-ruby
-       inflections
-       jump
-       keyfreq
-       let-alist
-       macrostep
-       markdown-mode
-       material-theme
-       monochrome-theme
-       multiple-cursors
-       nyan-mode
-       php-mode
-       pkg-info
-       popup
-       projectile
-       quasi-monochrom..
-       racer
-       rich-minority
-       rinari
-       rspec-mode
-       ruby-additional
-       ruby-block
-       ruby-compilation
-       ruby-dev
-       ruby-hash-syntax
-       ruby-tools
-       rust-mode
-       s
-       semi
-       seq
-       slime
-       smart-mode-line
-       smartparens
-       smex
-       sr-speedbar
-       ssh
-       wanderlust
-       web-mode
-       which-key
-       with-editor
-       xcscope
-       yasnippet
-       )))
+(require 'achievements)
+(achievements-mode 1)
 
 ;;themes
 (load-theme 'quasi-monochrome t)
