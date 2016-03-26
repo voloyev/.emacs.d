@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (setq package-list '(
                      achievements
                      apel
@@ -57,7 +60,6 @@
                      with-editor
                      xcscope
                      yasnippet
-
                      ))
 (require 'package)
 (add-to-list
@@ -65,9 +67,6 @@
  '("melpa" . "http://melpa.org/packages/")
  t)
 (package-initialize)
-
-;;(defun init--install-packages ()
-;;    (packages-install
 
                                         ; fetch the list of packages available
 (unless package-archive-contents
@@ -79,6 +78,7 @@
         (package-install package)))
 
 ;;------------------------------;;
+
 ;;themes
 (load-theme 'quasi-monochrome t)
 ;;(load-theme 'monochrome t)
@@ -165,6 +165,7 @@
 (defalias 'list-buffers 'ibuffer)
 (global-set-key (kbd "<f2>") 'bs-show)
 
+;;multiple cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -189,7 +190,7 @@
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
 
-;; Indent settings
+;;Indent settings
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width          4)
 (setq-default c-basic-offset     4)
@@ -265,7 +266,7 @@
 (yas-global-mode t)
 (add-to-list 'load-path
              "~/.emacs.d/snippets")
-;;(yas/load-directory "~/.emacs.d/yasnippet/snippets")
+(yas-load-directory "~/.emacs.d/snippets")
 
 ;;flycheck
 (package-install 'flycheck)
@@ -275,14 +276,13 @@
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 
-
-
-;;Markdown
+;; Markdown
 (autoload 'markdown-mode "markdown-mode"
     "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; Use visual-line-mode in gfm-mode
 (defun my-gfm-mode-hook ()
     (visual-line-mode 1))
@@ -296,7 +296,7 @@
 (--each '(restclient-mode-hook
           js-mode-hook
           python-mode-hook
-          web-mode-hoo
+          web-mode-hook
           ruby-mode-hook
           markdown-mode-hook
           org-mode-hook
@@ -304,6 +304,23 @@
           cc-mode-hook
           lisp-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
+
+;;line number
+(require 'linum)
+;;(global-set-key "\C-c l" 'linum-mode)
+(defun enable-linum-mode ()
+    (linum-mode t))
+;;linum mode for my modes
+(add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
+;; format linum
+(setq linum-format "%d ")
 
 ;;gutter
 (global-git-gutter-mode +1)
@@ -344,6 +361,7 @@
 ;; | <f3>  | visit-tags-table | Loads tags                 |
 ;; | M-.   | find-tag         | Jumps to the specified tag |
 ;; | C-M-. | pop-tag-mark     | Jumps back                 |
+
 ;; Bookmark settings
 (require 'bookmark)
 (setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
@@ -358,15 +376,6 @@
 (set-face-attribute 'default nil :font "Terminus Re33 12" )
 (set-frame-font "Terminus Re33 12")
 
-;;line nunber
-(linum-mode t)
-(add-hook 'ruby-mode 'linum-mode 1)
-(add-hook 'lisp-mode 'linum-mode)
-(add-hook 'python-mode 'linum-mode)
-(add-hook 'rust-mode 'linum-mode)
-(add-hook 'c-mode 'linum-mode)
-
-(setq linum-format "%d ")
 
 ;;whichkey
 (package-install 'which-key)
@@ -396,7 +405,8 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
-                             "~/Mega/git/note/todo.org"))
+                             "~/Mega/git/note/todo.org"
+                             "~/Mega/git/note/aikisite.org"))
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
