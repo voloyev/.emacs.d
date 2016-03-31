@@ -1,15 +1,21 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+;; Initialize packages for installation
 (setq package-list '(
                      achievements
                      apel
                      async
+                     codesearch
                      company
                      dash
                      dired+
                      emmet-mode
                      epl
+                     evil
+                     evil-matchit
+                     evil-rails
+                     evil-tabs
                      f
                      findr
                      flim
@@ -17,6 +23,7 @@
                      ggtags
                      git-commit
                      git-gutter
+                     goto-chg
                      imenu-list
                      inf-ruby
                      inflections
@@ -33,7 +40,10 @@
                      pkg-info
                      popup
                      projectile
-                     ;;quasi-monochrome
+                     projectile-codesearch
+                     projectile-rails
+                     projectile-speedbar
+                     quasi-monochrome-theme
                      racer
                      rich-minority
                      rinari
@@ -54,6 +64,7 @@
                      smex
                      sr-speedbar
                      ssh
+                     undo-tree
                      wanderlust
                      web-mode
                      which-key
@@ -61,7 +72,7 @@
                      xcscope
                      yasnippet
                      ))
-
+;;Init MELPA represitory
 (require 'package)
 (add-to-list
  'package-archives
@@ -69,16 +80,17 @@
  t)
 (package-initialize)
 
-                                        ; fetch the list of packages available
+;; fetch the list of packages available
 (unless package-archive-contents
     (package-refresh-contents))
 
-                                        ; install the missing packages
+;; install the missing packages
 (dolist (package package-list)
     (unless (package-installed-p package)
         (package-install package)))
 
 ;;------------------------------;;
+;;Achievements mode
 (require 'achievements)
 (achievements-mode 1)
 
@@ -99,9 +111,9 @@
 (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Emacs server
-(require 'server)
-(unless (server-running-p)
-    (server-start))
+;;(require 'server)
+;;(unless (server-running-p)
+;;    (server-start))
 
 ;;toolbar and menu
 (tool-bar-mode -1)
@@ -120,7 +132,6 @@
 ;; Smart M-x is smart
 (require 'smex)
 (smex-initialize)
-
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
@@ -184,6 +195,9 @@
 
 ;;projectile
 (projectile-global-mode)
+(require 'projectile-speedbar)
+(require 'projectile-codesearch)
+(add-hook 'projectile-mode-hook 'projectile-rails-on)
 
 ;;scrolling
 (setq scroll-step 1)
@@ -417,6 +431,12 @@
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
+
+;; evil modes
+(global-set-key (kbd "C-M-e") 'evil-mode)
+(require 'evil-matchit)
+(global-evil-matchit-mode 1)
+(global-evil-tabs-mode t)
 
 ;;github markdown preview
 (custom-set-variables
