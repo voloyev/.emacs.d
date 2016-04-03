@@ -212,7 +212,7 @@
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width          4)
+(setq tab-width                  4)
 (setq-default c-basic-offset     4)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
@@ -434,9 +434,9 @@
 
 ;; evil modes
 (global-set-key (kbd "C-M-e") 'evil-mode)
-(require 'evil-matchit)
-(global-evil-matchit-mode 1)
-(global-evil-tabs-mode t)
+;;(require 'evil-matchit)
+;;(global-evil-matchit-mode 1)
+;;(global-evil-tabs-mode t)
 
 ;;github markdown preview
 (custom-set-variables
