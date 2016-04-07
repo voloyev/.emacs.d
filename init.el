@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 ;; Initialize packages for installation
+
 (setq package-list '(
                      achievements
                      apel
