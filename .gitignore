@@ -11,6 +11,7 @@
 /elpa/
 /themes/
 /auto-save-list/
+/eshell/
 
 #files
 session*
