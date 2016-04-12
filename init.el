@@ -466,3 +466,7 @@
 
 ;;paradox github integration
 (setq paradox-github-token "2171d9c86e6373dabd800f4603a0905ca10571f6")
+
+;;calendar app
+(require 'calfw)
+(require 'calfw-org)
