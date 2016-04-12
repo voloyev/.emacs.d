@@ -37,6 +37,7 @@
                      monochrome-theme
                      multiple-cursors
                      nyan-mode
+                     paradox
                      php-mode
                      pkg-info
                      popup
@@ -449,6 +450,7 @@
    (quote
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(markdown-command "/home/nuncostans/Programs/flavor.rb")
+ '(paradox-automatically-star t)
  '(show-paren-mode t)
  '(show-paren-style (quote expression)))
 
@@ -461,3 +463,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "dark gray" :foreground "black")))))
+
+;;paradox github integration
+(setq paradox-github-token "2171d9c86e6373dabd800f4603a0905ca10571f6")
