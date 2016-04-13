@@ -464,6 +464,10 @@
  ;; If there is more than one, they won't work right.
  '(show-paren-match ((t (:background "dark gray" :foreground "black")))))
 
+;;show all files in speedbar
+(custom-set-variables
+ '(speedbar-show-unknown-files t)
+ )
 ;;paradox github integration
 (setq paradox-github-token "2171d9c86e6373dabd800f4603a0905ca10571f6")
 
