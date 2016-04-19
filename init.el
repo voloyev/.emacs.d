@@ -1,3 +1,4 @@
+
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -113,9 +114,9 @@
 (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Emacs server
-;;(require 'server)
-;;(unless (server-running-p)
-;;    (server-start))
+(require 'server)
+(unless (server-running-p)
+    (server-start))
 
 ;;toolbar and menu
 (tool-bar-mode -1)
@@ -210,7 +211,7 @@
 
 ;;ruby
 (require 'ruby-tools)
-(setq ruby-indent-level 2)
+(setq ruby-indent-level 4)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -449,7 +450,7 @@
  '(custom-safe-themes
    (quote
     ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(markdown-command "/home/nuncostans/Programs/flavor.rb")
+ '(markdown-command "ruby /home/nuncostans/Programs/flavor.rb")
  '(paradox-automatically-star t)
  '(show-paren-mode t)
  '(show-paren-style (quote expression)))
@@ -474,3 +475,9 @@
 ;;calendar app
 (require 'calfw)
 (require 'calfw-org)
+
+;;setup emacsclient
+(custom-set-variables
+ '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
+ '(server-switch-hook (quote ((lambda nil (let (server-buf) (setq server-buf (current-buffer)) (bury-buffer)      (switch-to-buffer-other-frame server-buf))))))
+ )
