@@ -230,15 +230,15 @@
     (windmove-default-keybindings 'meta))
 
 ;; Delete trailing whitespaces, format buffer and untabify when save buffer
-(defun format-current-buffer()
-    (indent-region (point-min) (point-max)))
-(defun untabify-current-buffer()
-    (if (not indent-tabs-mode)
-        (untabify (point-min) (point-max)))
-    nil)
-(add-to-list 'write-file-functions 'format-current-buffer)
-(add-to-list 'write-file-functions 'untabify-current-buffer)
-(add-to-list 'write-file-functions 'delete-trailing-whitespace)
+;; (defun format-current-buffer()
+;;     (indent-region (point-min) (point-max)))
+;; (defun untabify-current-buffer()
+;;     (if (not indent-tabs-mode)
+;;         (untabify (point-min) (point-max)))
+;;     nil)
+;; (add-to-list 'write-file-functions 'format-current-buffer)
+;; (add-to-list 'write-file-functions 'untabify-current-buffer)
+;; (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 
 ;;slime
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
