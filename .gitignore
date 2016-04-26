@@ -7,6 +7,8 @@
 # Autosaver
 *~:w
 *.*~
+projectile.cache
+
 #directories
 /elpa/
 /themes/
