@@ -1,4 +1,3 @@
-
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -201,6 +200,8 @@
 (require 'projectile-speedbar)
 (require 'projectile-codesearch)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
+(setq speedbar-show-unknown-files t) ; show all files
+(setq sr-speedbar-right-side nil) ; to the left side
 
 ;;scrolling
 (setq scroll-step 1)
@@ -430,7 +431,8 @@
 (setq org-agenda-files (list "~/Mega/git/note/main.org"
                              "~/Mega/git/note/todo.org"
                              "~/Mega/git/note/aikisite.org"
-                             "~/Mega/git/note/todo.org"))
+                             "~/Mega/git/note/todo.org"
+                             "~/Mega/git/note/cursor.org"))
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
@@ -481,3 +483,4 @@
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook (quote ((lambda nil (let (server-buf) (setq server-buf (current-buffer)) (bury-buffer)      (switch-to-buffer-other-frame server-buf))))))
  )
+(put 'upcase-region 'disabled nil)
