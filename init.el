@@ -97,12 +97,13 @@
 (achievements-mode 1)
 
 ;;themes
-(load-theme 'quasi-monochrome t)
+;;(load-theme 'quasi-monochrome t)
+(load-theme 'tao-yin t)
 ;;(load-theme 'monochrome t)
 ;;(load-theme 'material t)
 ;;(load-theme 'sanityinc-solarized-dark t)
-(set-frame-parameter nil 'background-mode 'dark)
-(set-terminal-parameter nil 'background-mode 'dark)
+;;(set-frame-parameter nil 'background-mode 'dark)
+;;(set-terminal-parameter nil 'background-mode 'dark)
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
