@@ -484,3 +484,5 @@
  '(server-switch-hook (quote ((lambda nil (let (server-buf) (setq server-buf (current-buffer)) (bury-buffer)      (switch-to-buffer-other-frame server-buf))))))
  )
 (put 'upcase-region 'disabled nil)
+;; work mouse in terminal
+(xterm-mouse-mode t)
