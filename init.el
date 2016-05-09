@@ -1,3 +1,4 @@
+
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
@@ -213,7 +214,7 @@
 
 ;;ruby
 (require 'ruby-tools)
-(setq ruby-indent-level 4)
+(setq ruby-indent-level 2)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
