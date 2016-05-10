@@ -48,6 +48,7 @@
                      racer
                      rich-minority
                      rinari
+                     robe
                      rspec-mode
                      ruby-additional
                      ruby-block
