@@ -1,8 +1,7 @@
-;;; package --- Summary
-;;; Commentary:
+;;; package --- My emaacs init-file
+;;; Commentary: My emaacs init-file
 ;;; Code:
-;; Initialize packages for installation
-
+;;; Initialize packages for installation
 (setq package-list '(
                      achievements
                      apel
@@ -214,6 +213,7 @@
 ;;ruby
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
+(add-hook 'ruby-mode-hook 'robe-mode)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -353,6 +353,9 @@
 (git-gutter:linum-setup)
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
+(set-face-background 'git-gutter:modified "purple") ;; background color
+(set-face-foreground 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:deleted "red")
 
 ;;web-mode
 (require 'web-mode)
@@ -379,6 +382,8 @@
 ;;company mode
 (global-company-mode t)
 (add-hook 'after-init-hook 'global-company-mode)
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-inf-ruby))
 
 ;;map
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -473,7 +478,7 @@
  '(speedbar-show-unknown-files t)
  )
 ;;paradox github integration
-(setq paradox-github-token "2171d9c86e6373dabd800f4603a0905ca10571f6")
+(setq paradox-github-token "1a8089f872abd9efa1a25b56bf0f256db641f431")
 
 ;;calendar app
 (require 'calfw)
