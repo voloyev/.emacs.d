@@ -97,13 +97,14 @@
 (achievements-mode 1)
 
 ;;themes
-;;(load-theme 'quasi-monochrome t)
-(load-theme 'tao-yin t)
+;;(load-theme 'zenburn t)
+(load-theme 'quasi-monochrome t)
+;;(load-theme 'tao-yin t)
 ;;(load-theme 'monochrome t)
 ;;(load-theme 'material t)
 ;;(load-theme 'sanityinc-solarized-dark t)
-;;(set-frame-parameter nil 'background-mode 'dark)
-;;(set-terminal-parameter nil 'background-mode 'dark)
+(set-frame-parameter nil 'background-mode 'dark)
+(set-terminal-parameter nil 'background-mode 'dark)
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
@@ -151,7 +152,9 @@
 
 ;;paren mode
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+(setq show-paren-delay 0)
+(setq show-paren-style 'parenthesis)
+(set-face-attribute 'weight 'extra-bold)
 (set-face-foreground 'show-paren-match "black")
 
 (defadvice show-paren-function
@@ -458,11 +461,21 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(markdown-command "ruby /home/nuncostans/Programs/flavor.rb")
  '(paradox-automatically-star t)
+ '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
+ '(server-switch-hook
+   (quote
+    ((lambda nil
+         (let
+             (server-buf)
+             (setq server-buf
+                   (current-buffer))
+             (bury-buffer)
+             (switch-to-buffer-other-frame server-buf))))))
  '(show-paren-mode t)
- '(show-paren-style (quote expression)))
+ '(speedbar-show-unknown-files t))
 
 ;;emmet mode
 (add-hook 'web-mode-hook 'emmet-mode)
@@ -475,9 +488,7 @@
  '(show-paren-match ((t (:background "dark gray" :foreground "black")))))
 
 ;;show all files in speedbar
-(custom-set-variables
- '(speedbar-show-unknown-files t)
- )
+
 ;;paradox github integration
 (setq paradox-github-token "1a8089f872abd9efa1a25b56bf0f256db641f431")
 
@@ -486,10 +497,7 @@
 (require 'calfw-org)
 
 ;;setup emacsclient
-(custom-set-variables
- '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
- '(server-switch-hook (quote ((lambda nil (let (server-buf) (setq server-buf (current-buffer)) (bury-buffer)      (switch-to-buffer-other-frame server-buf))))))
- )
+
 (put 'upcase-region 'disabled nil)
 ;; work mouse in terminal
 (xterm-mouse-mode t)
