@@ -442,7 +442,8 @@
                              "~/Mega/git/note/todo.org"
                              "~/Mega/git/note/aikisite.org"
                              "~/Mega/git/note/todo.org"
-                             "~/Mega/git/note/cursor.org"))
+                             "~/Mega/git/note/cursor.org"
+                             "~/Dropbox/TODO/become_programer.org"))
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
