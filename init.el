@@ -500,5 +500,6 @@
 ;;setup emacsclient
 
 (put 'upcase-region 'disabled nil)
+
 ;; work mouse in terminal
 (xterm-mouse-mode t)
