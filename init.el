@@ -73,6 +73,7 @@
                      with-editor
                      xcscope
                      yasnippet
+                     phoenix-dark-mono
                      ))
 ;;Init MELPA represitory
 (require 'package)
@@ -98,11 +99,8 @@
 
 ;;themes
 ;;(load-theme 'zenburn t)
-(load-theme 'quasi-monochrome t)
-;;(load-theme 'tao-yin t)
-;;(load-theme 'monochrome t)
-;;(load-theme 'material t)
-;;(load-theme 'sanityinc-solarized-dark t)
+(load-theme 'phoenix-dark-mono t)
+;;(load-theme 'quasi-monochrome t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
 
@@ -217,6 +215,7 @@
 ;;ruby
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
+(require 'robe)
 (add-hook 'ruby-mode-hook 'robe-mode)
 
 ;;Indent settings
@@ -385,9 +384,13 @@
 
 ;;company mode
 (global-company-mode t)
+(company-quickhelp-mode t)
 (add-hook 'after-init-hook 'global-company-mode)
 (eval-after-load 'company
-  '(add-to-list 'company-backends 'company-inf-ruby))
+    '(add-to-list 'company-backends 'company-inf-ruby))
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+(global-set-key (kbd "<f6>") 'company-complete)
 
 ;;map
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -423,6 +426,14 @@
 (ido-everywhere                t)
 (setq ido-vitrual-buffers      t)
 (setq ido-enable-flex-matching t)
+;; Display ido results vertically, rather than horizontally
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
+(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-truncation)
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+    (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+    (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
 
 ;;racer
 (add-hook 'rust-mode-hook #'racer-mode)
