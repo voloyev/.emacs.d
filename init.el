@@ -2,6 +2,7 @@
 ;;; Commentary: My emaacs init-file
 ;;; Code:
 ;;; Initialize packages for installation
+
 (setq package-list '(
                      achievements
                      apel
@@ -73,7 +74,7 @@
                      with-editor
                      xcscope
                      yasnippet
-                     phoenix-dark-mono
+                     phoenix-dark-mono-theme
                      ))
 ;;Init MELPA represitory
 (require 'package)
@@ -86,6 +87,7 @@
 ;; fetch the list of packages available
 (unless package-archive-contents
     (package-refresh-contents))
+
 
 ;; install the missing packages
 (dolist (package package-list)
@@ -204,6 +206,7 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 (setq speedbar-show-unknown-files t) ; show all files
 (setq sr-speedbar-right-side nil) ; to the left side
+(sr-speedbar-refresh-turn-off)
 
 ;;scrolling
 (setq scroll-step 1)
@@ -217,6 +220,9 @@
 (setq ruby-indent-level 2)
 (require 'robe)
 (add-hook 'ruby-mode-hook 'robe-mode)
+(defadvice inf-ruby (before activate-rvm-for-robe activate)
+    (rvm-activate-corresponding-ruby))
+(add-hook 'ruby-mode-hook #'rubocop-mode)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -288,10 +294,16 @@
               (speedbar-add-supported-extension  ".ma?k")
               (speedbar-add-supported-extension  "[Mm]akefile\\(\\.in\\)?")
               (speedbar-add-supported-extension  "\\.rs")))
-
+(setq sr-speedbar-width-x 20)
 ;;yanisppet
 (require 'yasnippet)
-(yas-global-mode t)
+(defun enable-yas-mode ()
+     (yas-minor-mode t))
+;;yas-mode for my modes
+(add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
+(add-hook 'rust-mode-hook '(lambda () (yas-minor-mode 1)))
+(add-hook 'python-mode-hook '(lambda () (yas-minor-mode 1)))
+;;(yas-global-mode t)
 (add-to-list 'load-path
              "~/.emacs.d/snippets")
 (yas-load-directory "~/.emacs.d/snippets")
@@ -300,7 +312,7 @@
 (package-install 'flycheck)
 (global-flycheck-mode)
 
-;; Highlight search resaults
+;; Highlight search result
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 
@@ -335,25 +347,25 @@
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;line number
-(require 'linum)
+;;(require 'linum)
 ;;(global-set-key "\C-c l" 'linum-mode)
-(defun enable-linum-mode ()
-    (linum-mode t))
-;;linum mode for my modes
-(add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
-;; format linum
-(setq linum-format "%d ")
+;; (defun enable-linum-mode ()
+;;     (linum-mode t))
+;; ;;linum mode for my modes
+;; (add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'emacs-mlisp-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
+;; (add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
+;; ;; format linum
+;; (setq linum-format "%d ")
 
 ;;gutter
 (global-git-gutter-mode +1)
-(git-gutter:linum-setup)
+;;(git-gutter:linum-setup)
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
 (set-face-background 'git-gutter:modified "purple") ;; background color
@@ -387,9 +399,7 @@
 (company-quickhelp-mode t)
 (add-hook 'after-init-hook 'global-company-mode)
 (eval-after-load 'company
-    '(add-to-list 'company-backends 'company-inf-ruby))
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+    '(push 'company-robe company-backends))
 (global-set-key (kbd "<f6>") 'company-complete)
 
 ;;map
@@ -426,6 +436,7 @@
 (ido-everywhere                t)
 (setq ido-vitrual-buffers      t)
 (setq ido-enable-flex-matching t)
+
 ;; Display ido results vertically, rather than horizontally
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 (defun ido-disable-line-truncation () (set (make-local-variable 'truncate-lines) nil))
@@ -461,8 +472,9 @@
 
 ;; evil modes
 (global-set-key (kbd "C-M-e") 'evil-mode)
+;;(add-hook 'evil-mode-hook evil-matchit-mode)
 ;;(require 'evil-matchit)
-;;(global-evil-matchit-mode 1)
+;;(global-evil-matchit-mode t)
 ;;(global-evil-tabs-mode t)
 
 ;;github markdown preview
@@ -514,3 +526,66 @@
 
 ;; work mouse in terminal
 (xterm-mouse-mode t)
+
+;;helm
+(require 'helm)
+
+;; Locate the helm-swoop folder to your path
+(require 'helm-swoop)
+
+;; Change the keybinds to whatever you like :)
+(global-set-key (kbd "M-i") 'helm-swoop)
+(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+(global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+(global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+
+;; When doing isearch, hand the word over to helm-swoop
+(define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+;; From helm-swoop to helm-multi-swoop-all
+(define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+;; When doing evil-search, hand the word over to helm-swoop
+;; (define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)
+
+;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
+(define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+
+;; Move up and down like isearch
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+
+;; Save buffer when helm-multi-swoop-edit complete
+(setq helm-multi-swoop-edit-save t)
+
+;; If this value is t, split window inside the current window
+(setq helm-swoop-split-with-multiple-windows nil)
+
+;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+(setq helm-swoop-split-direction 'split-window-vertically)
+
+;; If nil, you can slightly boost invoke speed in exchange for text color
+(setq helm-swoop-speed-or-color nil)
+
+;; ;; Go to the opposite side of line from the end or beginning of line
+(setq helm-swoop-move-to-line-cycle t)
+
+;; Optional face for line numbers
+;; Face name is `helm-swoop-line-number-face`
+(setq helm-swoop-use-line-number-face t)
+
+;; If you prefer fuzzy matching
+(setq helm-swoop-use-fuzzy-match t)
+
+;; If you would like to use migemo, enable helm's migemo feature
+;;(helm-migemo-mode 1)
+;;emacs-neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; imenu anywhere
+(global-set-key (kbd "C-.") #'imenu-anywhere)
+
+;;vimish folds
+(require 'vimish-fold)
+(global-set-key (kbd "C-x g") 'magit-status)
