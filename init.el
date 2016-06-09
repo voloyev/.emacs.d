@@ -588,4 +588,6 @@
 
 ;;vimish folds
 (require 'vimish-fold)
+
+;;magit 
 (global-set-key (kbd "C-x g") 'magit-status)
