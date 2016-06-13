@@ -137,6 +137,12 @@
 (require 'smex)
 (smex-initialize)
 
+;;company mode
+(global-company-mode t)
+(company-quickhelp-mode t)
+(add-hook 'after-init-hook 'global-company-mode)
+
+
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
@@ -203,10 +209,16 @@
 (projectile-global-mode)
 (require 'projectile-speedbar)
 (require 'projectile-codesearch)
+(add-hook 'ruby-mode-hook 'projectile-on)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 (setq speedbar-show-unknown-files t) ; show all files
 (setq sr-speedbar-right-side nil) ; to the left side
 (sr-speedbar-refresh-turn-off)
+(add-hook 'ibuffer-hook
+    (lambda ()
+      (ibuffer-projectile-set-filter-groups)
+      (unless (eq ibuffer-sorting-mode 'alphabetic)
+        (ibuffer-do-sort-by-alphabetic))))
 
 ;;scrolling
 (setq scroll-step 1)
@@ -218,11 +230,17 @@
 ;;ruby
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
+(add-hook 'ruby-mode-hook #'rubocop-mode)
+(setq ruby-deep-indent-paren nil)
+(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 (require 'robe)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (defadvice inf-ruby (before activate-rvm-for-robe activate)
     (rvm-activate-corresponding-ruby))
-(add-hook 'ruby-mode-hook #'rubocop-mode)
+(eval-after-load 'company
+    '(push 'company-robe company-backends))
+(global-set-key (kbd "<f6>") 'company-complete)
+(add-hook 'robe-start 'inf-ruby )
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -394,13 +412,7 @@
 (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
 
-;;company mode
-(global-company-mode t)
-(company-quickhelp-mode t)
-(add-hook 'after-init-hook 'global-company-mode)
-(eval-after-load 'company
-    '(push 'company-robe company-backends))
-(global-set-key (kbd "<f6>") 'company-complete)
+
 
 ;;map
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -591,3 +603,7 @@
 
 ;;magit 
 (global-set-key (kbd "C-x g") 'magit-status)
+
+(provide 'init)
+;;; init.el ends here
+(persp-mode)
