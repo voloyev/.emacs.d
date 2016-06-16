@@ -189,6 +189,8 @@
 (setq bs-configurations
       '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last)))
 (require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+    (autoload 'ibuffer "ibuffer" "List buffers." t)
 (defalias 'list-buffers 'ibuffer)
 (global-set-key (kbd "<f2>") 'bs-show)
 
@@ -220,6 +222,7 @@
       (unless (eq ibuffer-sorting-mode 'alphabetic)
         (ibuffer-do-sort-by-alphabetic))))
 
+
 ;;scrolling
 (setq scroll-step 1)
 (windmove-default-keybindings 'meta)
@@ -240,7 +243,9 @@
 (eval-after-load 'company
     '(push 'company-robe company-backends))
 (global-set-key (kbd "<f6>") 'company-complete)
-(add-hook 'robe-start 'inf-ruby )
+(add-hook 'robe-mode-hook 'inf-ruby-minor-mode)
+(add-hook 'inf-ruby-minor-mode-hook 'robe-start)
+(add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -600,10 +605,18 @@
 
 ;;vimish folds
 (require 'vimish-fold)
-
-;;magit 
+(global-set-key (kbd "C-c v f") #'vimish-fold)
+(global-set-key (kbd "C-c v v") #'vimish-fold-delete)
+;;magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
+
+(persp-mode)
+
+;;undo tree
+(undo-tree-mode t)
+
+;; highlight indentation
+(highlight-indentation-current-column-mode 1)
 (provide 'init)
 ;;; init.el ends here
-(persp-mode)
