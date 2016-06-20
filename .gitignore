@@ -14,6 +14,7 @@ projectile.cache
 /themes/
 /auto-save-list/
 /eshell/
+/vimish-fold/
 
 #files
 session*
@@ -25,3 +26,4 @@ ido.last
 *.eld
 *.swp
 /.mc-lists.el
+rake.cache
