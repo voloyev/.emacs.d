@@ -215,7 +215,7 @@
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 (setq speedbar-show-unknown-files t) ; show all files
 (setq sr-speedbar-right-side nil) ; to the left side
-(sr-speedbar-refresh-turn-off)
+(sr-speedbar-refresh-turn-on)
 (add-hook 'ibuffer-hook
     (lambda ()
       (ibuffer-projectile-set-filter-groups)
@@ -243,9 +243,6 @@
 (eval-after-load 'company
     '(push 'company-robe company-backends))
 (global-set-key (kbd "<f6>") 'company-complete)
-(add-hook 'robe-mode-hook 'inf-ruby-minor-mode)
-(add-hook 'inf-ruby-minor-mode-hook 'robe-start)
-(add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -255,6 +252,9 @@
 (setq-default lisp-body-indent   4)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
+
+;;add highlight ingentation
+(global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -315,13 +315,16 @@
               (speedbar-add-supported-extension  "\\.\\(inc\\|php[s345]?\\|phtml\\)")
               (speedbar-add-supported-extension  ".s?html")
               (speedbar-add-supported-extension  ".ma?k")
+              (speedbar-add-supported-extension  ".haml")
               (speedbar-add-supported-extension  "[Mm]akefile\\(\\.in\\)?")
               (speedbar-add-supported-extension  "\\.rs")))
 (setq sr-speedbar-width-x 20)
+
 ;;yanisppet
 (require 'yasnippet)
 (defun enable-yas-mode ()
      (yas-minor-mode t))
+
 ;;yas-mode for my modes
 (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'rust-mode-hook '(lambda () (yas-minor-mode 1)))
@@ -477,13 +480,12 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
-(setq org-agenda-files (list "~/Mega/git/note/main.org"
-                             "~/Mega/git/note/todo.org"
-                             "~/Mega/git/note/aikisite.org"
-                             "~/Mega/git/note/todo.org"
-                             "~/Mega/git/note/cursor.org"
-                             "~/Dropbox/TODO/become_programer.org"))
-
+(setq org-agenda-files (list "~/Mega/git/note/cursor.org"
+                             "~/Dropbox/TODO/become_programer.org"
+                             "~/Dropbox/workspace/org_notes/views_and_controllers.org"
+                             "~/Dropbox/workspace/org_notes/aikido.org"))
+(add-hook 'org-mode-hook (lambda () 
+                           (auto-fill-mode -1))) 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 
@@ -537,9 +539,7 @@
 (require 'calfw)
 (require 'calfw-org)
 
-;;setup emacsclient
-
-(put 'upcase-region 'disabled nil)
+;;(put 'upcase-region 'disabled nil)
 
 ;; work mouse in terminal
 (xterm-mouse-mode t)
@@ -607,10 +607,11 @@
 (require 'vimish-fold)
 (global-set-key (kbd "C-c v f") #'vimish-fold)
 (global-set-key (kbd "C-c v v") #'vimish-fold-delete)
+
 ;;magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
-
+;;
 (persp-mode)
 
 ;;undo tree
