@@ -1,5 +1,5 @@
 ;;; package --- My emaacs init-file
-;;; Commentary: My emaacs init-file
+;;; Commentary:
 ;;; Code:
 ;;; Initialize packages for installation
 
@@ -237,11 +237,11 @@
 (setq ruby-deep-indent-paren nil)
 (global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 (require 'robe)
-(add-hook 'ruby-mode-hook 'robe-mode)
 (defadvice inf-ruby (before activate-rvm-for-robe activate)
     (rvm-activate-corresponding-ruby))
 (eval-after-load 'company
     '(push 'company-robe company-backends))
+;; shortkey for company-complete
 (global-set-key (kbd "<f6>") 'company-complete)
 
 ;;Add custome modes extension
@@ -364,6 +364,9 @@
 
 ;; Default setup of smartparens
 (require 'smartparens-config)
+(add-hook 'js-mode-hook #'smartparens-mode)
+(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
+
 (--each '(restclient-mode-hook
           js-mode-hook
           python-mode-hook
@@ -373,7 +376,8 @@
           org-mode-hook
           rust-mode-hook
           cc-mode-hook
-          lisp-mode-hook)
+          lisp-mode-hook
+          emacs-lisp-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;line number
@@ -626,10 +630,17 @@
 (provide 'init)
 
 ;;hooks ;)
+;;; hooks for highlightion
 (add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'python-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'haml-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'web-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'rust-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
+
+;;; hooks for ruby mode
+(add-hook 'ruby-mode-hook 'inf-ruby-mode)
+(add-hook 'inf-ruby-mode-hook 'robe-start)
 
 ;;; init.el ends here
