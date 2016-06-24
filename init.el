@@ -488,8 +488,7 @@
                              "~/Dropbox/TODO/become_programer.org"
                              "~/Dropbox/workspace/org_notes/views_and_controllers.org"
                              "~/Dropbox/workspace/org_notes/aikido.org"))
-(add-hook 'org-mode-hook (lambda () 
-                           (auto-fill-mode -1))) 
+(add-hook 'org-mode-hook 'toggle-truncate-lines)
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 
@@ -625,4 +624,12 @@
 ;; highlight indentation
 (highlight-indentation-current-column-mode 1)
 (provide 'init)
+
+;;hooks ;)
+(add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'python-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'haml-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'web-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'rust-mode-hook 'highlight-indentation-current-column-mode)
+
 ;;; init.el ends here
