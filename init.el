@@ -190,10 +190,14 @@
       '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last)))
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-    (autoload 'ibuffer "ibuffer" "List buffers." t)
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+;;(add-to-list 'ibuffer-never-show-regexps "^\\*")
 (defalias 'list-buffers 'ibuffer)
-(global-set-key (kbd "<f2>") 'bs-show)
+(add-hook 'ibuffer-mode-hook
+	  '(lambda ()
+	     (ibuffer-auto-mode 1)))
 
+(global-set-key (kbd "<f2>") 'bs-show)
 
 ;;multiple cursors
 
@@ -211,7 +215,7 @@
 (projectile-global-mode)
 ;;(require 'projectile-speedbar)
 (require 'projectile-codesearch)
-(add-hook 'ruby-mode-hook 'projectile-on)
+(add-hook 'ruby-mode-hook 'projectile-mode)
 (add-hook 'projectile-mode-hook 'projectile-rails-on)
 ;;(setq speedbar-show-unknown-files t) ; show all files
 ;;(setq sr-speedbar-right-side nil) ; to the left side
@@ -237,6 +241,7 @@
 (setq ruby-deep-indent-paren nil)
 (global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 (require 'robe)
+(add-hook 'ruby-mode-hook 'robe-mode)
 (defadvice inf-ruby (before activate-rvm-for-robe activate)
     (rvm-activate-corresponding-ruby))
 (eval-after-load 'company
@@ -474,9 +479,19 @@
     (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 (add-hook 'ido-setup-hook 'ido-define-keys)
 
+;;rust
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
 ;;racer
+
+(setq racer-cmd "/usr/local/bin/racer")
+(setq racer-rust-src-path "/home/nuncostans/.rust/src/")
+
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+;; Use company-racer in rust mode
+(set (make-local-variable 'company-backends) '(company-racer))
 
 ;;wanderlust
 (autoload 'wl "wl" "Wanderlust" t)
@@ -640,7 +655,7 @@
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
 
 ;;; hooks for ruby mode
-(add-hook 'ruby-mode-hook 'inf-ruby-mode)
-(add-hook 'inf-ruby-mode-hook 'robe-start)
+;;(add-hook 'ruby-mode-hook 'inf-ruby-mode)
+;;(add-hook 'inf-ruby-mode-hook 'robe-start)
 
 ;;; init.el ends here
