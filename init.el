@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 ;;; Initialize packages for installation
-
 (setq package-list '(
                      achievements
                      apel
@@ -386,25 +385,25 @@
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;line number
-;;(require 'linum)
+(require 'linum)
 ;;(global-set-key "\C-c l" 'linum-mode)
-;; (defun enable-linum-mode ()
-;;     (linum-mode t))
-;; ;;linum mode for my modes
-;; (add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'emacs-mlisp-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
-;; (add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
-;; ;; format linum
-;; (setq linum-format "%d ")
+(defun enable-linum-mode ()
+    (linum-mode t))
+ ;;linum mode for my modes
+ (add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
+ (add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
+ ;; format linum
+(setq linum-format "%d ")
 
 ;;gutter
 (global-git-gutter-mode +1)
-;;(git-gutter:linum-setup)
+(git-gutter:linum-setup)
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
 (set-face-background 'git-gutter:modified "purple") ;; background color
