@@ -517,7 +517,6 @@
 ;;(global-evil-matchit-mode t)
 ;;(global-evil-tabs-mode t)
 
-;;github markdown preview
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -526,7 +525,6 @@
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(markdown-command "ruby /home/nuncostans/Programs/flavor.rb")
  '(paradox-automatically-star t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
@@ -653,6 +651,9 @@
 (add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
 
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
+(require 'livedown)
+(global-set-key [f7] 'livedown:preview)
 ;;; hooks for ruby mode
 ;;(add-hook 'ruby-mode-hook 'inf-ruby-mode)
 ;;(add-hook 'inf-ruby-mode-hook 'robe-start)
