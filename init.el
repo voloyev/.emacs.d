@@ -101,6 +101,7 @@
 ;;themes
 ;;(load-theme 'zenburn t)
 (load-theme 'phoenix-dark-mono t)
+;;(load-theme 'danneskjold t)
 ;;(load-theme 'quasi-monochrome t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
@@ -238,7 +239,6 @@
 (setq ruby-indent-level 2)
 (add-hook 'ruby-mode-hook #'rubocop-mode)
 (setq ruby-deep-indent-paren nil)
-(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 (require 'robe)
 (add-hook 'ruby-mode-hook 'robe-mode)
 (defadvice inf-ruby (before activate-rvm-for-robe activate)
@@ -247,6 +247,12 @@
     '(push 'company-robe company-backends))
 ;; shortkey for company-complete
 (global-set-key (kbd "<f6>") 'company-complete)
+(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
+(global-set-key (kbd "C-c r r") 'inf-ruby)
+
+
+;; rinari
+     (setq rinari-tags-file-name "TAGS")
 
 ;;Add custome modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -263,6 +269,7 @@
 
 ;;add highlight ingentation
 (global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
+
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -332,6 +339,8 @@
 (require 'yasnippet)
 (defun enable-yas-mode ()
      (yas-minor-mode t))
+(eval-after-load 'rspec-mode
+    '(rspec-install-snippets))
 
 ;;yas-mode for my modes
 (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
