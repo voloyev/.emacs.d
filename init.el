@@ -99,10 +99,14 @@
 (achievements-mode 1)
 
 ;;themes
-;;(load-theme 'zenburn t)
-(load-theme 'phoenix-dark-mono t)
+(load-theme 'zenburn t)
+;;(load-theme 'phoenix-dark-mono t)
+;;(load-theme 'tao-yin t)
+;;(load-theme 'monochrome t)
 ;;(load-theme 'danneskjold t)
 ;;(load-theme 'quasi-monochrome t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'eltbus t)
 (set-frame-parameter nil 'background-mode 'dark)
 (set-terminal-parameter nil 'background-mode 'dark)
 
@@ -271,7 +275,7 @@
 
 ;;add highlight ingentation
 (global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
-
+(set-face-background 'highlight-indentation-current-column-face "#444444")
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -535,7 +539,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(paradox-automatically-star t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
