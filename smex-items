@@ -1,16 +1,47 @@
 
 ;; ----- smex-history -----
 (
- cd
- wl
- 5x5
- arp
- dbx
- dig
- erc
+ package-list-packages
+ package-menu-mark-upgrades
+ helm-ag-project-root
+ magit-shell-command
+ smartparens-mode
+ rake-find-task
+ inf-ruby
 )
 
 ;; ----- smex-data -----
 (
- 
+ (cd . 1)
+ (multiple-cursors-mode . 1)
+ (package-install . 6)
+ (list-colors-display . 4)
+ (eval-buffer . 1)
+ (achievements-list-mode . 2)
+ (achievements-list-achievements . 1)
+ (achievements-mode . 2)
+ (achievements-load-achievements . 1)
+ (achievements-save-achievements . 1)
+ (magit-checkout . 4)
+ (magit-merge . 6)
+ (inf-ruby . 4)
+ (robe-start . 7)
+ (show-all . 1)
+ (make-directory . 2)
+ (helm-ag . 2)
+ (tags-search . 1)
+ (rubocop-check-project . 1)
+ (projectile-rails-goto-gemfile . 1)
+ (list-packages . 1)
+ (bundle-open . 1)
+ (bundle-install . 1)
+ (package-show-package-list . 1)
+ (paradox-list-packages . 1)
+ (sass-mode . 1)
+ (rake-find-task . 1)
+ (smartparens-mode . 1)
+ (magit-shell-command . 1)
+ (helm-ag-project-root . 1)
+ (package-menu-mark-upgrades . 1)
+ (package-list-packages . 1)
 )
