@@ -99,16 +99,15 @@
 (achievements-mode 1)
 
 ;;themes
-(load-theme 'zenburn t)
-;;(load-theme 'phoenix-dark-mono t)
+;;(load-theme 'zenburn t)
+(load-theme 'phoenix-dark-mono t)
 ;;(load-theme 'tao-yin t)
 ;;(load-theme 'monochrome t)
 ;;(load-theme 'danneskjold t)
 ;;(load-theme 'quasi-monochrome t)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'eltbus t)
-(set-frame-parameter nil 'background-mode 'dark)
-(set-terminal-parameter nil 'background-mode 'dark)
+;;(load-theme 'minimal t)
+;;(set-frame-parameter nil 'background-mode 'dark)
+;;(set-terminal-parameter nil 'background-mode 'dark)
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
@@ -241,24 +240,32 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;;ruby
+;;rvm
+;;(require 'rvm)
+;;(rvm-use-default)
+;;(rvm-activate-corresponding-ruby)
+;;rbenv
+(require 'rbenv)
+(global-rbenv-mode)
 (require 'ruby-tools)
 (setq ruby-indent-level 2)
 (add-hook 'ruby-mode-hook #'rubocop-mode)
 (setq ruby-deep-indent-paren nil)
 (require 'robe)
 (add-hook 'ruby-mode-hook 'robe-mode)
-(defadvice inf-ruby (before activate-rvm-for-robe activate)
-    (rvm-activate-corresponding-ruby))
+;;(defadvice inf-ruby (before activate-rvm-for-robe activate)
+;;    (rvm-activate-corresponding-ruby))
 (eval-after-load 'company
     '(push 'company-robe company-backends))
 ;; shortkey for company-complete
 (global-set-key (kbd "<f6>") 'company-complete)
-(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
+;;(global-set-key (kbd "C-c r a") 'rvm-activate-corresponding-ruby)
 (global-set-key (kbd "C-c r r") 'inf-ruby)
+(require 'bundler)
 
 
 ;; rinari
-     (setq rinari-tags-file-name "TAGS")
+(setq rinari-tags-file-name "TAGS")
 
 ;;Add custome modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -273,9 +280,8 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
-;;add highlight ingentation
-(global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
-(set-face-background 'highlight-indentation-current-column-face "#444444")
+
+
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -396,7 +402,8 @@
           rust-mode-hook
           cc-mode-hook
           lisp-mode-hook
-          emacs-lisp-mode-hook)
+          emacs-lisp-mode-hook
+          haml-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;line number
@@ -666,11 +673,34 @@
 (add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
 
+;;add highlight ingentation
+(global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
+(set-face-background 'highlight-indentation-face "#444444")
+(set-face-background 'highlight-indentation-current-column-face "#444444")
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
 (require 'livedown)
 (global-set-key [f7] 'livedown:preview)
 ;;; hooks for ruby mode
 ;;(add-hook 'ruby-mode-hook 'inf-ruby-mode)
 ;;(add-hook 'inf-ruby-mode-hook 'robe-start)
-
+(setq auto-revert-check-vc-info t)
+;; Highlights *.elixir2 as well
+(add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
+;;ruby do..end for elexir
+(add-to-list 'elixir-mode-hook
+             (defun auto-activate-ruby-end-mode-for-elixir-mode ()
+               (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
+                    "\\(?:^\\|\\s-+\\)\\(?:do\\)")
+               (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
+               (ruby-end-mode +1)))
+;;dealing with smartparens 
+(sp-with-modes '(elixir-mode)
+  (sp-local-pair "fn" "end"
+         :when '(("SPC" "RET"))
+         :actions '(insert navigate))
+  (sp-local-pair "do" "end"
+         :when '(("SPC" "RET"))
+         :post-handlers '(sp-ruby-def-post-handler)
+         :actions '(insert navigate)))
 ;;; init.el ends here
