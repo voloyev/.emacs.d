@@ -1,20 +1,20 @@
 
 ;; ----- smex-history -----
 (
+ package-install
  package-list-packages
+ bundle-install
+ scss-mode
+ helm-ag
  package-menu-mark-upgrades
  helm-ag-project-root
- magit-shell-command
- smartparens-mode
- rake-find-task
- inf-ruby
 )
 
 ;; ----- smex-data -----
 (
  (cd . 1)
  (multiple-cursors-mode . 1)
- (package-install . 6)
+ (package-install . 8)
  (list-colors-display . 4)
  (eval-buffer . 1)
  (achievements-list-mode . 2)
@@ -28,13 +28,13 @@
  (robe-start . 7)
  (show-all . 1)
  (make-directory . 2)
- (helm-ag . 2)
+ (helm-ag . 3)
  (tags-search . 1)
  (rubocop-check-project . 1)
  (projectile-rails-goto-gemfile . 1)
  (list-packages . 1)
  (bundle-open . 1)
- (bundle-install . 1)
+ (bundle-install . 2)
  (package-show-package-list . 1)
  (paradox-list-packages . 1)
  (sass-mode . 1)
@@ -43,5 +43,6 @@
  (magit-shell-command . 1)
  (helm-ag-project-root . 1)
  (package-menu-mark-upgrades . 1)
- (package-list-packages . 1)
+ (package-list-packages . 5)
+ (scss-mode . 1)
 )

@@ -3,78 +3,151 @@
 ;;; Code:
 ;;; Initialize packages for installation
 (setq package-list '(
-                     achievements
-                     apel
-                     async
-                     codesearch
-                     company
-                     dash
-                     dired+
-                     emmet-mode
-                     epl
-                     evil
-                     evil-matchit
-                     evil-rails
-                     evil-tabs
-                     f
-                     findr
-                     flim
-                     flycheck
-                     ggtags
-                     git-commit
-                     git-gutter
-                     goto-chg
-                     imenu-list
-                     inf-ruby
-                     inflections
-                     jump
-                     keyfreq
-                     let-alist
-                     macrostep
-                     markdown-mode
-                     material-theme
-                     monochrome-theme
-                     multiple-cursors
-                     nyan-mode
-                     paradox
-                     php-mode
-                     pkg-info
-                     popup
-                     projectile
-                     projectile-codesearch
-                     projectile-rails
-                     projectile-speedbar
-                     quasi-monochrome-theme
-                     racer
-                     rich-minority
-                     rinari
-                     robe
-                     rspec-mode
-                     ruby-additional
-                     ruby-block
-                     ruby-compilation
-                     ruby-dev
-                     ruby-hash-syntax
-                     ruby-tools
-                     rust-mode
-                     s
-                     semi
-                     seq
-                     slime
-                     smart-mode-line
-                     smartparens
-                     smex
-                     sr-speedbar
-                     ssh
-                     undo-tree
-                     wanderlust
-                     web-mode
-                     which-key
-                     with-editor
-                     xcscope
-                     yasnippet
+                     achievements       
+                     alchemist          
+                     apel               
+                     async              
+                     bundler            
+                     calfw              
+                     cider              
+                     clojure-mode       
+                     codesearch         
+                     coffee-mode        
+                     company            
+                     company-dict       
+                     company-inf-ruby   
+                     company-jedi       
+                     company-quickhelp  
+                     company-racer      
+                     concurrent         
+                     ctable             
+                     ctags              
+                     ctags-update       
+                     danneskjold-theme  
+                     dash               
+                     deferred           
+                     dired+             
+                     elixir-mode        
+                     elixir-yasnippets  
+                     elscreen           
+                     emmet-mode         
+                     epc                
+                     epl                
+                     evil               
+                     evil-matchit       
+                     evil-rails         
+                     evil-tabs          
+                     f                  
+                     findr              
+                     flim               
+                     flycheck           
+                     flycheck-elixir    
+                     flycheck-rust      
+                     flymd              
+                     ggtags             
+                     git                
+                     git-commit         
+                     git-gutter         
+                     google-maps        
+                     goto-chg           
+                     haml-mode          
+                     helm               
+                     helm-ag            
+                     helm-core          
+                     helm-projectile    
+                     helm-swoop         
+                     highlight-indentation
+                     ht                 
+                     htmlize            
+                     hydra              
+                     ibuffer-git        
+                     ibuffer-projectile 
+                     ibuffer-rcirc      
+                     ibuffer-tramp      
+                     ibuffer-vc         
+                     imenu-anywhere     
+                     imenu-list         
+                     inf-ruby           
+                     inflections        
+                     jedi-core          
+                     jump               
+                     keyfreq            
+                     know-your-http-well 
+                     let-alist          
+                     macrostep          
+                     magit              
+                     magit-popup        
+                     markdown-mode      
+                     material-theme     
+                     migemo             
+                     minimal-theme      
+                     monochrome-theme   
+                     multiple-cursors   
+                     mustache           
+                     nav                
+                     neotree            
+                     nyan-mode          
+                     org                
+                     org-page           
+                     paradox            
+                     parent-mode        
+                     perspective        
                      phoenix-dark-mono-theme
-                     ))
+                     php-mode           
+                     pkg-info           
+                     popup              
+                     pos-tip            
+                     projectile         
+                     projectile-codesearch
+                     projectile-rails   
+                     projectile-speedbar
+                     python-environment 
+                     quasi-monochrome-theme
+                     queue              
+                     racer              
+                     rake               
+                     rbenv              
+                     restclient         
+                     rich-minority      
+                     rinari             
+                     robe               
+                     rsense             
+                     rspec-mode         
+                     rubocop            
+                     ruby-additional    
+                     ruby-block         
+                     ruby-compilation   
+                     ruby-dev           
+                     ruby-hash-syntax   
+                     ruby-tools         
+                     rust-mode          
+                     rvm                
+                     s                  
+                     sass-mode          
+                     scss-mode          
+                     semi               
+                     seq                
+                     simple-httpd       
+                     slime              
+                     smart-mode-line    
+                     smartparens        
+                     spinner            
+                     sr-speedbar        
+                     ssh                
+                     tao-theme          
+                     thrift             
+                     tracking           
+                     undo-tree          
+                     vimish-fold        
+                     web-mode          
+                     weechat           
+                     which-key         
+                     with-editor       
+                     xcscope           
+                     yaml-mode         
+                     yari              
+                     yasnippet         
+                     zenburn-theme  ))
 ;;Init MELPA represitory
 (require 'package)
 (add-to-list
@@ -135,12 +208,6 @@
 
 ;;disable scrollbar
 (scroll-bar-mode   -1)
-
-;; Smart M-x is smart
-(require 'smex)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex) ;replace standard 'M-x' with smex
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;;company mode
 (global-company-mode t)
@@ -229,7 +296,9 @@
     (lambda ()
       (ibuffer-projectile-set-filter-groups)
       (unless (eq ibuffer-sorting-mode 'alphabetic)
-        (ibuffer-do-sort-by-alphabetic))))
+          (ibuffer-do-sort-by-alphabetic))))
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 
 ;;scrolling
@@ -514,9 +583,6 @@
 ;; Use company-racer in rust mode
 (set (make-local-variable 'company-backends) '(company-racer))
 
-;;wanderlust
-(autoload 'wl "wl" "Wanderlust" t)
-
 ;;org-mode
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -588,6 +654,7 @@
 ;;helm
 (require 'helm-config)
 (require 'helm)
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
@@ -687,13 +754,6 @@
 (setq auto-revert-check-vc-info t)
 ;; Highlights *.elixir2 as well
 (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-;;ruby do..end for elexir
-(add-to-list 'elixir-mode-hook
-             (defun auto-activate-ruby-end-mode-for-elixir-mode ()
-               (set (make-variable-buffer-local 'ruby-end-expand-keywords-before-re)
-                    "\\(?:^\\|\\s-+\\)\\(?:do\\)")
-               (set (make-variable-buffer-local 'ruby-end-check-statement-modifiers) nil)
-               (ruby-end-mode +1)))
 ;;dealing with smartparens 
 (sp-with-modes '(elixir-mode)
   (sp-local-pair "fn" "end"
@@ -703,4 +763,10 @@
          :when '(("SPC" "RET"))
          :post-handlers '(sp-ruby-def-post-handler)
          :actions '(insert navigate)))
+
+;;python
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 ;;; init.el ends here
