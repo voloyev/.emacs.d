@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- package-install
- package-list-packages
- bundle-install
- scss-mode
+ package-menu-mark-delete
+ helm-M-x
  helm-ag
- package-menu-mark-upgrades
  helm-ag-project-root
+ helm-multi-swoop-projectile
+ helm-swoop
+ package-install
 )
 
 ;; ----- smex-data -----
@@ -28,7 +28,7 @@
  (robe-start . 7)
  (show-all . 1)
  (make-directory . 2)
- (helm-ag . 3)
+ (helm-ag . 5)
  (tags-search . 1)
  (rubocop-check-project . 1)
  (projectile-rails-goto-gemfile . 1)
@@ -41,8 +41,12 @@
  (rake-find-task . 1)
  (smartparens-mode . 1)
  (magit-shell-command . 1)
- (helm-ag-project-root . 1)
+ (helm-ag-project-root . 2)
  (package-menu-mark-upgrades . 1)
  (package-list-packages . 5)
  (scss-mode . 1)
+ (helm-swoop . 1)
+ (helm-multi-swoop-projectile . 1)
+ (helm-M-x . 1)
+ (package-menu-mark-delete . 1)
 )

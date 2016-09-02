@@ -27,4 +27,4 @@ ido.last
 *.swp
 /.mc-lists.el
 rake.cache
-smex-items
+/smex-items
