@@ -440,7 +440,6 @@
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 
-
 ;;Markdown
 (autoload 'markdown-mode "markdown-mode"
     "Major mode for editing Markdown files" t)
@@ -480,16 +479,16 @@
 ;;(global-set-key "\C-c l" 'linum-mode)
 (defun enable-linum-mode ()
     (linum-mode t))
- ;;linum mode for my modes
- (add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
- (add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
- ;; format linum
+;;linum mode for my modes
+(add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
+;; format linum
 (setq linum-format "%d ")
 
 ;;gutter
@@ -522,8 +521,6 @@
 ;;сниппеты и автозакрытие парных скобок
 (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
-
-
 
 ;;map
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -768,4 +765,10 @@
   (add-to-list 'company-backends 'company-jedi))
 
 (add-hook 'python-mode-hook 'my/python-mode-hook)
+
+;;resize windows
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 ;;; init.el ends here
