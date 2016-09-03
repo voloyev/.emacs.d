@@ -573,7 +573,6 @@
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;;racer
-
 (setq racer-cmd "/usr/local/bin/racer")
 (setq racer-rust-src-path "/home/nuncostans/.rust/src/")
 
