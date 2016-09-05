@@ -587,6 +587,7 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/cursor.org"
+                             "~/Mega/git/TODO/*.org"
                              "~/Dropbox/TODO/become_programer.org"
                              "~/Dropbox/workspace/org_notes/views_and_controllers.org"
                              "~/Dropbox/workspace/org_notes/aikido.org"))
