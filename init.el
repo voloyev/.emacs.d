@@ -471,7 +471,8 @@
           cc-mode-hook
           lisp-mode-hook
           emacs-lisp-mode-hook
-          haml-mode-hook)
+          haml-mode-hook
+          c-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 
 ;;line number
