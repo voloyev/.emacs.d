@@ -587,10 +587,8 @@
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-agenda-files (list "~/Mega/git/note/cursor.org"
-                             "~/Mega/git/TODO/*.org"
-                             "~/Dropbox/TODO/become_programer.org"
-                             "~/Dropbox/workspace/org_notes/views_and_controllers.org"
-                             "~/Dropbox/workspace/org_notes/aikido.org"))
+                             "~/Mega/TODO/become_programer.org"
+                             "~/Mega/workspace/org_notes/views_and_controllers.org"))
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
@@ -610,6 +608,9 @@
  '(custom-safe-themes
    (quote
     ("b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(org-agenda-files
+   (quote
+    ("~/Mega/git/note/cursor.org" "~/Dropbox/TODO/become_programer.org" "~/Dropbox/workspace/org_notes/views_and_controllers.org" "~/Dropbox/workspace/org_notes/aikido.org")))
  '(paradox-automatically-star t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
