@@ -343,7 +343,7 @@
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
 (setq tab-width                  4)
-(setq-default c-basic-offset     4)
+;;(setq-default c-basic-offset     4)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
 (global-set-key (kbd "RET") 'newline-and-indent)
