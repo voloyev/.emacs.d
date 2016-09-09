@@ -776,6 +776,5 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;;c-mode settings
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(setq c-default-style "linux")
 ;;; init.el ends here
