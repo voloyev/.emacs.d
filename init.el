@@ -23,8 +23,7 @@
                      ctable             
                      ctags              
                      ctags-update       
-                     danneskjold-theme  
-                     dash               
+		     dash               
                      deferred           
                      dired+             
                      elixir-mode        
@@ -49,7 +48,7 @@
                      goto-chg           
                      haml-mode          
                      helm               
-                     helm-ag            
+                     helm-git-grep            
                      helm-core          
                      helm-projectile    
                      helm-swoop         
@@ -65,8 +64,7 @@
                      imenu-list         
                      inf-ruby           
                      inflections        
-                     jedi-core          
-                     jump               
+		     jump               
                      keyfreq            
                      know-your-http-well 
                      let-alist          
@@ -74,18 +72,14 @@
                      magit              
                      magit-popup        
                      markdown-mode      
-                     material-theme     
-                     migemo             
-                     minimal-theme      
-                     monochrome-theme   
-                     multiple-cursors   
+		     migemo             
+		     multiple-cursors   
                      mustache           
                      nav                
                      neotree            
                      nyan-mode          
                      org                
                      org-page           
-                     paradox            
                      parent-mode        
                      perspective        
                      phoenix-dark-mono-theme
@@ -98,7 +92,6 @@
                      projectile-rails   
                      projectile-speedbar
                      python-environment 
-                     quasi-monochrome-theme
                      queue              
                      racer              
                      rake               
@@ -130,8 +123,7 @@
                      spinner            
                      sr-speedbar        
                      ssh                
-                     tao-theme          
-                     thrift             
+		     thrift             
                      tracking           
                      undo-tree          
                      vimish-fold        
@@ -167,16 +159,6 @@
 (require 'achievements)
 (achievements-mode 1)
 
-;;themes
-;;(load-theme 'zenburn t)
-(load-theme 'phoenix-dark-mono t)
-;;(load-theme 'tao-yin t)
-;;(load-theme 'monochrome t)
-;;(load-theme 'danneskjold t)
-;;(load-theme 'quasi-monochrome t)
-;;(load-theme 'minimal t)
-;;(set-frame-parameter nil 'background-mode 'dark)
-;;(set-terminal-parameter nil 'background-mode 'dark)
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
@@ -538,8 +520,8 @@
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
 ;;fonts
-(set-face-attribute 'default nil :font "Terminus Re33 12" )
-(set-frame-font "Terminus Re33 12")
+(set-face-attribute 'default nil :font "Liberation Mono 10" )
+(set-frame-font "Liberation Mono 10")
 
 ;;whichkey
 (package-install 'which-key)
@@ -605,9 +587,7 @@
  '(custom-safe-themes
    (quote
     ("b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(org-agenda-files
-   (quote
-    ("~/Mega/git/note/cursor.org" "~/Dropbox/TODO/become_programer.org" "~/Dropbox/workspace/org_notes/views_and_controllers.org" "~/Dropbox/workspace/org_notes/aikido.org")))
+ '(org-agenda-files (quote ("~/Mega/git/note/cursor.org")))
  '(paradox-automatically-star t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
@@ -660,13 +640,10 @@
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
 (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-(global-set-key (kbd "C-c h a") 'helm-ag-project-root)
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; From helm-swoop to helm-multi-swoop-all
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
-;; When doing evil-search, hand the word over to helm-swoop
-;; (define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)
 
 ;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
 (define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
@@ -679,28 +656,31 @@
 
 ;; Save buffer when helm-multi-swoop-edit complete
 (setq helm-multi-swoop-edit-save t)
-
 ;; If this value is t, split window inside the current window
 (setq helm-swoop-split-with-multiple-windows nil)
-
 ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
 (setq helm-swoop-split-direction 'split-window-vertically)
-
 ;; If nil, you can slightly boost invoke speed in exchange for text color
 (setq helm-swoop-speed-or-color nil)
-
 ;; ;; Go to the opposite side of line from the end or beginning of line
 (setq helm-swoop-move-to-line-cycle t)
-
 ;; Optional face for line numbers
 ;; Face name is `helm-swoop-line-number-face`
 (setq helm-swoop-use-line-number-face t)
-
 ;; If you prefer fuzzy matching
 (setq helm-swoop-use-fuzzy-match t)
-
 ;; If you would like to use migemo, enable helm's migemo feature
 ;;(helm-migemo-mode 1)
+
+;; Not necessary if installed by package.el
+(require 'helm-git-grep)
+(global-set-key (kbd "C-c g") 'helm-git-grep)
+;;Invoke `helm-git-grep' from isearch.
+(define-key isearch-mode-map (kbd "C-c g") 'helm-git-grep-from-isearch)
+;;Invoke `helm-git-grep' from other helm.
+(eval-after-load 'helm
+  '(define-key helm-map (kbd "C-c g") 'helm-git-grep-from-helm))
+
 ;;emacs-neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
@@ -777,4 +757,13 @@
 ;;expand region mode
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;;themes
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;;(load-theme 'zenburn t)
+;;(load-theme 'phoenix-dark-mono t)
+(load-theme 'monochrome t)
+;;(set-frame-parameter nil 'background-mode 'dark)
+;;(set-terminal-parameter nil 'background-mode 'dark)
+
 ;;; init.el ends here
