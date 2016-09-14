@@ -23,7 +23,7 @@
                      ctable             
                      ctags              
                      ctags-update       
-		     dash               
+                     dash               
                      deferred           
                      dired+             
                      elixir-mode        
@@ -55,7 +55,7 @@
                      highlight-indentation
                      ht                 
                      htmlize            
-		     ibuffer-git        
+                     ibuffer-git        
                      ibuffer-projectile 
                      ibuffer-rcirc      
                      ibuffer-tramp      
@@ -64,7 +64,7 @@
                      imenu-list         
                      inf-ruby           
                      inflections        
-		     jump               
+                     jump
                      keyfreq            
                      know-your-http-well 
                      let-alist          
@@ -72,8 +72,8 @@
                      magit              
                      magit-popup        
                      markdown-mode      
-		     migemo             
-		     multiple-cursors   
+                     migemo             
+                     multiple-cursors   
                      mustache           
                      nav                
                      neotree            
@@ -123,7 +123,7 @@
                      spinner            
                      sr-speedbar        
                      ssh                
-		     thrift             
+                     thrift             
                      tracking           
                      undo-tree          
                      vimish-fold        
@@ -135,7 +135,7 @@
                      yaml-mode         
                      yari              
                      yasnippet         
-                     zenburn-theme  ))
+                     zenburn-theme))
 ;;Init MELPA represitory
 (require 'package)
 (add-to-list
@@ -154,11 +154,9 @@
     (unless (package-installed-p package)
         (package-install package)))
 
-;;------------------------------;;
 ;;Achievements mode
 (require 'achievements)
 (achievements-mode 1)
-
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
@@ -210,27 +208,13 @@
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 (setq show-paren-style 'parenthesis)
-(set-face-attribute 'weight 'extra-bold)
-(set-face-foreground 'show-paren-match "black")
-
-(defadvice show-paren-function
-    (after show-matching-paren-offscreen activate)
-    "If the matching paren is offscreen, show the matching line in the
-        echo area. Has no effect if the character before point is not of
-        the syntax class ')'."
-    (interactive)
-    (let* ((cb (char-before (point)))
-           (matching-text (and cb
-                               (char-equal (char-syntax cb) ?\) )
-                               (blink-matching-open))))
-        (when matching-text (message matching-text))))
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
 (setq sml/theme 'dark)
+(sml/setup t)
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
-(sml/setup t)
 (nyan-mode t)
 (add-hook 'nyan-start-animation 'nyan-mode)
 
@@ -250,7 +234,6 @@
 (global-set-key (kbd "<f2>") 'bs-show)
 
 ;;multiple cursors
-
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
@@ -277,7 +260,6 @@
           (ibuffer-do-sort-by-alphabetic))))
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
-
 
 ;;scrolling
 (setq scroll-step 1)
@@ -321,14 +303,10 @@
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
 (setq tab-width                  4)
-;;(setq-default c-basic-offset     4)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
-
-
-
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -367,7 +345,7 @@
               (speedbar-add-supported-extension "\\.py")
               (speedbar-add-supported-extension "\\.html")
               (speedbar-add-supported-extension "\\.css")
-              (speedbar-add-supported-extension  ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?")
+              (speedbar-add-supported-extension ".[ch]\\(\\+\\+\\|pp\\|c\\|h\\|xx\\)?")
               (speedbar-add-supported-extension  ".tex\\(i\\(nfo\\)?\\)?")
               (speedbar-add-supported-extension  "\\.todo")
               (speedbar-add-supported-extension  "\\.done")
@@ -599,23 +577,11 @@
                    (current-buffer))
              (bury-buffer)
              (switch-to-buffer-other-frame server-buf))))))
- '(show-paren-mode t)
  '(speedbar-show-unknown-files t))
 
 ;;emmet mode
 (add-hook 'web-mode-hook 'emmet-mode)
 (add-hook 'css-mode-hook  'emmet-mode)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(show-paren-match ((t (:background "dark gray" :foreground "black")))))
-
-;;show all files in speedbar
-
-;;paradox github integration
-(setq paradox-github-token "1a8089f872abd9efa1a25b56bf0f256db641f431")
 
 ;;calendar app
 (require 'calfw)
@@ -634,7 +600,6 @@
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
-
 ;; Change the keybinds to whatever you like :)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
@@ -644,16 +609,13 @@
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; From helm-swoop to helm-multi-swoop-all
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
-
 ;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
 (define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
-
 ;; Move up and down like isearch
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
-
 ;; Save buffer when helm-multi-swoop-edit complete
 (setq helm-multi-swoop-edit-save t)
 ;; If this value is t, split window inside the current window
@@ -681,10 +643,6 @@
 (eval-after-load 'helm
   '(define-key helm-map (kbd "C-c g") 'helm-git-grep-from-helm))
 
-;;emacs-neotree
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
-
 ;; imenu anywhere
 (global-set-key (kbd "C-.") #'imenu-anywhere)
 
@@ -696,7 +654,7 @@
 ;;magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;;
+;;persp-mode
 (persp-mode)
 
 ;;undo tree
@@ -704,8 +662,11 @@
 
 ;; highlight indentation
 (highlight-indentation-current-column-mode 1)
-(provide 'init)
-
+;;(provide 'init)
+;;add highlight ingentation
+(global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
+(set-face-background 'highlight-indentation-face "grey8")
+(set-face-background 'highlight-indentation-current-column-face "grey8")
 ;;hooks ;)
 ;;; hooks for highlightion
 (add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)
@@ -716,18 +677,12 @@
 (add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
 
-;;add highlight ingentation
-(global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
-(set-face-background 'highlight-indentation-face "#444444")
-(set-face-background 'highlight-indentation-current-column-face "#444444")
-
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
-(require 'livedown)
-(global-set-key [f7] 'livedown:preview)
-;;; hooks for ruby mode
-;;(add-hook 'ruby-mode-hook 'inf-ruby-mode)
-;;(add-hook 'inf-ruby-mode-hook 'robe-start)
+
+;; avto revert files after
+;; change git branch
 (setq auto-revert-check-vc-info t)
+
 ;; Highlights *.elixir2 as well
 (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
 ;;dealing with smartparens 
@@ -742,7 +697,7 @@
 
 ;;python
 (defun my/python-mode-hook ()
-  (add-to-list 'company-backends 'company-jedi))
+    (add-to-list 'company-backends 'company-jedi))
 (add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;;resize windows
@@ -765,5 +720,4 @@
 (load-theme 'monochrome t)
 ;;(set-frame-parameter nil 'background-mode 'dark)
 ;;(set-terminal-parameter nil 'background-mode 'dark)
-
 ;;; init.el ends here
