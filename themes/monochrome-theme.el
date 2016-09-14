@@ -50,8 +50,8 @@
    ;;`(whitespace-tab ((t (:background "#Fafad2" :foreground "darkgray"))))
 
    ;; Mode line faces
-   `(mode-line ((t (:background "black" :foreground ,sgray :weight bold :box (:line-width -1 :style released-button)))))
-   `(mode-line-inactive ((t (:background "dim gray" :foreground "black" :box (:line-width -1 :style released-button)))))
+   `(mode-line ((t ( :weight bold :box (:line-width -1 :style released-button)))))
+   ;;`(mode-line-inactive ((t (:background "gray" :foreground "black" :box (:line-width -1 :style released-button)))))
 
    ;; Whitespace-mode
    `(whitespace-empty ((,class (:background unspecified :foreground "red"))))
@@ -82,7 +82,7 @@
    `(link-visited ((,class (:underline t :foreground ,lgray))))
 
    ;; Show-paren
-   `(show-paren-match ((t (:background ,sgray))))
+   `(show-paren-match ((t (:background "grey25"))))
    `(show-paren-mismatch ((t (:background "red"))))
 
    ;; Speedbar
@@ -161,14 +161,10 @@
 
 
    ;; Org-mode
-   ;;`(org-level-1 ((t (:bold t :foreground ,lgray :height 1.5))))
-   ;;`(org-level-2 ((t (:bold nil :foreground ,lgray :height 1.2))))
-   ;;`(org-level-3 ((t (:bold t :foreground ,lgray :height 1.0))))
-   ;;`(org-level-4 ((t (:bold nil :foreground ,lgray :height 1.0))))
-   ;;`(org-link ((t (:foreground ,sgray :underline t))))
-   ;;`(org-todo ((t (:bold t :foreground "red"))))
-   ;;`(org-done ((t (:bold t :foreground "green"))))
-   ;;`(org-verbatim ((t (:foreground "dim gray"))))
+   `(org-link ((t (:foreground ,sgray :underline t))))
+   `(org-todo ((t (:bold t :foreground "red"))))
+   `(org-done ((t (:bold t :foreground "green"))))
+   `(org-verbatim ((t (:foreground "dim gray"))))
 
 
    ;; helm
@@ -213,7 +209,7 @@
    `(helm-mu-contacts-address-face ((t (:foreground ,lgray :background ,black))))
    `(helm-mu-contacts-name-face ((t (:foreground ,lgray :background ,black))))
    `(helm-match ((t (:background "dim gray"))))
-   `(helm-selection ((t (:background "#3b3b3b" :underline t))))
+   `(helm-selection ((t (:background "#3b3b3b" :underline nil))))
 
    ;; diff
    '(diff-added ((t (:foreground "dark sea green"))))
