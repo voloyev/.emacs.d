@@ -33,10 +33,7 @@
                      emmet-mode         
                      epc                
                      epl                
-                     evil               
-                     evil-matchit       
-                     evil-rails         
-                     evil-tabs          
+                     expand-region
                      f                  
                      findr              
                      flim               
@@ -59,8 +56,7 @@
                      highlight-indentation
                      ht                 
                      htmlize            
-                     hydra              
-                     ibuffer-git        
+		     ibuffer-git        
                      ibuffer-projectile 
                      ibuffer-rcirc      
                      ibuffer-tramp      
@@ -550,13 +546,13 @@
 (require 'which-key)
 (which-key-mode t)
 
-;;ido
-(require 'ido)
-(ido-mode t)
-(icomplete-mode                t)
-(ido-everywhere                t)
-(setq ido-vitrual-buffers      t)
-(setq ido-enable-flex-matching t)
+;;;;ido
+;;(require 'ido)
+;;(ido-mode t)
+;;(icomplete-mode                t)
+;;(ido-everywhere                t)
+;;(setq ido-vitrual-buffers      t)
+;;(setq ido-enable-flex-matching t)
 
 ;;;; Display ido results vertically, rather than horizontally
 ;;(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
@@ -654,7 +650,8 @@
 (require 'helm-config)
 (require 'helm)
 (global-set-key (kbd "M-x") 'helm-M-x)
-
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-d") 'helm-browse-project)
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
 
@@ -663,7 +660,7 @@
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
 (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-
+(global-set-key (kbd "C-c h a") 'helm-ag-project-root)
 ;; When doing isearch, hand the word over to helm-swoop
 (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; From helm-swoop to helm-multi-swoop-all
@@ -777,4 +774,8 @@
 
 ;;c-mode settings
 (setq c-default-style "linux")
+
+;;expand region mode
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 ;;; init.el ends here
