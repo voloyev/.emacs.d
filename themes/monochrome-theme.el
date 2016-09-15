@@ -1,18 +1,22 @@
-;;; monochrome-theme.el --- A dark Emacs 24 theme for your focused hacking sessions
+;;; package --- Summary:
+;;; Commentary:
+;;; sexy-monochrome-theme.el --- A sexy dark Emacs 24 theme for your focused hacking sessions
 
 ;; Copyright (C) 2011-2014 Xavier Noria
+;; No copyright (c) 2016 Volodymyr Yevtushenko
 ;;
-;; Author: Xavier Noria <fxn@hashref.com>
+;; Author: Volodymyr Yevtushenko <vol.yevtushenko@ukr.net>
 ;;
 ;; Just throw this file into ~/.emacs.d and
-;;
-;;     M-x load-theme RET monochrome RET
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/YOUR_FOLDER_WITH_THEME/")
+
+;;     M-x load-theme RET sexy-monochrome RET
 ;;
 ;; or put in your init file
 ;;
-;;     (load-theme 'monochrome)
+;;     (load-theme 'sexy-monochrome)
 ;;
-;; This theme is based on the builtin dichromacy theme.
+;; This theme is based on the Xavier Noria monochrome theme.
 ;;
 ;; Works with Emacs 24.
 ;;; Code:
@@ -47,11 +51,10 @@
    `(lazy-highlight ((,class (:foreground ,black :background ,lgray))))
    `(linum ((t (:foreground "dim gray"))))
    `(trailing-whitespace ((,class (:background "red"))))
-   ;;`(whitespace-tab ((t (:background "#Fafad2" :foreground "darkgray"))))
 
    ;; Mode line faces
-   `(mode-line ((t ( :weight bold :box (:line-width -1 :style released-button)))))
-   ;;`(mode-line-inactive ((t (:background "gray" :foreground "black" :box (:line-width -1 :style released-button)))))
+   `(mode-line ((t ( :box (:line-width -1 :style released-button)))))
+   `(mode-line-inactive ((t (:box (:line-width -1 :style released-button)))))
 
    ;; Whitespace-mode
    `(whitespace-empty ((,class (:background unspecified :foreground "red"))))
