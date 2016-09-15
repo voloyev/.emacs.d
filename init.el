@@ -498,8 +498,8 @@
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
 ;;fonts
-(set-face-attribute 'default nil :font "Liberation Mono 10" )
-(set-frame-font "Liberation Mono 10")
+(set-face-attribute 'default nil :font "SourceCodePro 10" )
+(set-frame-font "SourceCodePro 10")
 
 ;;whichkey
 (package-install 'which-key)
