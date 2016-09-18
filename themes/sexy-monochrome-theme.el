@@ -1,26 +1,41 @@
-;;; package --- Summary:
-;;; Commentary:
-;;; sexy-monochrome-theme.el --- A sexy dark Emacs 24 theme for your focused hacking sessions
+;;; sexy-monochrome-theme.el --- A sexy dark Emacs 24 theme for your sexy code
 
-;; Copyright (C) 2011-2014 Xavier Noria
-;; No copyright (c) 2016 Volodymyr Yevtushenko
-;;
+;; Copyright (c) 2016 Volodymyr Yevtushenko
+
 ;; Author: Volodymyr Yevtushenko <vol.yevtushenko@ukr.net>
-;;
-;; Just throw this file into ~/.emacs.d and
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/YOUR_FOLDER_WITH_THEME/")
+;; Keywords: themes
+;; URL: https://github.com/nuncostans/sexy-monochrome-theme
+;; Version: 1.0
 
-;;     M-x load-theme RET sexy-monochrome RET
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; To use it, put the following in your Emacs configuration file:
 ;;
-;; or put in your init file
+;;   (load-theme 'sexy-monochrome t)
 ;;
-;;     (load-theme 'sexy-monochrome)
-;;
-;; This theme is based on the Xavier Noria monochrome theme.
-;;
-;; Works with Emacs 24.
+;; Requirements: Emacs 24.
+
+;;; Credits:
+
+;; Based on the Xavier Noria monochrome-theme
+;; https://github.com/fxn/monochrome-theme.el/
+
 ;;; Code:
-(deftheme monochrome
+
+(deftheme sexy-monochrome
   "Gray on black for your focused hacking sessions.")
 
 (font-lock-add-keywords 'c-mode
@@ -36,7 +51,7 @@
       (sgray "light slate gray"))
 
   (custom-theme-set-faces
-   'monochrome
+   'sexy-monochrome
 
    (if (window-system)
        `(default ((,class (:foreground ,lgray :background ,black)))))
@@ -58,8 +73,8 @@
 
    ;; Whitespace-mode
    `(whitespace-empty ((,class (:background unspecified :foreground "red"))))
-   `(whitespace-line ((,class (:background "gray9" :foreground ,black))))
-   `(whitespace-space ((t (:foreground ,dgray))))
+   `(whitespace-line ((,class (:background ,lgray :underline t))))
+   `(whitespace-space ((t (:foreground "gray9"))))
    `(whitespace-tab ((t (:foreground ,dgray))))
 
    ;; Escape and prompt faces
@@ -70,14 +85,14 @@
    `(success ((,class (:foreground "green"))))
 
    ;; Font lock faces
-   `(font-lock-builtin-face ((,class (:foreground ,dgray))))
-   `(font-lock-comment-face ((,class (:foreground "gray33"))))
-   `(font-lock-constant-face ((,class (:weight bold :foreground ,sgray))))
+   `(font-lock-builtin-face ((,class (:foreground ,lgray))))
+   `(font-lock-comment-face ((,class (:foreground "gray36"))))
+   `(font-lock-constant-face ((,class (:foreground ,dgray))))
    `(font-lock-function-name-face ((t (:foreground ,sgray))))
    `(font-lock-keyword-face ((,class (:weight bold :foreground ,white))))
    `(font-lock-string-face ((t (:foreground ,sgray))))
    `(font-lock-type-face ((,class (:foreground ,sgray))))
-   `(font-lock-variable-name-face ((,class (:weight bold :foreground ,sgray))))
+   `(font-lock-variable-name-face ((,class (:foreground ,dgray))))
    `(font-lock-warning-face ((,class (:foreground "yellow"))))
 
    ;; Button and link faces
@@ -162,13 +177,11 @@
    ;; easy-kill
    `(easy-kill-selection ((t (:background "#333333"))))
 
-
    ;; Org-mode
    `(org-link ((t (:foreground ,sgray :underline t))))
    `(org-todo ((t (:bold t :foreground "red"))))
    `(org-done ((t (:bold t :foreground "green"))))
    `(org-verbatim ((t (:foreground "dim gray"))))
-
 
    ;; helm
    `(helm-header ((t (:foreground ,dgray :background ,black :underline nil :box nil))))
@@ -282,22 +295,17 @@
                                           :slant unspecified :underline ,sgray)))))
 
   (custom-theme-set-variables
-   'monochrome
+   'sexy-monochrome
    `(ansi-color-names-vector [,black ,lgray ,dgray ,sgray])))
-
-
-
-;; Autoload for MELPA
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'monochrome)
+(provide-theme 'sexy-monochrome)
 
 ;; Local Variables:
-;; no-byte-compile: t
 ;; End:
 
-;;; monochrome-theme.el ends here
+;;; sexy-monochrome-theme.el ends here
