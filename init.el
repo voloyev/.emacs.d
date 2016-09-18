@@ -3,138 +3,138 @@
 ;;; Code:
 ;;; Initialize packages for installation
 (setq package-list '(
-                     achievements       
-                     alchemist          
-                     apel               
-                     async              
-                     bundler            
-                     calfw              
-                     cider              
-                     clojure-mode       
-                     codesearch         
-                     coffee-mode        
-                     company            
-                     company-dict       
-                     company-inf-ruby   
-                     company-jedi       
-                     company-quickhelp  
-                     company-racer      
-                     concurrent         
-                     ctable             
-                     ctags              
-                     ctags-update       
-                     dash               
-                     deferred           
-                     dired+             
-                     elixir-mode        
-                     elixir-yasnippets  
-                     elscreen           
-                     emmet-mode         
-                     epc                
-                     epl                
+                     achievements
+                     alchemist
+                     apel
+                     async
+                     bundler
+                     calfw
+                     cider
+                     clojure-mode
+                     codesearch
+                     coffee-mode
+                     company
+                     company-dict
+                     company-inf-ruby
+                     company-jedi
+                     company-quickhelp
+                     company-racer
+                     concurrent
+                     ctable
+                     ctags
+                     ctags-update
+                     dash
+                     deferred
+                     dired+
+                     elixir-mode
+                     elixir-yasnippets
+                     elscreen
+                     emmet-mode
+                     epc
+                     epl
                      expand-region
-                     f                  
-                     findr              
-                     flim               
-                     flycheck           
-                     flycheck-elixir    
-                     flycheck-rust      
-                     flymd              
-                     ggtags             
-                     git                
-                     git-commit         
-                     git-gutter         
-                     google-maps        
-                     goto-chg           
-                     haml-mode          
-                     helm               
-                     helm-git-grep            
-                     helm-core          
-                     helm-projectile    
-                     helm-swoop         
+                     f
+                     findr
+                     flim
+                     flycheck
+                     flycheck-elixir
+                     flycheck-rust
+                     flymd
+                     ggtags
+                     git
+                     git-commit
+                     git-gutter
+                     google-maps
+                     goto-chg
+                     haml-mode
+                     helm
+                     helm-git-grep
+                     helm-core
+                     helm-projectile
+                     helm-swoop
                      highlight-indentation
-                     ht                 
-                     htmlize            
-                     ibuffer-git        
-                     ibuffer-projectile 
-                     ibuffer-rcirc      
-                     ibuffer-tramp      
-                     ibuffer-vc         
-                     imenu-anywhere     
-                     imenu-list         
-                     inf-ruby           
-                     inflections        
+                     ht
+                     htmlize
+                     ibuffer-git
+                     ibuffer-projectile
+                     ibuffer-rcirc
+                     ibuffer-tramp
+                     ibuffer-vc
+                     imenu-anywhere
+                     imenu-list
+                     inf-ruby
+                     inflections
                      jump
-                     keyfreq            
-                     know-your-http-well 
-                     let-alist          
-                     macrostep          
-                     magit              
-                     magit-popup        
-                     markdown-mode      
-                     migemo             
-                     multiple-cursors   
-                     mustache           
-                     nav                
-                     neotree            
-                     nyan-mode          
-                     org                
-                     org-page           
-                     parent-mode        
-                     perspective        
+                     keyfreq
+                     know-your-http-well
+                     let-alist
+                     macrostep
+                     magit
+                     magit-popup
+                     markdown-mode
+                     migemo
+                     multiple-cursors
+                     mustache
+                     nav
+                     neotree
+                     nyan-mode
+                     org
+                     org-page
+                     parent-mode
+                     perspective
                      phoenix-dark-mono-theme
-                     php-mode           
-                     pkg-info           
-                     popup              
-                     pos-tip            
-                     projectile         
+                     php-mode
+                     pkg-info
+                     popup
+                     pos-tip
+                     projectile
                      projectile-codesearch
-                     projectile-rails   
+                     projectile-rails
                      projectile-speedbar
-                     python-environment 
-                     queue              
-                     racer              
-                     rake               
-                     rbenv              
-                     restclient         
-                     rich-minority      
-                     rinari             
-                     robe               
-                     rsense             
-                     rspec-mode         
-                     rubocop            
-                     ruby-additional    
-                     ruby-block         
-                     ruby-compilation   
-                     ruby-dev           
-                     ruby-hash-syntax   
-                     ruby-tools         
-                     rust-mode          
-                     rvm                
-                     s                  
-                     sass-mode          
-                     scss-mode          
-                     semi               
-                     seq                
-                     simple-httpd       
-                     slime              
-                     smart-mode-line    
-                     smartparens        
-                     spinner            
-                     sr-speedbar        
-                     ssh                
-                     thrift             
-                     tracking           
-                     undo-tree          
-                     vimish-fold        
-                     web-mode          
-                     weechat           
-                     which-key         
-                     with-editor       
-                     xcscope           
-                     yaml-mode         
-                     yari              
-                     yasnippet         
+                     python-environment
+                     queue
+                     racer
+                     rake
+                     rbenv
+                     restclient
+                     rich-minority
+                     rinari
+                     robe
+                     rsense
+                     rspec-mode
+                     rubocop
+                     ruby-additional
+                     ruby-block
+                     ruby-compilation
+                     ruby-dev
+                     ruby-hash-syntax
+                     ruby-tools
+                     rust-mode
+                     rvm
+                     s
+                     sass-mode
+                     scss-mode
+                     semi
+                     seq
+                     simple-httpd
+                     slime
+                     smart-mode-line
+                     smartparens
+                     spinner
+                     sr-speedbar
+                     ssh
+                     thrift
+                     tracking
+                     undo-tree
+                     vimish-fold
+                     web-mode
+                     weechat
+                     which-key
+                     with-editor
+                     xcscope
+                     yaml-mode
+                     yari
+                     yasnippet
                      zenburn-theme))
 ;;Init MELPA represitory
 (require 'package)
@@ -228,8 +228,8 @@
 ;;(add-to-list 'ibuffer-never-show-regexps "^\\*")
 (defalias 'list-buffers 'ibuffer)
 (add-hook 'ibuffer-mode-hook
-	  '(lambda ()
-	     (ibuffer-auto-mode 1)))
+          '(lambda ()
+             (ibuffer-auto-mode 1)))
 
 (global-set-key (kbd "<f2>") 'bs-show)
 
@@ -296,7 +296,7 @@
 ;; rinari
 (setq rinari-tags-file-name "TAGS")
 
-;;Add custome modes extension
+;;Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
 
@@ -383,6 +383,9 @@
 (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'rust-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'python-mode-hook '(lambda () (yas-minor-mode 1)))
+(add-hook 'web-mode-hook '(lambda () (yas-minor-mode 1)))
+(add-hook 'js2-mode-hook '(lambda () (yas-minor-mode 1)))
+
 ;;(yas-global-mode t)
 (add-to-list 'load-path
              "~/.emacs.d/snippets")
@@ -413,8 +416,9 @@
 
 ;; Default setup of smartparens
 (require 'smartparens-config)
-(add-hook 'js-mode-hook #'smartparens-mode)
+(add-hook 'js2-mode-hook 'smartparens-mode)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
+(add-hook 'web-mode-hook 'smartparens-mode)
 
 (--each '(restclient-mode-hook
           js-mode-hook
@@ -444,7 +448,7 @@
 (add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
 (add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
 (add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'javascript-mode-hook '(lambda () (linum-mode 1)))
+(add-hook 'js2-mode-hook '(lambda () (linum-mode 1)))
 ;; format linum
 (setq linum-format "%d ")
 
@@ -470,16 +474,16 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (setq web-mode-enable-auto-pairing t)
 
-;;настройка отступов
+;;web-mode indent
 (setq web-mode-markup-indent-offset 2)
 (setq web-mode-css-indent-offset 2)
 (setq web-mode-code-indent-offset 2)
 
-;;сниппеты и автозакрытие парных скобок
+;;snippets fo autoclise tags
 (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
 
-;;map
+;;map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
 ;; | Combo | Function         | Description                |
 ;; |-------+------------------+----------------------------|
@@ -549,7 +553,7 @@
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
-
+(global-set-key (kbd "C-c <f5>") 'whitespace-cleanup)
 ;; evil modes
 (global-set-key (kbd "C-M-e") 'evil-mode)
 ;;(add-hook 'evil-mode-hook evil-matchit-mode)
@@ -564,8 +568,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("44cc408f88144aa9b41435dc9f3bc86a74b95b1a0bcd1e8a19a86c79e42d954e" "b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(org-agenda-files (quote ("~/Mega/git/note/cursor.org")))
+ '(package-selected-packages
+   (quote
+    (flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode sexy-monochrome-theme semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(paradox-automatically-star t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
@@ -677,15 +684,13 @@
 (add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-livedown"))
-
 ;; avto revert files after
 ;; change git branch
 (setq auto-revert-check-vc-info t)
 
 ;; Highlights *.elixir2 as well
 (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-;;dealing with smartparens 
+;;dealing with smartparens
 (sp-with-modes '(elixir-mode)
   (sp-local-pair "fn" "end"
          :when '(("SPC" "RET"))
@@ -713,11 +718,27 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; fb2 mode
+(add-to-list 'load-path "~/.emacs.d/plugins/fb2-mode/")
+(require 'fb2-mode)
+
+;;js2-mode
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;;skewer
+(add-hook 'js2-mode-hook 'skewer-mode)
+(add-hook 'css-mode-hook 'skewer-css-mode)
+(add-hook 'web-mode-hook 'skewer-html-mode)
+
+;; simple  httpd
+(require 'simple-httpd)
+(setq httpd-root "/home/nuncostans/workspace/js/")
+(httpd-start)
+
 ;;themes
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;;(load-theme 'zenburn t)
 ;;(load-theme 'phoenix-dark-mono t)
-(load-theme 'monochrome t)
+(load-theme 'sexy-monochrome t)
 ;;(set-frame-parameter nil 'background-mode 'dark)
 ;;(set-terminal-parameter nil 'background-mode 'dark)
 ;;; init.el ends here
