@@ -215,8 +215,8 @@
 (sml/setup t)
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
-(nyan-mode t)
-(add-hook 'nyan-start-animation 'nyan-mode)
+;(nyan-mode t)
+;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; show buffers
 (require 'bs)
@@ -742,3 +742,9 @@
 ;;(set-frame-parameter nil 'background-mode 'dark)
 ;;(set-terminal-parameter nil 'background-mode 'dark)
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
