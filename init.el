@@ -211,7 +211,8 @@
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
-(setq sml/theme 'dark)
+(setq sml/theme 'light)
+;;(setq sml/theme 'dark)
 (sml/setup t)
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
@@ -552,9 +553,11 @@
                              "~/Mega/TODO/become_programer.org"
                              "~/Mega/workspace/org_notes/views_and_controllers.org"))
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
+
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 (global-set-key (kbd "C-c <f5>") 'whitespace-cleanup)
+
 ;; evil modes
 (global-set-key (kbd "C-M-e") 'evil-mode)
 ;;(add-hook 'evil-mode-hook evil-matchit-mode)
@@ -720,10 +723,6 @@
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; fb2 mode
-(add-to-list 'load-path "~/.emacs.d/plugins/fb2-mode/")
-(require 'fb2-mode)
-
 ;;js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
@@ -741,13 +740,14 @@
 ;;(load-theme 'zenburn t)
 ;;(load-theme 'phoenix-dark-mono t)
 (load-theme 'sexy-monochrome t)
-;;(set-frame-parameter nil 'background-mode 'dark)
-;;(set-terminal-parameter nil 'background-mode 'dark)
+(unless (display-graphic-p)
+;;    (add-to-list 'default-frame-alist '(foreground-color . "#E0DFDB"))
+    (add-to-list 'default-frame-alist '(background-color . "#000000"))
+    )
 
 ;; email wanderlust
 (autoload 'wl "wl" "Wanderlust" t)
 ;;; init.el ends here
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
