@@ -438,9 +438,9 @@
 
 ;;line number
 (require 'linum)
-;;(global-set-key "\C-c l" 'linum-mode)
-(defun enable-linum-mode ()
-    (linum-mode t))
+(global-set-key "\C-c l" 'linum-mode)
+;;(defun enable-linum-mode ()
+;;    (linum-mode t))
 ;;linum mode for my modes
 (add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
 (add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
