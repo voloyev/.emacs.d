@@ -384,6 +384,7 @@
 (add-hook 'rust-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'python-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'web-mode-hook '(lambda () (yas-minor-mode 1)))
+(add-hook 'html-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'js2-mode-hook '(lambda () (yas-minor-mode 1)))
 
 ;;(yas-global-mode t)
@@ -572,8 +573,9 @@
  '(org-agenda-files (quote ("~/Mega/git/note/cursor.org")))
  '(package-selected-packages
    (quote
-    (flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode sexy-monochrome-theme semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (smarty-mode password-store paradox wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode sexy-monochrome-theme semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(paradox-automatically-star t)
+ '(paradox-github-token "9ae0e83b460e4e770bd5c610dde91971aaa353ca")
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
    (quote
@@ -603,7 +605,7 @@
 (require 'helm-config)
 (require 'helm)
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
@@ -733,7 +735,7 @@
 ;; simple  httpd
 (require 'simple-httpd)
 (setq httpd-root "/home/nuncostans/workspace/js/")
-(httpd-start)
+;;(httpd-start)
 
 ;;themes
 ;;(load-theme 'zenburn t)
@@ -741,7 +743,12 @@
 (load-theme 'sexy-monochrome t)
 ;;(set-frame-parameter nil 'background-mode 'dark)
 ;;(set-terminal-parameter nil 'background-mode 'dark)
+
+;; email wanderlust
+(autoload 'wl "wl" "Wanderlust" t)
 ;;; init.el ends here
+
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
