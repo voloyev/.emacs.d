@@ -442,14 +442,14 @@
 ;;(defun enable-linum-mode ()
 ;;    (linum-mode t))
 ;;linum mode for my modes
-(add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
-(add-hook 'js2-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'ruby-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'lisp-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'emacs-lisp-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'rust-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'python-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'web-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'c-mode-hook '(lambda () (linum-mode 1)))
+;;(add-hook 'js2-mode-hook '(lambda () (linum-mode 1)))
 ;; format linum
 (setq linum-format "%d ")
 
