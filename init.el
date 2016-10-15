@@ -455,7 +455,7 @@
 
 ;;gutter
 (global-git-gutter-mode +1)
-(git-gutter:linum-setup)
+;;(git-gutter:linum-setup)
 (add-hook 'ruby-mode-hook 'git-gutter-mode)
 (add-hook 'python-mode-hook 'git-gutter-mode)
 (set-face-background 'git-gutter:modified "purple") ;; background color
