@@ -248,12 +248,7 @@
 
 ;;projectile
 (projectile-global-mode)
-;;(require 'projectile-speedbar)
-(require 'projectile-codesearch)
-(add-hook 'ruby-mode-hook 'projectile-mode)
-(add-hook 'ruby-mode-hook 'projectile-rails-mode)
-(add-hook 'haml-mode-hook 'projectile-rails-mode)
-(add-hook 'projectile-mode-hook 'projectile-rails-on)
+(projectile-rails-global-mode)
 (setq speedbar-show-unknown-files t) ; show all files
 ;;(setq sr-speedbar-right-side nil) ; to the left side
 ;;(sr-speedbar-refresh-turn-on)
@@ -578,7 +573,7 @@
  '(org-agenda-files (quote ("~/Mega/git/note/cursor.org")))
  '(package-selected-packages
    (quote
-    (smarty-mode password-store paradox wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (all-the-icons-dired slim-mode ranger smarty-mode password-store paradox wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(paradox-automatically-star t)
  '(paradox-github-token "9ae0e83b460e4e770bd5c610dde91971aaa353ca")
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
@@ -647,7 +642,7 @@
 (setq helm-swoop-use-fuzzy-match t)
 ;; If you would like to use migemo, enable helm's migemo feature
 ;;(helm-migemo-mode 1)
-
+(setq helm-descbinds-window-style 'same-window)
 ;; Not necessary if installed by package.el
 (require 'helm-git-grep)
 (global-set-key (kbd "C-c g") 'helm-git-grep)
@@ -740,10 +735,10 @@
 
 ;;themes
 ;;(load-theme 'zenburn t)
-(load-theme 'phoenix-dark-mono t)
+;;(load-theme 'phoenix-dark-mono t)
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/themes/")
-;;(load-theme 'sexy-monochrome t)
+(load-theme 'sexy-monochrome t)
 
 (unless (display-graphic-p)
 ;;    (add-to-list 'default-frame-alist '(foreground-color . "#ffffff"))
@@ -755,7 +750,7 @@
 ;;neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
-(setq projectile-switch-project-action 'neotree-projectile-action)
+;;(setq projectile-switch-project-action 'neotree-projectile-action)
 ;;; init.el ends here
 
 (custom-set-faces
