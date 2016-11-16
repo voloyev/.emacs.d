@@ -9,13 +9,16 @@
 *.*~
 projectile.cache
 
-#directories
-/elpa/
-/auto-save-list/
-/eshell/
-/vimish-fold/
+# Directories
+/elpa/*
+/auto-save-list/*
+/eshell/*
+/vimish-fold/*
+/themes/*
+/url/*
+/.python-environments/*
 
-#files
+# Files
 session*
 emacs*
 \#*
@@ -27,5 +30,4 @@ ido.last
 /.mc-lists.el
 rake.cache
 /smex-items
-/themes
-/url
+/themes/sexy-monochrome-theme.el
