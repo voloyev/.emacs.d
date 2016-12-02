@@ -685,6 +685,9 @@
 (add-hook 'rust-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'lisp-mode-hook 'highlight-indentation-current-column-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'yml-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'slim-mode-hook 'highlight-indentation-current-column-mode)
+(add-hook 'c-mode-hook 'highlight-indentation-current-column-mode)
 
 ;; avto revert files after
 ;; change git branch
