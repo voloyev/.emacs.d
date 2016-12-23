@@ -17,6 +17,7 @@
 (require 'yasnippet-module)
 (require 'helm-module)
 (require 'highlight-indentation-mode-module)
+;;(require 'ivy-module)
 (require 'looks-module)
 (require 'themes-module)
 ;; Achievements mode
@@ -57,9 +58,9 @@
 ;;multiple cursors
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-,") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-|") 'mc/mark-all-like-this)
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 
 ;;global line mode
@@ -113,11 +114,11 @@
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
-;; | Combo | Function         | Description                |
-;; |-------+------------------+----------------------------|
-;; | <f3>  | visit-tags-table | Loads tags                 |
-;; | M-.   | find-tag         | Jumps to the specified tag |
-;; | C-M-. | pop-tag-mark     | Jumps back                 |
+" | Combo | Function         | Description                |"
+" |-------+------------------+----------------------------|"
+" | <f3>  | visit-tags-table | Loads tags                 |"
+" | M-.   | find-tag         | Jumps to the specified tag |"
+" | C-M-. | pop-tag-mark     | Jumps back                 |"
 
 ;; Bookmark settings
 (require 'bookmark)
@@ -133,14 +134,6 @@
 (package-install 'which-key)
 (require 'which-key)
 (which-key-mode t)
-
-;; ido
-(require 'ido)
-(ido-mode t)
-(icomplete-mode                t)
-(ido-everywhere                t)
-(setq ido-vitrual-buffers      t)
-(setq ido-enable-flex-matching t)
 
 ;; rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
@@ -161,9 +154,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-iswitchb)
-(setq org-agenda-files (list "~/Mega/git/note/cursor.org"
-                             "~/Mega/TODO/become_programer.org"
-                             "~/Mega/workspace/org_notes/views_and_controllers.org"))
+(setq org-agenda-files (list "~/Mega/TODO/become_programer.org"
+                             "~/Mega/must_notes.org"))
 (add-hook 'org-mode-hook 'toggle-truncate-lines)
 
 ;;whitespace
@@ -187,7 +179,7 @@
 (xterm-mouse-mode t)
 
 ;; imenu anywhere
-(global-set-key (kbd "C-.") #'imenu-anywhere)
+(global-set-key (kbd "C-c i") #'imenu-anywhere)
 
 ;; vimish folds
 (require 'vimish-fold)
@@ -256,9 +248,12 @@
 ;; email wanderlust
 (autoload 'wl "wl" "Wanderlust" t)
 
-;;neotree
+;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+
+;; avy config
+(avy-setup-default)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -267,11 +262,11 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("44cc408f88144aa9b41435dc9f3bc86a74b95b1a0bcd1e8a19a86c79e42d954e" "b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+    ("4e753673a37c71b07e3026be75dc6af3efbac5ce335f3707b7d6a110ecb636a3" "44cc408f88144aa9b41435dc9f3bc86a74b95b1a0bcd1e8a19a86c79e42d954e" "b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(org-agenda-files (quote ("~/Mega/git/note/cursor.org")))
  '(package-selected-packages
    (quote
-    (all-the-icons-dired slim-mode ranger smarty-mode password-store paradox wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (angular-mode avy counsel-projectile counsel swiper all-the-icons-dired slim-mode ranger smarty-mode password-store paradox wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(paradox-automatically-star t)
  '(paradox-github-token "9ae0e83b460e4e770bd5c610dde91971aaa353ca")
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
