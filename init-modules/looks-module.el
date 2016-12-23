@@ -14,8 +14,8 @@
 (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Inhibit startup/splash screen
-(setq inhibit-splash-screen   t)
-(setq ingibit-startup-message t)
+;;(setq inhibit-splash-screen   0)
+;;(setq ingibit-startup-message 0)
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
