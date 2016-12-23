@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;; cursor-active-mark-init doing this
 ;; themes
-;; (load-theme 'zenburn t)
-;; (load-theme 'phoenix-dark-mono t)
+;;(load-theme 'zenburn t)
+;;(load-theme 'phoenix-dark-mono t)
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/themes/")
 (load-theme 'sexy-monochrome t)
