@@ -7,6 +7,7 @@
                      alchemist
                      apel
                      async
+                     avy
                      bundler
                      calfw
                      cider
@@ -65,6 +66,8 @@
                      inf-ruby
                      inflections
                      ivy
+                     swiper
+                     counsel
                      jump
                      keyfreq
                      know-your-http-well
