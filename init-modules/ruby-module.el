@@ -1,3 +1,4 @@
+
 ;;ruby
 ;;rvm
 (require 'rvm)
@@ -26,4 +27,7 @@
 ;; rinari
 (setq rinari-tags-file-name "TAGS")
 (provide 'ruby-module)
+
+;;slim-mode
+(add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
 ;;; ruby-module.el ends here
