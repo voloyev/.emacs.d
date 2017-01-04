@@ -49,6 +49,7 @@
                      goto-chg
                      haml-mode
                      helm
+                     helm-ag
                      helm-git-grep
                      helm-core
                      helm-projectile
@@ -122,6 +123,7 @@
                      seq
                      simple-httpd
                      slime
+                     slim-mode
                      smart-mode-line
                      smartparens
                      spinner
