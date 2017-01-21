@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;; Default setup of smartparens
 (require 'smartparens-config)
 ;;; Code:
@@ -17,7 +19,8 @@
           lisp-mode-hook
           emacs-lisp-mode-hook
           haml-mode-hook
-          c-mode-hook)
+          c-mode-hook
+          go-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here

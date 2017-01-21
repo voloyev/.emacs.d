@@ -14,8 +14,8 @@
 (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Inhibit startup/splash screen
-;;(setq inhibit-splash-screen   0)
-;;(setq ingibit-startup-message 0)
+(setq inhibit-splash-screen   0)
+(setq ingibit-startup-message 0)
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
@@ -60,6 +60,7 @@
 (setq tab-width                  4)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
+(custom-set-variables '(coffee-tab-width 2))
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 

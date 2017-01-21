@@ -6,7 +6,7 @@
 ;;; Initialize packages for installation
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/init-modules")
+(add-to-list 'load-path "~/.emacs.d/modules")
 ;;; List of required modules
 (require 'auto-install-packages)
 (require 'melpa-module)
@@ -23,7 +23,8 @@
 ;; Achievements mode
 (require 'achievements)
 (achievements-mode 1)
-
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -33,10 +34,15 @@
 (delete-selection-mode t)
 
 ;;company mode
+(require 'company)
 (global-company-mode t)
 (company-quickhelp-mode t)
+(global-set-key (kbd "C-<tab>") 'company-complete)
 (add-hook 'after-init-hook 'global-company-mode)
-
+(add-to-list 'company-backends 'company-tern)
+(add-to-list 'company-backends 'company-robe)
+(add-to-list 'company-backends 'company-go)
+(add-to-list 'company-backends 'company-jedy)
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
@@ -88,7 +94,7 @@
 (setq slime-contribs '(slime-fancy))
 
 ;; flycheck
-(package-install 'flycheck)
+;;(package-install 'flycheck)
 (global-flycheck-mode)
 
 ;; Markdown
@@ -99,18 +105,28 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 ;; line number
-(require 'linum)
-(global-set-key "\C-cl" 'linum-mode)
-(setq linum-format "%d ")
+(require 'nlinum)
+(global-set-key "\C-cl" 'nlinum-mode)
+(add-hook 'ruby-mode-hook 'nlinum-mode)
+(add-hook 'python-mode-hook 'nlinum-mode)
+(add-hook 'lisp-mode-hook 'nlinum-mode)
+(add-hook 'c-mode-hook 'nlinum-mode)
+(add-hook 'js2-mode-hook 'nlinum-mode)
+(add-hook 'js2-jsx-mode-hook 'nlinum-mode)
+(add-hook 'rust-mode-hook 'nlinum-mode)
+(add-hook 'java-mode-hook 'nlinum-mode)
+(add-hook 'web-mode-hook 'nlinum-mode)
+(add-hook 'emacs-lisp-mode-hook 'nlinum-mode)
 
 ;; gutter
+(require 'git-gutter-fringe)
 (global-git-gutter-mode +1)
 ;;(git-gutter:linum-setup)
-(add-hook 'ruby-mode-hook 'git-gutter-mode)
-(add-hook 'python-mode-hook 'git-gutter-mode)
-(set-face-background 'git-gutter:modified "purple") ;; background color
-(set-face-foreground 'git-gutter:added "green")
-(set-face-foreground 'git-gutter:deleted "red")
+;;(add-hook 'ruby-mode-hook 'git-gutter-mode)
+;;(add-hook 'python-mode-hook 'git-gutter-mode)
+;;(set-face-background 'git-gutter:modified "purple") ;; background color
+;;(set-face-foreground 'git-gutter:added "green")
+;;(set-face-foreground 'git-gutter:deleted "red")
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -212,9 +228,7 @@
          :actions '(insert navigate)))
 
 ;; python
-(defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-(add-hook 'python-mode-hook 'my/python-mode-hook)
+(add-hook 'python-mode-hook 'indent-tabs-mode nil)
 
 ;; resize windows
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
@@ -246,21 +260,32 @@
 ;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(setq neo-theme  'arrow)
 
-;; avy config
-(avy-setup-default)
+;;slim-mode
+(require 'slim-mode)
+(add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
+;;lein exec path
+(add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
+
+;;quickrun
+(require 'quickrun)
+
+;;all-the-icons
+(require 'all-the-icons)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
     ("4e753673a37c71b07e3026be75dc6af3efbac5ce335f3707b7d6a110ecb636a3" "44cc408f88144aa9b41435dc9f3bc86a74b95b1a0bcd1e8a19a86c79e42d954e" "b2db1708af2a7d50cac271be91908fffeddb04c66cb1a853fff749c7ad6926ae" "603a9c7f3ca3253cb68584cb26c408afcf4e674d7db86badcfe649dd3c538656" "40bc0ac47a9bd5b8db7304f8ef628d71e2798135935eb450483db0dbbfff8b11" "e56ee322c8907feab796a1fb808ceadaab5caba5494a50ee83a13091d5b1a10c" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(package-selected-packages
    (quote
-    (company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
    (quote
@@ -273,3 +298,9 @@
              (switch-to-buffer-other-frame server-buf))))))
  '(speedbar-show-unknown-files t))
 ;;; init.el ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight-indentation-current-column-face ((t (:background "gray9")))))

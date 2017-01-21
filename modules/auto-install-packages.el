@@ -10,6 +10,8 @@
                      avy
                      bundler
                      calfw
+                     cask
+                     cask-mode
                      cider
                      clojure-mode
                      codesearch
@@ -52,7 +54,6 @@
                      helm-ag
                      helm-git-grep
                      helm-core
-                     helm-projectile
                      helm-swoop
                      highlight-indentation
                      ht
@@ -70,6 +71,8 @@
                      swiper
                      counsel
                      jump
+                     js2-mode
+                     json-mode
                      keyfreq
                      know-your-http-well
                      let-alist

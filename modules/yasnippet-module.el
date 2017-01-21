@@ -16,9 +16,10 @@
 (add-hook 'html-mode-hook '(lambda () (yas-minor-mode 1)))
 (add-hook 'js2-mode-hook '(lambda () (yas-minor-mode 1)))
 
-;;(yas-global-mode t)
 (add-to-list 'load-path
              "~/.emacs.d/snippets")
 (yas-load-directory "~/.emacs.d/snippets")
+(yas-global-mode t)
+
 (provide 'yasnippet-module)
 ;;; yasnippet-module ends here

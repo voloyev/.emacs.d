@@ -5,6 +5,8 @@
 ;; themes
 ;;(load-theme 'zenburn t)
 ;;(load-theme 'phoenix-dark-mono t)
+;;(load-theme 'ample t t)
+;;(enable-theme 'ample)
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/themes/")
 (load-theme 'sexy-monochrome t)
