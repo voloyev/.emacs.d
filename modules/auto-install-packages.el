@@ -29,9 +29,11 @@
                      dash
                      deferred
                      dired+
+		     ein
                      elixir-mode
                      elixir-yasnippets
                      elscreen
+		     elpy
                      emmet-mode
                      epc
                      epl
