@@ -3,14 +3,19 @@
 ;;; Commentary:
 ;;; cursor-active-mark-init doing this
 ;; themes
+(setq custom-safe-themes t)
 ;;(load-theme 'zenburn t)
 ;;(load-theme 'phoenix-dark-mono t)
 ;;(load-theme 'ample t t)
-;;(enable-theme 'ample)
+;(enable-theme 'ample)
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/themes/")
 (load-theme 'sexy-monochrome t)
-
+(enable-theme 'sexy-monochrome)
+;;(load-theme 'tomorrow-night-paradise t)
+;;(load-theme 'base16-solarized-dark t)
+;;(load-theme 'ujelly t)
+;;(enable-theme 'ujelly)
 (defun cursor-active-mark-init ()
     "Данная функция меняет цвет курсора на красный."
 (set-cursor-color "#ff0000")

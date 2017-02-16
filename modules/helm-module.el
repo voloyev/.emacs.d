@@ -6,11 +6,6 @@
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
 ;; Change the keybinds to whatever you like :)
-
-(global-set-key (kbd "C-x b")   #'helm-mini)
-(global-set-key (kbd "C-x C-b") #'helm-buffers-list)
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
 (helm-projectile-on)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
@@ -31,5 +26,12 @@
 (eval-after-load 'helm
                  '(define-key helm-map (kbd "C-c g") 'helm-git-grep-from-helm))
 (global-set-key (kbd "C-c C-c p s") 'helm-multi-swoop-projectile)
+
+;;helm on the bottom
+(add-to-list 'display-buffer-alist
+             `(,(rx bos "*helm" (* not-newline) "*" eos)
+                (display-buffer-in-side-window)
+                (inhibit-same-window . t)
+                (window-height . 0.4)))
 (provide 'helm-module)
 ;;; helm-module ends here
