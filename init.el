@@ -159,13 +159,15 @@
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;; racer
-(setq racer-cmd "/usr/local/bin/racer")
-(setq racer-rust-src-path "/home/nuncostans/.rust/src/")
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-;; Use company-racer in rust mode
-(set (make-local-variable 'company-backends) '(company-racer))
+(add-hook 'racer-mode-hook #'company-mode)
+
+(require 'rust-mode)
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
+
 
 ;; org-mode
 (require 'org-install)
@@ -294,16 +296,16 @@
  '(ansi-term-color-vector
    [unspecified "#000000" "#d54e53" "#afd75f" "#e7c547" "#5f87d7" "#af87d7" "#5f87d7" "#dadada"])
  '(coffee-tab-width 2)
- '(custom-enabled-themes (quote (smart-mode-line-light sexy-monochrome)))
+ '(custom-enabled-themes (quote (minimal)))
  '(custom-safe-themes
    (quote
-    ("ca8e634fa3e088ef5e19a6e609f9e79fd407a6188fcb5bc3de17801ed38f8afa" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "b32487a336b756ef2353018ccc58c27356727ddf2b72f28f922306fb9f95d01b" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "2a18e54e84857de0f8703671661609ad9d287c25175594a282f91444841e92e5" default)))
+    ("3f3c476a8ed7019de5bf7220f5f965c9cc41c0631ee14aab881a4bfbe7cbcebf" "84ed2decf8f06fdc5f33f86d2951bf402b11caf3dedabb8942dd1080fe08b7b4" "85a63a721f791797b347fb893a9e7ceabf2bb58cd4662b7f85d1390e24e2fea4" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "ca8e634fa3e088ef5e19a6e609f9e79fd407a6188fcb5bc3de17801ed38f8afa" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "b32487a336b756ef2353018ccc58c27356727ddf2b72f28f922306fb9f95d01b" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "2a18e54e84857de0f8703671661609ad9d287c25175594a282f91444841e92e5" default)))
  '(fci-rule-character-color "#1c1c1c")
- '(fci-rule-color "#1c1c1c")
+ '(fci-rule-color "#1c1c1c" t)
  '(neo-theme (quote arrow))
  '(package-selected-packages
    (quote
-    (spacemacs-theme sql-indent sqlite sqlplus sqlup-mode systemd tao-theme rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode elpy ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (flycheck-nim nim-mode punpun-theme spacemacs-theme sql-indent sqlite sqlplus sqlup-mode systemd tao-theme rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
    (quote
@@ -323,4 +325,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(highlight-indentation-current-column-face ((t (:background "gray9")))))
+ )

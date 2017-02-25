@@ -10,8 +10,9 @@
 ;(enable-theme 'ample)
 (add-to-list 'custom-theme-load-path
              "~/.emacs.d/themes/")
-(load-theme 'sexy-monochrome t)
-(enable-theme 'sexy-monochrome)
+(load-theme 'minimal)
+;;(load-theme 'sexy-monochrome t)
+;;(enable-theme 'sexy-monochrome)
 ;;(load-theme 'tomorrow-night-paradise t)
 ;;(load-theme 'base16-solarized-dark t)
 ;;(load-theme 'ujelly t)
