@@ -2,8 +2,8 @@
 *.elc
 
 # Packaging
-.cask
-
+.cask/
+!.cask/cask.el
 # Autosaver
 *~:w
 *.*~
@@ -33,3 +33,6 @@ rake.cache
 /themes/sexy-monochrome-theme.el
 *.log
 recentf
+.directory
+abbrev_defs
+semanticdb/

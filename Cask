@@ -52,6 +52,7 @@
 (depends-on "magit-popup")
 (depends-on "memoize")
 (depends-on "multiple-cursors")
+(depends-on "nyan-mode")
 (depends-on "package-build")
 (depends-on "pallet")
 (depends-on "paradox")

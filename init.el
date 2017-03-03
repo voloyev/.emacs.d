@@ -294,6 +294,9 @@
 (require 'golden-ratio)
 (golden-ratio-mode 1)
 
+;; nyan-mode
+(nyan-mode 1)
+
 ;; css and sccs indent level
 (setq css-indent-offset 2)
 (setq scss-indent-offset 2)
