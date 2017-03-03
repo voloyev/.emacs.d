@@ -3,59 +3,80 @@
 ;;; Lol
 ;;; Code:
 (setq package-list '(
-                     achievements
-                     alchemist
                      apel
                      async
+                     auto-virtualenv
                      avy
                      bundler
                      calfw
+                     cargo
                      cask
                      cask-mode
                      cider
                      clojure-mode
                      codesearch
                      coffee-mode
+                     commenter
                      company
                      company-dict
+                     company-erlang
+                     company-go
                      company-inf-ruby
                      company-jedi
                      company-quickhelp
                      company-racer
+                     company-restclient
+                     company-tern
+                     company-web
+                     company-ycmd
                      concurrent
+                     counsel
                      ctable
-                     ctags
                      ctags-update
                      dash
+                     dash-functional
                      deferred
                      dired+
-		     ein
+                     drag-stuff
+                     ein
                      elixir-mode
                      elixir-yasnippets
                      elscreen
-		     elpy
                      emmet-mode
                      epc
                      epl
+                     erlang
+                     evil
+                     exec-path-from-shell
                      expand-region
                      f
                      findr
                      flim
                      flycheck
+                     flycheck-cask
                      flycheck-elixir
+                     flycheck-nim
                      flycheck-rust
+                     flycheck-ycmd
                      flymd
+                     font-lock+
+                     fringe-helper
                      ggtags
                      git
                      git-commit
                      git-gutter
+                     git-gutter-fringe
+                     go-mode
+                     golden-ratio
+                     golint
+                     google-c-style
                      google-maps
                      goto-chg
                      haml-mode
                      helm
                      helm-ag
-                     helm-git-grep
                      helm-core
+                     helm-git-grep
                      helm-swoop
                      highlight-indentation
                      ht
@@ -65,47 +86,77 @@
                      ibuffer-rcirc
                      ibuffer-tramp
                      ibuffer-vc
+                     idle-highlight-mode
                      imenu-anywhere
                      imenu-list
                      inf-ruby
                      inflections
                      ivy
-                     swiper
-                     counsel
-                     jump
+                     jade
+                     jdee
+                     jedi
+                     jedi-core
+                     jekyll-modes
                      js2-mode
                      json-mode
+                     json-reformat
+                     json-snatcher
+                     jump
                      keyfreq
                      know-your-http-well
                      let-alist
+                     load-relative
+                     loc-changes
                      macrostep
                      magit
                      magit-popup
                      markdown-mode
+                     memoize
                      migemo
                      multiple-cursors
                      mustache
                      nav
                      neotree
+                     nim-mode
+                     nlinum
+                     nvm
                      nyan-mode
                      org
                      org-page
+                     package-build
+                     pallet
                      parent-mode
                      perspective
                      phoenix-dark-mono-theme
                      php-mode
                      pkg-info
+                     polymode
                      popup
+                     popwin
                      pos-tip
+                     prodigy
                      projectile
                      projectile-codesearch
                      projectile-rails
                      projectile-speedbar
+                     punpun-theme
+                     pyenv-mode
+                     pyenv-mode-auto
                      python-environment
+                     pythonic
+                     pyvenv
                      queue
+                     quickrun
                      racer
+                     rainbow-mode
                      rake
                      rbenv
+                     react-snippets
+                     realgud
+                     realgud-byebug
+                     realgud-rdb2
+                     request
+                     request-deferred
                      restclient
                      rich-minority
                      rinari
@@ -126,19 +177,34 @@
                      scss-mode
                      semi
                      seq
+                     shut-up
                      simple-httpd
-                     slime
                      slim-mode
+                     slime
+                     slime-company
                      smart-mode-line
                      smartparens
+                     smex
                      spinner
+                     sql-indent
+                     sqlite
+                     sqlplus
+                     sqlup-mode
                      sr-speedbar
                      ssh
+                     swiper
+                     systemd
+                     tern
+                     test-simple
                      thrift
+                     toml
+                     toml-mode
                      tracking
                      undo-tree
+                     use-package
                      vimish-fold
                      web-mode
+                     websocket
                      weechat
                      which-key
                      with-editor
@@ -146,6 +212,22 @@
                      yaml-mode
                      yari
                      yasnippet
-                     zenburn-theme))
+                     ycmd
+                     alchemist
+                     ein
+                     elpy
+                     achievements
+                     ))
+
+;; fetch the list of packages available
+(unless package-archive-contents
+    (package-refresh-contents))
+
+;; install the missing packages
+(dolist (package package-list)
+    (unless (package-installed-p package)
+        (package-install package)))
+(package-initialize)
+
 (provide 'auto-install-packages)
 ;;; auto-install-packages.el ends here

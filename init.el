@@ -3,13 +3,18 @@
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
-;;; Initialize packages for installation
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/")t)
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/modules")
 ;;; List of required modules
-(require 'auto-install-packages)
-(require 'melpa-module)
 (require 'ruby-module)
 (require 'speedbar-module)
 (require 'smartparens-module)
@@ -18,12 +23,16 @@
 (require 'helm-module)
 (require 'python-module)
 (require 'highlight-indentation-mode-module)
+
 ;;(require 'ivy-module)
 (require 'looks-module)
 (require 'themes-module)
+
 ;; Achievements mode
 (require 'achievements)
 (achievements-mode 1)
+
+;; cask
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 ;; Emacs server
@@ -281,8 +290,10 @@
 ;;quickrun
 (require 'quickrun)
 
-;;all-the-icons
-(require 'all-the-icons)
+;;golden ratio
+(require 'golden-ratio)
+(golden-ratio-mode 1)
+
 ;; css and sccs indent level
 (setq css-indent-offset 2)
 (setq scss-indent-offset 2)
@@ -296,16 +307,17 @@
  '(ansi-term-color-vector
    [unspecified "#000000" "#d54e53" "#afd75f" "#e7c547" "#5f87d7" "#af87d7" "#5f87d7" "#dadada"])
  '(coffee-tab-width 2)
- '(custom-enabled-themes (quote (minimal)))
+ '(custom-enabled-themes (quote (smart-mode-line-light sexy-monochrome)))
  '(custom-safe-themes
    (quote
-    ("3f3c476a8ed7019de5bf7220f5f965c9cc41c0631ee14aab881a4bfbe7cbcebf" "84ed2decf8f06fdc5f33f86d2951bf402b11caf3dedabb8942dd1080fe08b7b4" "85a63a721f791797b347fb893a9e7ceabf2bb58cd4662b7f85d1390e24e2fea4" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "ca8e634fa3e088ef5e19a6e609f9e79fd407a6188fcb5bc3de17801ed38f8afa" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "b32487a336b756ef2353018ccc58c27356727ddf2b72f28f922306fb9f95d01b" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "2a18e54e84857de0f8703671661609ad9d287c25175594a282f91444841e92e5" default)))
+    ("fbcb48518376e6fb67ab0e7b26c012db608b8fa2e548a421fd9b5c7a081a096a" "1d777e10e0e838b4feccc87ff47b4cb25959c44a07c35592afe82444a7b787d5" "3c52aad4c656099631f43e50b5512c3c60256224dddde6f11ae0d8d067a6cb32" "f49dd1ce4a05bb2c171257decf163b4c8a728dfaa65bfbe1de78529d1e2b743f" "fb4c83e076f1745b6b2c5dfdc57288aa6257fa497e4b93354ecbc52c12d6da40" "3f3c476a8ed7019de5bf7220f5f965c9cc41c0631ee14aab881a4bfbe7cbcebf" "84ed2decf8f06fdc5f33f86d2951bf402b11caf3dedabb8942dd1080fe08b7b4" "85a63a721f791797b347fb893a9e7ceabf2bb58cd4662b7f85d1390e24e2fea4" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "7f5837a7dbf54c2b7c41d94f5eb1373cf63274847d1971037faa24d7f2231eea" "ca8e634fa3e088ef5e19a6e609f9e79fd407a6188fcb5bc3de17801ed38f8afa" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "b32487a336b756ef2353018ccc58c27356727ddf2b72f28f922306fb9f95d01b" "4aafea32abe07a9658d20aadcae066e9c7a53f8e3dfbd18d8fa0b26c24f9082c" "2a18e54e84857de0f8703671661609ad9d287c25175594a282f91444841e92e5" default)))
  '(fci-rule-character-color "#1c1c1c")
  '(fci-rule-color "#1c1c1c" t)
  '(neo-theme (quote arrow))
  '(package-selected-packages
    (quote
-    (flycheck-nim nim-mode punpun-theme spacemacs-theme sql-indent sqlite sqlplus sqlup-mode systemd tao-theme rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (pydoc pallet helm jenkins jira js2-closure js2-highlight-vars js2-refactor js3-mode jsx-mode brainfuck-mode clojure-mode common-lisp-snippets company company-lua company-php rjsx-mode rust-mode nvm paradox toml toml-mode golden-ratio google-c-style flycheck-nim nim-mode punpun-theme sql-indent sqlite sqlplus sqlup-mode systemd rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smartparens smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+ '(paradox-github-token t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
    (quote
