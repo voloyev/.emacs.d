@@ -20,7 +20,8 @@
           emacs-lisp-mode-hook
           haml-mode-hook
           c-mode-hook
-          go-mode-hook)
+          go-mode-hook
+          elixir-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
