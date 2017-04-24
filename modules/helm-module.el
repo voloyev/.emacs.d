@@ -18,6 +18,7 @@
 (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
 ;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
 (define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+
 (require 'helm-git-grep)
 (global-set-key (kbd "C-c g") 'helm-git-grep)
 ;;Invoke `helm-git-grep' from isearch.
@@ -26,12 +27,13 @@
 (eval-after-load 'helm
                  '(define-key helm-map (kbd "C-c g") 'helm-git-grep-from-helm))
 (global-set-key (kbd "C-c C-c p s") 'helm-multi-swoop-projectile)
-
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "M-x") 'helm-M-x)
 ;;helm on the bottom
-(add-to-list 'display-buffer-alist
-             `(,(rx bos "*helm" (* not-newline) "*" eos)
-                (display-buffer-in-side-window)
-                (inhibit-same-window . t)
-                (window-height . 0.4)))
+;;(add-to-list 'display-buffer-alist
+;;             `(,(rx bos "*helm" (* not-newline) "*" eos)
+;;                (display-buffer-in-side-window)
+;;                (inhibit-same-window . t)
+;;                (window-height . 0.4)))
 (provide 'helm-module)
 ;;; helm-module ends here

@@ -2,8 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts
-(set-face-attribute 'default nil :font "Terminus 12" )
-(set-frame-font "Terminus 12")
+(set-face-attribute 'default nil :font "Source Code Pro 10" )
+(set-frame-font "Source Code Pro 10")
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
