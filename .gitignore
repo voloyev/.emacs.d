@@ -17,6 +17,7 @@ projectile.cache
 /themes/*
 /url/*
 /.python-environments/*
+themes/
 
 # Files
 session*
@@ -36,3 +37,4 @@ recentf
 .directory
 abbrev_defs
 semanticdb/
+tramp
