@@ -35,6 +35,7 @@
 ;; cask
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
+
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -45,6 +46,9 @@
 
 ;; use bash
 (setq shell-file-name "/bin/bash")
+
+;; Switch window
+(global-set-key (kbd "C-x o") 'switch-window)
 
 ;; company mode
 (require 'company)
@@ -276,6 +280,7 @@
 ;;slim-mode
 (require 'slim-mode)
 (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
+
 ;;lein exec path
 (add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
 
@@ -307,6 +312,9 @@
 (add-hook 'lisp-mode-hook 'fci-mode)
 (add-hook 'emacs-lisp-mode-hook 'fci-mode)
 
+;;slime
+(add-hook 'lisp-mode-hook 'sly-editing-mode)
+
 ;;paradox token
 (defvar paradox-token
     (getenv "PARADOX"))
@@ -319,7 +327,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#000000" "light gray" "dark gray" "light slate gray"])
  '(ansi-term-color-vector
-   [unspecified "#000000" "#d54e53" "#afd75f" "#e7c547" "#5f87d7" "#af87d7" "#5f87d7" "#dadada"])
+   [unspecified "#000000" "#d54e53" "#afd75f" "#e7c547" "#5f87d7" "#af87d7" "#5f87d7" "#dadada"] t)
  '(coffee-tab-width 2)
  '(custom-enabled-themes (quote (smart-mode-line-light sexy-monochrome)))
  '(custom-safe-themes
@@ -331,7 +339,7 @@
  '(neo-theme (quote arrow))
  '(package-selected-packages
    (quote
-    (gitconfig-mode racket-mode arch-packer indium fill-column-indicator smartparens csv-mode d-mode erlang tern haskell-mode gist pydoc pallet helm jenkins jira js2-closure js2-highlight-vars js2-refactor js3-mode jsx-mode brainfuck-mode clojure-mode common-lisp-snippets company company-lua company-php rjsx-mode rust-mode nvm paradox toml toml-mode golden-ratio google-c-style flycheck-nim nim-mode punpun-theme sql-indent sqlite sqlplus sqlup-mode systemd rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
+    (projectile-variable gitconfig-mode racket-mode arch-packer indium fill-column-indicator smartparens csv-mode d-mode erlang tern haskell-mode gist pydoc pallet helm jenkins jira js2-closure js2-highlight-vars js2-refactor js3-mode jsx-mode brainfuck-mode clojure-mode common-lisp-snippets company company-lua company-php rjsx-mode rust-mode nvm paradox toml toml-mode golden-ratio google-c-style flycheck-nim nim-mode punpun-theme sql-indent sqlite sqlplus sqlup-mode systemd rainbow-mode rake jdee jedi auto-virtualenv pyenv-mode-auto pyenv-mode ein company-restclient company-erlang realgud-byebug realgud-rdb2 all-the-icons quickrun git-gutter-fringe nlinum realgud jekyll-modes ample-theme 0blayout react-snippets cargo simple-httpd slime-company company-go company-tern flycheck-ycmd company-ycmd cask-mode package-build shut-up epl git commander f dash s cask stylus-mode json-mode js2-mode company-web angular-mode avy counsel-projectile counsel swiper slim-mode ranger smarty-mode password-store wanderlust flycheck zenburn-theme yari yaml-mode xcscope which-key weechat web-mode vimish-fold thrift ssh sr-speedbar smart-mode-line slime skewer-mode semi scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rinari restclient rbenv racer projectile-speedbar projectile-rails projectile-codesearch php-mode phoenix-dark-mono-theme perspective org-page nyan-mode neotree nav multiple-cursors migemo markdown-mode magit know-your-http-well imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git hydra highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag golint go-mode git-gutter ggtags flymd flycheck-rust flycheck-elixir expand-region evil emmet-mode elscreen elixir-yasnippets dired+ ctags-update ctags company-racer company-quickhelp company-jedi company-inf-ruby company-dict company-c-headers coffee-mode cmake-mode cider chef-mode calfw bundler alchemist achievements)))
  '(paradox-github-token t t)
  '(server-done-hook (quote ((lambda nil (kill-buffer nil)) delete-frame)))
  '(server-switch-hook
