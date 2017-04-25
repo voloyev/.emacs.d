@@ -7,6 +7,7 @@
 (require 'helm-swoop)
 ;; Change the keybinds to whatever you like :)
 (helm-projectile-on)
+(global-set-key (kbd "C-c C-p") 'helm-projectile-switch-project)
 (global-set-key (kbd "M-i") 'helm-swoop)
 (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)

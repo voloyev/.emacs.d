@@ -1,7 +1,7 @@
 ;;sr-speedbar
 (require 'sr-speedbar)
 ;;; Code:
-(global-set-key (kbd "<f12>") 'sr-speedbar-toggle)
+(global-set-key (kbd "<f8>") 'sr-speedbar-toggle)
 (add-hook 'speedbar-mode-hook
           (lambda()
               (speedbar-add-supported-extension "\\.rb")
