@@ -16,7 +16,7 @@
 (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 (global-set-key (kbd "C-c g") 'counsel-git)
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-c C-a") 'counsel-projectile-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (counsel-projectile-on)
 (provide 'ivy-module)

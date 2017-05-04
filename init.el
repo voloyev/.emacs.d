@@ -29,8 +29,6 @@
 (require 'ivy-module)
 (require 'python-module)
 (require 'highlight-indentation-mode-module)
-
-;;(require 'ivy-module)
 (require 'looks-module)
 (require 'themes-module)
 
