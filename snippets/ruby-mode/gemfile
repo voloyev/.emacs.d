@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: gemfile
+# key: gemfile
+# --
+
+source 'https://rubygems.org' do
+  $1
+end
