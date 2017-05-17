@@ -4,6 +4,7 @@
 # Packaging
 .cask/
 !.cask/cask.el
+
 # Autosaver
 *~:w
 *.*~
@@ -18,6 +19,7 @@ projectile.cache
 /url/*
 /.python-environments/*
 themes/
+var/
 
 # Files
 session*
