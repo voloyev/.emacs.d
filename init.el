@@ -127,6 +127,7 @@
 (require 'nlinum)
 (global-set-key "\C-cl" 'nlinum-mode)
 (add-hook 'ruby-mode-hook 'nlinum-mode)
+(add-hook 'enh-ruby-mode-hook 'nlinum-mode)
 (add-hook 'python-mode-hook 'nlinum-mode)
 (add-hook 'lisp-mode-hook 'nlinum-mode)
 (add-hook 'c-mode-hook 'nlinum-mode)
@@ -307,6 +308,15 @@
       (unless (eq ibuffer-sorting-mode 'alphabetic)
           (ibuffer-do-sort-by-alphabetic))))
 
+;; crystal mode
+(add-to-list 'load-path
+             "~/.emacs.d/plugins/")
+(autoload 'crystal-mode "crystal-mode" "Major mode for crystal files" t)
+(add-to-list 'auto-mode-alist '("\\.cr$" . crystal-mode))
+(add-to-list 'interpreter-mode-alist '("crystal" . crystal-mode))
+(require 'flycheck-crystal)
+(add-hook 'crystal-mode-hook 'flycheck-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -324,7 +334,7 @@
  '(neo-theme (quote arrow))
  '(package-selected-packages
    (quote
-    (switch-window feature-mode gitconfig gitignore-mode zenburn-theme yari yaml-mode which-key weechat web-mode wanderlust vimish-fold toml-mode toml thrift systemd stylus-mode ssh sqlup-mode sqlplus sqlite sql-indent smarty-mode smartparens smart-mode-line sly-company slime-company slim-mode skewer-mode scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rjsx-mode rinari realgud-rdb2 realgud-byebug react-snippets rbenv ranger rainbow-mode racket-mode racer quickrun pyenv-mode-auto pydoc projectile-variable projectile-speedbar projectile-rails projectile-codesearch phoenix-dark-mono-theme password-store paradox pallet org-page nyan-mode nvm nlinum nim-mode neotree nav migemo markdown-mode magit jsx-mode json-mode js3-mode js2-refactor js2-highlight-vars js2-closure jira jenkins jekyll-modes jedi jdee indium imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag haskell-mode google-c-style golint golden-ratio gitconfig-mode git-gutter-fringe gist ggtags flymd flycheck-ycmd flycheck-rust flycheck-nim flycheck-elixir fill-column-indicator expand-region evil emmet-mode elscreen elixir-yasnippets ein dired+ d-mode ctags-update csv-mode counsel-projectile company-ycmd company-web company-tern company-restclient company-quickhelp company-php company-lua company-jedi company-inf-ruby company-go company-erlang common-lisp-snippets commander clojure-mode cask-mode cargo calfw brainfuck-mode avy arch-packer angular-mode)))
+    (yard-mode enh-ruby-mode vmd-mode ruby-refactor ruby-test-mode vimrc-mode switch-window feature-mode gitconfig gitignore-mode zenburn-theme yari yaml-mode which-key weechat web-mode wanderlust vimish-fold toml-mode toml thrift systemd stylus-mode ssh sqlup-mode sqlplus sqlite sql-indent smarty-mode smartparens smart-mode-line sly-company slime-company slim-mode skewer-mode scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rjsx-mode rinari realgud-rdb2 realgud-byebug react-snippets rbenv ranger rainbow-mode racket-mode racer quickrun pyenv-mode-auto pydoc projectile-variable projectile-speedbar projectile-rails projectile-codesearch phoenix-dark-mono-theme password-store paradox pallet org-page nyan-mode nlinum nim-mode neotree nav migemo markdown-mode magit jsx-mode json-mode js3-mode js2-refactor js2-highlight-vars js2-closure jira jenkins jekyll-modes jedi jdee indium imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag haskell-mode google-c-style golint golden-ratio gitconfig-mode git-gutter-fringe gist ggtags flymd flycheck-rust flycheck-nim flycheck-elixir fill-column-indicator expand-region evil emmet-mode elscreen elixir-yasnippets ein dired+ d-mode ctags-update csv-mode counsel-projectile company-web company-tern company-restclient company-quickhelp company-php company-lua company-jedi company-inf-ruby company-go company-erlang common-lisp-snippets commander clojure-mode cask-mode cargo calfw brainfuck-mode avy arch-packer angular-mode)))
  '(paradox-github-token t t)
  '(sml/no-confirm-load-theme 1)
  '(sml/theme (quote light))
