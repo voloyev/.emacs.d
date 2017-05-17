@@ -21,7 +21,11 @@
           haml-mode-hook
           c-mode-hook
           go-mode-hook
-          elixir-mode-hook)
+          elixir-mode-hook
+          enh-ruby-mode-hook
+          crystal-mode-hook
+          slim-mode-hook
+          rust-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
