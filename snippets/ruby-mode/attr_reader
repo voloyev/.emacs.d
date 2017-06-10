@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: attr_reader
+# key: reader
+# --
+attr_reader $1
