@@ -26,15 +26,16 @@
 (require 'smartparens-module)
 (require 'web-mode-module)
 (require 'yasnippet-module)
-(require 'ivy-module)
+(require 'helm-module)
 (require 'python-module)
 (require 'highlight-indentation-mode-module)
 (require 'looks-module)
 (require 'themes-module)
 
 ;; Achievements mode
-(require 'achievements)
-(achievements-mode 1)
+(use-package achievements
+    :config
+    (achievements-mode 1))
 
 ;; cask
 (require 'cask "~/.cask/cask.el")
@@ -55,15 +56,18 @@
 (global-set-key (kbd "C-x o") 'switch-window)
 
 ;; company mode
-(require 'company)
-(global-company-mode t)
-(company-quickhelp-mode t)
-(global-set-key (kbd "C-<tab>") 'company-complete)
-(add-hook 'after-init-hook 'global-company-mode)
-(add-to-list 'company-backends 'company-tern)
-(add-to-list 'company-backends 'company-robe)
-(add-to-list 'company-backends 'company-go)
-(add-to-list 'company-backends 'company-jedy)
+(use-package company
+    :init
+    (with-eval-after-load 'company
+        (add-hook 'after-init-hook 'global-company-mode)
+        (add-to-list 'company-backends 'company-robe)
+        (add-to-list 'company-backends 'tern)
+        (add-to-list 'company-backends 'company-go)
+        (add-to-list 'company-backends 'company-jedy))
+    :bind("C-<tab>" . company-complete)
+    :config
+    (global-company-mode t)
+    (company-quickhelp-mode t))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
@@ -79,25 +83,26 @@
          (list (line-beginning-position)
                (line-beginning-position 2)))))
 
-;;paren mode
-(show-smartparens-global-mode 1)
-;;(setq show-sma 0)
-;;(setq show-paren-style 'parenthesis)
+(use-package smartparens
+    :config
+    (show-smartparens-global-mode 1))
 
 ;;multiple cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-.") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-,") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-|") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(use-package multiple-cursors
+    :bind (("C-S-c C-S-c" . mc/edit-lines)
+           ("C-." . mc/mark-next-like-this)
+           ( "C-," . mc/mark-previous-like-this)
+           ("C-c C-|" . mc/mark-all-like-this)
+           ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;;global line mode
 (global-hl-line-mode)
 
 ;;projectile
-(projectile-global-mode)
-(projectile-rails-global-mode)
+(use-package projectile
+    :config
+    (projectile-global-mode)
+    (projectile-rails-global-mode))
 
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -116,32 +121,34 @@
 (global-flycheck-mode)
 
 ;; Markdown
-(autoload 'markdown-mode "markdown-mode"
-    "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(setq markdown-command "grip --export")
+(use-package markdown-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+    (setq markdown-command "grip --export"))
 
 ;; line number
-(require 'nlinum)
-(global-set-key "\C-cl" 'nlinum-mode)
-(add-hook 'ruby-mode-hook 'nlinum-mode)
-(add-hook 'enh-ruby-mode-hook 'nlinum-mode)
-(add-hook 'python-mode-hook 'nlinum-mode)
-(add-hook 'lisp-mode-hook 'nlinum-mode)
-(add-hook 'c-mode-hook 'nlinum-mode)
-(add-hook 'js2-mode-hook 'nlinum-mode)
-(add-hook 'js2-jsx-mode-hook 'nlinum-mode)
-(add-hook 'rust-mode-hook 'nlinum-mode)
-(add-hook 'java-mode-hook 'nlinum-mode)
-(add-hook 'web-mode-hook 'nlinum-mode)
-(add-hook 'emacs-lisp-mode-hook 'nlinum-mode)
-(add-hook 'elixir-mode-hook 'nlinum-mode)
+(use-package nlinum
+    :bind (("\C-cl" . nlinum-mode))
+    :init
+    (add-hook 'ruby-mode-hook 'nlinum-mode)
+    (add-hook 'enh-ruby-mode-hook 'nlinum-mode)
+    (add-hook 'python-mode-hook 'nlinum-mode)
+    (add-hook 'lisp-mode-hook 'nlinum-mode)
+    (add-hook 'c-mode-hook 'nlinum-mode)
+    (add-hook 'js2-mode-hook 'nlinum-mode)
+    (add-hook 'js2-jsx-mode-hook 'nlinum-mode)
+    (add-hook 'rust-mode-hook 'nlinum-mode)
+    (add-hook 'java-mode-hook 'nlinum-mode)
+    (add-hook 'web-mode-hook 'nlinum-mode)
+    (add-hook 'emacs-lisp-mode-hook 'nlinum-mode)
+    (add-hook 'elixir-mode-hook 'nlinum-mode))
 
 ;; gutter
-(require 'git-gutter-fringe)
-(global-git-gutter-mode +1)
+(use-package git-gutter-fringe
+    :config
+    (global-git-gutter-mode t))
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -162,37 +169,38 @@
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
 ;; whichkey
-(package-install 'which-key)
-(require 'which-key)
-(which-key-mode t)
+(use-package which-key
+    :config
+    (which-key-mode t))
 
 ;; rust
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;; racer
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-(add-hook 'racer-mode-hook #'company-mode)
 
-(require 'rust-mode)
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-(setq company-tooltip-align-annotations t)
+(use-package rust-mode
+    :init
+    (setq company-tooltip-align-annotations t)
+    (add-hook 'rust-mode-hook #'racer-mode)
+    (add-hook 'racer-mode-hook #'eldoc-mode)
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+    (add-hook 'racer-mode-hook #'company-mode))
 
 ;; org-mode
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-cb" 'org-iswitchb)
-(setq org-agenda-files (list "~/Mega/TODO/become_programer.org"
+(use-package org-install
+    :init
+    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+    (setq org-agenda-files (list "~/Mega/TODO/become_programer.org"
                              "~/Mega/must_notes.org"))
-(add-hook 'org-mode-hook 'toggle-truncate-lines)
-(setq org-src-fontify-natively nil)
-(defface org-block
-    '((t (:background "#000000")))
-    "Face used for the source block background.")
+    (add-hook 'org-mode-hook 'toggle-truncate-lines)
+    (setq org-src-fontify-natively nil)
+    (defface org-block
+        '((t (:background "#000000")))
+        "Face used for the source block background.")
+    :bind(("\C-cl" . org-store-link)
+          ("\C-ca" . org-agenda)
+          ("\C-cc" . org-capture)
+          ("\C-cb" . org-iswitchb)))
 
 ;;whitespace
 (global-set-key (kbd "<f5>") 'whitespace-mode)
@@ -214,27 +222,20 @@
 ;; work mouse in terminal
 (xterm-mouse-mode t)
 
-;; imenu anywhere
-(global-set-key (kbd "C-c i") #'imenu-anywhere)
-
 ;; vimish folds
-(require 'vimish-fold)
-(global-set-key (kbd "C-c v f") #'vimish-fold)
-(global-set-key (kbd "C-c v v") #'vimish-fold-delete)
+(use-package vimish-fold
+    :bind(("C-c v f" . vimish-fold)
+          ("C-c v v" . vimish-fold-delete)))
 
 ;; magit
-(global-set-key (kbd "C-x g") 'magit-status)
-;;(magit-auto-revert-mode )
-(global-auto-revert-mode 1)
-;; persp-mode
-(persp-mode)
-
+(use-package magit
+    :bind("C-x g" . magit-status)
+    :config
+    (global-auto-revert-mode 1)
+    (persp-mode))
+    
 ;; undo tree
 (global-undo-tree-mode t)
-
-;; avto revert files after
-;; change git branch
-;;(setq auto-revert-check-vc-info t)
 
 ;; Highlights *.elixir2 as well
 (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
@@ -249,16 +250,11 @@
 (setq c-default-style "linux")
 
 ;; expand region mode
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+    :bind("C-=" . er/expand-region))
 
 ;;js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-;; simple  httpd
-(require 'simple-httpd)
-(setq httpd-root "/home/nuncostans/workspace/js/")
-;;(httpd-start)
 
 (unless (display-graphic-p)
     (add-to-list 'default-frame-alist '(background-color . "#000000")))
@@ -267,14 +263,16 @@
 (autoload 'wl "wl" "Wanderlust" t)
 
 ;; neotree
-(require 'neotree)
-(global-set-key [f12] 'neotree-projectile-action)
-(global-set-key (kbd "M-<f12>") 'neotree-hide)
-(setq neo-theme  'arrow)
+(use-package  neotree
+    :bind(("<f12>" . neotree-projectile-action)
+          ("M-<f12>" . neotree-hide))
+    :config
+    (setq neo-theme  'arrow))
 
 ;;slim-mode
-(require 'slim-mode)
-(add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode))
+(use-package slim-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode)))
 
 ;;lein exec path
 (add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
@@ -283,8 +281,13 @@
 (require 'quickrun)
 
 ;;golden ratio
-(require 'golden-ratio)
-(global-set-key(kbd "C-c C-g") 'golden-ratio-mode)
+(use-package golden-ratio
+    :bind("C-c & g" . golden-ratio-mode))
+
+;; toggle quotes
+(use-package toggle-quotes
+    :bind("C-'" . toggle-quotes))
+    
 
 ;; nyan-mode
 (nyan-mode 1)
@@ -297,6 +300,11 @@
 (defvar paradox-token
     (getenv "PARADOX"))
 (setq paradox-github-token 'paradox-token)
+
+;; ido
+(use-package ido
+    :config
+    (ido-mode t))
 
 ;;disable sound
 (setq visible-bell 1)
@@ -334,7 +342,7 @@
  '(neo-theme (quote arrow))
  '(package-selected-packages
    (quote
-    (sexy-monochrome-theme coffee-mode alchemist yard-mode enh-ruby-mode vmd-mode ruby-refactor ruby-test-mode vimrc-mode switch-window feature-mode gitconfig gitignore-mode zenburn-theme yari yaml-mode which-key weechat web-mode wanderlust vimish-fold toml-mode toml thrift systemd stylus-mode ssh sqlup-mode sqlplus sqlite sql-indent smarty-mode smartparens smart-mode-line sly-company slime-company slim-mode skewer-mode scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rjsx-mode rinari realgud-rdb2 realgud-byebug react-snippets rbenv ranger rainbow-mode racket-mode racer quickrun pyenv-mode-auto pydoc projectile-variable projectile-speedbar projectile-rails projectile-codesearch phoenix-dark-mono-theme password-store paradox pallet org-page nyan-mode nlinum nim-mode neotree nav migemo markdown-mode magit jsx-mode json-mode js3-mode js2-refactor js2-highlight-vars js2-closure jira jenkins jekyll-modes jdee indium imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag haskell-mode google-c-style golint golden-ratio gitconfig-mode git-gutter-fringe gist ggtags flymd flycheck-rust flycheck-nim flycheck-elixir fill-column-indicator expand-region evil emmet-mode elscreen elixir-yasnippets ein dired+ d-mode ctags-update csv-mode counsel-projectile company-web company-tern company-restclient company-quickhelp company-php company-lua company-jedi company-inf-ruby company-go company-erlang common-lisp-snippets commander clojure-mode cask-mode cargo calfw brainfuck-mode avy arch-packer angular-mode)))
+    (toggle-quotes bundler use-package sexy-monochrome-theme coffee-mode alchemist yard-mode enh-ruby-mode vmd-mode ruby-refactor ruby-test-mode vimrc-mode switch-window feature-mode gitconfig gitignore-mode zenburn-theme yari yaml-mode which-key weechat web-mode wanderlust vimish-fold toml-mode toml thrift systemd stylus-mode ssh sqlup-mode sqlplus sqlite sql-indent smarty-mode smartparens smart-mode-line sly-company slime-company slim-mode skewer-mode scss-mode sass-mode rvm ruby-tools ruby-hash-syntax ruby-dev ruby-block ruby-additional rubocop rspec-mode rsense robe rjsx-mode rinari realgud-rdb2 realgud-byebug react-snippets rbenv ranger rainbow-mode racket-mode racer quickrun pyenv-mode-auto pydoc projectile-variable projectile-speedbar projectile-rails projectile-codesearch phoenix-dark-mono-theme password-store paradox pallet org-page nyan-mode nlinum nim-mode neotree nav migemo markdown-mode magit jsx-mode json-mode js3-mode js2-refactor js2-highlight-vars js2-closure jira jenkins jekyll-modes jdee indium imenu-list imenu-anywhere ibuffer-vc ibuffer-tramp ibuffer-rcirc ibuffer-projectile ibuffer-git highlight-indentation helm-swoop helm-projectile helm-git-grep helm-ag haskell-mode google-c-style golint golden-ratio gitconfig-mode git-gutter-fringe gist ggtags flymd flycheck-rust flycheck-nim flycheck-elixir fill-column-indicator expand-region evil emmet-mode elscreen elixir-yasnippets ein dired+ d-mode ctags-update csv-mode company-web company-tern company-restclient company-quickhelp company-php company-lua company-jedi company-inf-ruby company-go common-lisp-snippets commander clojure-mode cask-mode cargo calfw brainfuck-mode avy arch-packer angular-mode)))
  '(paradox-github-token t)
  '(sml/no-confirm-load-theme 1)
  '(sml/theme (quote dark))
