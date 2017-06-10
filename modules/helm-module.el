@@ -15,7 +15,7 @@
 ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
 ;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
 ;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-;;(global-set-key (kbd "C-c C-a") 'helm-projectile-ag)
+(global-set-key (kbd "C-c C-a") 'helm-projectile-ag)
 ;; ;; When doing isearch, hand the word over to helm-swoop
 ;; (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
 ;; ;; From helm-swoop to helm-multi-swoop-all
@@ -33,5 +33,5 @@
 
 ;;(global-set-key (kbd "C-c C-c s") 'helm-multi-swoop-projectile)
 
-;;(provide 'helm-module)
+(provide 'helm-module)
 ;;; helm-module ends here
