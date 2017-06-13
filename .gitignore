@@ -22,6 +22,10 @@ themes/
 var/
 
 # Files
+.ac-comphist.dat
+places
+smex-items
+bookmarks
 session*
 emacs*
 \#*
