@@ -20,6 +20,10 @@ projectile.cache
 /.python-environments/*
 themes/
 var/
+request/
+/smex-items
+semanticdb/
+themes/
 
 # Files
 .ac-comphist.dat
@@ -36,11 +40,8 @@ ido.last
 *.swp
 /.mc-lists.el
 rake.cache
-/smex-items
-/themes/sexy-monochrome-theme.el
 *.log
 recentf
 .directory
 abbrev_defs
-semanticdb/
 tramp
