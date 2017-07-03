@@ -38,5 +38,17 @@ this section.
     :init
     (setq rinari-tags-file-name "TAGS"))
 
+;;slim-mode
+(use-package slim-mode
+    :init
+    (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode)))
+
+;; line number
+(use-package nlinum
+    :bind (("\C-cl" . nlinum-mode))
+    :init
+    (add-hook 'ruby-mode-hook 'nlinum-mode)
+    (add-hook 'enh-ruby-mode-hook 'nlinum-mode))
+
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
