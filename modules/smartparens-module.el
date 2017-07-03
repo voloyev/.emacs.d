@@ -25,7 +25,9 @@
           enh-ruby-mode-hook
           crystal-mode-hook
           slim-mode-hook
-          rust-mode-hook)
+          rust-mode-hook
+          yaml-mode-hook
+          nginx-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
