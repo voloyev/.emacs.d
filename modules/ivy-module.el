@@ -13,11 +13,11 @@
 (global-set-key (kbd "<f1> l") 'counsel-find-library)
 (global-set-key (kbd "C-<f1> i") 'counsel-info-lookup-symbol)
 (global-set-key (kbd "C-<f1> u") 'counsel-unicode-char)
-(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
+;; (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
 (global-set-key (kbd "C-c g") 'counsel-git)
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c C-a") 'counsel-projectile-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (counsel-projectile-on)
 (provide 'ivy-module)
-;;; ivy-module ends here
+;;; ivy-module.el ends here
