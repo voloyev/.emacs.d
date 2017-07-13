@@ -43,8 +43,8 @@
     (achievements-mode 1))
 
 ;; cask
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
+;; (require 'cask "~/.cask/cask.el")
+;; (cask-initialize)
 
 ;; Emacs server
 (require 'server)
@@ -248,7 +248,9 @@
     :bind(("<f12>" . neotree-projectile-action)
           ("M-<f12>" . neotree-hide))
     :config
-    (setq neo-theme  'arrow))
+    (setq neo-theme  'arrow)
+    (setq neo-smart-open t)
+    (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;;lein exec path
 (add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
