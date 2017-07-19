@@ -162,8 +162,8 @@
 (setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
 (when (file-exists-p (concat user-emacs-directory "bookmarks"))
     (bookmark-load bookmark-default-file t))
-(global-set-key (kbd "C-M-b") 'bookmark-set)
-(global-set-key (kbd "M-C-b") 'bookmark-jump)
+(global-set-key (kbd "C-c & M-b") 'bookmark-set)
+(global-set-key (kbd "C-M-b") 'bookmark-jump)
 (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
