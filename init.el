@@ -162,8 +162,8 @@
 (setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
 (when (file-exists-p (concat user-emacs-directory "bookmarks"))
     (bookmark-load bookmark-default-file t))
-(global-set-key (kbd "C-M-b") 'bookmark-set)
-(global-set-key (kbd "M-C-b") 'bookmark-jump)
+(global-set-key (kbd "C-c M-b") 'bookmark-set)
+(global-set-key (kbd "C-c & b") 'bookmark-jump)
 (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
@@ -249,8 +249,7 @@
           ("M-<f12>" . neotree-hide))
     :config
     (setq neo-theme  'arrow)
-    (setq neo-smart-open t)
-    (setq projectile-switch-project-action 'neotree-projectile-action))
+    (setq neo-smart-open t))
 
 ;;lein exec path
 (add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
@@ -298,6 +297,13 @@
     :config
     (flyspell-mode t))
 
+(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
+
+;; resize buffers
+(global-set-key (kbd "<C-up>") 'shrink-window)
+(global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

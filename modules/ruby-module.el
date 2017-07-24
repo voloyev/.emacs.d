@@ -49,6 +49,6 @@ this section.
     :init
     (add-hook 'ruby-mode-hook 'nlinum-mode)
     (add-hook 'enh-ruby-mode-hook 'nlinum-mode))
-
+(setq ruby-insert-encoding-magic-comment nil)
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
