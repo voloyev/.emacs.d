@@ -26,7 +26,7 @@
 (require 'smartparens-module)
 (require 'web-mode-module)
 (require 'yasnippet-module)
-;;(require 'helm-module)
+(require 'helm-module)
 (require 'ivy-module)
 (require 'python-module)
 (require 'highlight-indentation-mode-module)
@@ -124,7 +124,8 @@
 ;; flycheck
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  ;:init (global-flycheck-mode)
+  )
 
 ;; Markdown
 (use-package markdown-mode
@@ -217,8 +218,7 @@
 (use-package magit
     :bind("C-x g" . magit-status)
     :config
-    (global-auto-revert-mode 1)
-    (persp-mode))
+    (global-auto-revert-mode 1))
     
 ;; undo tree
 (global-undo-tree-mode t)
@@ -235,7 +235,6 @@
 ;; expand region mode
 (use-package expand-region
     :bind("C-=" . er/expand-region))
-
 
 (unless (display-graphic-p)
     (add-to-list 'default-frame-alist '(background-color . "#000000")))
@@ -304,6 +303,10 @@
 (global-set-key (kbd "<C-down>") 'enlarge-window)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+(require 'god-mode)
+(global-set-key (kbd "<ESC>") 'god-local-mode)
+(setq god-exempt-major-modes nil)
+(setq god-exempt-predicates nil)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

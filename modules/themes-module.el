@@ -5,9 +5,10 @@
 ;; themes
 (setq custom-safe-themes t)
 ;;(load-theme 'zenburn t)
+;;(enable-theme 'zenburn)
 
 (load-theme 'sexy-monochrome t)
-;;(enable-theme 'sexy-monochrome)
+(enable-theme 'sexy-monochrome)
 
 (defun cursor-active-mark-init ()
     "Change cursor color into red in mark mode."
