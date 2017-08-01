@@ -19,6 +19,7 @@ this section.
     :init
     (setq ruby-indent-level 2)
     (add-hook 'ruby-mode-hook #'rubocop-mode)
+    (add-hook 'enh-ruby-mode #'rubocop-mode)
     (setq ruby-deep-indent-paren nil))
 
 (use-package robe
@@ -30,7 +31,8 @@ this section.
 
     :bind(("C-c r a" . rvm-activate-corresponding-ruby)
           ("C-c r r" . inf-ruby)
-          ( "C-c C-c r s" . robe-start)))
+          ( "C-c C-c r s" . robe-start)
+          ("C-c & h r" . enh-ruby-mode)))
 (require 'bundler)
 
 ;; rinari

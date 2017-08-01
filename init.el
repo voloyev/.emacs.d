@@ -303,8 +303,9 @@
 (global-set-key (kbd "<C-down>") 'enlarge-window)
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+
 (require 'god-mode)
-(global-set-key (kbd "<ESC>") 'god-local-mode)
+(global-set-key (kbd "<escape>") 'god-local-mode)
 (setq god-exempt-major-modes nil)
 (setq god-exempt-predicates nil)
 ;; save customization in separate file
