@@ -264,9 +264,6 @@
 (use-package toggle-quotes
     :bind("C-'" . toggle-quotes))
 
-;; nyan-mode
-(nyan-mode 1)
-
 ;; css and sccs indent level
 (setq css-indent-offset 2)
 (setq scss-indent-offset 2)
@@ -305,11 +302,14 @@
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 
 (global-set-key (kbd "<f7>") 'project-explorer-open)
-
+;; god mode
 (require 'god-mode)
-(global-set-key (kbd "<escape>") 'god-local-mode)
+(global-set-key (kbd "<escape>") 'god-mode-all)
+(define-key god-local-mode-map (kbd "z") 'repeat)
+(define-key god-local-mode-map (kbd "i") 'god-local-mode)
 (setq god-exempt-major-modes nil)
 (setq god-exempt-predicates nil)
+(add-to-list 'god-exempt-major-modes 'dired-mode)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

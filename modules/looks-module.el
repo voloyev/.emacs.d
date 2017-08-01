@@ -23,7 +23,7 @@
 (sml/setup t)
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
-;(nyan-mode t)
+(nyan-mode t)
 ;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; toolbar and menu
