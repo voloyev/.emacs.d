@@ -304,6 +304,8 @@
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 
+(global-set-key (kbd "<f7>") 'project-explorer-open)
+
 (require 'god-mode)
 (global-set-key (kbd "<escape>") 'god-local-mode)
 (setq god-exempt-major-modes nil)
