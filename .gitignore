@@ -24,7 +24,9 @@ request/
 /smex-items
 semanticdb/
 themes/
-
+project-explorer-cache/
+persp-confs/
+backup.Cask/
 # Files
 .ac-comphist.dat
 places
