@@ -304,12 +304,24 @@
 (global-set-key (kbd "<f7>") 'project-explorer-open)
 ;; god mode
 (require 'god-mode)
-(global-set-key (kbd "<escape>") 'god-mode-all)
+(global-set-key (kbd "<escape>") 'god-local-mode)
 (define-key god-local-mode-map (kbd "z") 'repeat)
 (define-key god-local-mode-map (kbd "i") 'god-local-mode)
 (setq god-exempt-major-modes nil)
 (setq god-exempt-predicates nil)
 (add-to-list 'god-exempt-major-modes 'dired-mode)
+(add-to-list 'god-exempt-major-modes 'magit-mode)
+(add-to-list 'god-exempt-major-modes 'undo-tree-mode)
+(add-to-list 'god-exempt-major-modes 'project-explorer-mode)
+
+;; disable modes for big files
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (when (> (buffer-size) 40000)
+                (turn-off-smartparens-mode)
+                (turn-off-show-smartparens-mode)
+                (company-mode 0)
+                (flycheck-mode 0))))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
