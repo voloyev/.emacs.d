@@ -361,6 +361,7 @@
          ;; but it makes the bookmark data in repository more in sync with the file
          ;; state.
          (add-hook 'after-save-hook #'bm-buffer-save)
+         (add-hook 'bm-annotate-on-create 'bm-toggle)
 
          ;; Restoring bookmarks
          (add-hook 'find-file-hooks   #'bm-buffer-restore)
@@ -379,8 +380,8 @@
 
          :bind (("<f6>" . bm-next)
                 ("S-<f6>" . bm-previous)
-                ("C-<f6>" . bm-toggle))
-         )
+                ("C-<f6>" . bm-toggle)
+                ("C-c C-<f6>" . bm-show-all)))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
