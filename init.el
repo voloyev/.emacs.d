@@ -382,6 +382,7 @@
                 ("S-<f6>" . bm-previous)
                 ("C-<f6>" . bm-toggle)
                 ("C-c C-<f6>" . bm-show-all)))
+(dumb-jump-mode)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
