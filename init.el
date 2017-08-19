@@ -118,7 +118,10 @@
     (windmove-default-keybindings 'meta))
 
 ;; slime
-;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq slime-lisp-implementations
+      '((closure ("lein" "repl"))
+        (sbcl ("/usr/local/bin/sbcl"))))
+;; (setq inferior-lisp-program 
 ;; (setq slime-contribs '(slime-fancy))
 
 ;; flycheck
@@ -322,6 +325,8 @@
                 (company-mode 0)
                 (flycheck-mode 0))))
 
+;; visual bookmarks
+(setq bm-restore-repository-on-load t)
 (use-package bm
          :ensure t
          :demand t
@@ -329,6 +334,7 @@
          :init
          ;; restore on load (even before you require bm)
          (setq bm-restore-repository-on-load t)
+         (setq bm-buffer-restore-all t)
 
 
          :config
@@ -345,7 +351,7 @@
          (add-hook 'after-init-hook 'bm-repository-load)
 
          ;; Restoring bookmarks when on file find.
-         (add-hook 'find-file-hooks 'bm-buffer-restore)
+         (add-hook 'find-file-hooks 'bm-buffer-restore-all)
 
          ;; Saving bookmarks
          (add-hook 'kill-buffer-hook #'bm-buffer-save)
