@@ -121,8 +121,7 @@
 (setq slime-lisp-implementations
       '((closure ("lein" "repl"))
         (sbcl ("/usr/local/bin/sbcl"))))
-;; (setq inferior-lisp-program 
-;; (setq slime-contribs '(slime-fancy))
+(setq slime-contribs '(slime-fancy))
 
 ;; flycheck
 (use-package flycheck
