@@ -126,8 +126,8 @@
 ;; flycheck
 (use-package flycheck
   :ensure t
-  ;:init (global-flycheck-mode)
-  )
+  :init
+  (global-flycheck-mode))
 
 ;; Markdown
 (use-package markdown-mode
@@ -321,8 +321,7 @@
             (when (> (buffer-size) 40000)
                 (turn-off-smartparens-mode)
                 (turn-off-show-smartparens-mode)
-                (company-mode 0)
-                (flycheck-mode 0))))
+                (company-mode 0))))
 
 ;; visual bookmarks
 (setq bm-restore-repository-on-load t)

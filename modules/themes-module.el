@@ -4,11 +4,11 @@
 ;;; cursor-active-mark-init doing this
 ;; themes
 (setq custom-safe-themes t)
-;;(load-theme 'zenburn t)
-;;(enable-theme 'zenburn)
+(load-theme 'zenburn t)
+(enable-theme 'zenburn)
 
-(load-theme 'sexy-monochrome t)
-(enable-theme 'sexy-monochrome)
+;;(load-theme 'sexy-monochrome t)
+;;(enable-theme 'sexy-monochrome)
 
 (defun cursor-active-mark-init ()
     "Change cursor color into red in mark mode."
