@@ -26,7 +26,7 @@
 (require 'smartparens-module)
 (require 'web-mode-module)
 (require 'yasnippet-module)
-;;(require 'helm-module)
+(require 'helm-module)
 (require 'ivy-module)
 (require 'python-module)
 (require 'highlight-indentation-mode-module)
@@ -118,13 +118,16 @@
     (windmove-default-keybindings 'meta))
 
 ;; slime
-;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
-;; (setq slime-contribs '(slime-fancy))
+(setq slime-lisp-implementations
+      '((closure ("lein" "repl"))
+        (sbcl ("/usr/local/bin/sbcl"))))
+(setq slime-contribs '(slime-fancy))
 
 ;; flycheck
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init
+  (global-flycheck-mode))
 
 ;; Markdown
 (use-package markdown-mode
@@ -162,8 +165,8 @@
 (setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
 (when (file-exists-p (concat user-emacs-directory "bookmarks"))
     (bookmark-load bookmark-default-file t))
-(global-set-key (kbd "C-M-b") 'bookmark-set)
-(global-set-key (kbd "M-C-b") 'bookmark-jump)
+(global-set-key (kbd "C-c M-b") 'bookmark-set)
+(global-set-key (kbd "C-c & b") 'bookmark-jump)
 (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
 (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
 
@@ -176,8 +179,7 @@
 (use-package org-install
     :init
     (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-    (setq org-agenda-files (list "~/Mega/TODO/become_programer.org"
-                             "~/Mega/must_notes.org"))
+    (setq org-agenda-files (list "~/Documents/todo.org"))
     (add-hook 'org-mode-hook 'toggle-truncate-lines)
     (setq org-src-fontify-natively nil)
     (defface org-block
@@ -193,7 +195,7 @@
 (global-set-key (kbd "C-c <f5>") 'whitespace-cleanup)
 
 ;; evil modes
-(global-set-key (kbd "<f6>") 'evil-mode)
+;;(global-set-key (kbd "<f6>") 'evil-mode)
 
 ;; emmet mode
 (add-hook 'web-mode-hook 'emmet-mode)
@@ -217,8 +219,7 @@
 (use-package magit
     :bind("C-x g" . magit-status)
     :config
-    (global-auto-revert-mode 1)
-    (persp-mode))
+    (global-auto-revert-mode 1))
     
 ;; undo tree
 (global-undo-tree-mode t)
@@ -236,7 +237,6 @@
 (use-package expand-region
     :bind("C-=" . er/expand-region))
 
-
 (unless (display-graphic-p)
     (add-to-list 'default-frame-alist '(background-color . "#000000")))
 
@@ -249,8 +249,7 @@
           ("M-<f12>" . neotree-hide))
     :config
     (setq neo-theme  'arrow)
-    (setq neo-smart-open t)
-    (setq projectile-switch-project-action 'neotree-projectile-action))
+    (setq neo-smart-open t))
 
 ;;lein exec path
 (add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
@@ -265,9 +264,6 @@
 ;; toggle quotes
 (use-package toggle-quotes
     :bind("C-'" . toggle-quotes))
-
-;; nyan-mode
-(nyan-mode 1)
 
 ;; css and sccs indent level
 (setq css-indent-offset 2)
@@ -298,6 +294,143 @@
     :config
     (flyspell-mode t))
 
+(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
+
+;; resize buffers
+(global-set-key (kbd "<C-up>") 'shrink-window)
+(global-set-key (kbd "<C-down>") 'enlarge-window)
+(global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
+
+(global-set-key (kbd "<f7>") 'project-explorer-open)
+;; god mode
+(require 'god-mode)
+(global-set-key (kbd "<escape>") 'god-local-mode)
+(define-key god-local-mode-map (kbd "z") 'repeat)
+(define-key god-local-mode-map (kbd "i") 'god-local-mode)
+(setq god-exempt-major-modes nil)
+(setq god-exempt-predicates nil)
+(add-to-list 'god-exempt-major-modes 'dired-mode)
+(add-to-list 'god-exempt-major-modes 'magit-mode)
+(add-to-list 'god-exempt-major-modes 'undo-tree-mode)
+(add-to-list 'god-exempt-major-modes 'project-explorer-mode)
+
+;; disable modes for big files
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (when (> (buffer-size) 40000)
+                (turn-off-smartparens-mode)
+                (turn-off-show-smartparens-mode)
+                (company-mode 0))))
+
+;; visual bookmarks
+(setq bm-restore-repository-on-load t)
+(use-package bm
+         :ensure t
+         :demand t
+
+         :init
+         ;; restore on load (even before you require bm)
+         (setq bm-restore-repository-on-load t)
+         (setq bm-buffer-restore-all t)
+
+
+         :config
+         ;; Allow cross-buffer 'next'
+         (setq bm-cycle-all-buffers t)
+
+         ;; where to store persistant files
+         (setq bm-repository-file "~/.emacs.d/bm-repository")
+
+         ;; save bookmarks
+         (setq-default bm-buffer-persistence t)
+
+         ;; Loading the repository from file when on start up.
+         (add-hook 'after-init-hook 'bm-repository-load)
+
+         ;; Restoring bookmarks when on file find.
+         (add-hook 'find-file-hooks 'bm-buffer-restore-all)
+
+         ;; Saving bookmarks
+         (add-hook 'kill-buffer-hook #'bm-buffer-save)
+
+         ;; Saving the repository to file when on exit.
+         ;; kill-buffer-hook is not called when Emacs is killed, so we
+         ;; must save all bookmarks first.
+         (add-hook 'kill-emacs-hook #'(lambda nil
+                                          (bm-buffer-save-all)
+                                          (bm-repository-save)))
+
+         ;; The `after-save-hook' is not necessary to use to achieve persistence,
+         ;; but it makes the bookmark data in repository more in sync with the file
+         ;; state.
+         (add-hook 'after-save-hook #'bm-buffer-save)
+         (add-hook 'bm-annotate-on-create 'bm-toggle)
+
+         ;; Restoring bookmarks
+         (add-hook 'find-file-hooks   #'bm-buffer-restore)
+         (add-hook 'after-revert-hook #'bm-buffer-restore)
+
+         ;; The `after-revert-hook' is not necessary to use to achieve persistence,
+         ;; but it makes the bookmark data in repository more in sync with the file
+         ;; state. This hook might cause trouble when using packages
+         ;; that automatically reverts the buffer (like vc after a check-in).
+         ;; This can easily be avoided if the package provides a hook that is
+         ;; called before the buffer is reverted (like `vc-before-checkin-hook').
+         ;; Then new bookmarks can be saved before the buffer is reverted.
+         ;; Make sure bookmarks is saved before check-in (and revert-buffer)
+         (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
+
+
+         :bind (("<f6>" . bm-next)
+                ("S-<f6>" . bm-previous)
+                ("C-<f6>" . bm-toggle)
+                ("C-c C-<f6>" . bm-show-all)))
+(dumb-jump-mode)
+
+;; dashboard
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+;; Or if you use use-package
+(use-package dashboard
+  :config
+    (dashboard-setup-startup-hook)
+    (add-to-list 'dashboard-items '(agenda) t)
+    (setq dashboard-items '((recents  . 5)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5))))
+
+(use-package ztree
+    :bind (("C-c C-c z" . ztree-dir)))
+
+;; beacon
+(beacon-mode 1)
+
+;; fiplr
+(setq fiplr-root-markers '(".git" ".svn"))
+(setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+
+(use-package parinfer
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+            pretty-parens  ; different paren styles for different modes.
+            paredit        ; Introduce some paredit commands.
+            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+            smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)
+    (add-hook 'racket-mode-hook #'parinfer-mode)))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

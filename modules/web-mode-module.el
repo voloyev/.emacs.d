@@ -22,5 +22,6 @@
 ;;snippets fo autoclose tags
 (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
+(setq web-mode-enable-auto-indentation nil)
 (provide 'web-mode-module)
 ;;; web-mode-module ends here

@@ -2,7 +2,7 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts
-(set-face-attribute 'default nil :font "Source Code Pro 10" )
+(set-face-attribute 'default nil :font "Source Code Pro 10")
 (set-frame-font "Source Code Pro 10")
 
 ;; Disable backup/autosave files
@@ -23,7 +23,7 @@
 (sml/setup t)
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
-;(nyan-mode t)
+(nyan-mode t)
 ;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; toolbar and menu
@@ -75,7 +75,7 @@
 (defun my-gfm-mode-hook ()
     (visual-line-mode 1))
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
-
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
 
