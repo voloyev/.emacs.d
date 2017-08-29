@@ -49,6 +49,9 @@ this section.
     :init
     (add-hook 'ruby-mode-hook 'nlinum-mode)
     (add-hook 'enh-ruby-mode-hook 'nlinum-mode))
+(use-package ruby-refactor
+    :config
+    ((add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)))
 (setq ruby-insert-encoding-magic-comment nil)
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
