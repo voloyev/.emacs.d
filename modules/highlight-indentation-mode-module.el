@@ -6,8 +6,8 @@
 ;;(provide 'init)
 ;;add highlight ingentation
 (global-set-key(kbd "<f9>") 'highlight-indentation-current-column-mode)
-(set-face-background 'highlight-indentation-face "dark grey")
-(set-face-background 'highlight-indentation-current-column-face "grey20")
+(set-face-background 'highlight-indentation-face "grey9")
+(set-face-background 'highlight-indentation-current-column-face "grey9")
 ;;hooks ;)
 ;;; hooks for highlightion
 (add-hook 'ruby-mode-hook 'highlight-indentation-current-column-mode)

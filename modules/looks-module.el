@@ -75,7 +75,7 @@
 (defun my-gfm-mode-hook ()
     (visual-line-mode 1))
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
-
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
 

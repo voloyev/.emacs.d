@@ -387,6 +387,50 @@
                 ("C-<f6>" . bm-toggle)
                 ("C-c C-<f6>" . bm-show-all)))
 (dumb-jump-mode)
+
+;; dashboard
+(require 'dashboard)
+(dashboard-setup-startup-hook)
+;; Or if you use use-package
+(use-package dashboard
+  :config
+    (dashboard-setup-startup-hook)
+    (add-to-list 'dashboard-items '(agenda) t)
+    (setq dashboard-items '((recents  . 5)
+                        (bookmarks . 5)
+                        (projects . 5)
+                        (agenda . 5))))
+
+(use-package ztree
+    :bind (("C-c C-c z" . ztree-dir)))
+
+;; beacon
+(beacon-mode 1)
+
+;; fiplr
+(setq fiplr-root-markers '(".git" ".svn"))
+(setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+
+(use-package parinfer
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+            pretty-parens  ; different paren styles for different modes.
+            paredit        ; Introduce some paredit commands.
+            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+            smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)
+    (add-hook 'racket-mode-hook #'parinfer-mode)))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

@@ -18,8 +18,6 @@ this section.
 (use-package ruby-tools
     :init
     (setq ruby-indent-level 2)
-    (add-hook 'ruby-mode-hook #'rubocop-mode)
-    (add-hook 'enh-ruby-mode #'rubocop-mode)
     (setq ruby-deep-indent-paren nil))
 
 (use-package robe
