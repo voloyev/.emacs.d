@@ -304,133 +304,136 @@
 
 (global-set-key (kbd "<f7>") 'project-explorer-open)
 ;; god mode
-(require 'god-mode)
-(global-set-key (kbd "<escape>") 'god-local-mode)
-(define-key god-local-mode-map (kbd "z") 'repeat)
-(define-key god-local-mode-map (kbd "i") 'god-local-mode)
-(setq god-exempt-major-modes nil)
-(setq god-exempt-predicates nil)
-(add-to-list 'god-exempt-major-modes 'dired-mode)
-(add-to-list 'god-exempt-major-modes 'magit-mode)
-(add-to-list 'god-exempt-major-modes 'undo-tree-mode)
-(add-to-list 'god-exempt-major-modes 'project-explorer-mode)
-
-;; disable modes for big files
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (when (> (buffer-size) 40000)
-                (turn-off-smartparens-mode)
-                (turn-off-show-smartparens-mode)
-                (company-mode 0))))
+(use-package god-mode
+    :config
+    (global-set-key (kbd "<escape>") 'god-local-mode)
+    (define-key god-local-mode-map (kbd "z") 'repeat)
+    (define-key god-local-mode-map (kbd "i") 'god-local-mode)
+    (setq god-exempt-major-modes nil)
+    (setq god-exempt-predicates nil)
+    (add-to-list 'god-exempt-major-modes 'dired-mode)
+    (add-to-list 'god-exempt-major-modes 'magit-mode)
+    (add-to-list 'god-exempt-major-modes 'undo-tree-mode)
+    (add-to-list 'god-exempt-major-modes 'project-explorer-mode))
 
 ;; visual bookmarks
-(setq bm-restore-repository-on-load t)
 (use-package bm
-         :ensure t
-         :demand t
+    :ensure t
+    :demand t
 
-         :init
-         ;; restore on load (even before you require bm)
-         (setq bm-restore-repository-on-load t)
-         (setq bm-buffer-restore-all t)
+    :init
+    ;; restore on load (even before you require bm)
+    (setq bm-restore-repository-on-load t)
+    (setq bm-buffer-restore-all t)
 
+    :config
+    ;; Allow cross-buffer 'next'
+    (setq bm-cycle-all-buffers t)
 
-         :config
-         ;; Allow cross-buffer 'next'
-         (setq bm-cycle-all-buffers t)
+    ;; where to store persistant files
+    (setq bm-repository-file "~/.emacs.d/bm-repository")
 
-         ;; where to store persistant files
-         (setq bm-repository-file "~/.emacs.d/bm-repository")
+    ;; save bookmarks
+    (setq-default bm-buffer-persistence t)
 
-         ;; save bookmarks
-         (setq-default bm-buffer-persistence t)
+    ;; Loading the repository from file when on start up.
+    (add-hook 'after-init-hook 'bm-repository-load)
 
-         ;; Loading the repository from file when on start up.
-         (add-hook 'after-init-hook 'bm-repository-load)
+    ;; Restoring bookmarks when on file find.
+    (add-hook 'find-file-hooks 'bm-buffer-restore-all)
 
-         ;; Restoring bookmarks when on file find.
-         (add-hook 'find-file-hooks 'bm-buffer-restore-all)
+    ;; Saving bookmarks
+    (add-hook 'kill-buffer-hook #'bm-buffer-save)
 
-         ;; Saving bookmarks
-         (add-hook 'kill-buffer-hook #'bm-buffer-save)
+    ;; Saving the repository to file when on exit.
+    ;; kill-buffer-hook is not called when Emacs is killed, so we
+    ;; must save all bookmarks first.
+    (add-hook 'kill-emacs-hook #'(lambda nil
+                                     (bm-buffer-save-all)
+                                     (bm-repository-save)))
 
-         ;; Saving the repository to file when on exit.
-         ;; kill-buffer-hook is not called when Emacs is killed, so we
-         ;; must save all bookmarks first.
-         (add-hook 'kill-emacs-hook #'(lambda nil
-                                          (bm-buffer-save-all)
-                                          (bm-repository-save)))
+    ;; The `after-save-hook' is not necessary to use to achieve persistence,
+    ;; but it makes the bookmark data in repository more in sync with the file
+    ;; state.
+    (add-hook 'after-save-hook #'bm-buffer-save)
+    (add-hook 'bm-annotate-on-create 'bm-toggle)
 
-         ;; The `after-save-hook' is not necessary to use to achieve persistence,
-         ;; but it makes the bookmark data in repository more in sync with the file
-         ;; state.
-         (add-hook 'after-save-hook #'bm-buffer-save)
-         (add-hook 'bm-annotate-on-create 'bm-toggle)
+    ;; Restoring bookmarks
+    (add-hook 'find-file-hooks   #'bm-buffer-restore)
+    (add-hook 'after-revert-hook #'bm-buffer-restore)
 
-         ;; Restoring bookmarks
-         (add-hook 'find-file-hooks   #'bm-buffer-restore)
-         (add-hook 'after-revert-hook #'bm-buffer-restore)
+    ;; The `after-revert-hook' is not necessary to use to achieve persistence,
+    ;; but it makes the bookmark data in repository more in sync with the file
+    ;; state. This hook might cause trouble when using packages
+    ;; that automatically reverts the buffer (like vc after a check-in).
+    ;; This can easily be avoided if the package provides a hook that is
+    ;; called before the buffer is reverted (like `vc-before-checkin-hook').
+    ;; Then new bookmarks can be saved before the buffer is reverted.
+    ;; Make sure bookmarks is saved before check-in (and revert-buffer)
+    (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
+    :bind (("<f6>" . bm-next)
+           ("S-<f6>" . bm-previous)
+           ("C-<f6>" . bm-toggle)
+           ("C-c C-<f6>" . bm-show-all)))
 
-         ;; The `after-revert-hook' is not necessary to use to achieve persistence,
-         ;; but it makes the bookmark data in repository more in sync with the file
-         ;; state. This hook might cause trouble when using packages
-         ;; that automatically reverts the buffer (like vc after a check-in).
-         ;; This can easily be avoided if the package provides a hook that is
-         ;; called before the buffer is reverted (like `vc-before-checkin-hook').
-         ;; Then new bookmarks can be saved before the buffer is reverted.
-         ;; Make sure bookmarks is saved before check-in (and revert-buffer)
-         (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
-
-
-         :bind (("<f6>" . bm-next)
-                ("S-<f6>" . bm-previous)
-                ("C-<f6>" . bm-toggle)
-                ("C-c C-<f6>" . bm-show-all)))
-(dumb-jump-mode)
+(use-package dump-jump-mode
+    :config
+    (dumb-jump-mode 1))
 
 ;; dashboard
-(require 'dashboard)
-(dashboard-setup-startup-hook)
-;; Or if you use use-package
 (use-package dashboard
   :config
     (dashboard-setup-startup-hook)
     (add-to-list 'dashboard-items '(agenda) t)
-    (setq dashboard-items '((recents  . 5)
+    (setq dashboard-items '((recents  . 5))
                         (bookmarks . 5)
                         (projects . 5)
-                        (agenda . 5))))
+                        (agenda . 5)))
 
 (use-package ztree
     :bind (("C-c C-c z" . ztree-dir)))
 
 ;; beacon
-(beacon-mode 1)
+(use-package beacon
+    :config
+    (beacon-mode 1))
 
 ;; fiplr
-(setq fiplr-root-markers '(".git" ".svn"))
-(setq fiplr-ignored-globs '((directories (".git" ".svn"))
-                            (files ("*.jpg" "*.png" "*.zip" "*~"))))
-(global-set-key (kbd "C-x f") 'fiplr-find-file)
+(use-package fiplr
+    :config
+    (setq fiplr-root-markers '(".git" ".svn"))
+    (setq fiplr-ignored-globs '((directories (".git" ".svn"))
+                                (files ("*.jpg" "*.png" "*.zip" "*~"))))
+    :bind
+    (("C-x f" . fiplr-find-file)))
 
 (use-package parinfer
-  :ensure t
-  :bind
-  (("C-," . parinfer-toggle-mode))
-  :init
-  (progn
-    (setq parinfer-extensions
-          '(defaults       ; should be included.
-            pretty-parens  ; different paren styles for different modes.
-            paredit        ; Introduce some paredit commands.
-            smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-            smart-yank))   ; Yank behavior depend on mode.
-    (add-hook 'clojure-mode-hook #'parinfer-mode)
-    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-    (add-hook 'scheme-mode-hook #'parinfer-mode)
-    (add-hook 'lisp-mode-hook #'parinfer-mode)
-    (add-hook 'racket-mode-hook #'parinfer-mode)))
+    :ensure t
+    :bind
+    (("C-," . parinfer-toggle-mode))
+    :init
+    (progn
+        (setq parinfer-extensions
+              '(defaults       ; should be included.
+                pretty-parens  ; different paren styles for different modes.
+                paredit        ; Introduce some paredit commands.
+                smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+                smart-yank))   ; Yank behavior depend on mode.
+        (add-hook 'clojure-mode-hook #'parinfer-mode)
+        (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+        (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+        (add-hook 'scheme-mode-hook #'parinfer-mode)
+        (add-hook 'lisp-mode-hook #'parinfer-mode)
+        (add-hook 'racket-mode-hook #'parinfer-mode)))
+
+(use-package hyde)
+;; disable modes for big files
+(add-hook 'prog-mode-hook
+          (lambda ()
+              (when (> (buffer-size) 40000)
+                  (turn-off-smartparens-mode)
+                  (turn-off-show-smartparens-mode)
+                  (company-mode 0))))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
