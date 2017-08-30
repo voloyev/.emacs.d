@@ -377,8 +377,8 @@
            ("C-c C-<f6>" . bm-show-all)))
 
 (use-package dump-jump-mode
-    :config
-    (dumb-jump-mode 1))
+    :init
+    (dumb-jump-mode))
 
 ;; dashboard
 (use-package dashboard
