@@ -396,7 +396,9 @@
 ;; beacon
 (use-package beacon
     :config
-    (beacon-mode 1))
+    (beacon-mode 1)
+    :bind
+    (("C-c C-c C-c" . beacon-blink)))
 
 ;; fiplr
 (use-package fiplr
