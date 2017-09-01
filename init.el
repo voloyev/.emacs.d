@@ -428,7 +428,9 @@
         (add-hook 'lisp-mode-hook #'parinfer-mode)
         (add-hook 'racket-mode-hook #'parinfer-mode)))
 
+;; hyde
 (use-package hyde)
+
 ;; disable modes for big files
 (add-hook 'prog-mode-hook
           (lambda ()
