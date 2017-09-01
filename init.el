@@ -389,7 +389,7 @@
                             (bookmarks . 5)
                             (projects . 5)
                             (agenda . 5))))
-
+;;ztree
 (use-package ztree
     :bind (("C-c C-c z" . ztree-dir)))
 
