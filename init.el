@@ -118,10 +118,10 @@
     (windmove-default-keybindings 'meta))
 
 ;; slime
-(setq slime-lisp-implementations
-      '((closure ("lein" "repl"))
-        (sbcl ("/usr/local/bin/sbcl"))))
-(setq slime-contribs '(slime-fancy))
+;;; (setq slime-lisp-implementations
+;;       '((closure ("lein" "repl"))
+;;         (sbcl ("/usr/local/bin/sbcl")))))
+;; (setq slime-contribs '(slime-fancy))
 
 ;; flycheck
 (use-package flycheck
@@ -388,7 +388,9 @@
     (setq dashboard-items '((recents  . 5)
                             (bookmarks . 5)
                             (projects . 5)
-                            (agenda . 5))))
+                            (agenda . 5)))
+    (setq dashboard-banner-logo-title "Double check everything. Remember about backward compatibility. Check nil, empty params"))
+
 ;;ztree
 (use-package ztree
     :bind (("C-c C-c z" . ztree-dir)))

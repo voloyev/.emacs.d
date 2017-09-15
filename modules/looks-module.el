@@ -58,6 +58,7 @@
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
 (setq tab-width                  4)
+(setq-default tab-width          2)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
 (custom-set-variables '(coffee-tab-width 2))
