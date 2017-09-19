@@ -378,9 +378,13 @@
            ("C-<f6>" . bm-toggle)
            ("C-c C-<f6>" . bm-show-all)))
 
-(use-package dump-jump-mode
+(use-package dump-jump
     :init
-    (dumb-jump-mode))
+    (dumb-jump-mode)
+    :config
+    (setq dumb-jump-selector 'ivy)
+    :ensure)
+    
 
 ;; dashboard
 (use-package dashboard
@@ -391,7 +395,8 @@
                             (bookmarks . 5)
                             (projects . 5)
                             (agenda . 5)))
-    (setq dashboard-banner-logo-title "Double check everything. Remember about backward compatibility. Check nil, empty params"))
+    (setq dashboard-banner-logo-title "Double check everything. Remember about backward compatibility. Check nil, empty params")
+    :ensure)
 
 ;;ztree
 (use-package ztree
@@ -406,6 +411,7 @@
 
 ;; fiplr
 (use-package fiplr
+    :ensure
     :config
     (setq fiplr-root-markers '(".git" ".svn"))
     (setq fiplr-ignored-globs '((directories (".git" ".svn"))
