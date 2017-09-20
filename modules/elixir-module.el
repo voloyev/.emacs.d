@@ -13,10 +13,5 @@
 (setq alchemist-compile-command "/usr/bin/elixirc") ;; default: elixirc
 (setq alchemist-hooks-compile-on-save t)
 
-;; line number
-(use-package nlinum
-    :bind (("\C-cl" . nlinum-mode))
-    :init
-    (add-hook 'elixir-mode-hook 'nlinum-mode))
 (provide 'elixir-module)
 ;;; elixir-module.el ends here

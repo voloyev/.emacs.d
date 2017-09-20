@@ -11,10 +11,5 @@
 (add-to-list 'interpreter-mode-alist '("crystal" . crystal-mode))
 (require 'flycheck-crystal)
 (add-hook 'crystal-mode-hook 'flycheck-mode)
-
-(use-package nlinum
-    :bind (("\C-cl" . nlinum-mode))
-    :init
-    (add-hook 'crystal-mode-hook 'nlinum-mode))
 (provide 'crystal-module)
 ;;; crystal-module.el ends here

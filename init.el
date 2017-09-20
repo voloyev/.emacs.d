@@ -139,13 +139,14 @@
 
 ;; line number
 (use-package nlinum
-    :bind (("\C-cl" . nlinum-mode))
+    :bind (("C-c C-l" . nlinum-mode)))
+    "if you realy want you can add hooks here
     :init
-    (add-hook 'lisp-mode-hook 'nlinum-mode)
-    (add-hook 'c-mode-hook 'nlinum-mode)
-    (add-hook 'java-mode-hook 'nlinum-mode)
-    (add-hook 'web-mode-hook 'nlinum-mode)
-    (add-hook 'emacs-lisp-mode-hook 'nlinum-mode))
+    ;; (add-hook 'lisp-mode-hook 'nlinum-mode)
+    ;; (add-hook 'c-mode-hook 'nlinum-mode)
+    ;; (add-hook 'java-mode-hook 'nlinum-mode)
+    ;; (add-hook 'web-mode-hook 'nlinum-mode)
+    ;; (add-hook 'emacs-lisp-mode-hook 'nlinum-mode))"
 
 ;; gutter
 (use-package git-gutter-fringe

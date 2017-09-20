@@ -15,10 +15,5 @@
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
     (add-hook 'racer-mode-hook #'company-mode))
 
-;; line number
-(use-package nlinum
-    :bind (("\C-cl" . nlinum-mode))
-    :init
-    (add-hook 'rust-mode-hook 'nlinum-mode))
 (provide 'rust-module)
 ;;; rust-module.el ends here
