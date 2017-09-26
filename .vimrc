@@ -15,26 +15,15 @@ Plugin 'L9'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"YCM
-Plugin 'Valloric/YouCompleteMe'
-"zenburn
-"Plugin 'jnurmine/Zenburn'
-"vim-monochrome
 Plugin 'fxn/vim-monochrome'
-"NERDtree
 Plugin 'scrooloose/nerdtree'
-"supertab
 Plugin 'ervandew/supertab'
-"Tagbar
 Plugin 'majutsushi/tagbar'
-"Rust vim
 Plugin 'rust-lang/rust.vim'
-"multicursor
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-markdown'
 Plugin 'townk/vim-autoclose'
-Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -47,6 +36,12 @@ Plugin 'stephpy/vim-yaml'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'python-mode/python-mode'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'mileszs/ack.vim'
+Plugin 'andreimaxim/vim-io'
+Plugin 'rhysd/vim-crystal'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -56,7 +51,7 @@ set mouse=a
 set number
 set guioptions-=m
 set incsearch
-"set background=dark
+set background=dark
 colorscheme monochrome
 nmap <F3> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
@@ -73,3 +68,35 @@ set shortmess+=c
 set shell=/bin/bash
 :set guioptions-=r  "remove right-hand scroll bar
 :set guioptions-=L  "remove left-hand scroll bar
+"80 columns
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+let &colorcolumn="80,".join(range(120,999),",")
+"setup backups
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+set cursorline
+set guioptions-=T "remove menu bar
+
+hi cursorline cterm=none ctermbg=235 ctermfg=white guibg=darkred guifg=white
+"set nocursorline
+
+"change cursor shape
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+"indent guide
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size=1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=235   ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=235   ctermbg=235
+
