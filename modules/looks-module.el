@@ -2,8 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts
-(set-face-attribute 'default nil :font "Source Code Pro 10")
-(set-frame-font "Source Code Pro 10")
+(set-face-attribute 'default nil :font "Hack 10")
+(set-frame-font "Hack 10")
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
@@ -24,6 +24,7 @@
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
 (nyan-mode t)
+(setq nyan-animate-nyancat t)
 ;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; toolbar and menu
@@ -79,6 +80,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
+(fci-mode 1)
+(setq fci-rule-width 3)
 
 (provide 'looks-module)
 ;;; looks-module ends here
