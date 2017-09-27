@@ -45,7 +45,7 @@ this section.
 
 (use-package ruby-refactor
     :config
-    ((add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch)))
+    (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
 
 (setq ruby-insert-encoding-magic-comment nil)
 (provide 'ruby-module)
