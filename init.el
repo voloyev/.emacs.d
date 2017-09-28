@@ -162,14 +162,15 @@
 " | C-M-. | pop-tag-mark     | Jumps back                 |"
 
 ;; Bookmark settings
-(require 'bookmark)
-(setq bookmark-save-flag t) ;; автоматически сохранять закладки в файл
-(when (file-exists-p (concat user-emacs-directory "bookmarks"))
-    (bookmark-load bookmark-default-file t))
-(global-set-key (kbd "C-c M-b") 'bookmark-set)
-(global-set-key (kbd "C-c & b") 'bookmark-jump)
-(global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
-(setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
+(use-package bookmark
+    :init
+    (setq bookmark-save-flag t)
+    (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
+    (when (file-exists-p (concat user-emacs-directory "bookmarks"))
+        (bookmark-load bookmark-default-file t))
+    :bind(("C-c & M-b" . bookmark-set)
+          ("C-c & b" . bookmark-jump)
+          ("<f4>" . bookmark-bmenu-list)))
 
 ;; whichkey
 (use-package which-key
@@ -192,30 +193,35 @@
           ("\C-cb" . org-iswitchb)))
 
 ;;whitespace
-(require 'whitespace)
-(global-set-key (kbd "<f5>") 'whitespace-mode)
-(global-set-key (kbd "C-c <f5>") 'whitespace-cleanup)
-(set-face-attribute 'whitespace-space nil
+(use-package whitespace
+    :init
+    (setq whitespace-line-column 250)
+    (setq whitespace-display-mappings
+          '((space-mark 32 [183] [46])
+            (newline-mark 10 [8629 10])
+            (tab-mark 9 [9655 9] [92 9])))
+    :config
+    (set-face-attribute 'whitespace-space nil
                     :background nil
                     :foreground "gray30")
-(set-face-attribute 'whitespace-newline
+    (set-face-attribute 'whitespace-newline
                     nil :background nil
                     :foreground "gray30")
-(setq whitespace-line-column 250)
-(setq whitespace-display-mappings '(
-                                    (space-mark 32 [183] [46])
-                                    (newline-mark 10 [8629 10])
-                                    (tab-mark 9 [9655 9] [92 9])))
+    :bind(("<f5>" . whitespace-mode)
+          ("C-c <f5>" . whitespace-cleanup)))
+ 
 ;; evil modes
 ;;(global-set-key (kbd "<f6>") 'evil-mode)
 
 ;; emmet mode
-(add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook  'emmet-mode)
+(use-package emmet-mode
+    :config
+    (add-hook 'web-mode-hook 'emmet-mode)
+    (add-hook 'css-mode-hook  'emmet-mode))
 
 ;; calendar app
-(require 'calfw)
-(require 'calfw-org)
+(use-package calfw)
+(use-package calfw-org)
 
 ;;(put 'upcase-region 'disabled nil)
 
@@ -319,16 +325,18 @@
 (global-set-key (kbd "<f7>") 'project-explorer-open)
 ;; god mode
 (use-package god-mode
-    :config
-    (global-set-key (kbd "<escape>") 'god-local-mode)
-    (define-key god-local-mode-map (kbd "z") 'repeat)
-    (define-key god-local-mode-map (kbd "i") 'god-local-mode)
+    :init
     (setq god-exempt-major-modes nil)
     (setq god-exempt-predicates nil)
+    :config
     (add-to-list 'god-exempt-major-modes 'dired-mode)
     (add-to-list 'god-exempt-major-modes 'magit-mode)
     (add-to-list 'god-exempt-major-modes 'undo-tree-mode)
     (add-to-list 'god-exempt-major-modes 'project-explorer-mode))
+;; bindings
+(global-set-key (kbd "<escape>") 'god-local-mode)
+(define-key god-local-mode-map (kbd "z") 'repeat)
+(define-key god-local-mode-map (kbd "i") 'god-local-mode)
 
 (defun my-update-cursor ()
     (setq cursor-type (if
