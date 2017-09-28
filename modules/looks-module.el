@@ -2,8 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts
-(set-face-attribute 'default nil :font "Hack 10")
-(set-frame-font "Hack 10")
+(set-face-attribute 'default nil :font "Hack 9")
+(set-frame-font "Hack 9")
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
