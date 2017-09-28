@@ -192,16 +192,20 @@
           ("\C-cb" . org-iswitchb)))
 
 ;;whitespace
+(require 'whitespace)
 (global-set-key (kbd "<f5>") 'whitespace-mode)
 (global-set-key (kbd "C-c <f5>") 'whitespace-cleanup)
-(set-face-attribute 'whitespace-space nil :background nil :foreground "gray30")
-(set-face-attribute 'whitespace-newline nil :background nil :foreground "gray30")
+(set-face-attribute 'whitespace-space nil
+                    :background nil
+                    :foreground "gray30")
+(set-face-attribute 'whitespace-newline
+                    nil :background nil
+                    :foreground "gray30")
 (setq whitespace-line-column 250)
 (setq whitespace-display-mappings '(
                                     (space-mark 32 [183] [46])
                                     (newline-mark 10 [8629 10])
-                                    (tab-mark 9 [9655 9] [92 9])
-                                    ))
+                                    (tab-mark 9 [9655 9] [92 9])))
 ;; evil modes
 ;;(global-set-key (kbd "<f6>") 'evil-mode)
 
