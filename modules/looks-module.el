@@ -63,6 +63,7 @@
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
 (custom-set-variables '(coffee-tab-width 2))
+(custom-set-variables '(js2-basic-offset 2))
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
