@@ -481,6 +481,15 @@
                   (turn-off-smartparens-mode)
                   (turn-off-show-smartparens-mode)
                   (company-mode 0))))
+
+(use-package nlinum-relative
+    :config
+    ;; something else you want
+    ;;    (nlinum-relative-setup-evil)
+    (setq nlinum-relative-current-symbol "")
+    (setq nlinum-relative-redisplay-delay 0)
+    (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
