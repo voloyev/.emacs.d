@@ -489,7 +489,7 @@
     (setq nlinum-relative-current-symbol "")
     (setq nlinum-relative-redisplay-delay 0)
     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
-
+(global-set-key (kbd "C-c C-p") #'ivy-imenu-anywhere)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
