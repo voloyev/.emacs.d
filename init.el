@@ -490,6 +490,8 @@
     (setq nlinum-relative-redisplay-delay 0)
     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 (global-set-key (kbd "C-c C-p") #'ivy-imenu-anywhere)
+(global-set-key (kbd "C-c C-c l") 'imenu-list)
+
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
