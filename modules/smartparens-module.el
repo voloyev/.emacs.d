@@ -9,6 +9,7 @@
 
 (--each '(restclient-mode-hook
           js-mode-hook
+          js2-mode-hook
           python-mode-hook
           web-mode-hook
           ruby-mode-hook
@@ -25,9 +26,11 @@
           enh-ruby-mode-hook
           crystal-mode-hook
           slim-mode-hook
+          haml-mode-hook
           rust-mode-hook
           yaml-mode-hook
-          nginx-mode-hook)
+          nginx-mode-hook
+          scss-mode-hook)
     (add-hook it 'turn-on-smartparens-mode))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
