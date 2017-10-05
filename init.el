@@ -322,7 +322,6 @@
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 
-(global-set-key (kbd "<f7>") 'project-explorer-open)
 ;; god mode
 (use-package god-mode
     :init
@@ -419,18 +418,6 @@
     (setq dumb-jump-force-searcher 'ag)
     :ensure)
 
-;; dashboard
-(use-package dashboard
-    :config
-    (dashboard-setup-startup-hook)
-    (add-to-list 'dashboard-items '(agenda) t)
-    (setq dashboard-items '((recents  . 5)
-                            (bookmarks . 5)
-                            (projects . 5)
-                            (agenda . 5)))
-    (setq dashboard-banner-logo-title "Double check everything. Remember about backward compatibility. Check nil, empty params")
-    :ensure)
-
 ;;ztree
 (use-package ztree
     :bind (("C-c C-c z" . ztree-dir)))
@@ -489,7 +476,6 @@
     (setq nlinum-relative-current-symbol "")
     (setq nlinum-relative-redisplay-delay 0)
     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
-(global-set-key (kbd "C-c C-p") #'ivy-imenu-anywhere)
 (global-set-key (kbd "C-c C-c l") 'imenu-list)
 
 ;; save customization in separate file

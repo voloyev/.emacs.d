@@ -47,3 +47,4 @@ recentf
 .directory
 abbrev_defs
 tramp
+.emacs-custom.el

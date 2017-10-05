@@ -35,9 +35,6 @@
 (scroll-bar-mode   -1)
 
 ;; show buffers
-(require 'bs)
-(setq bs-configurations
-      '(("files" "^\\*scratch\\*" nil nil bs-visits-non-file bs-sort-buffer-interns-are-last)))
 (require 'ibuffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (autoload 'ibuffer "ibuffer" "List buffers." t)
@@ -46,8 +43,6 @@
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
              (ibuffer-auto-mode 1)))
-
-(global-set-key (kbd "<f2>") 'bs-show)
 
 ;;scrolling
 (setq scroll-step 1)
@@ -62,8 +57,6 @@
 (setq-default tab-width          2)
 (setq-default standart-indent    4)
 (setq-default lisp-body-indent   4)
-(custom-set-variables '(coffee-tab-width 2))
-(custom-set-variables '(js2-basic-offset 2))
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
@@ -78,7 +71,7 @@
 (defun my-gfm-mode-hook ()
     (visual-line-mode 1))
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
 (fci-mode 1)

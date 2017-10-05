@@ -2,23 +2,43 @@
 ;;; Code:
 ;;; Commentary:
 ;; ivy module
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "C-<f1> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "C-<f1> u") 'counsel-unicode-char)
-(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c m a") 'counsel-projectile-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(counsel-projectile-on)
-(global-set-key (kbd "C-c p p") 'counsel-projectile-switch-project)
+(use-package ivy-mode
+    :init
+    (counsel-projectile-on)
+    :config
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    :bind(("C-s" . swiper)
+          ("M-x" . counsel-M-x)
+          ("C-x C-f" . counsel-find-file)
+          ("<f1> f" . counsel-describe-function)
+          ("<f1> v" . counsel-describe-variable)
+          ("<f1> l" . counsel-find-library)
+          ("C-<f1> i" . counsel-info-lookup-symbol)
+          ("C-<f1> u" . counsel-unicode-char)
+          ("C-r" . counsel-expression-history)
+          ("C-c m g" . counsel-git-grep)
+          ("C-c m a" . counsel-projectile-ag)
+          ("C-c p p" . counsel-projectile-switch-project)
+          ("<f2>" . ivy-switch-buffer)
+          ;;("C-x l" . counsel-locate)
+          ;;("C-c g" . counsel-git)
+          ))
+
+(use-package counsel-gtags
+    :config
+    (add-hook 'c-mode-hook 'counsel-gtags-mode)
+    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
+    (add-hook 'ruby-mode-hook 'counsel-gtags-mode)
+    (add-hook 'enh-ruby-mode-hook 'counsel-gtags-mode)
+    (add-hook 'python-mode-hook 'counsel-gtags-mode)
+    (add-hook 'emacs-lisp-mode-hook 'counsel-gtags-mode)
+    (add-hook 'lisp-mode-hook 'counsel-gtags-mode)
+
+    :bind(("C-c C-c t t". counsel-gtags-find-definition)
+          ("C-c C-c t r" . counsel-gtags-find-reference)
+          ("C-c C-c t s" . counsel-gtags-find-symbol)
+          ("C-c C-c t ," . counsel-gtags-go-backward)))
+
 (provide 'ivy-module)
 ;;; ivy-module.el ends here
