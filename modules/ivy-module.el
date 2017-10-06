@@ -35,7 +35,7 @@
     (add-hook 'emacs-lisp-mode-hook 'counsel-gtags-mode)
     (add-hook 'lisp-mode-hook 'counsel-gtags-mode)
 
-    :bind(("C-c C-c t t". counsel-gtags-find-definition)
+    :bind(("C-c C-c t t" . counsel-gtags-find-definition)
           ("C-c C-c t r" . counsel-gtags-find-reference)
           ("C-c C-c t s" . counsel-gtags-find-symbol)
           ("C-c C-c t ," . counsel-gtags-go-backward)))
