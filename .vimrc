@@ -99,4 +99,4 @@ let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=235   ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=235   ctermbg=235
-
+hi MatchParen cterm=bold ctermbg=none ctermfg=green

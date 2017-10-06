@@ -10,6 +10,9 @@
 (load-theme 'sexy-monochrome t)
 (enable-theme 'sexy-monochrome)
 
+;;(load-theme 'grayscale t)
+;;(enable-theme 'grayscale)
+
 (defun cursor-active-mark-init ()
     "Change cursor color into red in mark mode."
     (set-cursor-color "#ff0000")
