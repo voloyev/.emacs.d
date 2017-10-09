@@ -107,7 +107,9 @@
 (use-package projectile
     :config
     (projectile-global-mode)
-    (projectile-rails-global-mode))
+    (projectile-rails-global-mode)
+    (setq projectile-indexing-method 'native)
+    (setq projectile-enable-caching t))
 
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
@@ -439,25 +441,6 @@
     :bind
     (("C-x f" . fiplr-find-file)))
 
-;; (use-package parinfer
-;;     :ensure t
-;;     :bind
-;;     (("C-," . parinfer-toggle-mode))
-;;     :init
-;;     (progn
-;;         (setq parinfer-extensions
-;;               '(defaults       ; should be included.
-;;                 pretty-parens  ; different paren styles for different modes.
-;;                 paredit        ; Introduce some paredit commands.
-;;                 smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;;                 smart-yank))   ; Yank behavior depend on mode.
-;;         (add-hook 'clojure-mode-hook #'parinfer-mode)
-;;         (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-;;         (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-;;         (add-hook 'scheme-mode-hook #'parinfer-mode)
-;;         (add-hook 'lisp-mode-hook #'parinfer-mode)
-;;         (add-hook 'racket-mode-hook #'parinfer-mode)))
-
 ;; hyde
 (use-package hyde)
 
@@ -476,8 +459,9 @@
     (setq nlinum-relative-current-symbol "")
     (setq nlinum-relative-redisplay-delay 0)
     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
-(global-set-key (kbd "C-c C-c l") 'imenu-list)
 
+(global-set-key (kbd "C-c C-c l") 'imenu-list)
+(setq auto-window-vscroll nil)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
