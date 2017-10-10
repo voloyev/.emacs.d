@@ -12,6 +12,8 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+
 (setq web-mode-enable-auto-pairing t)
 
 ;;web-mode indent
@@ -23,5 +25,8 @@
 (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
 (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
 (setq web-mode-enable-auto-indentation nil)
+(setq web-mode-content-types-alist
+      '(("jsx" . "\\.js[x]?\\'")))
+
 (provide 'web-mode-module)
 ;;; web-mode-module ends here
