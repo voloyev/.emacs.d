@@ -24,7 +24,8 @@
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
 (nyan-mode t)
-(setq nyan-animate-nyancat t)
+;;(setq nyan-animate-nyancat t)
+(nyan-start-animation)
 ;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; toolbar and menu
