@@ -42,10 +42,6 @@
     :config
     (achievements-mode 1))
 
-;; cask
-;; (require 'cask "~/.cask/cask.el")
-;; (cask-initialize)
-
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -142,13 +138,6 @@
 ;; line number
 (use-package nlinum
     :bind (("C-c C-l" . nlinum-mode)))
-    "if you realy want you can add hooks here
-    :init
-    ;; (add-hook 'lisp-mode-hook 'nlinum-mode)
-    ;; (add-hook 'c-mode-hook 'nlinum-mode)
-    ;; (add-hook 'java-mode-hook 'nlinum-mode)
-    ;; (add-hook 'web-mode-hook 'nlinum-mode)
-    ;; (add-hook 'emacs-lisp-mode-hook 'nlinum-mode))"
 
 ;; gutter
 (use-package git-gutter-fringe
@@ -211,7 +200,7 @@
                     :foreground "gray30")
     :bind(("<f5>" . whitespace-mode)
           ("C-c <f5>" . whitespace-cleanup)))
- 
+
 ;; evil modes
 ;;(global-set-key (kbd "<f6>") 'evil-mode)
 
@@ -262,9 +251,6 @@
 (unless (display-graphic-p)
     (add-to-list 'default-frame-alist '(background-color . "#000000")))
 
-;; email wanderlust
-(autoload 'wl "wl" "Wanderlust" t)
-
 ;; neotree
 (use-package  neotree
     :bind(("<f12>" . neotree-projectile-action)
@@ -274,10 +260,10 @@
     (setq neo-smart-open t))
 
 ;;lein exec path
-(add-to-list 'exec-path "/home/nuncostans/Programs/leiningen")
+(add-to-list 'exec-path "~/Programs/leiningen")
 
 ;;quickrun
-(require 'quickrun)
+(use-package quickrun)
 
 ;;golden ratio
 (use-package golden-ratio
@@ -333,11 +319,11 @@
     (add-to-list 'god-exempt-major-modes 'dired-mode)
     (add-to-list 'god-exempt-major-modes 'magit-mode)
     (add-to-list 'god-exempt-major-modes 'undo-tree-mode)
-    (add-to-list 'god-exempt-major-modes 'project-explorer-mode))
+    (add-to-list 'god-exempt-major-modes 'project-explorer-mode)
 ;; bindings
-(global-set-key (kbd "<escape>") 'god-local-mode)
-(define-key god-local-mode-map (kbd "z") 'repeat)
-(define-key god-local-mode-map (kbd "i") 'god-local-mode)
+    (global-set-key (kbd "<escape>") 'god-local-mode)
+    (define-key god-local-mode-map (kbd "z") 'repeat)
+    (define-key god-local-mode-map (kbd "i") 'god-local-mode))
 
 (defun my-update-cursor ()
     (setq cursor-type (if
@@ -450,7 +436,8 @@
               (when (> (buffer-size) 40000)
                   (turn-off-smartparens-mode)
                   (turn-off-show-smartparens-mode)
-                  (company-mode 0))))
+                  (company-mode 0)
+                  (flycheck-mode 0))))
 
 (use-package nlinum-relative
     :config
