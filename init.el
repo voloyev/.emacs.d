@@ -172,7 +172,7 @@
 (use-package org-install
     :init
     (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-    (setq org-agenda-files (list "~/Documents/todo.org"))
+    (setq org-agenda-files (list "~/Dropbox/org/todo.org"))
     (add-hook 'org-mode-hook 'toggle-truncate-lines)
     (setq org-src-fontify-natively nil)
     (defface org-block
