@@ -6,7 +6,7 @@
 (setq custom-safe-themes t)
 ;;(load-theme 'zenburn t)
 ;;(enable-theme 'zenburn)
-
+;;(add-to-list 'custom-theme-load-path "/home/voloyev/workspace/emacs_lisp/sexy-monochrome-theme")
 (load-theme 'sexy-monochrome t)
 (enable-theme 'sexy-monochrome)
 
