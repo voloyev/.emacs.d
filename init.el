@@ -56,19 +56,19 @@
 ;; Switch window
 (global-set-key (kbd "C-x o") 'switch-window)
 
-;; company mode
-(use-package company
-    :init
-    (with-eval-after-load 'company
-        (add-hook 'after-init-hook 'global-company-mode)
-        (add-to-list 'company-backends 'company-robe)
-        (add-to-list 'company-backends 'tern)
-        (add-to-list 'company-backends 'company-go)
-        (add-to-list 'company-backends 'company-jedy))
-    :bind("C-<tab>" . company-complete)
-    :config
-    (global-company-mode t)
-    (company-quickhelp-mode t))
+;; ;; company mode
+;; (use-package company
+;;     :init
+;;     (with-eval-after-load 'company
+;;         (add-hook 'after-init-hook 'global-company-mode)
+;;         (add-to-list 'company-backends 'company-robe)
+;;         (add-to-list 'company-backends 'tern)
+;;         (add-to-list 'company-backends 'company-go)
+;;         (add-to-list 'company-backends 'company-jedy))
+;;     :bind("C-<tab>" . company-complete)
+;;     :config
+;;     (global-company-mode t)
+;;     (company-quickhelp-mode t))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
@@ -101,8 +101,10 @@
     (projectile-global-mode)
     (projectile-rails-global-mode)
     (setq projectile-indexing-method 'native)
-    (setq projectile-enable-caching t))
-
+    (setq projectile-enable-caching t)
+    (setq projectile-mode-line
+          '(:eval (format " Projectile[%s]"
+                   (projectile-project-name)))))
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
@@ -405,11 +407,11 @@
                   (company-mode 0)
                   (flycheck-mode 0))))
 
-(use-package nlinum-relative
-    :config
-    (setq nlinum-relative-current-symbol "")
-    (setq nlinum-relative-redisplay-delay 0)
-    (add-hook 'prog-mode-hook 'nlinum-relative-mode))
+;; (use-package nlinum-relative
+;;     :config
+;;     (setq nlinum-relative-current-symbol "")
+;;     (setq nlinum-relative-redisplay-delay 0)
+;;     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
 
 (global-set-key (kbd "<f2>") 'imenu-list)
 (setq auto-window-vscroll nil)
