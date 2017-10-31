@@ -73,9 +73,9 @@ let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 let &colorcolumn="80,".join(range(120,999),",")
 "setup backups
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+"set backupdir=~/.vim/backup//
+"set directory=~/.vim/swap//
+"set undodir=~/.vim/undo//
 set cursorline
 set guioptions-=T "remove menu bar
 
@@ -97,6 +97,9 @@ endif
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=235   ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=235   ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 hi MatchParen cterm=bold ctermbg=none ctermfg=green
+
+let g:ackprg = 'ag --vimgrep'
+"let g:ackprg = 'ag --nogroup --nocolor --column'
