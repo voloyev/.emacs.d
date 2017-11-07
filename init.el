@@ -332,36 +332,6 @@
 (add-hook 'god-mode-enabled-hook 'my-update-cursor)
 (add-hook 'god-mode-disabled-hook 'my-update-cursor)
 
-;; visual bookmarks
-(use-package bm
-    :ensure t
-    :demand t
-
-    :init
-    (setq bm-restore-repository-on-load t)
-    (setq bm-buffer-restore-all t)
-
-    :config
-    (setq bm-cycle-all-buffers t)
-
-    (setq bm-repository-file "~/.emacs.d/bm-repository")
-    (setq-default bm-buffer-persistence t)
-    (add-hook 'after-init-hook 'bm-repository-load)
-    (add-hook 'find-file-hooks 'bm-buffer-restore-all)
-    (add-hook 'kill-buffer-hook #'bm-buffer-save)
-    (add-hook 'kill-emacs-hook #'(lambda nil
-                                     (bm-buffer-save-all)
-                                     (bm-repository-save)))
-    (add-hook 'after-save-hook #'bm-buffer-save)
-    (add-hook 'bm-annotate-on-create 'bm-toggle)
-    (add-hook 'find-file-hooks   #'bm-buffer-restore)
-    (add-hook 'after-revert-hook #'bm-buffer-restore)
-    (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
-    :bind (("<f6>" . bm-next)
-           ("S-<f6>" . bm-previous)
-           ("C-<f6>" . bm-toggle)
-           ("C-c C-<f6>" . bm-show-all)))
-
 (use-package dumb-jump
     :bind (("M-g o" . dumb-jump-go-other-window)
            ("M-g j" . dumb-jump-go)
