@@ -407,13 +407,7 @@
                   (company-mode 0)
                   (flycheck-mode 0))))
 
-;; (use-package nlinum-relative
-;;     :config
-;;     (setq nlinum-relative-current-symbol "")
-;;     (setq nlinum-relative-redisplay-delay 0)
-;;     (add-hook 'prog-mode-hook 'nlinum-relative-mode))
-
-(global-set-key (kbd "<f2>") 'imenu-list)
+;;(global-set-key (kbd "<f2>") 'imenu-list))
 (setq auto-window-vscroll nil)
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
