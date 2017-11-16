@@ -48,3 +48,5 @@ recentf
 abbrev_defs
 tramp
 .emacs-custom.el
+.gitconfig
+

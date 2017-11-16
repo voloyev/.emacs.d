@@ -38,11 +38,6 @@
 (require 'elixir-module)
 (require 'settings-module)
 
-;; Achievements mode
-(use-package achievements
-    :config
-    (achievements-mode 1))
-
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
