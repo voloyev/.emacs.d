@@ -35,7 +35,8 @@
 (require 'js-module)
 (require 'rust-module)
 (require 'crystal-module)
-(require 'elixir-mode)
+(require 'elixir-module)
+(require 'settings-module)
 
 ;; Achievements mode
 (use-package achievements

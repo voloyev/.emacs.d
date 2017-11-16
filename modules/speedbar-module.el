@@ -1,8 +1,12 @@
-;;sr-speedbar
-(require 'sr-speedbar)
+;;; package --- Summary:
 ;;; Code:
-(global-set-key (kbd "<f8>") 'sr-speedbar-toggle)
-(add-hook 'speedbar-mode-hook
+;;; Commentary:
+;; sr-speedbar
+
+(use-package sr-speedbar
+    :ensure t
+    :init
+    (add-hook 'speedbar-mode-hook
           (lambda()
               (speedbar-add-supported-extension "\\.rb")
               (speedbar-add-supported-extension "\\.ru")
@@ -39,8 +43,12 @@
               (speedbar-add-supported-extension  ".haml")
               (speedbar-add-supported-extension  "[Mm]akefile\\(\\.in\\)?")
               (speedbar-add-supported-extension  "\\.rs")))
-(setq sr-speedbar-width-x 20)
-(setq speedbar-show-unknown-files t);; show all files
-(sr-speedbar-refresh-turn-on) ;;auto refresh
+    :config
+    (setq sr-speedbar-width-x 20)
+    (setq speedbar-show-unknown-files t)
+    (sr-speedbar-refresh-turn-on)
+    :bind
+    ("<f6>" . sr-speedbar-toggle))
+
 (provide 'speedbar-module)
 ;;; speedbar-module.el ends here

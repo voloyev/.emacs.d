@@ -8,6 +8,7 @@
 ;; racer
 
 (use-package rust-mode
+    :ensure t
     :init
     (setq company-tooltip-align-annotations t)
     (add-hook 'rust-mode-hook #'racer-mode)

@@ -2,7 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 ;; ivy module
-(use-package ivy-mode
+(use-package ivy
+    :ensure t
     :init
     (counsel-projectile-on)
     :config

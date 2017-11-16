@@ -12,6 +12,7 @@ this section.
 "
 ;;rbenv
 (use-package rbenv
+    :ensure t
     :config
     (global-rbenv-mode 1))
 
@@ -21,6 +22,7 @@ this section.
     (setq ruby-deep-indent-paren nil))
 
 (use-package robe
+    :ensure t
     :init
     (add-to-list 'auto-mode-alist
                  '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode))
@@ -31,15 +33,18 @@ this section.
           ("C-c r r" . inf-ruby)
           ( "C-c C-c r s" . robe-start)
           ("C-c & h r" . enh-ruby-mode)))
-(require 'bundler)
+(use-package bundler
+    :ensure t)
 
 ;; rinari
 (use-package rinari
+    :ensure t
     :init
     (setq rinari-tags-file-name "TAGS"))
 
 ;;slim-mode
 (use-package slim-mode
+    :ensure t
     :init
     (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode)))
 
@@ -48,5 +53,6 @@ this section.
     (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
 
 (setq ruby-insert-encoding-magic-comment nil)
+
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
