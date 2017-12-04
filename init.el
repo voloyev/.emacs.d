@@ -53,19 +53,20 @@
 ;; Switch window
 (global-set-key (kbd "C-x o") 'switch-window)
 
-;; ;; company mode
-;; (use-package company
-;;     :init
-;;     (with-eval-after-load 'company
-;;         (add-hook 'after-init-hook 'global-company-mode)
-;;         (add-to-list 'company-backends 'company-robe)
-;;         (add-to-list 'company-backends 'tern)
-;;         (add-to-list 'company-backends 'company-go)
-;;         (add-to-list 'company-backends 'company-jedy))
-;;     :bind("C-<tab>" . company-complete)
-;;     :config
-;;     (global-company-mode t)
-;;     (company-quickhelp-mode t))
+;; company mode
+ (use-package company
+     :ensure t
+     :init
+     (with-eval-after-load 'company
+         (add-hook 'after-init-hook 'global-company-mode)
+         (add-to-list 'company-backends 'company-robe)
+         (add-to-list 'company-backends 'tern)
+         (add-to-list 'company-backends 'company-go)
+         (add-to-list 'company-backends 'company-jedy))
+     :bind("C-<tab>" . company-complete)
+     :config
+     (global-company-mode t)
+     (company-quickhelp-mode t))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
