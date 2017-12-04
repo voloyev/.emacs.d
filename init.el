@@ -15,6 +15,7 @@
 (package-initialize)
 (setq my-package-list '())
 (mapc #'package-install my-package-list)
+(require 'use-package)
 (add-to-list 'load-path "~/.emacs.d/modules")
 
 (desktop-save-mode 0)
@@ -362,7 +363,8 @@
     (("C-x f" . fiplr-find-file)))
 
 ;; hyde
-(use-package hyde)
+(use-package hyde
+    :ensure t)
 
 ;; disable modes for big files
 (add-hook 'prog-mode-hook

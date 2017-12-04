@@ -49,6 +49,7 @@ this section.
     (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode)))
 
 (use-package ruby-refactor
+    :ensure t
     :config
     (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
 
