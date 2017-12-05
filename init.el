@@ -61,8 +61,8 @@
      (with-eval-after-load 'company
          (add-hook 'after-init-hook 'global-company-mode)
          (add-to-list 'company-backends 'company-robe)
-         (add-to-list 'company-backends 'tern)
          (add-to-list 'company-backends 'company-go)
+         (add-to-list 'company-backends 'sly-company)
          (add-to-list 'company-backends 'company-jedy))
      :bind("C-<tab>" . company-complete)
      :config
@@ -117,6 +117,14 @@
 ;;       '((closure ("lein" "repl"))
 ;;         (sbcl ("/usr/local/bin/sbcl")))))
 ;; (setq slime-contribs '(slime-fancy))
+
+;;sly
+(use-package sly
+    :ensure t)
+
+;; racket
+(use-package racket-mode
+    :ensure t)
 
 ;; flycheck
 (use-package flycheck
@@ -379,6 +387,22 @@
 
 ;;(global-set-key (kbd "<f2>") 'imenu-list))
 (setq auto-window-vscroll nil)
+
+;; language tool
+(use-package langtool
+    :ensure t
+    :bind (("C-C C-c w" . langtool-check)
+           ("C-C C-c W" . langtool-check-done)
+           ("C-C C-c l" . langtool-switch-default-language)
+           ("C-C C-c 4" . langtool-show-message-at-point)
+           ("C-C C-c c" . langtool-correct-buffer))
+    :config
+    (setq langtool-language-tool-jar "~/bin/LanguageTool/languagetool-commandline.jar")
+          langtool-default-language "en-US"
+          langtool-disabled-rules '("WHITESPACE_RULE"
+                                    "EN_UNPAIRED_BRACKETS"
+                                    "COMMA_PARENTHESIS_WHITESPACE"
+                                    "EN_QUOTES"))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
