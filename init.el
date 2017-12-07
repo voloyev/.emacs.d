@@ -15,7 +15,7 @@
 (package-initialize)
 (setq my-package-list '())
 (mapc #'package-install my-package-list)
-(add-to-list 'load-path "~/.emacs.d/plugins/use-package")
+;;(add-to-list 'load-path "~/.emacs.d/plugins/use-package")
 (require 'use-package)
 (add-to-list 'load-path "~/.emacs.d/modules")
 
