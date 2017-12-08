@@ -403,6 +403,11 @@
                                     "EN_UNPAIRED_BRACKETS"
                                     "COMMA_PARENTHESIS_WHITESPACE"
                                     "EN_QUOTES"))
+;; emacs surround
+(add-to-list 'load-path "~/.emacs.d/plugins/emacs-surround")
+(use-package emacs-surround
+    ;;:ensure t
+    :bind((("C-q" . emacs-surround))))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)

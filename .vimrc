@@ -42,6 +42,8 @@ Plugin 'tpope/vim-endwise'
 Plugin 'mileszs/ack.vim'
 Plugin 'andreimaxim/vim-io'
 Plugin 'rhysd/vim-crystal'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'slashmili/alchemist.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
