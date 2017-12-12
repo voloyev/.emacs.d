@@ -51,9 +51,6 @@
 ;; use bash
 (setq shell-file-name "/bin/bash")
 
-;; Switch window
-(global-set-key (kbd "C-x o") 'switch-window)
-
 ;; company mode
  (use-package company
      :ensure t

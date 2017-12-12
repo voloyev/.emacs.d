@@ -14,5 +14,10 @@
     :config
     (achievements-mode 1))
 
+(use-package switch-window
+    ;; Switch window
+    :ensure t
+    :bind(("C-x o" . switch-window)))
+
 (provide 'settings-module)
 ;;; settings-module.el ends here
