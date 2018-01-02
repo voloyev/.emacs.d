@@ -19,5 +19,8 @@
     :ensure t
     :bind(("C-x o" . switch-window)))
 
+(use-package focus
+    :ensure t)
+
 (provide 'settings-module)
 ;;; settings-module.el ends here
