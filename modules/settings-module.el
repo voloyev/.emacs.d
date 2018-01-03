@@ -20,7 +20,8 @@
     :bind(("C-x o" . switch-window)))
 
 (use-package focus
-    :ensure t)
+    :ensure t
+    :bind(("C-c f m" . focus-mode)))
 
 (provide 'settings-module)
 ;;; settings-module.el ends here
