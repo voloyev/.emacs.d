@@ -78,5 +78,8 @@
 (fci-mode 1)
 (setq fci-rule-width 3)
 
+(use-package dimmer
+    :ensure t)
+
 (provide 'looks-module)
 ;;; looks-module ends here
