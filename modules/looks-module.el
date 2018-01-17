@@ -1,7 +1,7 @@
 ;;; Package --- Summary
 ;;; Code:
 ;;; Commentary:
-;;; fonts
+;;; fonts and general looks
 (set-face-attribute 'default nil :font "Hack 9")
 (set-frame-font "Hack 9")
 
@@ -77,9 +77,6 @@
 (setq frame-title-format "GNU Emacs: %b")
 (fci-mode 1)
 (setq fci-rule-width 3)
-
-(use-package dimmer
-    :ensure t)
 
 (provide 'looks-module)
 ;;; looks-module ends here
