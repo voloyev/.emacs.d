@@ -5,8 +5,8 @@
 ;; themes
 (setq custom-safe-themes t)
 ;; (add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs_lisp/sexy-monochrome-theme")
-;; (load-theme 'sexy-monochrome t)
-;; (enable-theme 'sexy-monochrome)
+(load-theme 'sexy-monochrome t)
+(enable-theme 'sexy-monochrome)
 
 (defun cursor-active-mark-init ()
     "Change cursor color into red in mark mode."
@@ -24,11 +24,11 @@
 (add-hook 'deactivate-mark-hook 'th-deactivate-mark-init)
 "If mark-mode is off, do nothing"
 
-(use-package nord-theme
-    :ensure t
+;; (use-package nord-theme
+;;     :ensure t
     
-    :init (load-theme 'nord t)
-    :config (setq nord-comment-brightness 20))
+;;     :init (load-theme 'nord t)
+;;     :config (setq nord-comment-brightness 20))
 
 (provide 'themes-module)
 ;;; themes-module ends here
