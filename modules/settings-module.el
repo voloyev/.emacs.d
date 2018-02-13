@@ -23,5 +23,10 @@
     :ensure t
     :bind(("C-c f m" . focus-mode)))
 
+(use-package rainbow-delimiters
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 (provide 'settings-module)
 ;;; settings-module.el ends here

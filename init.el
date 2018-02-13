@@ -250,8 +250,8 @@
 (use-package expand-region
     :bind("C-=" . er/expand-region))
 
-(unless (display-graphic-p)
-    (add-to-list 'default-frame-alist '(background-color . "#000000")))
+;; (unless (display-graphic-p)
+;;     (add-to-list 'default-frame-alist '(background-color . "#000000")))
 
 ;; neotree
 (use-package  neotree
