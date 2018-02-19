@@ -117,7 +117,11 @@
 
 ;;sly
 (use-package sly
-    :ensure t)
+    :ensure t
+    :init
+    (setq inferior-lisp-program "sbcl")
+    (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+    (add-hook 'lisp-mode-hook 'sly-editing-mode))
 
 ;; racket
 (use-package racket-mode

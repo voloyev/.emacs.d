@@ -28,5 +28,10 @@
     :init
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (provide 'settings-module)
 ;;; settings-module.el ends here

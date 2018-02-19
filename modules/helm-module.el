@@ -4,8 +4,9 @@
 ;; helm
 (use-package helm
     :ensure t)
-(use-package helm-config
-    :ensure t)
+
+(use-package helm-config)
+
 (use-package helm-git-grep
     :ensure t)
 
