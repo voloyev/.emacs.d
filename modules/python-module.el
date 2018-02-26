@@ -6,7 +6,8 @@
 ;;- Add ability to automatic change python version a-la pyenv
 ;;- Add integration with elpy
 ;;"
-(require 'elpy)
+(use-package elpy
+  :ensure t)
 (package-initialize)
 (elpy-enable)
 
