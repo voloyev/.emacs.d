@@ -2,7 +2,7 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts and general looks
-(set-face-attribute 'default nil :font "Hack 10")
+(set-face-attribute 'default nil :font "Hack 12")
 (set-frame-font "Hack 12")
 
 ;; Disable backup/autosave files

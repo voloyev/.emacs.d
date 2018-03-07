@@ -15,8 +15,8 @@
 (package-initialize)
 (setq my-package-list '())
 (mapc #'package-install my-package-list)
-;;(add-to-list 'load-path "~/.emacs.d/plugins/use-package")
 (require 'use-package)
+(add-to-list load-path "~/.emacs.d/plugins")
 (add-to-list 'load-path "~/.emacs.d/modules")
 
 (desktop-save-mode 0)
@@ -405,11 +405,14 @@
                                     "COMMA_PARENTHESIS_WHITESPACE"
                                     "EN_QUOTES"))
 ;; emacs surround
-(add-to-list 'load-path "~/.emacs.d/plugins/emacs-surround")
 (use-package emacs-surround
     ;;:ensure t
     :bind((("C-q" . emacs-surround))))
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+(when (memq window-system (mac ns x))
+    (exec-path-from-shell-initialize))
 (load custom-file)
 ;;; init.el ends here
