@@ -51,19 +51,19 @@
 (setq shell-file-name "/bin/bash")
 
 ;; company mode
- (use-package company
-     :ensure t
-     :init
-     (with-eval-after-load 'company
-         (add-hook 'after-init-hook 'global-company-mode)
-         (add-to-list 'company-backends 'company-robe)
-         (add-to-list 'company-backends 'company-go)
-         (add-to-list 'company-backends 'sly-company)
-         (add-to-list 'company-backends 'company-jedy))
-     :bind("C-<tab>" . company-complete)
-     :config
-     (global-company-mode t)
-     (company-quickhelp-mode t))
+(use-package company
+    :ensure t
+    :init
+    (with-eval-after-load 'company
+        (add-hook 'after-init-hook 'global-company-mode)
+        (add-to-list 'company-backends 'company-robe)
+        (add-to-list 'company-backends 'company-go)
+        (add-to-list 'company-backends 'sly-company)
+        (add-to-list 'company-backends 'company-jedy))
+    :bind("C-<tab>" . company-complete)
+    :config
+    (global-company-mode t)
+    (company-quickhelp-mode t))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
@@ -128,9 +128,9 @@
 
 ;; flycheck
 (use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode))
+    :ensure t
+    :init
+    (global-flycheck-mode))
 
 ;; Markdown
 (use-package markdown-mode
@@ -198,11 +198,11 @@
             (tab-mark 9 [9655 9] [92 9])))
     :config
     (set-face-attribute 'whitespace-space nil
-                    :background nil
-                    :foreground "gray30")
+                        :background nil
+                        :foreground "gray30")
     (set-face-attribute 'whitespace-newline
-                    nil :background nil
-                    :foreground "gray30")
+                        nil :background nil
+                        :foreground "gray30")
     :bind(("<f5>" . whitespace-mode)
           ("C-c <f5>" . whitespace-cleanup)))
 
@@ -284,7 +284,7 @@
 
 ;;paradox token
 (defvar paradox-token
-    (getenv "PARADOX"))
+  (getenv "PARADOX"))
 (setq paradox-github-token 'paradox-token)
 
 ;; ido
@@ -297,10 +297,10 @@
 
 ;;ibuffer settings
 (add-hook 'ibuffer-hook
-    (lambda ()
-      (ibuffer-projectile-set-filter-groups)
-      (unless (eq ibuffer-sorting-mode 'alphabetic)
-          (ibuffer-do-sort-by-alphabetic))))
+          (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                  (ibuffer-do-sort-by-alphabetic))))
 
 ;; flyspell
 (use-package flyspell
@@ -325,7 +325,7 @@
     (add-to-list 'god-exempt-major-modes 'magit-mode)
     (add-to-list 'god-exempt-major-modes 'undo-tree-mode)
     (add-to-list 'god-exempt-major-modes 'project-explorer-mode)
-;; bindings
+    ;; bindings
     (global-set-key (kbd "<escape>") 'god-local-mode)
     (define-key god-local-mode-map (kbd "z") 'repeat)
     (define-key god-local-mode-map (kbd "i") 'god-local-mode))
@@ -398,11 +398,11 @@
            ("C-C C-c c" . langtool-correct-buffer))
     :config
     (setq langtool-language-tool-jar "~/bin/LanguageTool/languagetool-commandline.jar")
-          langtool-default-language "en-US"
-          langtool-disabled-rules '("WHITESPACE_RULE"
-                                    "EN_UNPAIRED_BRACKETS"
-                                    "COMMA_PARENTHESIS_WHITESPACE"
-                                    "EN_QUOTES"))
+    langtool-default-language "en-US"
+    langtool-disabled-rules '("WHITESPACE_RULE"
+                              "EN_UNPAIRED_BRACKETS"
+                              "COMMA_PARENTHESIS_WHITESPACE"
+                              "EN_QUOTES"))
 ;; emacs surround
 (add-to-list 'load-path "~/.emacs.d/plugins/")
 (use-package emacs-surround
