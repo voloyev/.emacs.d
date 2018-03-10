@@ -33,5 +33,6 @@
   :config
   (editorconfig-mode 1))
 
+(add-to-list 'exec-path "~/bin")
 (provide 'settings-module)
 ;;; settings-module.el ends here
