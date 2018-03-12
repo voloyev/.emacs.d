@@ -24,9 +24,7 @@
 (setq sml/name-width '40)
 (setq sml/shorten-modes 'full)
 (nyan-mode t)
-;;(setq nyan-animate-nyancat t)
 (nyan-start-animation)
-;;(add-hook 'nyan-start-animation 'nyan-mode)
 
 ;; toolbar and menu
 (tool-bar-mode -1)
@@ -54,10 +52,13 @@
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
-(setq tab-width                  4)
+(setq tab-width                  2)
 (setq-default tab-width          2)
-(setq-default standart-indent    4)
-(setq-default lisp-body-indent   4)
+(setq-default standart-indent    2)
+(setq-default lisp-body-indent   2)
+;; css and sccs indent level
+(setq css-indent-offset 2)
+(setq scss-indent-offset 2)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
