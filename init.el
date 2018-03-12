@@ -54,7 +54,6 @@
     (with-eval-after-load 'company
         (add-hook 'after-init-hook 'global-company-mode)
         (add-to-list 'company-backends 'company-robe)
-        (add-to-list 'company-backends 'company-go)
         (add-to-list 'company-backends 'sly-company)
         (add-to-list 'company-backends 'company-jedy))
     :bind("C-<tab>" . company-complete)
@@ -357,11 +356,13 @@
 (use-package emacs-surround
     ;;:ensure t
     :bind((("C-q" . emacs-surround))))
+
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-
-(when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+    :ensure t
+    :init (when (memq window-system '(mac))
+            (exec-path-from-shell-initialize)))
 (load custom-file)
 ;;; init.el ends here
