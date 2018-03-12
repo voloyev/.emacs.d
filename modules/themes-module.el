@@ -29,7 +29,7 @@
     
 ;; ;;     :init (load-theme 'nord t)
 ;; ;;     :config (setq nord-comment-brightness 20))
-(load-theme 'zenburn t)
 
+(load-theme 'zenburn t)
 (provide 'themes-module)
 ;;; themes-module ends here
