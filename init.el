@@ -4,10 +4,6 @@
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/")t)
@@ -39,6 +35,7 @@
 (require 'elixir-module)
 (require 'settings-module)
 (require 'go-module)
+(require 'clojure-module)
 
 ;; Emacs server
 (require 'server)
@@ -58,27 +55,12 @@
     (with-eval-after-load 'company
         (add-hook 'after-init-hook 'global-company-mode)
         (add-to-list 'company-backends 'company-robe)
-        (add-to-list 'company-backends 'company-go)
         (add-to-list 'company-backends 'sly-company)
         (add-to-list 'company-backends 'company-jedy))
     :bind("C-<tab>" . company-complete)
     :config
     (global-company-mode t)
     (company-quickhelp-mode t))
-
-;;copy without selection
-(defadvice kill-ring-save (before slick-copy activate compile)
-    "When called interactively with no active region, copy a single line instead."
-    (interactive (if mark-active (list (region-beginning) (region-end))
-                     (message "Copied line")
-                     (list (line-beginning-position) (line-beginning-position 2)))))
-
-(defadvice kill-region (before slick-cut activate compile)
-    "When called interactively with no active region, kill a single line instead."
-    (interactive
-     (if mark-active (list (region-beginning) (region-end))
-         (list (line-beginning-position)
-               (line-beginning-position 2)))))
 
 ;;multiple cursors
 (use-package multiple-cursors
@@ -101,9 +83,6 @@
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
-;; Add haml and yaml modes extension
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
 
 ;; Easy transition between buffers: M-arrow-keys
 (if (equal nil (equal major-mode 'org-mode))
@@ -216,10 +195,6 @@
     (add-hook 'web-mode-hook 'emmet-mode)
     (add-hook 'css-mode-hook  'emmet-mode))
 
-;; calendar app
-(use-package calfw)
-(use-package calfw-org)
-
 ;;(put 'upcase-region 'disabled nil)
 
 ;; work mouse in terminal
@@ -254,9 +229,6 @@
 (use-package expand-region
     :bind("C-=" . er/expand-region))
 
-;; (unless (display-graphic-p)
-;;     (add-to-list 'default-frame-alist '(background-color . "#000000")))
-
 ;; neotree
 (use-package  neotree
     :bind(("<f12>" . neotree-projectile-action)
@@ -266,32 +238,25 @@
     (setq neo-smart-open t))
 
 ;;lein exec path
-(add-to-list 'exec-path "~/Programs/leiningen")
+(add-to-list 'exec-path "~/bin")
 
 ;;quickrun
-(use-package quickrun)
+(use-package quickrun
+    :ensure t)
 
 ;;golden ratio
 (use-package golden-ratio
+    :ensure t
     :bind("C-c & g" . golden-ratio-mode))
 
 ;; toggle quotes
 (use-package toggle-quotes
     :bind("C-'" . toggle-quotes))
 
-;; css and sccs indent level
-(setq css-indent-offset 2)
-(setq scss-indent-offset 2)
-
 ;;paradox token
 (defvar paradox-token
   (getenv "PARADOX"))
 (setq paradox-github-token 'paradox-token)
-
-;; ido
-;; (use-package ido
-;;     :config
-;;     (ido-mode t))
 
 ;;disable sound
 (setq visible-bell 1)
@@ -331,12 +296,6 @@
     (define-key god-local-mode-map (kbd "z") 'repeat)
     (define-key god-local-mode-map (kbd "i") 'god-local-mode))
 
-(defun my-update-cursor ()
-    (setq cursor-type (if
-                          (or god-local-mode buffer-read-only)
-                          'hbar
-                          'box)))
-
 (add-hook 'god-mode-enabled-hook 'my-update-cursor)
 (add-hook 'god-mode-disabled-hook 'my-update-cursor)
 
@@ -351,17 +310,6 @@
     (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
     (setq dumb-jump-force-searcher 'ag)
     :ensure)
-
-;;ztree
-(use-package ztree
-    :bind (("C-c C-c z" . ztree-dir)))
-
-;; beacon
-(use-package beacon
-    :config
-    (beacon-mode 1)
-    :bind
-    (("C-c C-c C-c" . beacon-blink)))
 
 ;; fiplr
 (use-package fiplr
@@ -409,11 +357,12 @@
 (use-package emacs-surround
     ;;:ensure t
     :bind((("C-q" . emacs-surround))))
+
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
-
+;; exec shell
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -426,5 +375,10 @@
 
 (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
+
+(use-package exec-path-from-shell
+    :ensure t
+    :init (when (memq window-system '(mac))
+            (exec-path-from-shell-initialize)))
 (load custom-file)
 ;;; init.el ends here
