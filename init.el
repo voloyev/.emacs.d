@@ -34,6 +34,7 @@
 (require 'crystal-module)
 (require 'elixir-module)
 (require 'settings-module)
+(require 'go-module)
 (require 'clojure-module)
 
 ;; Emacs server
@@ -360,6 +361,21 @@
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+;; exec shell
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when window-system (set-exec-path-from-shell-PATH))
+
+(when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+
 (use-package exec-path-from-shell
     :ensure t
     :init (when (memq window-system '(mac))
