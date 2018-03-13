@@ -55,5 +55,10 @@ this section.
 
 (setq ruby-insert-encoding-magic-comment nil)
 
+(use-package minitest
+    :ensure t
+    :config
+    (add-hook 'ruby-mode-hook 'minitest-mode))
+
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
