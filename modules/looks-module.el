@@ -2,11 +2,11 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts and general looks
-(when (memq window-system '(mac))
-  (set-face-attribute 'default nil :font "Hack 12")
-  (set-frame-font "Hack 12"))
+(when (memq window-system '(mac ns))
+  (set-face-attribute 'default nil :font "Hack 11")
+  (set-frame-font "Hack 11"))
 
-(unless (memq window-system '(mac))
+(unless (memq window-system '(mac ns))
   (set-face-attribute 'default nil :font "Hack 9")
   (set-frame-font "Hack 9"))
 
