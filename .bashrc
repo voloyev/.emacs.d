@@ -135,15 +135,25 @@ export VISUAL="emacs" # $VISUAL opens in GUI with non-daemon as alternate
 alias betty='/home/nuncostans/betty/main.rb'
 
 #### caddy
-export PATH="$PATH:$HOME/Programs/caddy/" # Add caddy to PATH for running
+# export PATH="$PATH:$HOME/Programs/caddy/" # Add caddy to PATH for running
 #### heroku
 export PATH="/usr/local/heroku/bin:$PATH"
+
 # rbenv
-# export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # rvm
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# go
+export GOROOT="$HOME/bin/go"
+export PATH="$PATH:$GOROOT/bin"
+export GOPATH="$HOME/workspace/go"
+export PATH="$PATH:$GOPATH/bin"
+# rust src
+export RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

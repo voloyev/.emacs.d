@@ -378,7 +378,7 @@
 
 (use-package exec-path-from-shell
     :ensure t
-    :init (when (memq window-system '(mac))
+    :init (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
 (load custom-file)
 ;;; init.el ends here
