@@ -66,9 +66,18 @@
 (use-package calfw-org
     :ensure t)
 
+;; which-key
+(use-package which-key
+    :config
+    (which-key-mode t))
+
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
+
+;; Easy transition between buffers: M-arrow-keys
+(if (equal nil (equal major-mode 'org-mode))
+    (windmove-default-keybindings 'meta))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)

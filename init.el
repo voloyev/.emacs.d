@@ -37,6 +37,9 @@
 (require 'go-module)
 (require 'clojure-module)
 
+;; custom plugins path
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -84,50 +87,13 @@
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
 
-;; Easy transition between buffers: M-arrow-keys
-(if (equal nil (equal major-mode 'org-mode))
-    (windmove-default-keybindings 'meta))
-
-;; slime
-;;; (setq slime-lisp-implementations
-;;       '((closure ("lein" "repl"))
-;;         (sbcl ("/usr/local/bin/sbcl")))))
-;; (setq slime-contribs '(slime-fancy))
-
-;;sly
+;; sly
 (use-package sly
     :ensure t
     :init
     (setq inferior-lisp-program "sbcl")
     (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
     (add-hook 'lisp-mode-hook 'sly-editing-mode))
-
-;; racket
-(use-package racket-mode
-    :ensure t)
-
-;; flycheck
-(use-package flycheck
-    :ensure t
-    :init
-    (global-flycheck-mode))
-
-;; Markdown
-(use-package markdown-mode
-    :init
-    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-    (setq markdown-command "grip --export"))
-
-;; line number
-(use-package nlinum
-    :bind (("C-c C-l" . nlinum-mode)))
-
-;; gutter
-(use-package git-gutter-fringe
-    :config
-    (global-git-gutter-mode t))
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -147,11 +113,6 @@
     :bind(("C-c & M-b" . bookmark-set)
           ("C-c & b" . bookmark-jump)
           ("<f4>" . bookmark-bmenu-list)))
-
-;; whichkey
-(use-package which-key
-    :config
-    (which-key-mode t))
 
 ;; org-mode
 (use-package org-install
@@ -186,9 +147,6 @@
     :bind(("<f5>" . whitespace-mode)
           ("C-c <f5>" . whitespace-cleanup)))
 
-;; evil modes
-;;(global-set-key (kbd "<f6>") 'evil-mode)
-
 ;; emmet mode
 (use-package emmet-mode
     :config
@@ -215,7 +173,7 @@
 
 ;; undo tree
 (global-undo-tree-mode t)
-
+;; TODO do this realy need
 ;; resize windows
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
@@ -281,24 +239,6 @@
 (global-set-key (kbd "<C-left>") 'shrink-window-horizontally)
 (global-set-key (kbd "<C-right>") 'enlarge-window-horizontally)
 
-;; god mode
-(use-package god-mode
-    :init
-    (setq god-exempt-major-modes nil)
-    (setq god-exempt-predicates nil)
-    :config
-    (add-to-list 'god-exempt-major-modes 'dired-mode)
-    (add-to-list 'god-exempt-major-modes 'magit-mode)
-    (add-to-list 'god-exempt-major-modes 'undo-tree-mode)
-    (add-to-list 'god-exempt-major-modes 'project-explorer-mode)
-    ;; bindings
-    (global-set-key (kbd "<escape>") 'god-local-mode)
-    (define-key god-local-mode-map (kbd "z") 'repeat)
-    (define-key god-local-mode-map (kbd "i") 'god-local-mode))
-
-(add-hook 'god-mode-enabled-hook 'my-update-cursor)
-(add-hook 'god-mode-disabled-hook 'my-update-cursor)
-
 (use-package dumb-jump
     :bind (("M-g o" . dumb-jump-go-other-window)
            ("M-g j" . dumb-jump-go)
@@ -353,7 +293,6 @@
                               "COMMA_PARENTHESIS_WHITESPACE"
                               "EN_QUOTES"))
 ;; emacs surround
-(add-to-list 'load-path "~/.emacs.d/plugins/")
 (use-package emacs-surround
     ;;:ensure t
     :bind((("C-q" . emacs-surround))))
