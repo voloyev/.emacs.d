@@ -7,8 +7,15 @@
 ;;- Add integration with elpy
 ;;"
 (use-package elpy
-  :ensure t)
-(package-initialize)
+    :ensure t)
+
+(use-package anaconda-mode
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+
+;;(package-initialize)
 (elpy-enable)
 
 (provide 'python-module)
