@@ -28,5 +28,8 @@
     :init
     (add-hook 'go-mode-hook #'gorepl-mode))
 
+(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+(require 'golint)
+
 (provide 'go-module)
 ;;; go-module.el ends here

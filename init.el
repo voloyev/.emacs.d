@@ -376,6 +376,13 @@
 (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
 
+(use-package elisp-slime-nav
+    :ensure t
+    :init
+    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+      (add-hook hook 'elisp-slime-nav-mode)))
+
+
 (use-package exec-path-from-shell
     :ensure t
     :init (when (memq window-system '(mac ns x))
