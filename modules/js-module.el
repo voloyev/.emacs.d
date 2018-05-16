@@ -17,8 +17,7 @@
 (use-package prettier-js
     :ensure t
     :init
-    (add-hook 'js2-mode-hook 'prettier-js-mode)
-    (add-hook 'web-mode-hook 'prettier-js-mode))
+    (add-hook 'js2-mode-hook 'prettier-js-mode))
 
 ;; vue mode
 (use-package vue-mode
