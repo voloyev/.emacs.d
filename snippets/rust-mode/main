@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: fn_main
+# key: fn_main
+# --
+
+fn main() {
+  $0
+}
