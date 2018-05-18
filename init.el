@@ -67,10 +67,10 @@
 
 ;;multiple cursors
 (use-package multiple-cursors
-    :bind (("C-S-c C-S-c" . mc/edit-lines)
-           ("C-." . mc/mark-next-like-this)
-           ( "C-," . mc/mark-previous-like-this)
-           ("C-c C-|" . mc/mark-all-like-this)
+    :bind (("C-S-c C-S-c"   . mc/edit-lines)
+           ("C-."           . mc/mark-next-like-this)
+           ( "C-,"          . mc/mark-previous-like-this)
+           ("C-c C-|"       . mc/mark-all-like-this)
            ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;;global line mode
@@ -111,8 +111,8 @@
     (when (file-exists-p (concat user-emacs-directory "bookmarks"))
         (bookmark-load bookmark-default-file t))
     :bind(("C-c & M-b" . bookmark-set)
-          ("C-c & b" . bookmark-jump)
-          ("<f4>" . bookmark-bmenu-list)))
+          ("C-c & b"   . bookmark-jump)
+          ("<f4>"      . bookmark-bmenu-list)))
 
 ;; org-mode
 (use-package org-install
@@ -301,7 +301,16 @@
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
+;; elisp settings
+(use-package elisp-slime-nav
+    :ensure t
+    :init
+    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+      (add-hook hook 'elisp-slime-nav-mode)))
+
 ;; exec shell
+;; some magic happens here
+;; DO NOT EDIT THIS SHIT!!!!!!!!!!!!!!!!!
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -315,16 +324,10 @@
 (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
 
-(use-package elisp-slime-nav
-    :ensure t
-    :init
-    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-      (add-hook hook 'elisp-slime-nav-mode)))
-
-
 (use-package exec-path-from-shell
     :ensure t
     :init (when (memq window-system '(mac ns x))
             (exec-path-from-shell-initialize)))
+;; DO NOT EDIT THIS SHIT ends here
 (load custom-file)
 ;;; init.el ends here

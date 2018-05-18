@@ -29,10 +29,10 @@ this section.
     (add-hook 'ruby-mode-hook 'robe-mode)
     (add-hook 'ruby-mode-hook 'yard-mode)
 
-    :bind(("C-c r a" . rvm-activate-corresponding-ruby)
-          ("C-c r r" . inf-ruby-console-auto)
+    :bind(("C-c r a"      . rvm-activate-corresponding-ruby)
+          ("C-c r r"      . inf-ruby-console-auto)
           ( "C-c C-c r s" . robe-start)
-          ("C-c & h r" . enh-ruby-mode)))
+          ("C-c & h r"    . enh-ruby-mode)))
 (use-package bundler
     :ensure t)
 
