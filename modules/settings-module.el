@@ -92,6 +92,6 @@
      (if mark-active (list (region-beginning) (region-end))
          (list (line-beginning-position)
                (line-beginning-position 2)))))
-
+(set-face-attribute 'region nil :background "#191970")
 (provide 'settings-module)
 ;;; settings-module.el ends here

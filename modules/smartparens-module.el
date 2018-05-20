@@ -8,9 +8,6 @@
     (show-smartparens-global-mode 1)
 
     (require 'smartparens-config)
-    (add-hook 'js2-mode-hook 'smartparens-mode)
-    (add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-    (add-hook 'web-mode-hook 'smartparens-mode)
     (--each '(restclient-mode-hook
               js-mode-hook
               js2-mode-hook
@@ -34,7 +31,9 @@
               rust-mode-hook
               yaml-mode-hook
               nginx-mode-hook
-              scss-mode-hook)
+              scss-mode-hook
+              web-mode-hook
+              emacs-lisp-mode-hook)
         (add-hook it 'turn-on-smartparens-mode)))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
