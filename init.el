@@ -59,7 +59,7 @@
         (add-hook 'after-init-hook 'global-company-mode)
         (add-to-list 'company-backends 'company-robe)
         (add-to-list 'company-backends 'sly-company)
-        (add-to-list 'company-backends 'company-jedy))
+        (add-to-list 'company-backends 'company-jedi))
     :bind("C-<tab>" . company-complete)
     :config
     (global-company-mode t)
