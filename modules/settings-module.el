@@ -49,7 +49,10 @@
     (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
     (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
     (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-    (setq markdown-command "grip --export"))
+    (setq markdown-command "mark"))
+
+(use-package markdown-preview-mode
+    :ensure t)
 
 ;; line number
 (use-package nlinum
