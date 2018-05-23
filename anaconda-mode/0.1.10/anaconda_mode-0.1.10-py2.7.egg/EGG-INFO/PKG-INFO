@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: anaconda-mode
+Version: 0.1.10
+Summary: Code navigation, documentation lookup and completion for Python.
+Home-page: https://github.com/proofit404/anaconda-mode
+Author: Artem Malyshev
+Author-email: proofit404@gmail.com
+License: GPL3
+Description: 
+        Autocompletion server for ``anaconda-mode`` Emacs plugin.
+        
+        See https://github.com/proofit404/anaconda-mode for more details.
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Text Editors
+Classifier: Topic :: Text Editors :: Emacs
