@@ -1,23 +1,15 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH=/home/voloyev/.oh-my-zsh
 
-# Path to your oh-my-zsh installation.
- export ZSH=/home/user/.oh-my-zsh
+ZSH_THEME="mortalscumbag"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="fishy"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails ruby rbenv zsh-autosuggestions)
-
+plugins=(
+  git rails ruby rbenv zsh-autosuggestions yaourt capistrano common-aliases knife gem docker django python zsh-autosuggestions
+)
 source $ZSH/oh-my-zsh.sh
 
-# Example aliases
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
 alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -33,22 +25,33 @@ export PATH="$HOME/bin:$PATH"
 # fzf
 alias fzfp="fzf --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500'"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # go
 export GOROOT="$HOME/bin/go"
 export PATH="$PATH:$GOROOT/bin"
-GOPATH="$HOME/Documents/temp/go"
+export GOPATH="$HOME/workspace/go"
+export PATH="$PATH:$GOPATH/bin"
 
 # editor
 export EDITOR=vim
 export VISUAL=vim
-alias emct='emacsclient -t'
+alias emc='emacsclient -t'
 
 # rust src
 export RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+# nim
+export PATH=/home/voloyev/.nimble/bin:$PATH
 
+# pipenv
+eval "$(pipenv --completion)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# android
+export ANDROID_HOME=~/bin/android/sdk
+
+###-tns-completion-start-###
+if [ -f /home/voloyev/.tnsrc ]; then 
+    source /home/voloyev/.tnsrc 
+fi
+###-tns-completion-end-###
