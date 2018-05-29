@@ -36,6 +36,9 @@ this section.
 (use-package bundler
     :ensure t)
 
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+
 (defadvice inf-ruby-console-auto (before activate)
   (rbenv-use-corresponding))
 
