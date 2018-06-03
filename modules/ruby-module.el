@@ -12,9 +12,10 @@ this section.
 "
 ;;rbenv
 (use-package rbenv
-    :ensure t
-    :config
-    (global-rbenv-mode 1))
+    :ensure t)
+
+(use-package chruby
+    :ensure t)
 
 (use-package ruby-tools
     :init
@@ -29,10 +30,11 @@ this section.
     (add-hook 'ruby-mode-hook 'robe-mode)
     (add-hook 'ruby-mode-hook 'yard-mode)
 
-    :bind(("C-c r a"      . rvm-activate-corresponding-ruby)
+    :bind(("C-c r a"      . chruby-use-corresponding)
           ("C-c r r"      . inf-ruby-console-auto)
-          ( "C-c C-c r s" . robe-start)
+          ("C-c C-c r s"  . robe-start)
           ("C-c & h r"    . enh-ruby-mode)))
+
 (use-package bundler
     :ensure t)
 
@@ -40,7 +42,8 @@ this section.
   '(push 'company-robe company-backends))
 
 (defadvice inf-ruby-console-auto (before activate)
-  (rbenv-use-corresponding))
+  "Activate corespongeting ruby when use inf-ruby."
+  (chruby-use-corresponding))
 
 ;; rinari
 (use-package rinari
@@ -48,7 +51,7 @@ this section.
     :init
     (setq rinari-tags-file-name "TAGS"))
 
-;;slim-mode
+;; slim-mode
 (use-package slim-mode
     :ensure t
     :init
@@ -64,7 +67,8 @@ this section.
 (use-package minitest
     :ensure t
     :config
-    (add-hook 'ruby-mode-hook 'minitest-mode))
+    (add-hook 'ruby-mode-hook 'minitest-mode)
+    (add-hook 'enh-ruby-mode-hook 'minitest-mode))
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
