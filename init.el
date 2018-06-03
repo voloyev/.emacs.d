@@ -252,15 +252,11 @@
     (setq dumb-jump-force-searcher 'ag)
     :ensure)
 
-;; fiplr
-(use-package fiplr
-    :ensure
-    :config
-    (setq fiplr-root-markers '(".git" ".svn"))
-    (setq fiplr-ignored-globs '((directories (".git" ".svn"))
-                                (files ("*.jpg" "*.png" "*.zip" "*~"))))
+;; fzf
+(use-package fzf
+    :ensure t
     :bind
-    (("C-x f" . fiplr-find-file)))
+    (("C-x f" . fzf)))
 
 ;; hyde
 (use-package hyde
