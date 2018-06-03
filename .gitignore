@@ -48,7 +48,5 @@ recentf
 abbrev_defs
 tramp
 .emacs-custom.el
-.gitconfig
-
 network-security.data
 anaconda-mode/
