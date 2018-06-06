@@ -15,7 +15,9 @@
     (setq alchemist-iex-program-name "iex") ;; default: iex
     (setq alchemist-execute-command "elixir") ;; default: elixir
     (setq alchemist-compile-command "elixirc") ;; default: elixirc
-    (setq alchemist-hooks-compile-on-save t))
+    (setq alchemist-hooks-compile-on-save t)
+    (setq alchemist-goto-erlang-source-dir "~/source/otp")
+    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
 (use-package alchemist
     :ensure t)
