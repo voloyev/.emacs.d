@@ -1,0 +1,15 @@
+* TODO ERUBY tasks
+** TODO Refresh knowledge of Rack.
+** TODO Glance through Sinatra and Trailblazer docs.
+** TODO Create doc with frameworks areas of usage, pros and cons.
+
+** TODO Create 2 MVC apps using Hanami and Padrino. Use GitHub and deploy to Heroku.
+*** TODO Implement CRUD actions for 2 resources (e.g. Post <-* Comment, Gallery <-* Image or your own idea).
+*** TODO Use MongoDB for one project and PostgreSQL with Sequel as ORM for another.
+*** TODO Use simple HTML views or FE framework of your choice.
+
+** TODO Only for 1 app (you choose it):
+*** TODO Add your own extra Rack middleware. It could be a simple one like adding custom HTTP header, embedding HTML meta tag or logging.
+*** TODO Build RESTful JSON API with Grape using Rack::Cascade for 1 resource.
+
+** TODO [Optional] Build simple service using RoR or other framework, Trailblazer, and Ruby Object Mapper
