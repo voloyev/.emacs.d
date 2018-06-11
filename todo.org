@@ -1,4 +1,8 @@
+
 * TODO ERUBY tasks
+** TODO Write a gem for identicon
+** TODO Add identicon gem to two this application
+** TODO Use websockets for comments
 ** TODO Refresh knowledge of Rack.
 ** TODO Glance through Sinatra and Trailblazer docs.
 ** TODO Create doc with frameworks areas of usage, pros and cons.
