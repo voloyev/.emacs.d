@@ -56,3 +56,5 @@ eval "$(pipenv --completion)"
 
 # fzf in history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias be="bundle exec"

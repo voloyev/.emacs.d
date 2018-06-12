@@ -290,10 +290,10 @@
                               "COMMA_PARENTHESIS_WHITESPACE"
                               "EN_QUOTES"))
 ;; evil mode
-(use-package evil
-    :ensure t
-    :init
-    (evil-mode 1))
+;; (use-package evilual
+;;     :ensure t
+;;     :init
+;;     (evil-mode 1))
 
 ;; emacs surround
 (use-package emacs-surround
