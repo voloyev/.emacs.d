@@ -17,6 +17,7 @@
               markdown-mode-hook
               org-mode-hook
               rust-mode-hook
+              toml-mode-hook
               cc-mode-hook
               lisp-mode-hook
               emacs-lisp-mode-hook
@@ -33,7 +34,8 @@
               nginx-mode-hook
               scss-mode-hook
               web-mode-hook
-              emacs-lisp-mode-hook)
+              emacs-lisp-mode-hook
+              clojure-mode-hook)
         (add-hook it 'turn-on-smartparens-mode)))
 (provide 'smartparens-module)
 ;;; smartparens-module ends here
