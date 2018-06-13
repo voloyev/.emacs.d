@@ -17,3 +17,14 @@
 *** TODO Build RESTful JSON API with Grape using Rack::Cascade for 1 resource.
 
 ** TODO [Optional] Build simple service using RoR or other framework, Trailblazer, and Ruby Object Mapper
+
+
+* SETUP Splunk forwarder(steps)
+** Here are the main ways that you can configure data inputs on a forwarder:
+*** Specify inputs during initial deployment.
+*** For Windows forwarders, specify common inputs during the installation process.
+*** For *nix forwarders, specify inputs directly after installation.
+*** Use the CLI.
+*** Edit inputs.conf.
+*** Install an app that contains the inputs you want.
+*** Use Splunk Web to configure the inputs and a deployment server to copy the resulting inputs.conf file to forwarders.
