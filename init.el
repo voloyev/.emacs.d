@@ -210,6 +210,7 @@
 
 ;; toggle quotes
 (use-package toggle-quotes
+    :ensure t
     :bind("C-'" . toggle-quotes))
 
 ;;paradox token
@@ -230,8 +231,9 @@
 ;; flyspell
 (use-package flyspell
     :config
-    (flyspell-mode t))
+  (flyspell-mode t))
 
+;; php mode hook :)
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 ;; resize buffers
@@ -290,15 +292,23 @@
                               "COMMA_PARENTHESIS_WHITESPACE"
                               "EN_QUOTES"))
 ;; evil mode
-;; (use-package evilual
-;;     :ensure t
-;;     :init
-;;     (evil-mode 1))
+(use-package evil
+     :ensure t
+     :bind
+     (("C-c e e" . evil-local-mode)))
 
 ;; emacs surround
 (use-package emacs-surround
     ;;:ensure t
     :bind((("C-q" . emacs-surround))))
+
+;; Emacs key bindings
+(use-package evil-nerd-commenter
+    :ensure t
+    :bind (( "M-;" .  evilnc-comment-or-uncomment-lines)
+           ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
+           ( "C-c e c" . evilnc-copy-and-comment-lines)
+           ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
