@@ -42,7 +42,10 @@
   :ensure t
   :init
   (global-flycheck-mode))
-
+(use-package flycheck-pycheckers
+  :ensure t)
+;;(with-eval-after-load 'flycheck
+ ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 ;; Markdown
 (use-package markdown-mode
     :init
