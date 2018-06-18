@@ -25,5 +25,8 @@
 ;;(package-initialize)
 (elpy-enable)
 
+(setq python-shell-interpreter "python3"
+      python-shell-interpreter-args "-i")
+
 (provide 'python-module)
 ;;; python-module ends here
