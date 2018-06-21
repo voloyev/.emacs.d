@@ -28,3 +28,19 @@
 *** Edit inputs.conf.
 *** Install an app that contains the inputs you want.
 *** Use Splunk Web to configure the inputs and a deployment server to copy the resulting inputs.conf file to forwarders.
+
+
+* TODO install kibana
+** https://www.elastic.co/products/kibana
+* TODO install logstash
+** https://www.elastic.co/products/logstash
+* TODO sutup communication between _kibana_ and _logstash_
+* TODO Install beats
+** https://www.elastic.co/products/beats
+** filebeats
+** metricbeat
+** packetbeat
+* TODO install apm
+** https://www.elastic.co/solutions/apm
+** setup apm for rails
+
