@@ -30,7 +30,7 @@
 *** Use Splunk Web to configure the inputs and a deployment server to copy the resulting inputs.conf file to forwarders.
 
 
-* TODO install kibana
+* DONE install kibana
 ** https://www.elastic.co/products/kibana
 * TODO install logstash
 ** https://www.elastic.co/products/logstash

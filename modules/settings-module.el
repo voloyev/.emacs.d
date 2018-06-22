@@ -77,6 +77,14 @@
     :config
     (which-key-mode t))
 
+;; nginx
+
+(use-package company-nginx
+    :ensure t
+    :config
+    (eval-after-load 'nginx-mode
+      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
+
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))

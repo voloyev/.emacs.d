@@ -18,29 +18,34 @@
 
 ;;; Change config start
 ;; -=[ Rust
+
+
+(require 'company-racer)
+
+(with-eval-after-load 'company
+  (add-to-list 'company-backends 'company-racer))
+
 (use-package rust-mode
-  :mode "\\.rs\\'"
-  :config
-  (setq rust-format-on-save t)
-  (use-package flycheck-rust
+    :mode "\\.rs\\'"
+    :ensure t
+    :init
+    (add-hook 'rust-mode-hook #'racer-mode)
+    (add-hook 'racer-mode-hook #'eldoc-mode)
+    (add-hook 'racer-mode-hook #'company-mode)
+    (setq rust-format-on-save t))
+
+(use-package flycheck-rust
     :after flycheck
     :commands flycheck-rust-setup
     :init
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package racer
+    :ensure t
     :commands racer-mode
     :diminish racer-mode
     :init
-    (add-hook 'rust-mode-hook 'racer-mode)
-    (add-hook 'rust-mode-hook 'eldoc-mode)
-    (add-hook 'racer-mode-hook #'company-mode)
     :bind (("M-." . racer-find-definition)))
-
-(use-package company-racer
-    :config
-    (add-to-list 'company-backends 'company-racer)
-    (setq company-tooltip-align-annotations t))
 
 (use-package cargo
     :commands cargo-minor-mode
