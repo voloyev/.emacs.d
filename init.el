@@ -297,6 +297,11 @@
      :bind
      (("C-c e e" . evil-local-mode)))
 
+(use-package evil-matchit
+    :ensure t)
+
+(add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
+
 ;; emacs surround
 (use-package emacs-surround
     ;;:ensure t
