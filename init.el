@@ -83,7 +83,7 @@
     (projectile-global-mode)
     (projectile-rails-global-mode)
     (setq projectile-indexing-method 'native)
-    (setq projectile-enable-caching t)
+    ;;(setq projectile-enable-caching t)
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
