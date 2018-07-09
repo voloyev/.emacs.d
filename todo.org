@@ -19,6 +19,10 @@
 ** TODO [Optional] Build simple service using RoR or other framework, Trailblazer, and Ruby Object Mapper
 
 ** TODO This is called (voluntary) context switching.
+https://github.com/ruby-concurrency/concurrent-ruby
+https://www.toptal.com/ruby/ruby-concurrency-and-parallelism-a-practical-primer
+https://medium.com/@WesleyDavis/multi-threading-in-ruby-1c075f4c7410
+https://habrahabr.ru/post/94574/
 
 
 * SETUP Splunk forwarder(steps)
