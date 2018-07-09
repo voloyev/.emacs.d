@@ -18,6 +18,8 @@
 
 ** TODO [Optional] Build simple service using RoR or other framework, Trailblazer, and Ruby Object Mapper
 
+** TODO This is called (voluntary) context switching.
+
 
 * SETUP Splunk forwarder(steps)
 ** Here are the main ways that you can configure data inputs on a forwarder:
@@ -32,15 +34,14 @@
 
 * DONE install kibana
 ** https://www.elastic.co/products/kibana
-* TODO install logstash
+* install logstash
 ** https://www.elastic.co/products/logstash
 * TODO sutup communication between _kibana_ and _logstash_
-* TODO Install beats
+* DONE Install beats
 ** https://www.elastic.co/products/beats
 ** filebeats
 ** metricbeat
 ** packetbeat
-* TODO install apm
+* DONE install apm
 ** https://www.elastic.co/solutions/apm
 ** setup apm for rails
-
