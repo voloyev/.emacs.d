@@ -37,7 +37,7 @@
 (require 'go-module)
 (require 'clojure-module)
 (require 'avy-module)
-
+(require 'hydra-module)
 ;; custom plugins path
 (add-to-list 'load-path "~/.emacs.d/plugins/")
 
