@@ -85,6 +85,13 @@
     (eval-after-load 'nginx-mode
       '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
+;; upcase region
+(use-package fix-word
+    :ensure t
+    :bind(("M-u" . fix-word-upcase)
+          ("M-l" . fix-word-downcase)
+          ("M-c" . fix-word-capitalize)))
+
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
