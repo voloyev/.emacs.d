@@ -51,3 +51,50 @@ https://habrahabr.ru/post/94574/
 ** setup apm for rails
 
 * TODO ELK:
+** What is search
+*** Information retrieval - search engine
+**** Sort
+**** Highlight
+**** Aggregation
+**** Suggestions
+*** Search engine
+Happens twice
+into index and search
+**** Indexing
+**** Tokinize
+**** Filtering
+**** Date parsing
+
+*** Tokenization
+**** Found word bounderies
+**** Understand pattern
+**** Streaming
+- Plurals
+- Conjugations
+- lookup tables
+- suffic
+
+*** Filtering 
+cast to lowercast
+remove stop words like "a" or "the"
+add synonyms
+Relevance Scoring
+
+** Elasticsearch
+
+*** default algth TF/IDF
+
+*** Real-Time Data 1 second gap
+*** Real-Time Analytics
+*** Distributed
+*** Hight Availability
+*** Multitenancy
+*** Full-Text Search built on top Apach Lucene
+*** Documet-Oriented
+*** Schema-Free, it actuall has schema, it automaticaly create schema, or you can create it before _indexing_
+*** Developer-Friendly, RESTful API
+
+<REST verb> <Index> <Type> <ID>
+PUT    sales order 123
+GET    sales order 123
+DELETE sales
