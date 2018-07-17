@@ -49,3 +49,5 @@ https://habrahabr.ru/post/94574/
 * DONE install apm
 ** https://www.elastic.co/solutions/apm
 ** setup apm for rails
+
+* TODO ELK:

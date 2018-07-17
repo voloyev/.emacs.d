@@ -92,6 +92,9 @@
           ("M-l" . fix-word-downcase)
           ("M-c" . fix-word-capitalize)))
 
+(use-package es-mode
+    :ensure t)
+
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))

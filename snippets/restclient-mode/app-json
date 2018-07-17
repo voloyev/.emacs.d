@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: app_json
+# key: app_json
+# --
+Content-Type: application/json
