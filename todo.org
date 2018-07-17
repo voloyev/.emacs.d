@@ -94,7 +94,21 @@ Relevance Scoring
 *** Schema-Free, it actuall has schema, it automaticaly create schema, or you can create it before _indexing_
 *** Developer-Friendly, RESTful API
 
-<REST verb> <Index> <Type> <ID>
+<REST verb> /<Index>/<Type>/<ID>
 PUT    sales order 123
 GET    sales order 123
 DELETE sales
+
+Some metaphor
+| Rational DB | Elasticsearch |
+|-------------+---------------|
+| Databases   | Indexes       |
+| Tables      | Types         |
+| Rows        | Documents     |
+| Columns     | Fiels         |
+
+But,
+Initially, we spoke about an “index” being similar to a “database” in an SQL database, and a “type” being equivalent to a “table”.
+
+This was a bad analogy that led to incorrect assumptions. In an SQL database, tables are independent of each other. The columns in one table have no bearing on columns with the same name in another table. This is not the case for fields in a mapping type.
+https://www.elastic.co/guide/en/elasticsearch/reference/master/removal-of-types.html#_why_are_mapping_types_being_removed
