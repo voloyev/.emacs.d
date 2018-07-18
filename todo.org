@@ -52,6 +52,7 @@ https://habrahabr.ru/post/94574/
 
 * TODO Cherwell tasks
 ** TODO Alert script
+http://docs.splunk.com/Documentation/Splunk/7.1.2/Alert/Alertexamples
 ** TODO Splunk commands
 ** TODO Mock logs
 https://github.com/kiritbasu/Fake-Apache-Log-Generator
