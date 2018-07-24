@@ -12,7 +12,11 @@
     :bind(("C-s" . swiper)))
 
 (use-package counsel-projectile
-    :ensure t)
+    :ensure t
+    :bind(("C-c p s s" . counsel-projectile-ag)
+          ("C-c p p" . counsel-projectile-switch-project)))
+
+(counsel-projectile-mode)
 
 (provide 'ivy-module)
 ;;; ivy-module.el ends here

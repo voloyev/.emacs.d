@@ -62,3 +62,8 @@ http://docs.splunk.com/Documentation/Splunk/7.1.2/AdvancedDev/ModInputsIntro
 http://dev.splunk.com/view/python-sdk/SP-CAAAER3
 - example
 http://docs.splunk.com/Documentation/Splunk/latest/AdvancedDev/ModInputsExample#Twitter_example
+** fields
+- Configurable
+- Entity
+- Refresh time
+- Auth credentials
