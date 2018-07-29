@@ -9,7 +9,8 @@
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
-    :bind(("C-s" . swiper)))
+    :bind(("C-s" . swiper)
+          ("M-y" . counsel-yank-pop)))
 
 (use-package counsel-projectile
     :ensure t
