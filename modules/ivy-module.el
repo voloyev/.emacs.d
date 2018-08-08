@@ -15,7 +15,8 @@
 (use-package counsel-projectile
     :ensure t
     :bind(("C-c p s s" . counsel-projectile-ag)
-          ("C-c p p" . counsel-projectile-switch-project)))
+          ("C-c p p" . counsel-projectile-switch-project)
+          ("C-c p SPC" . counsel-projectile)))
 
 (counsel-projectile-mode)
 
