@@ -2,6 +2,8 @@
 ;;; Code:
 ;;; Commentary:
 ;; ivy module
+(setq projectile-keymap-prefix (kbd "C-c C-p"))
+
 (use-package ivy
     :ensure t
     :init
@@ -12,9 +14,9 @@
     :bind(("C-s" . swiper)))
 
 (use-package counsel-projectile
-    :ensure t
-    :bind(("C-c p s s" . counsel-projectile-ag)
-          ("C-c p p" . counsel-projectile-switch-project)))
+    :ensure t)
+    ;; :bind(("C-c p s s" . counsel-projectile-ag) 
+    ;;       ("C-c p p" . counsel-projectile-switch-project)))
 
 (counsel-projectile-mode)
 
