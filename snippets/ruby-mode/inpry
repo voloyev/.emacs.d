@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inpry
+# key: inpry
+# --
+$0require 'pry'; binding.pry # <<<<<<<<<<<<<<<<<<<< REMOVE

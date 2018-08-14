@@ -61,6 +61,7 @@
 (setq-default tab-width          2)
 (setq-default standart-indent    2)
 (setq-default lisp-body-indent   2)
+
 ;; css and sccs indent level
 (setq css-indent-offset 2)
 (setq scss-indent-offset 2)
@@ -79,6 +80,7 @@
     (visual-line-mode 1))
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;;Display the name of the current buffer in the title bar
 (setq frame-title-format "GNU Emacs: %b")
 (fci-mode 1)
@@ -86,4 +88,3 @@
 
 (provide 'looks-module)
 ;;; looks-module ends here
-

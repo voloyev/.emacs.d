@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; php module
 ;;; Code:
-;; here should be settings that can not be placet anywhere elese
+;; here should be settings that can not be placed anywhere elese
 (use-package vi-tilde-fringe
     :ensure t
     :config
@@ -45,7 +45,7 @@
 (use-package flycheck-pycheckers
   :ensure t)
 ;;(with-eval-after-load 'flycheck
- ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 ;; Markdown
 (use-package markdown-mode
     :init
@@ -78,7 +78,6 @@
     (which-key-mode t))
 
 ;; nginx
-
 (use-package company-nginx
     :ensure t
     :config
@@ -116,5 +115,6 @@
      (if mark-active (list (region-beginning) (region-end))
          (list (line-beginning-position)
                (line-beginning-position 2)))))
+
 (provide 'settings-module)
 ;;; settings-module.el ends here

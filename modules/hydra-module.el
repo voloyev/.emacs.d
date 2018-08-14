@@ -9,5 +9,6 @@
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
+
 (provide 'hydra-module)
 ;;; hydra-module.el ends here
