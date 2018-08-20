@@ -3,12 +3,12 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "Hack 11")
-  (set-frame-font "Hack 12"))
+  (set-face-attribute 'default nil :font "Inconsolata 14")
+  (set-frame-font "Inconsolata 14"))
 
 (unless (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "Hack 9")
-  (set-frame-font "Hack 9"))
+  (set-face-attribute 'default nil :font "Inconsolata 14")
+  (set-frame-font "Inconsolata 14"))
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
