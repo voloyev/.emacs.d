@@ -2,7 +2,7 @@
 	name = Volodymyr Yevtushenko
 	email = voloyev@vivaldi.net
 [core]
-	autocrlf = input
+	autocrlf = false
 	safecrlf = true
 [alias]
 	co   = checkout
