@@ -55,6 +55,10 @@
 
 (use-package toml-mode
     :mode (("\\.toml\\'" . toml-mode)))
+
+(use-package rust-playground
+    :ensure t
+    :bind(("C-c C-r e" . rust-playground-exec)))
 ;;; change config end
 ;; (use-package rust-mode
 ;;     :mode "\\.rs\\'"
