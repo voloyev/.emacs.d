@@ -7,8 +7,8 @@
   (set-frame-font "Hack 11"))
 
 (unless (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "Inconsolata 14")
-  (set-frame-font "Inconsolata 14"))
+  (set-face-attribute 'default nil :font "Hack 10")
+  (set-frame-font "Hack 10"))
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
