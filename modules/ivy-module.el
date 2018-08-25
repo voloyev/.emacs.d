@@ -17,9 +17,9 @@
     :bind(("C-c p s s" . counsel-projectile-ag)
 	        ("C-c p s r" . counsel-projectile-rg)
           ("C-c p p"   . counsel-projectile-switch-project)
-          ("C-c p SPC" . counsel-projectile)))
+          ("C-c SPC"   . counsel-projectile)))
 
-;;(counsel-projectile-mode t)
+(counsel-projectile-mode t)
 
 (provide 'ivy-module)
 ;;; ivy-module.el ends here
