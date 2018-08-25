@@ -70,7 +70,7 @@
 (use-package multiple-cursors
     :bind (("C-S-c C-S-c"   . mc/edit-lines)
            ("C-."           . mc/mark-next-like-this)
-           ( "C-,"          . mc/mark-previous-like-this)
+           ("C-,"           . mc/mark-previous-like-this)
            ("C-c C-|"       . mc/mark-all-like-this)
            ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
@@ -154,8 +154,6 @@
     (add-hook 'web-mode-hook 'emmet-mode)
     (add-hook 'css-mode-hook  'emmet-mode))
 
-;;(put 'upcase-region 'disabled nil)
-
 ;; work mouse in terminal
 (xterm-mouse-mode t)
 
@@ -174,12 +172,6 @@
 
 ;; undo tree
 (global-undo-tree-mode t)
-;; TODO do this realy need
-;; resize windows
-(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<down>") 'shrink-window)
-(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; c-mode settings
 (setq c-default-style "linux")
