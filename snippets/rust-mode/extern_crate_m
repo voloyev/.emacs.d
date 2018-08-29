@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: extcm
+# key: extcm
+# --
+
+#[macro_use]
+extern create $1;
+$0
