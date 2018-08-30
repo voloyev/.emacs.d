@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: extc
+# key: extc
+# --
+extern crate $1;
+$0

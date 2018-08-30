@@ -28,9 +28,14 @@
 
 (use-package xref-js2
     :ensure t)
+
 ;; typescript
 (use-package tide
-    :ensure t)
+    :ensure t
+    :after (typescript-mode company flycheck)
+    :hook ((typescript-mode . tide-setup)
+           (typescript-mode . tide-hl-identifier-mode)
+           (before-save . tide-format-before-save)))
 
 (defun setup-tide-mode ()
     (interactive)
@@ -61,6 +66,10 @@
 
 (add-hook 'js2-mode-hook (lambda ()
                            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+(add-hook 'js2-mode-hook #'setup-tide-mode)
+;; configure javascript-tide checker to run after your default javascript checker
+(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+
 (require 'company)
 (require 'company-tern)
 
