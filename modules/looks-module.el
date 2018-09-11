@@ -86,5 +86,10 @@
 (fci-mode 1)
 (setq fci-rule-width 3)
 
+(use-package fixmee
+    :ensure t
+    :init (require 'button-lock)
+    :config (global-fixmee-mode 1))
+
 (provide 'looks-module)
 ;;; looks-module ends here
