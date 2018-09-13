@@ -2,8 +2,6 @@
 ;;; Code:
 ;;; Commentary:
 ;; ivy module
-(setq projectile-keymap-prefix (kbd "C-c C-p"))
-
 (use-package ivy
     :ensure t
     :config
