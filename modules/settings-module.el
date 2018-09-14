@@ -8,12 +8,6 @@
     :config
     (global-vi-tilde-fringe-mode t))
 
-;; Achievements mode
-(use-package achievements
-    :ensure t
-    :config
-    (achievements-mode 1))
-
 (use-package switch-window
     ;; Switch window
     :ensure t
@@ -46,6 +40,7 @@
   :ensure t)
 ;;(with-eval-after-load 'flycheck
 ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+
 ;; Markdown
 (use-package markdown-mode
     :init

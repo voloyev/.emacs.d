@@ -87,6 +87,7 @@
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; sly
 (use-package sly
