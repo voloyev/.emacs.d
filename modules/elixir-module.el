@@ -6,6 +6,9 @@
 ;; Highlights *.elixir2 as well
 (use-package elixir-mode
     :ensure t
+    :init
+    (add-hook 'elixir-mode-hook
+          (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
     :config
     (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
     (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
