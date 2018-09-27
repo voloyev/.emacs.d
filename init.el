@@ -82,12 +82,20 @@
     :config
     (projectile-global-mode)
     (projectile-rails-global-mode)
-    (setq projectile-indexing-method 'native)
+    ;(setq projectile-indexing-method 'native)
     ;;(setq projectile-enable-caching t)
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq projectile-enable-caching t)
+;; (if (eq system-type 'darwin)
+;;  (defcustom projectile-enable-caching (eq projectile-indexing-method 'native)
+;;    "When t enables project files caching.
+;; Project caching is automatically enabled by default if you're
+;; using the native indexing method."
+;;   :group 'projectile
+;;   :type 'boolean))
 
 ;; sly
 (use-package sly
