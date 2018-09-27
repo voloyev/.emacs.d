@@ -53,8 +53,13 @@ export PATH=/home/voloyev/.nimble/bin:$PATH
 
 # pipenv
 eval "$(pipenv --completion)"
+eval "$(luarocks path --bin)"
 
 # fzf in history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias be="bundle exec"
+alias mongosrv="mongod --dbpath=$HOME/mongodb"
+
+alias dockstop="(docker stop $(docker ps -a -q))"
+alias dockrm="(docker rm $(docker ps -a -q))"

@@ -4,6 +4,8 @@
 ;;; Code:
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))
 (custom-set-variables '(js-basic-offset 2))
@@ -67,11 +69,23 @@
 (add-hook 'js2-mode-hook (lambda ()
                            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 (add-hook 'js2-mode-hook #'setup-tide-mode)
-;; configure javascript-tide checker to run after your default javascript checker
-(flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+
+(defun enable-minor-mode (my-pair)
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+          (funcall (cdr my-pair)))))
+
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook #'(lambda ()
+                            (enable-minor-mode
+                             '("\\.vue?\\'" . prettier-js-mode))))
 
 (require 'company)
 (require 'company-tern)
+
+(use-package prettier-js
+    :ensure t)
 
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'js2-mode-hook (lambda ()
