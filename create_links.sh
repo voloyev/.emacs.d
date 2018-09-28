@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+yaourt -S chruby ruby-install ; \
 cd ~
 ln -s ~/.emacs.d/.vimrc ~/.vimrc ; \
 ln -s ~/.emacs.d/.zshrc ~/.zshrc ; \

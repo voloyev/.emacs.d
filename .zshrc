@@ -12,10 +12,8 @@ autoload -Uz compinit && compinit -i
 alias zshconfig="vim ~/.zshrc"
 
 # ruby versions
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-# source /usr/share/chruby/chruby.sh
-# source /usr/share/chruby/auto.sh
+source /usr/share/chruby/chruby.sh
+source /usr/share/chruby/auto.sh
 
 # nodenv
 export PATH="$HOME/.nodenv/bin:$PATH"

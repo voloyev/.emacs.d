@@ -21,10 +21,6 @@
     :init
     (add-hook 'js2-mode-hook 'prettier-js-mode))
 
-;; vue mode
-(use-package vue-mode
-    :ensure t)
-
 (use-package js2-refactor
     :ensure t)
 
