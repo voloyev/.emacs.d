@@ -1,0 +1,6 @@
+#+TITLE: notes about splunk db connect
+#+CATEGORY: splunk
+
+* Client-side
+They use react and redux(?) or simple router to interact with user
+endpoints is defined in restmap.conf
