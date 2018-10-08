@@ -40,6 +40,7 @@ export PATH="$PATH:$GOPATH/bin"
 export EDITOR=vim
 export VISUAL=vim
 alias emc='emacsclient -t'
+alias enw="emacs -nw"
 
 # rust src
 export RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"

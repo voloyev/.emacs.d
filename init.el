@@ -168,10 +168,10 @@
 
 ;; vimish folds
 (use-package vimish-fold
-    :bind(("C-c v f" . vimish-fold)
-          ("C-c v t" . vimish-fold-toggle)
-          ("C-c v u" . vimish-fold-unfold)
-          ("C-c v v" . vimish-fold-delete)))
+    :bind(("C-c n f" . vimish-fold)
+          ("C-c n t" . vimish-fold-toggle)
+          ("C-c n u" . vimish-fold-unfold)
+          ("C-c n v" . vimish-fold-delete)))
 
 ;; magit
 (use-package magit
