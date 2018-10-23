@@ -69,9 +69,9 @@
 ;;multiple cursors
 (use-package multiple-cursors
     :bind (("C-S-c C-S-c"   . mc/edit-lines)
-           ("C-."           . mc/mark-next-like-this)
-           ("C-,"           . mc/mark-previous-like-this)
-           ("C-c C-|"       . mc/mark-all-like-this)
+           ("C-c ."         . mc/mark-next-like-this)
+           ("C-c ,"         . mc/mark-previous-like-this)
+           ("C-c |"         . mc/mark-all-like-this)
            ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;;global line mode
@@ -327,6 +327,13 @@
     (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
       (add-hook hook 'elisp-slime-nav-mode)))
 
+(use-package htmlize
+    :ensure t)
+
+;; (use-package org-manage
+    ;; :ensure t
+    ;; :config
+    ;; (setq org-manage-directory-org "~/.emacs.d/org"))
 ;; exec shell
 ;; some magic happens here
 ;; DO NOT EDIT THIS SHIT!!!!!!!!!!!!!!!!!
