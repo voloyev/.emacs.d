@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "Hack 11")
-  (set-frame-font "Hack 11"))
+  (set-face-attribute 'default nil :font "Hack 12")
+  (set-frame-font "Hack 12"))
 
 (unless (memq window-system '(mac ns))
   (set-face-attribute 'default nil :font "Hack 9")

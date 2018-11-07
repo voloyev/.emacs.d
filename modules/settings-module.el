@@ -94,6 +94,9 @@
     :config
     (global-set-key (kbd "C-'") 'toggle-quotes))
 
+(use-package counsel-etags
+    :ensure t)
+
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
