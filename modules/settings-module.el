@@ -13,6 +13,12 @@
     :ensure t
     :bind(("C-x o" . switch-window)))
 
+(use-package ace-window
+    :ensure t
+    :config
+    (setq aw-dispatch-always t)
+    :bind(("M-o" . ace-window)))
+
 (use-package focus
     :ensure t
     :bind(("C-c f m" . focus-mode)))
