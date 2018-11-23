@@ -106,6 +106,16 @@
 ;; Add haml and yaml modes extension
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
+(add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode))
+
+
+(defun xah-mouse-click-to-search (@click)
+  (interactive "e")
+  (let ((p1 (posn-point (event-start @click))))
+    (goto-char p1)
+    (isearch-forward-symbol-at-point)))
+
+(global-set-key (kbd "<mouse-3>") 'xah-mouse-click-to-search)
 
 ;; Easy transition between buffers: M-arrow-keys
 (if (equal nil (equal major-mode 'org-mode))

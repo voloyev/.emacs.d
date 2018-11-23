@@ -19,7 +19,12 @@
 (use-package prettier-js
     :ensure t
     :init
-    (add-hook 'js2-mode-hook 'prettier-js-mode))
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'js2-jsx-mode-hook 'prettier-js-mode)
+    (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.vue?\\'" . prettier-js-mode)))))
 
 (use-package js2-refactor
     :ensure t)
@@ -64,6 +69,7 @@
 
 (add-hook 'js2-mode-hook (lambda ()
                            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 
 (defun enable-minor-mode (my-pair)
@@ -72,10 +78,8 @@
       (if (string-match (car my-pair) buffer-file-name)
           (funcall (cdr my-pair)))))
 
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook #'(lambda ()
-                            (enable-minor-mode
-                             '("\\.vue?\\'" . prettier-js-mode))))
+;; setup prettier
+
 
 (require 'company)
 (require 'company-tern)
