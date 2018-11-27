@@ -234,9 +234,6 @@
     :config
   (flyspell-mode t))
 
-;; php mode hook :)
-(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
-
 ;; resize buffers
 (global-set-key (kbd "<C-up>") 'shrink-window)
 (global-set-key (kbd "<C-down>") 'enlarge-window)
@@ -331,10 +328,6 @@
 (use-package htmlize
     :ensure t)
 
-;; (use-package org-manage
-    ;; :ensure t
-    ;; :config
-    ;; (setq org-manage-directory-org "~/.emacs.d/org"))
 ;; exec shell
 ;; some magic happens here
 ;; DO NOT EDIT THIS SHIT!!!!!!!!!!!!!!!!!

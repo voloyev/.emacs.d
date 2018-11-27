@@ -9,6 +9,10 @@
 (use-package elpy
     :ensure t)
 
+;; (defvar elpy-mode-map nil "Keymap for `elpy-mode-map'.")
+;; (setq elpy-mode-map (make-sparse-keymap))
+;; (define-key elpy-mode-map (kbd "M-.") 'elpy-goto-definition)
+
 (use-package anaconda-mode
     :ensure t
     :init

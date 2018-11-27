@@ -109,8 +109,10 @@
 (add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
 (add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode))
 
-
+;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
+  "Show all that look like smt that was clicked by right mouse button.
+@click."
   (interactive "e")
   (let ((p1 (posn-point (event-start @click))))
     (goto-char p1)
