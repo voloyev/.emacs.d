@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sapp
+# key: sapp
+# --
+
+/app/sap_app/solman_configuration_dashboard/$1

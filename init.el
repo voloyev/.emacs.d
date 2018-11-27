@@ -69,9 +69,9 @@
 ;;multiple cursors
 (use-package multiple-cursors
     :bind (("C-S-c C-S-c"   . mc/edit-lines)
-           ("C-c ."         . mc/mark-next-like-this)
-           ("C-c ,"         . mc/mark-previous-like-this)
-           ("C-c |"         . mc/mark-all-like-this)
+           ("C-c C-c ."     . mc/mark-next-like-this)
+           ("C-c C-c ,"     . mc/mark-previous-like-this)
+           ("C-c C-c |"     . mc/mark-all-like-this)
            ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;;global line mode
@@ -246,14 +246,15 @@
 (use-package dumb-jump
     :bind (("M-g o" . dumb-jump-go-other-window)
            ("M-g j" . dumb-jump-go)
+           ("M-g q" . dumb-jump-quick-look)
            ("M-g i" . dumb-jump-go-prompt)
            ("M-g x" . dumb-jump-go-prefer-external)
            ("M-g z" . dumb-jump-go-prefer-external-other-window)
            ("M-g b" . dumb-jump-back))
     :config
     (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-    (setq dumb-jump-force-searcher 'ag)
-    :ensure)
+    (setq dumb-jump-force-searcher 'rg)
+    :ensure t)
 
 ;; fzf
 (use-package fzf
