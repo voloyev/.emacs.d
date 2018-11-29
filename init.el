@@ -298,10 +298,16 @@
       ("<f2> <f2>" . evil-mode)))
 
 (use-package evil-matchit
-    :ensure t)
+    :ensure t
+    :config
+    (add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
+    (add-hook 'evil-mode 'turn-on-evil-matchit-mode))
 
-(add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
-(add-hook 'evil-mode 'turn-on-evil-matchit-mode)
+;; use emacs keybindings in insert mode
+(setcdr evil-insert-state-map nil)
+;; but [escape] should switch back to normal state
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
+(evil-set-initial-state 'eshell-mode 'emacs)
 
 ;; emacs surround
 (use-package emacs-surround
