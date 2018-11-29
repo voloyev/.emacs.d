@@ -294,13 +294,14 @@
 (use-package evil
      :ensure t
      :bind
-     (("C-c e e" . evil-local-mode)
+     (("C-c e e"   . evil-local-mode)
       ("<f2> <f2>" . evil-mode)))
 
 (use-package evil-matchit
     :ensure t)
 
 (add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
+(add-hook 'evil-mode 'turn-on-evil-matchit-mode)
 
 ;; emacs surround
 (use-package emacs-surround
