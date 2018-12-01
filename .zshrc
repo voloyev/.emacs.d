@@ -15,10 +15,6 @@ alias zshconfig="vim ~/.zshrc"
 source /usr/share/chruby/chruby.sh
 source /usr/share/chruby/auto.sh
 
-# nodenv
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
-
 # custom bin path
 export PATH="$HOME/bin:$PATH"
 
@@ -62,3 +58,9 @@ alias mongosrv="mongod --dbpath=$HOME/mongodb"
 
 alias dockstop="(docker stop $(docker ps -a -q))"
 alias dockrm="(docker rm $(docker ps -a -q))"
+
+export CARP_DIR=~/.Carp/
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"

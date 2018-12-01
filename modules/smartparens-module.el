@@ -10,6 +10,7 @@
     (require 'smartparens-config)
     (--each '(restclient-mode-hook
               js-mode-hook
+              vue-mode-hook
               js2-mode-hook
               python-mode-hook
               web-mode-hook
@@ -34,6 +35,7 @@
               nginx-mode-hook
               scss-mode-hook
               web-mode-hook
+              conf-mode-hook
               emacs-lisp-mode-hook
               clojure-mode-hook)
         (add-hook it 'turn-on-smartparens-mode)))

@@ -3,8 +3,8 @@
 ;;; js module
 ;;; Code:
 ;; js2-mode
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"  . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
 
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))
@@ -20,6 +20,8 @@
     :ensure t
     :init
     (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'js-mode-hook 'prettier-js-mode)
+    (add-hook 'vue-mode-hook 'prettier-js-mode)
     (add-hook 'js2-jsx-mode-hook 'prettier-js-mode)
     (add-hook 'rjsx-mode-hook 'prettier-js-mode)
     (add-hook 'web-mode-hook #'(lambda ()
@@ -47,9 +49,6 @@
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
     (eldoc-mode +1)
     (tide-hl-identifier-mode +1)
-    ;; company is an optional dependency. You have to
-    ;; install it separately via package-install
-    ;; `M-x package-install [ret] company`
     (company-mode +1))
 
 ;; aligns annotation to the right hand side
@@ -67,8 +66,9 @@
 ;; unbind it.
 (define-key js-mode-map (kbd "M-.") nil)
 
-(add-hook 'js2-mode-hook (lambda ()
-                           (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 
@@ -77,9 +77,6 @@
   (if (buffer-file-name)
       (if (string-match (car my-pair) buffer-file-name)
           (funcall (cdr my-pair)))))
-
-;; setup prettier
-
 
 (require 'company)
 (require 'company-tern)
@@ -91,7 +88,15 @@
 (add-hook 'js2-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode)))
-                           
+
+
+(use-package vue-mode
+    :ensure t)
+
+(add-hook 'mmm-mode-hook
+          (lambda ()
+            (set-face-background 'mmm-default-submode-face nil)))
+
 ;; Disable completion keybindings, as we use xref-js2 instead
 (define-key tern-mode-keymap (kbd "M-.") nil)
 (define-key tern-mode-keymap (kbd "M-,") nil)
