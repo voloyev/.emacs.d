@@ -4,7 +4,7 @@
 ;;; Code:
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+(add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
 
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))
@@ -88,14 +88,10 @@
 (add-hook 'js2-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode)))
-
-
-(use-package vue-mode
-    :ensure t)
-
-(add-hook 'mmm-mode-hook
-          (lambda ()
-            (set-face-background 'mmm-default-submode-face nil)))
+;; vue
+(add-hook 'web-mode-hook #'(lambda ()
+                             (enable-minor-mode
+                              '("\\.vue?\\'" . tern-mode))))
 
 ;; Disable completion keybindings, as we use xref-js2 instead
 (define-key tern-mode-keymap (kbd "M-.") nil)

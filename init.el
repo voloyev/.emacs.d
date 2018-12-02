@@ -139,6 +139,14 @@
           ("\C-cc" . org-capture)
           ("\C-cb" . org-iswitchb)))
 
+;; eval langs in go
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)
+   (dot . t)
+   (gnuplot . t)))
+
 ;;whitespace
 (use-package whitespace
     :init
@@ -334,6 +342,9 @@
       (add-hook hook 'elisp-slime-nav-mode)))
 
 (use-package htmlize
+    :ensure t)
+
+(use-package multi-term
     :ensure t)
 
 ;; exec shell
