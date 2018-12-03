@@ -10,6 +10,16 @@ this section.
 ;;(rvm-use-default)
 ;;(rvm-activate-corresponding-ruby))
 "
+
+(use-package ruby-mode
+    :config (setq ruby-insert-encoding-magic-comment nil)
+    :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
+    :hook (robe-mode)
+    :hook (yard-mode)
+    :bind(("C-c r a"      . chruby-use-corresponding)
+          ("C-c r r"      . inf-ruby-console-auto)
+          ("C-c & h r"    . enh-ruby-mode)))
+
 ;;rbenv
 (use-package rbenv
     :ensure t)
@@ -24,16 +34,7 @@ this section.
 
 (use-package robe
     :ensure t
-    :init
-    (add-to-list 'auto-mode-alist
-                 '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode))
-    (add-hook 'ruby-mode-hook 'robe-mode)
-    (add-hook 'ruby-mode-hook 'yard-mode)
-
-    :bind(("C-c r a"      . chruby-use-corresponding)
-          ("C-c r r"      . inf-ruby-console-auto)
-          ("C-c C-c r s"  . robe-start)
-          ("C-c & h r"    . enh-ruby-mode)))
+    :bind(("C-c C-c r s"  . robe-start)))
 
 (use-package bundler
     :ensure t)
@@ -54,21 +55,22 @@ this section.
 ;; slim-mode
 (use-package slim-mode
     :ensure t
-    :init
-    (add-to-list 'auto-mode-alist '("\\.slim\\'" . slim-mode)))
+    :mode ("\\.slim\\'" . slim-mode))
 
 (use-package ruby-refactor
     :ensure t
     :config
-    (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
-
-(setq ruby-insert-encoding-magic-comment nil)
+    :hook (ruby-refactor-mode-launch . ruby-mode))
 
 (use-package minitest
     :ensure t
     :config
-    (add-hook 'ruby-mode-hook 'minitest-mode)
-    (add-hook 'enh-ruby-mode-hook 'minitest-mode))
+    :hook (ruby-mode-hook)
+    :hook (enh-ruby-mode-hook))
+
+;; hyde jekyll mode
+(use-package hyde
+    :ensure t)
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
