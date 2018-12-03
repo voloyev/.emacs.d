@@ -18,6 +18,9 @@
           ("C-c p p"   . counsel-projectile-switch-project)
           ("C-c SPC"   . counsel-projectile)))
 
+(use-package counsel-etags
+    :ensure t)
+
 (counsel-projectile-mode t)
 
 (provide 'ivy-module)

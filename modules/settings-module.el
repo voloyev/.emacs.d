@@ -3,15 +3,20 @@
 ;;; php module
 ;;; Code:
 ;; here should be settings that can not be placed anywhere elese
-(use-package vi-tilde-fringe
-    :ensure t
-    :config
-    (global-vi-tilde-fringe-mode t))
 
-(use-package switch-window
-    ;; Switch window
-    :ensure t
-    :bind(("C-x o" . switch-window)))
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer)
+  :init
+  (autoload 'ibuffer "ibuffer" "List buffers." t)
+  (defalias 'list-buffers 'ibuffer)
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-auto-mode 1)))
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package ace-window
     :ensure t
@@ -30,56 +35,45 @@
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
+    :ensure t
+    :config
+    (editorconfig-mode 1))
 
-;; racket
-(use-package racket-mode
+(use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode))
+
+(use-package flycheck-pycheckers
     :ensure t)
 
-;; flycheck
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode))
-(use-package flycheck-pycheckers
-  :ensure t)
-;;(with-eval-after-load 'flycheck
-;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
-
-;; Markdown
 (use-package markdown-mode
-    :init
-    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-    (setq markdown-command "mark"))
+    :init (setq markdown-command "mark")
+    :mode ("\\.text\\'" . markdown-mode)
+    :mode ("\\.markdown\\'" . markdown-mode)
+    :mode ("\\.md\\'" . markdown-mode))
 
 (use-package markdown-preview-mode
     :ensure t)
 
-;; line number
 (use-package nlinum
     :bind (("C-c C-l" . nlinum-mode)))
 
-;; gutter
 (use-package git-gutter-fringe
     :config
-    (global-git-gutter-mode t))
+  (global-git-gutter-mode t))
 
 ;; calendar app
 (use-package calfw
     :ensure t)
+
 (use-package calfw-org
     :ensure t)
 
-;; which-key
 (use-package which-key
     :config
-    (which-key-mode t))
+  (which-key-mode t))
 
-;; nginx
 (use-package company-nginx
     :ensure t
     :config
@@ -96,18 +90,18 @@
 (use-package es-mode
     :ensure t)
 
-(use-package toggle-quotes
+(use-package yaml-mode
+    :mode ("\\.yml\\'" . yaml-mode))
+
+(use-package haml-mode
+    :mode ("\\.haml\\'" . haml-mode))
+
+(use-package restclient
     :ensure t
-    :config
-    (global-set-key (kbd "C-'") 'toggle-quotes))
+    :mode ("\\.restclient\\'" . restclient-mode))
 
-(use-package counsel-etags
-    :ensure t)
-
-;; Add haml and yaml modes extension
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.haml\\'" . haml-mode))
-(add-to-list 'auto-mode-alist '("\\.restclient\\'" . restclient-mode))
+;; work mouse in terminal
+(xterm-mouse-mode t)
 
 ;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
@@ -126,17 +120,17 @@
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
-    "When called interactively with no active region, copy a single line instead."
-    (interactive (if mark-active (list (region-beginning) (region-end))
-                     (message "Copied line")
-                     (list (line-beginning-position) (line-beginning-position 2)))))
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (if mark-active (list (region-beginning) (region-end))
+                 (message "Copied line")
+                 (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
-    "When called interactively with no active region, kill a single line instead."
-    (interactive
-     (if mark-active (list (region-beginning) (region-end))
-         (list (line-beginning-position)
-               (line-beginning-position 2)))))
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 (provide 'settings-module)
 ;;; settings-module.el ends here
