@@ -10,17 +10,22 @@
   (set-face-attribute 'default nil :font "Hack 9")
   (set-frame-font "Hack 9"))
 
+ (setq ring-bell-function 'ignore)
+
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
 (setq auto-save-default        nil)
 (setq auto-save-list-file-name nil)
 
-;;move backups
-(setq backup-directory-alist '(("." . "~/.saves")))
+;; move backups
+;; uncomment if you really need this
+;; (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Inhibit startup/splash screen
 (setq inhibit-splash-screen   0)
 (setq ingibit-startup-message 0)
+
+(setq auto-window-vscroll nil)
 
 ;;sexy mode line
 (setq sml/no-confirm-load-theme 1)
@@ -38,35 +43,11 @@
 ;;disable scrollbar
 (scroll-bar-mode   -1)
 
-;; show buffers
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(autoload 'ibuffer "ibuffer" "List buffers." t)
-;;(add-to-list 'ibuffer-never-show-regexps "^\\*")
-(defalias 'list-buffers 'ibuffer)
-(add-hook 'ibuffer-mode-hook
-          '(lambda ()
-             (ibuffer-auto-mode 1)))
-
-;;scrolling
+;; scrolling
 (setq scroll-step 1)
-(windmove-default-keybindings 'meta)
 
-;;short answer
+;; short answer
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;;Indent settings
-(setq-default indent-tabs-mode nil)
-(setq tab-width                  2)
-(setq-default tab-width          2)
-(setq-default standart-indent    2)
-(setq-default lisp-body-indent   2)
-
-;; css and sccs indent level
-(setq css-indent-offset 2)
-(setq scss-indent-offset 2)
-(global-set-key (kbd "RET") 'newline-and-indent)
-(setq lisp-indent-function  'common-lisp-indent-function)
 
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
@@ -77,7 +58,8 @@
 
 ;; Use visual-line-mode in gfm-mode
 (defun my-gfm-mode-hook ()
-    (visual-line-mode 1))
+  (visual-line-mode 1))
+
 (add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -90,6 +72,24 @@
     :ensure t
     :init (require 'button-lock)
     :config (global-fixmee-mode 1))
+
+;;whitespace
+(use-package whitespace
+    :init
+    (setq whitespace-line-column 250)
+    (setq whitespace-display-mappings
+          '((space-mark 32 [183] [46])
+            (newline-mark 10 [8629 10])
+            (tab-mark 9 [9655 9] [92 9])))
+    :config
+    (set-face-attribute 'whitespace-space nil
+                        :background nil
+                        :foreground "gray30")
+    (set-face-attribute 'whitespace-newline
+                        nil :background nil
+                        :foreground "gray30")
+    :bind(("<f5>" . whitespace-mode)
+          ("C-c <f5>" . whitespace-cleanup)))
 
 (provide 'looks-module)
 ;;; looks-module ends here
