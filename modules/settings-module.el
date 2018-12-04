@@ -98,7 +98,7 @@
 
 (use-package restclient
     :ensure t
-    :mode ("\\.restclient\\'" . restclient-mode))
+    :mode ("\\.restc\\'" . restclient-mode))
 
 ;; work mouse in terminal
 (xterm-mouse-mode t)

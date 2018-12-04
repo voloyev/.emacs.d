@@ -2,10 +2,14 @@
 ;;; Code:
 ;;; Commentary:
 ;; python module
-;;"TODO:
-;;- Add ability to automatic change python version a-la pyenv
-;;- Add integration with elpy
-;;"
+
+(use-package python-mode
+    :ensure t
+    :init
+    (elpy-enable)
+    (setq python-shell-interpreter "python3"
+          python-shell-interpreter-args "-i"))
+
 (use-package elpy
     :ensure t)
 
@@ -26,11 +30,7 @@
     (setq
      pipenv-projectile-after-switch-function
      #'pipenv-projectile-after-switch-extended))
-;;(package-initialize)
-(elpy-enable)
 
-(setq python-shell-interpreter "python3"
-      python-shell-interpreter-args "-i")
 
 (provide 'python-module)
 ;;; python-module ends here

@@ -17,7 +17,7 @@
 (desktop-save-mode 0)
 
 ;;; List of required modules
-(require 'auto-install-packages)
+;;(require 'auto-install-packages)
 (require 'ruby-module)
 (require 'smartparens-module)
 (require 'web-mode-module)
