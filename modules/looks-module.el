@@ -27,15 +27,6 @@
 
 (setq auto-window-vscroll nil)
 
-;;sexy mode line
-(setq sml/no-confirm-load-theme 1)
-(setq sml/theme 'light)
-(sml/setup t)
-(setq sml/name-width '40)
-(setq sml/shorten-modes 'full)
-(nyan-mode t)
-(nyan-start-animation)
-
 ;; toolbar and menu
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -52,9 +43,19 @@
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
 
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (setq sml/no-confirm-load-theme 1)
+  (setq sml/theme 'light)
+  (sml/setup t)
+  (setq sml/name-width '40)
+  (setq sml/shorten-modes 'full))
+
 ;; Highlight search result
 (setq search-highlight        t)
 (setq query-replace-highlight t)
+(setq frame-title-format "GNU Emacs: %b")
 
 ;; Use visual-line-mode in gfm-mode
 (defun my-gfm-mode-hook ()
@@ -64,9 +65,17 @@
 ;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;;Display the name of the current buffer in the title bar
-(setq frame-title-format "GNU Emacs: %b")
-(fci-mode 1)
-(setq fci-rule-width 3)
+(use-package fill-column-indicator
+    :ensure t
+    :init
+    (fci-mode 1)
+    (setq fci-rule-width 3))
+
+(use-package nyan-mode
+  :ensure t
+  :init
+  (nyan-mode t)
+  (nyan-start-animation))
 
 (use-package fixmee
     :ensure t
