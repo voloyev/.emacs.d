@@ -43,15 +43,6 @@
 ;; Clipboard settings
 (setq x-select-enable-clipboard t)
 
-(use-package smart-mode-line
-  :ensure t
-  :config
-  (setq sml/no-confirm-load-theme 1)
-  (setq sml/theme 'light)
-  (sml/setup t)
-  (setq sml/name-width '40)
-  (setq sml/shorten-modes 'full))
-
 ;; Highlight search result
 (setq search-highlight        t)
 (setq query-replace-highlight t)
