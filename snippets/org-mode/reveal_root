@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: reveal
+# key: reveal
+# --
+
+#+REVEAL_ROOT: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.7.0/
+#+REVEAL_PLUGINS: (highlight)
+#+REVEAL_THEME: white

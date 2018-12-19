@@ -12,6 +12,9 @@
           ("\C-cc" . org-capture)
           ("\C-cb" . org-iswitchb)))
 
+(use-package ox-reveal
+    :ensure t)
+
 ;; eval langs in go
 (org-babel-do-load-languages
  'org-babel-load-languages

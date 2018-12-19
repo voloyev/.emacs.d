@@ -7,17 +7,15 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/")t)
+
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
 ;; activate installed packages
 (package-initialize)
-(setq my-package-list '())
-(mapc #'package-install my-package-list)
 (require 'use-package)
 (add-to-list 'load-path "~/.emacs.d/modules")
 
-(desktop-save-mode 0)
-
 ;;; List of required modules
-;;(require 'auto-install-packages)
 (require 'ruby-module)
 (require 'smartparens-module)
 (require 'web-mode-module)
@@ -55,6 +53,9 @@
 
 ;; use bash
 (setq shell-file-name "/bin/bash")
+
+;; desktop-save-mode
+(desktop-save-mode 0)
 
 ;; company mode
 (use-package company
