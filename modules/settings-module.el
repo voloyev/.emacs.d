@@ -45,10 +45,9 @@
     (global-flycheck-mode))
 
 (use-package flycheck-inline
-    :ensure t)
-
-(with-eval-after-load 'flycheck
-  (global-flycheck-inline-mode t))
+    :ensure t
+    :init
+    (global-flycheck-inline-mode t))
 
 (use-package flycheck-pycheckers
     :ensure t)
