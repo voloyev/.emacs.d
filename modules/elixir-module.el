@@ -28,5 +28,12 @@
     (setq alchemist-goto-erlang-source-dir "~/source/otp")
     (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
+(use-package flycheck-credo
+    :ensure t)
+
+(eval-after-load 'flycheck
+  '(flycheck-credo-setup))
+(add-hook 'elixir-mode-hook 'flycheck-mode)
+
 (provide 'elixir-module)
 ;;; elixir-module.el ends here

@@ -44,8 +44,20 @@
     :init
     (global-flycheck-mode))
 
+(use-package flycheck-inline
+    :ensure t)
+
+(with-eval-after-load 'flycheck
+  (global-flycheck-inline-mode))
+
 (use-package flycheck-pycheckers
     :ensure t)
+
+(use-package super-save
+  :ensure t
+  :config
+  (setq super-save-auto-save-when-idle t)
+  (super-save-mode +1))
 
 (use-package markdown-mode
     :init (setq markdown-command "mark")

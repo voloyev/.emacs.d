@@ -1,4 +1,3 @@
-
 ;;; packaage --- Summary:
 ;;; Code:
 ;;; Commentary:
@@ -12,11 +11,15 @@
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
 
-(use-package zenburn-theme
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :init
+;;   (load-theme 'zenburn t))
+
+(use-package grayscale-theme
   :ensure t
   :init
-  (load-theme 'zenburn t))
+  (load-theme 'grayscale t))
 
-;;(load-theme 'zenburn t)
 (provide 'themes-module)
 ;;; themes-module ends here
