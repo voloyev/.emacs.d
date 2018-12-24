@@ -1,4 +1,5 @@
 ;; elisp settings
+
 (use-package elisp-slime-nav
     :ensure t
     :init
@@ -10,7 +11,7 @@
     :init
     (setq inferior-lisp-program "sbcl")
     (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
-    :hook (sly-editing . lisp-mode))
+    :hook (sly-mode . common-lisp-mode))
 
 (use-package racket-mode
     :ensure t)
@@ -20,7 +21,8 @@
     :hook(paredit-mode . lisp-mode)
     :hook(paredit-mode . emacs-lisp-mode)
     :hook(paredit-mode . clojure-mode)
-    :hook(paredit-mode . racket-mode))
+    :hook(paredit-mode . racket-mode)
+    :hook(paredit-mode . sly-mode))
 
 (provide 'lisp-module)
 ;;; lisp-module ends here

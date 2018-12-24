@@ -60,6 +60,9 @@ alias dockstop="(docker stop $(docker ps -a -q))"
 alias dockrm="(docker rm $(docker ps -a -q))"
 
 export CARP_DIR=~/.Carp/
+
+# rowel
+export PATH="$PATH:$HOME/.roswell/bin"
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
