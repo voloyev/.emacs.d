@@ -27,7 +27,7 @@
 
 (use-package focus
     :ensure t
-    :bind(("C-c f m" . focus-mode)))
+    :bind(("C-c m f" . focus-mode)))
 
 (use-package rainbow-delimiters
     :ensure t
