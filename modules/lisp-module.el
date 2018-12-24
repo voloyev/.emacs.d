@@ -10,8 +10,7 @@
     :ensure t
     :init
     (setq inferior-lisp-program "sbcl")
-    (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
-    :hook (sly-mode . common-lisp-mode))
+    (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
 
 (use-package racket-mode
     :ensure t)
