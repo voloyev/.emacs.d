@@ -23,5 +23,13 @@
     :hook(paredit-mode . racket-mode)
     :hook(paredit-mode . sly-mode))
 
+(use-package lispy
+    :ensure t)
+
+(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+(add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
+(add-hook 'common-lisp-mode-hook (lambda () (lispy-mode 1)))
+
+
 (provide 'lisp-module)
 ;;; lisp-module ends here
