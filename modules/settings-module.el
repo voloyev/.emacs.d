@@ -111,6 +111,11 @@
     :ensure t
     :mode ("\\.restc\\'" . restclient-mode))
 
+(use-package dired
+    :commands dired
+    :init
+    (setq dired-listing-switches
+          "-laGh1v --group-directories-first"))
 ;; work mouse in terminal
 (xterm-mouse-mode t)
 

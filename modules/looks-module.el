@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "UbuntuMono Nerd Font 16")
-  (set-frame-font "UbuntuMono Nerd Font 16"))
+  (set-face-attribute 'default nil :font "Hack 14")
+  (set-frame-font "Hack 14"))
 
 (unless (memq window-system '(mac ns))
   (set-face-attribute 'default nil :font "UbuntuMono Nerd Font 12")

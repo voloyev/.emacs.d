@@ -83,8 +83,8 @@
     (projectile-global-mode)
     (projectile-rails-global-mode)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-    ;(setq projectile-indexing-method 'native)
-    (setq projectile-enable-caching t)
+    (setq projectile-indexing-method 'alien)
+    (setq projectile-enable-caching nil)
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
