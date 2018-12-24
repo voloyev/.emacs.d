@@ -27,7 +27,7 @@
 
 (use-package focus
     :ensure t
-    :bind(("C-c f m" . focus-mode)))
+    :bind(("C-c m f" . focus-mode)))
 
 (use-package rainbow-delimiters
     :ensure t
@@ -111,6 +111,11 @@
     :ensure t
     :mode ("\\.restc\\'" . restclient-mode))
 
+(use-package dired
+    :commands dired
+    :init
+    (setq dired-listing-switches
+          "-laGh1v --group-directories-first"))
 ;; work mouse in terminal
 (xterm-mouse-mode t)
 
