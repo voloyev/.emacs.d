@@ -39,6 +39,7 @@
 (require 'evil-module)
 (require 'lisp-module)
 (require 'indent-module)
+(require 'lsp-module)
 
 ;; custom plugins path
 (add-to-list 'load-path "~/.emacs.d/plugins/")

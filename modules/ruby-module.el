@@ -65,8 +65,8 @@ this section.
 (use-package minitest
     :ensure t
     :config
-    :hook (ruby-mode-hook)
-    :hook (enh-ruby-mode-hook))
+    :hook (ruby-mode)
+    :hook (enh-ruby-mode))
 
 ;; hyde jekyll mode
 (use-package hyde
