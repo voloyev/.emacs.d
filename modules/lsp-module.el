@@ -1,13 +1,15 @@
+(use-package lsp
+    :config
+  (require 'lsp-clients))
+
 (use-package lsp-mode
     :commands lsp
     :ensure t)
 
-(require 'lsp-clients)
-
-(add-hook 'ruby-mode 'lsp)
+(add-hook 'ruby-mode-hook 'lsp)
 (add-hook 'js2-mode-hook 'lsp)
-(add-hook 'js2-jsx-mode 'lsp)
-(add-hook 'vue-mode 'lsp)
+(add-hook 'js2-jsx-mode-hook 'lsp)
+(add-hook 'vue-mode-hook 'lsp)
 
 (use-package lsp-ui
     :commands lsp-ui-mode
