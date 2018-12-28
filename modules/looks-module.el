@@ -7,8 +7,8 @@
   (set-frame-font "Hack 14"))
 
 (unless (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "UbuntuMono Nerd Font 12")
-  (set-frame-font "UbuntuMono Nerd Font 12"))
+  (set-face-attribute 'default nil :font "UbuntuMono Nerd Font 14")
+  (set-frame-font "UbuntuMono Nerd Font 14"))
 
  (setq ring-bell-function 'ignore)
 

@@ -1,9 +1,9 @@
-export ZSH=/home/voloyev/.oh-my-zsh
+export ZSH=/home/voloyev/.oh-dmy-zsh
 
 ZSH_THEME="mortalscumbag"
 
 plugins=(
-  git rails ruby rbenv zsh-autosuggestions yaourt capistrano common-aliases knife gem docker django python zsh-autosuggestions
+  git ruby chruby zsh-autosuggestions yaourt capistrano common-aliases knife gem docker python
 )
 source $ZSH/oh-my-zsh.sh
 
@@ -48,7 +48,6 @@ export PATH=/home/voloyev/.nimble/bin:$PATH
 
 # pipenv
 eval "$(pipenv --completion)"
-eval "$(luarocks path --bin)"
 
 # fzf in history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
