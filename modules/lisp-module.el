@@ -15,6 +15,9 @@
 (use-package racket-mode
              :ensure t)
 
+(use-package geiser-mode
+             :ensure t)
+
 (use-package paredit
              :ensure t
              :hook(paredit-mode . lisp-mode)
