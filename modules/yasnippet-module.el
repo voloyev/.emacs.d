@@ -4,9 +4,9 @@
 ;;yanisppet
 (require 'yasnippet)
 (defun enable-yas-mode ()
-     (yas-minor-mode t))
+    (yas-minor-mode t))
 (eval-after-load 'rspec-mode
-    '(rspec-install-snippets))
+                 '(rspec-install-snippets))
 
 ;;yas-mode for my modes
 (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))

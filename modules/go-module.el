@@ -4,10 +4,10 @@
 ;;; Code:
 (add-to-list 'exec-path "~/workspace/go/bin")
 (use-package flycheck-gometalinter
-    :ensure t
-    :config
-    (progn
-        (flycheck-gometalinter-setup)))
+             :ensure t
+             :config
+             (progn
+                 (flycheck-gometalinter-setup)))
 ;; exec
 (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)
@@ -24,14 +24,14 @@
 
 ;; gorepl-mode
 (use-package gorepl-mode
-    :ensure t
-    :init
-    (add-hook 'go-mode-hook #'gorepl-mode))
+             :ensure t
+             :init
+             (add-hook 'go-mode-hook #'gorepl-mode))
 
 (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
 
 (use-package golint
-    :ensure t)
+             :ensure t)
 
 (provide 'go-module)
 ;;; go-module.el ends here

@@ -5,111 +5,111 @@
 ;; here should be settings that can not be placed anywhere elese
 
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
-  :init
-  (autoload 'ibuffer "ibuffer" "List buffers." t)
-  (defalias 'list-buffers 'ibuffer)
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-               (ibuffer-auto-mode 1)))
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-projectile-set-filter-groups)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
+             :bind ("C-x C-b" . ibuffer)
+             :init
+             (autoload 'ibuffer "ibuffer" "List buffers." t)
+             (defalias 'list-buffers 'ibuffer)
+             (add-hook 'ibuffer-mode-hook
+                       '(lambda ()
+                         (ibuffer-auto-mode 1)))
+             (add-hook 'ibuffer-hook
+                       (lambda ()
+                           (ibuffer-projectile-set-filter-groups)
+                           (unless (eq ibuffer-sorting-mode 'alphabetic)
+                               (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package ace-window
-    :ensure t
-    :config
-    (setq aw-dispatch-always t)
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    :bind(("M-o" . ace-window)))
+             :ensure t
+             :config
+             (setq aw-dispatch-always t)
+             (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+             :bind(("M-o" . ace-window)))
 
 (use-package focus
-    :ensure t
-    :bind(("C-c m f" . focus-mode)))
+             :ensure t
+             :bind(("C-c m f" . focus-mode)))
 
 (use-package rainbow-delimiters
-    :ensure t
-    :init
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+             :ensure t
+             :init
+             (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-    :ensure t
-    :config
-    (editorconfig-mode 1))
+             :ensure t
+             :config
+             (editorconfig-mode 1))
 
 (use-package flycheck
-    :ensure t
-    :init
-    (global-flycheck-mode))
+             :ensure t
+             :init
+             (global-flycheck-mode))
 
 (use-package flycheck-inline
-    :ensure t
-    :init
-    (global-flycheck-inline-mode t))
+             :ensure t
+             :init
+             (global-flycheck-inline-mode t))
 
 (use-package flycheck-pycheckers
-    :ensure t)
+             :ensure t)
 
 (use-package super-save
-  :ensure t
-  :config
-  (setq super-save-auto-save-when-idle t)
-  (super-save-mode +1))
+             :ensure t
+             :config
+             (setq super-save-auto-save-when-idle t)
+             (super-save-mode +1))
 
 (use-package markdown-mode
-    :init (setq markdown-command "mark")
-    :mode ("\\.text\\'" . markdown-mode)
-    :mode ("\\.markdown\\'" . markdown-mode)
-    :mode ("\\.md\\'" . markdown-mode))
+             :init (setq markdown-command "mark")
+             :mode ("\\.text\\'" . markdown-mode)
+             :mode ("\\.markdown\\'" . markdown-mode)
+             :mode ("\\.md\\'" . markdown-mode))
 
 (use-package markdown-preview-mode
-    :ensure t)
+             :ensure t)
 
 (use-package nlinum
-    :bind (("C-c C-l" . nlinum-mode)))
+             :bind (("C-c C-l" . nlinum-mode)))
 
 (use-package git-gutter-fringe
-    :config
-  (global-git-gutter-mode t))
+             :config
+             (global-git-gutter-mode t))
 
 ;; calendar app
 (use-package calfw
-    :ensure t)
+             :ensure t)
 
 (use-package calfw-org
-    :ensure t)
+             :ensure t)
 
 (use-package which-key
-    :config
-  (which-key-mode t))
+             :config
+             (which-key-mode t))
 
 (use-package company-nginx
-    :ensure t
-    :config
-    (eval-after-load 'nginx-mode
-      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
+             :ensure t
+             :config
+             (eval-after-load 'nginx-mode
+                              '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
-    :ensure t
-    :bind(("M-u" . fix-word-upcase)
-          ("M-l" . fix-word-downcase)
-          ("M-c" . fix-word-capitalize)))
+             :ensure t
+             :bind(("M-u" . fix-word-upcase)
+                   ("M-l" . fix-word-downcase)
+                   ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :ensure t)
+             :ensure t)
 
 (use-package yaml-mode
-    :mode ("\\.yml\\'" . yaml-mode))
+             :mode ("\\.yml\\'" . yaml-mode))
 
 (use-package haml-mode
-    :mode ("\\.haml\\'" . haml-mode))
+             :mode ("\\.haml\\'" . haml-mode))
 
 (use-package restclient
-    :ensure t
-    :mode ("\\.restc\\'" . restclient-mode))
+             :ensure t
+             :mode ("\\.restc\\'" . restclient-mode))
 
 ;; (use-package dired
 ;;     :commands dired
@@ -121,12 +121,12 @@
 
 ;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
-  "Show all that look like smt that was clicked by right mouse button.
+    "Show all that look like smt that was clicked by right mouse button.
 @click."
-  (interactive "e")
-  (let ((p1 (posn-point (event-start @click))))
-    (goto-char p1)
-    (isearch-forward-symbol-at-point)))
+    (interactive "e")
+    (let ((p1 (posn-point (event-start @click))))
+        (goto-char p1)
+        (isearch-forward-symbol-at-point)))
 
 (global-set-key (kbd "<mouse-3>") 'xah-mouse-click-to-search)
 
@@ -136,17 +136,17 @@
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
-  "When called interactively with no active region, copy a single line instead."
-  (interactive (if mark-active (list (region-beginning) (region-end))
-                 (message "Copied line")
-                 (list (line-beginning-position) (line-beginning-position 2)))))
+    "When called interactively with no active region, copy a single line instead."
+    (interactive (if mark-active (list (region-beginning) (region-end))
+                     (message "Copied line")
+                     (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single line instead."
-  (interactive
-   (if mark-active (list (region-beginning) (region-end))
-     (list (line-beginning-position)
-           (line-beginning-position 2)))))
+    "When called interactively with no active region, kill a single line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+         (list (line-beginning-position)
+               (line-beginning-position 2)))))
 
 (provide 'settings-module)
 ;;; settings-module.el ends here
