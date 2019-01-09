@@ -234,7 +234,7 @@
 (use-package multi-term
              :ensure t)
 
-(load (expand-file-name "~/.roswell/helper.el"))
+;;(load (expand-file-name "~/.roswell/helper.el"))
 
 ;; exec shell
 ;; some magic happens here
