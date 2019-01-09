@@ -1,4 +1,13 @@
-;; elisp settings
+;;; package -- Summary
+;;; Commentary:
+;;; Lisp settings
+;;; Code:
+
+(use-package slime
+             :ensure t
+             :init
+             (setq inferior-lisp-program "ros -Q run")
+             (setq slime-contribs '(slime-fancy)))
 
 (use-package elisp-slime-nav
              :ensure t
@@ -6,16 +15,7 @@
              (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
                  (add-hook hook 'elisp-slime-nav-mode)))
 
-(use-package sly
-             :ensure t
-             :init
-             (setq inferior-lisp-program "sbcl")
-             (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook))
-
 (use-package racket-mode
-             :ensure t)
-
-(use-package geiser-mode
              :ensure t)
 
 (use-package paredit
@@ -24,15 +24,16 @@
              :hook(paredit-mode . emacs-lisp-mode)
              :hook(paredit-mode . clojure-mode)
              :hook(paredit-mode . racket-mode)
-             :hook(paredit-mode . sly-mode))
+             :hook(paredit-mode . slime-mode))
 
-(use-package lispy
-             :ensure t)
+;; (use-package lispy
+;;              :ensure t)
 
-(add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-(add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
-(add-hook 'common-lisp-mode-hook (lambda () (lispy-mode 1)))
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+;; (add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
+;; (add-hook 'common-lisp-mode-hook (lambda () (lispy-mode 1)))
 
+(add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
 (provide 'lisp-module)
 ;;; lisp-module ends here

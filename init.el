@@ -62,15 +62,19 @@
 (use-package company
              :ensure t
              :init
+             (global-company-mode t)
              (with-eval-after-load 'company
                  (add-hook 'after-init-hook 'global-company-mode)
                  (add-to-list 'company-backends 'company-robe)
-                 (add-to-list 'company-backends 'sly-company)
+                 (add-to-list 'company-backends 'slime-company)
                  (add-to-list 'company-backends 'company-jedi))
-             :bind("C-<tab>" . company-complete)
-             :config
-             (global-company-mode t)
-             (company-quickhelp-mode t))
+             :bind("C-<tab>" . company-complete))
+
+(use-package company-quickhelp          ; Documentation popups for Company
+             :ensure t
+             :defer t
+             :init
+             (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
 
 ;; multiple cursors
 (use-package multiple-cursors :ensure t)
@@ -229,6 +233,8 @@
 
 (use-package multi-term
              :ensure t)
+
+(load (expand-file-name "~/.roswell/helper.el"))
 
 ;; exec shell
 ;; some magic happens here
