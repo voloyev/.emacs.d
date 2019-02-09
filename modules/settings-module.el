@@ -14,9 +14,9 @@
                          (ibuffer-auto-mode 1)))
              (add-hook 'ibuffer-hook
                        (lambda ()
-                           (ibuffer-projectile-set-filter-groups)
-                           (unless (eq ibuffer-sorting-mode 'alphabetic)
-                               (ibuffer-do-sort-by-alphabetic)))))
+                         (ibuffer-projectile-set-filter-groups)
+                         (unless (eq ibuffer-sorting-mode 'alphabetic)
+                           (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package ace-window
              :ensure t
@@ -111,6 +111,13 @@
              :ensure t
              :mode ("\\.restc\\'" . restclient-mode))
 
+(use-package bfbuilder
+             :ensure t
+             :mode ("\\.bf\\'" . bfbuilder-mode))
+
+(use-package fsharp-mode
+    :ensure t
+    :mode ("\\.fs[iylx]?$" . fsharp-mode))
 ;; (use-package dired
 ;;     :commands dired
 ;;     :init
@@ -121,12 +128,12 @@
 
 ;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
-    "Show all that look like smt that was clicked by right mouse button.
+  "Show all that look like smt that was clicked by right mouse button.
 @click."
-    (interactive "e")
-    (let ((p1 (posn-point (event-start @click))))
-        (goto-char p1)
-        (isearch-forward-symbol-at-point)))
+  (interactive "e")
+  (let ((p1 (posn-point (event-start @click))))
+    (goto-char p1)
+    (isearch-forward-symbol-at-point)))
 
 (global-set-key (kbd "<mouse-3>") 'xah-mouse-click-to-search)
 
@@ -136,17 +143,17 @@
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
-    "When called interactively with no active region, copy a single line instead."
-    (interactive (if mark-active (list (region-beginning) (region-end))
-                     (message "Copied line")
-                     (list (line-beginning-position) (line-beginning-position 2)))))
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (if mark-active (list (region-beginning) (region-end))
+                   (message "Copied line")
+                   (list (line-beginning-position) (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
-    "When called interactively with no active region, kill a single line instead."
-    (interactive
-     (if mark-active (list (region-beginning) (region-end))
-         (list (line-beginning-position)
-               (line-beginning-position 2)))))
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+       (list (line-beginning-position)
+             (line-beginning-position 2)))))
 
 (provide 'settings-module)
 ;;; settings-module.el ends here
