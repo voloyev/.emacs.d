@@ -3,23 +3,23 @@
 ;;; Commentary:
 ;; ivy module
 (use-package ivy
-             :ensure t
-             :config
-             (setq ivy-use-virtual-buffers t)
-             (setq ivy-count-format "(%d/%d) ")
-             :bind(("C-s"   . swiper)
-                   ("M-y"   . counsel-yank-pop)
-                   ("C-x b" . ivy-switch-buffer)))
+    :ensure t
+    :config
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    :bind(("C-s"   . swiper)
+          ("M-y"   . counsel-yank-pop)
+          ("C-x b" . ivy-switch-buffer)))
 
 (use-package counsel-projectile
-             :ensure t
-             :bind(("C-c p s s" . counsel-projectile-ag)
-                   ("C-c p s r" . counsel-projectile-rg)
-                   ("C-c p p"   . counsel-projectile-switch-project)
-                   ("C-c SPC"   . counsel-projectile)))
+    :ensure t
+    :bind(("C-c p s s" . counsel-projectile-ag)
+          ("C-c p s r" . counsel-projectile-rg)
+          ("C-c p p"   . counsel-projectile-switch-project)
+          ("C-c SPC"   . counsel-projectile)))
 
 (use-package counsel-etags
-             :ensure t)
+    :ensure t)
 
 (counsel-projectile-mode t)
 

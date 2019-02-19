@@ -17,47 +17,47 @@
 (setq vue-indent-level 2)
 
 (use-package vue-mode
-             :ensure t
-             :config
-             (add-hook 'mmm-mode-hook
-                       (lambda ()
-                           (set-face-background 'mmm-default-submode-face nil))))
+    :ensure t
+    :config
+    (add-hook 'mmm-mode-hook
+              (lambda ()
+                (set-face-background 'mmm-default-submode-face nil))))
 
 ;;pretier
 (use-package prettier-js
-             :ensure t
-             :init
-             (add-hook 'js2-mode-hook 'prettier-js-mode)
-             (add-hook 'js-mode-hook 'prettier-js-mode)
-             (add-hook 'vue-mode-hook 'prettier-js-mode)
-             (add-hook 'js2-jsx-mode-hook 'prettier-js-mode)
-             (add-hook 'rjsx-mode-hook 'prettier-js-mode)
-             (add-hook 'web-mode-hook #'(lambda ()
-                                            (enable-minor-mode
-                                             '("\\.vue?\\'" . prettier-js-mode)))))
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'js-mode-hook 'prettier-js-mode)
+    (add-hook 'vue-mode-hook 'prettier-js-mode)
+    (add-hook 'js2-jsx-mode-hook 'prettier-js-mode)
+    (add-hook 'rjsx-mode-hook 'prettier-js-mode)
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.vue?\\'" . prettier-js-mode)))))
 
 (use-package js2-refactor
-             :ensure t)
+    :ensure t)
 
 (use-package xref-js2
-             :ensure t)
+    :ensure t)
 
 ;; typescript
 (use-package tide
-             :ensure t
-             :after (typescript-mode company flycheck)
-             :hook ((typescript-mode . tide-setup)
-                    (typescript-mode . tide-hl-identifier-mode)
-                    (before-save . tide-format-before-save)))
+    :ensure t
+    :after (typescript-mode company flycheck)
+    :hook ((typescript-mode . tide-setup)
+           (typescript-mode . tide-hl-identifier-mode)
+           (before-save . tide-format-before-save)))
 
 (defun setup-tide-mode ()
-    (interactive)
-    (tide-setup)
-    (flycheck-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1)
-    (company-mode +1))
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -76,30 +76,30 @@
 
 (add-hook 'js2-mode-hook
           (lambda ()
-              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 (add-hook 'js2-mode-hook #'setup-tide-mode)
 
 (defun enable-minor-mode (my-pair)
-    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-    (if (buffer-file-name)
-        (if (string-match (car my-pair) buffer-file-name)
-            (funcall (cdr my-pair)))))
+  "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+  (if (buffer-file-name)
+      (if (string-match (car my-pair) buffer-file-name)
+          (funcall (cdr my-pair)))))
 
 (require 'company)
 (require 'company-tern)
 
 (use-package prettier-js
-             :ensure t)
+    :ensure t)
 
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'js2-mode-hook (lambda ()
-                             (tern-mode)
-                             (company-mode)))
+                           (tern-mode)
+                           (company-mode)))
 ;; vue
 (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.vue?\\'" . tern-mode))))
+                             (enable-minor-mode
+                              '("\\.vue?\\'" . tern-mode))))
 
 ;; Disable completion keybindings, as we use xref-js2 instead
 (define-key tern-mode-keymap (kbd "M-.") nil)
