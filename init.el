@@ -214,7 +214,7 @@
 
 ;; emacs surround
 (use-package emacs-surround
-    :ensure t
+    ;;:ensure t
     :bind((("C-q" . emacs-surround))))
 
 ;; Emacs key bindings
