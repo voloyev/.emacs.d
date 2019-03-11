@@ -15,6 +15,7 @@
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)
     (add-hook 'racer-mode-hook #'company-mode)
+    (add-hook 'rust-mode #'flycheck-inline-mode)
     (setq rust-format-on-save t))
 
 (use-package flycheck-rust

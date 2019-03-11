@@ -130,6 +130,11 @@
 ;; work mouse in terminal
 (xterm-mouse-mode t)
 
+(use-package eyebrowse
+    :ensure t
+    :config
+    (eyebrowse-mode t))
+
 ;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
   "Show all that look like smt that was clicked by right mouse button.
