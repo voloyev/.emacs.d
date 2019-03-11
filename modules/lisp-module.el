@@ -26,12 +26,9 @@
     :hook(paredit-mode . racket-mode)
     :hook(paredit-mode . slime-mode))
 
-;; (use-package lispy
-;;              :ensure t)
-
-;; (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-;; (add-hook 'lisp-mode-hook (lambda () (lispy-mode 1)))
-;; (add-hook 'common-lisp-mode-hook (lambda () (lispy-mode 1)))
+(use-package lispy
+    :ensure t
+    :bind(("C-c C-v l" . lispy-mode)))
 
 (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
