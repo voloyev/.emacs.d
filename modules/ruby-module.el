@@ -10,7 +10,6 @@ this section.
 ;;(rvm-use-default)
 ;;(rvm-activate-corresponding-ruby))
 "
-
 (use-package ruby-mode
     :config (setq ruby-insert-encoding-magic-comment nil)
     :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
@@ -57,10 +56,10 @@ this section.
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
-(use-package ruby-refactor
-    :ensure t
-    :config
-    :hook (ruby-refactor-mode-launch . ruby-mode))
+;; (use-package ruby-refactor
+;;     :ensure t
+;;     :config
+;;     :hook (ruby-refactor-mode-launch . ruby-mode))
 
 (use-package minitest
     :ensure t
