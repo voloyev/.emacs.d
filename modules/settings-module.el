@@ -135,6 +135,10 @@
     :config
     (eyebrowse-mode t))
 
+(use-package nov
+    :ensure t
+    :mode ("\\.epub\\'" . nov-mode))
+
 ;; show all tha loks like smt that was clecked by right mouse button
 (defun xah-mouse-click-to-search (@click)
   "Show all that look like smt that was clicked by right mouse button.
