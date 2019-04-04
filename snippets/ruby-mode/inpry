@@ -2,4 +2,4 @@
 # name: inpry
 # key: inpry
 # --
-$0require 'pry'; binding.pry # <<<<<<<<<<<<<<<<<<<< REMOVE
+$0require 'pry'; binding.pry # FIXME <<<<<<<<<<<<<<<<<<<< REMOVE

@@ -5,10 +5,10 @@
 (use-package avy
     :ensure t
     :bind
-    ("C-c ;" . avy-goto-char)
-    ("C-c :" . avy-goto-char-2)
-    ("C-c g l" . avy-goto-line)
-    ("C-c g w" . avy-goto-word-0))
+    ("M-g ;" . avy-goto-char)
+    ("M-g :" . avy-goto-char-2)
+    ("M-g w g" . avy-goto-word-0)
+    ("M-g g" . avy-goto-line))
 
 (provide 'avy-module)
 ;;; avy-module.el ends here
