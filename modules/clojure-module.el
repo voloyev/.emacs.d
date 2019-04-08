@@ -11,7 +11,9 @@
     (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
 (use-package clojure-mode
-    :ensure t)
+    :ensure t
+    :config
+    (setq clojure-indent-style 'always-indent))
 
 ;;lein exec path
 (add-to-list 'exec-path "~/bin")

@@ -139,16 +139,14 @@
     :ensure t
     :mode ("\\.epub\\'" . nov-mode))
 
-;; show all tha loks like smt that was clecked by right mouse button
-(defun xah-mouse-click-to-search (@click)
-  "Show all that look like smt that was clicked by right mouse button.
-@click."
-  (interactive "e")
-  (let ((p1 (posn-point (event-start @click))))
-    (goto-char p1)
-    (isearch-forward-symbol-at-point)))
+(use-package auto-highlight-symbol
+    :ensure t)
 
-(global-set-key (kbd "<mouse-3>") 'xah-mouse-click-to-search)
+(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
 
 ;; Easy transition between buffers: M-arrow-keys
 (if (equal nil (equal major-mode 'org-mode))
