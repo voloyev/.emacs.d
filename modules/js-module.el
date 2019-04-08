@@ -5,6 +5,7 @@
 ;; js2-mode
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"  . auto-highlight-symbol-mode))
 
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))

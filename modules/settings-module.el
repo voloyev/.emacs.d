@@ -147,10 +147,11 @@
 (add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
 
 ;; Easy transition between buffers: M-arrow-keys
-(if (equal nil (equal major-mode 'org-mode))
-    (windmove-default-keybindings 'meta))
+;; (if (equal nil (equal major-mode 'org-mode))
+;;     (windmove-default-keybindings 'meta))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
