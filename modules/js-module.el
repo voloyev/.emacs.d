@@ -3,6 +3,7 @@
 ;;; js module
 ;;; Code:
 ;; js2-mode
+
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'"  . auto-highlight-symbol-mode))
@@ -90,9 +91,6 @@
 
 (require 'company)
 (require 'company-tern)
-
-(use-package prettier-js
-    :ensure t)
 
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'js2-mode-hook (lambda ()
