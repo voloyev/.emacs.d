@@ -44,6 +44,7 @@ Plugin 'andreimaxim/vim-io'
 Plugin 'rhysd/vim-crystal'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'slashmili/alchemist.vim'
+Plugin 'easymotion/vim-easymotion'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -108,5 +109,17 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 hi MatchParen cterm=bold ctermbg=none ctermfg=green
 
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+map <space> <Plug>(easymotion-prefix)
+nmap <Leader>s <Plug>(easymotion-overwin-f)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 "let g:ackprg = 'ag --vimgrep'
 "let g:ackprg = 'ag --nogroup --nocolor --column'
