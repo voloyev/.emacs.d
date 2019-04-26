@@ -38,9 +38,6 @@ this section.
 (use-package bundler
     :ensure t)
 
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
-
 (defadvice inf-ruby-console-auto (before activate)
   "Activate corespongeting ruby when use inf-ruby."
   (chruby-use-corresponding))
@@ -49,6 +46,7 @@ this section.
 (setq inf-ruby-default-implementation "pry")
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
+
 ;; rinari
 (use-package rinari
     :ensure t
@@ -59,11 +57,6 @@ this section.
 (use-package slim-mode
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
-
-;; (use-package ruby-refactor
-;;     :ensure t
-;;     :config
-;;     :hook (ruby-refactor-mode-launch . ruby-mode))
 
 (use-package minitest
     :ensure t

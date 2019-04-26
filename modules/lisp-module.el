@@ -7,7 +7,7 @@
     :ensure t
     :init
     (setq inferior-lisp-program "ros -Q run")
-    (setq slime-contribs '(slime-fancy)))
+    (setq slime-contribs '(slime-fancy slime-company)))
 
 (use-package elisp-slime-nav
     :ensure t
