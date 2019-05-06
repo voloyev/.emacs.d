@@ -3,7 +3,7 @@ export ZSH=/home/voloyev/.oh-dmy-zsh
 ZSH_THEME="mortalscumbag"
 
 plugins=(
-  git ruby chruby zsh-autosuggestions yaourt capistrano common-aliases knife gem docker python
+  git ruby chruby zsh-autosuggestions capistrano common-aliases knife gem docker python
 )
 source $ZSH/oh-my-zsh.sh
 

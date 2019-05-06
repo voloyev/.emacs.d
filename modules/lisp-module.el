@@ -24,7 +24,8 @@
     :hook(paredit-mode . emacs-lisp-mode)
     :hook(paredit-mode . clojure-mode)
     :hook(paredit-mode . racket-mode)
-    :hook(paredit-mode . slime-mode))
+    :hook(paredit-mode . slime-mode)
+    :hook(paredit-mode . cider-mode))
 
 (use-package lispy
     :ensure t
