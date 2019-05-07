@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: inpry
-# key: inpry
+# key: debugger
 # --
 $0require 'pry'; binding.pry # FIXME <<<<<<<<<<<<<<<<<<<< REMOVE

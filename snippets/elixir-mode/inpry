@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: inpry
-# key: inpry
+# key: debugger
 # --
 
-require IEx; IEx.pry
+require IEx; IEx.pry # FIXME remove

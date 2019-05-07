@@ -1,6 +1,5 @@
 # -*- mode: snippet -*-
 # name: pydebg
-# key: pydebg
+# key: debugger
 # --
-
-import remote_pdb; remote_pdb.RemotePdb('127.0.0.1', 4444).set_trace() # FIXME remove
+$0import remote_pdb; remote_pdb.RemotePdb('127.0.0.1', 4444).set_trace() # FIXME remove
