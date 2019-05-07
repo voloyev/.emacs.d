@@ -98,7 +98,7 @@
 (global-set-key (kbd "<f8>") 'visit-tags-table)
 " | Combo | Function         | Description                |"
 " |-------+------------------+----------------------------|"
-" | <f3>  | visit-tags-table | Loads tags                 |"
+" | <f8>  | visit-tags-table | Loads tags                 |"
 " | M-.   | find-tag         | Jumps to the specified tag |"
 " | C-M-. | pop-tag-mark     | Jumps back                 |"
 
