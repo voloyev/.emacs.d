@@ -31,5 +31,8 @@
   ("r" mc/mark-all-in-region-regexp :exit t)
   ("q" nil))
 
+;; hydra for ptojectile
+(define-key projectile-rails-mode-map (kbd "C-c r") 'hydra-projectile-rails/body)
+
 (provide 'hydra-module)
 ;;; hydra-module.el ends here
