@@ -36,7 +36,8 @@ export PATH="$PATH:$GOPATH/bin"
 # editor
 export EDITOR=vim
 export VISUAL=vim
-alias emc='emacsclient -t'
+alias emc='emacsclient -c'
+alias emt='emacsclient -t'
 alias enw="emacs -nw"
 alias fd="/usr/bin/fd"
 # rust src
@@ -71,5 +72,7 @@ export ANSIBLE_INVENTORY="/home/voloyev/workspace/ansible/hosts"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 alias betty="~/workspace/ruby/betty/main.rb"
