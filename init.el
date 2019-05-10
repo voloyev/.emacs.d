@@ -34,11 +34,11 @@
 (require 'go-module)
 (require 'clojure-module)
 (require 'avy-module)
-(require 'hydra-module)
 (require 'org-module)
 (require 'evil-module)
 (require 'lisp-module)
 (require 'indent-module)
+(require 'hydra-module)
 ;;(require 'lsp-module)
 
 ;; custom plugins path
@@ -88,6 +88,7 @@
     (projectile-global-mode)
     (projectile-rails-global-mode)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (define-key projectile-rails-mode-map (kbd "C-c r") 'hydra-projectile-rails/body)
     (setq projectile-indexing-method 'alien)
     (setq projectile-enable-caching nil)
     (setq projectile-mode-line
