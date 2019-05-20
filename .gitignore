@@ -50,3 +50,6 @@ tramp
 .emacs-custom.el
 network-security.data
 anaconda-mode/
+transient/
+.lsp-session-v1
+nov-places
