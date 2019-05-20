@@ -150,11 +150,6 @@
 (add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
-(use-package shx
-    :ensure t
-    :config
-    (shx-global-mode t))
-
 ;; Easy transition between buffers: M-arrow-keys
 ;; (if (equal nil (equal major-mode 'org-mode))
 ;;     (windmove-default-keybindings 'meta))
