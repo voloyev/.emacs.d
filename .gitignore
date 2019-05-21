@@ -53,3 +53,5 @@ anaconda-mode/
 transient/
 .lsp-session-v1
 nov-places
+ac-comphist.dat
+todo.org_archive
