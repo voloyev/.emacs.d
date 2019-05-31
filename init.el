@@ -39,7 +39,7 @@
 (require 'lisp-module)
 (require 'indent-module)
 (require 'hydra-module)
-;;(require 'lsp-module)
+(require 'lsp-module)
 
 ;; custom plugins path
 (add-to-list 'load-path "~/.emacs.d/plugins/")

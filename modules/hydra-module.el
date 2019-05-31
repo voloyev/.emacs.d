@@ -11,7 +11,7 @@
   ("l" text-scale-decrease "out"))
 
 ;; hydra for mc
-(defhydra multiple-cursors-hydra (global-map "C-c m c" :hint nil)
+(defhydra multiple-cursors-hydra (global-map "C-c m c")
   "
      ^Up^            ^Down^        ^Other^
 ----------------------------------------------
@@ -32,6 +32,30 @@
   ("q" nil))
 
 ;; hydra for ptojectile
+
+(defhydra hydra-lsp (global-map "M-g ." :exit t)
+  "
+ Buffer^^               Server^^                   Symbol
+-------------------------------------------------------------------------------------
+ [_f_] format           [_M-r_] restart            [_D_] declaration  [_i_] implementation  [_o_] documentation
+ [_m_] imenu            [_S_]   shutdown           [_d_] definition   [_t_] type            [_R_] rename
+ [_x_] execute action   [_M-s_] describe session   [_r_] references   [_s_] signature"
+  ("D" lsp-find-declaration)
+  ("d" lsp-ui-peek-find-definitions)
+  ("r" lsp-ui-peek-find-references)
+  ("i" lsp-ui-peek-find-implementation)
+  ("t" lsp-find-type-definition)
+  ("s" lsp-signature-help)
+  ("o" lsp-describe-thing-at-point)
+  ("R" lsp-rename)
+
+  ("f" lsp-format-buffer)
+  ("m" lsp-ui-imenu)
+  ("x" lsp-execute-code-action)
+
+  ("M-s" lsp-describe-session)
+  ("M-r" lsp-restart-workspace)
+  ("S" lsp-shutdown-workspace))
 
 (provide 'hydra-module)
 ;;; hydra-module.el ends here
