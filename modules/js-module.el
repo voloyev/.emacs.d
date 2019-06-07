@@ -51,5 +51,11 @@
     :hook (rjsx-mode   . tern-mode)
     :hook (rjsx-mode   . company-mode))
 
+
+(use-package elm-mode
+    :ensure t
+    :mode ("\\.elm\\" . elm-mode)
+    :config (elm-format-on-save-mode t))
+
 (provide 'js-module)
 ;;; js-module.el ends here
