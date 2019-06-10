@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Volodymyr subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Must Read" title="Must Read">
+            <outline type="rss" text="Stable Updates - Manjaro Linux Forum" title="Stable Updates - Manjaro Linux Forum" xmlUrl="https://forum.manjaro.org/c/announcements/stable-updates.rss" htmlUrl="https://forum.manjaro.org/c/announcements/stable-updates"/>
+        </outline>
+        <outline text="Programing" title="Programing">
+            <outline type="rss" text="Rust Blog" title="Rust Blog" xmlUrl="http://blog.rust-lang.org/feed.xml" htmlUrl="https://blog.rust-lang.org/"/>
+            <outline type="rss" text="Hacker News" title="Hacker News" xmlUrl="http://news.ycombinator.com/rss" htmlUrl="https://news.ycombinator.com/"/>
+            <outline type="rss" text="Techmeme" title="Techmeme" xmlUrl="http://www.techmeme.com/feed.xml" htmlUrl="http://www.techmeme.com/"/>
+            <outline type="rss" text="This Week in Rust" title="This Week in Rust" xmlUrl="http://this-week-in-rust.org/atom.xml" htmlUrl="https://this-week-in-rust.org/"/>
+            <outline type="rss" text="Canonical" title="Canonical" xmlUrl="http://www.canonical.com/rss.xml" htmlUrl="https://insights.ubuntu.com"/>
+            <outline type="rss" text="Read Rust - All Posts" title="Read Rust - All Posts" xmlUrl="http://readrust.net/all/feed.rss" htmlUrl="https://readrust.net/"/>
+            <outline type="rss" text="Giant Robots Smashing Into Other Giant Robots" title="Giant Robots Smashing Into Other Giant Robots" xmlUrl="http://feeds.feedburner.com/GiantRobotsSmashingIntoOtherGiantRobots" htmlUrl="https://thoughtbot.com/blog"/>
+            <outline type="rss" text="Netflix TechBlog" title="Netflix TechBlog" xmlUrl="http://techblog.netflix.com/feeds/posts/default" htmlUrl="https://medium.com/netflix-techblog?source=rss----2615bd06b42e---4"/>
+            <outline type="rss" text="Riding Rails" title="Riding Rails" xmlUrl="http://weblog.rubyonrails.org/feed/atom.xml" htmlUrl="https://weblog.rubyonrails.org/"/>
+            <outline type="rss" text="RubyFlow" title="RubyFlow" xmlUrl="http://feeds.feedburner.com/Rubyflow" htmlUrl="http://www.rubyflow.com"/>
+        </outline>
+        <outline type="rss" text="Философия" title="Философия" xmlUrl="http://feed.rutracker.org/atom/f/995.atom" htmlUrl="https://rutracker.org/forum/viewforum.php?f=995"/>
+        <outline type="rss" text="Stable Updates - Manjaro Linux Forum" title="Stable Updates - Manjaro Linux Forum" xmlUrl="https://forum.manjaro.org/c/announcements/stable-updates.rss" htmlUrl="https://forum.manjaro.org/c/announcements/stable-updates"/>
+    </body>
+</opml>

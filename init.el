@@ -40,6 +40,7 @@
 (require 'indent-module)
 (require 'hydra-module)
 (require 'lsp-module)
+(require 'elfeed-module)
 
 ;; custom plugins path
 (add-to-list 'load-path "~/.emacs.d/plugins/")
@@ -125,14 +126,16 @@
           ("C-c n v" . vimish-fold-delete)))
 
 (use-package magit
-    :bind("C-x g" . magit-status)
-    :config
-    (global-auto-revert-mode t))
+    :bind("C-x g" . magit-status))
 
 (use-package undo-tree
     :ensure t
     :config
-    (global-undo-tree-mode t))
+    (global-undo-tree-mode t)
+    ;; autosave the undo-tree history
+    (setq undo-tree-history-directory-alist
+          `((".*" . ,temporary-file-directory)))
+    (setq undo-tree-auto-save-history t))
 
 ;; c-mode settings
 (setq c-default-style "linux")
@@ -235,28 +238,60 @@
 (use-package multi-term
     :ensure t)
 
-;;(load (expand-file-name "~/.roswell/helper.el"))
+(use-package irony
+    :ensure t)
 
-;; exec shell
-;; some magic happens here
-;; DO NOT EDIT THIS SHIT!!!!!!!!!!!!!!!!!
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(use-package calfw-cal
+    :ensure t)
+
+(use-package calfw
+    :ensure t)
+
+(use-package calfw-org
+    :ensure t)
+
+(use-package howm
+    :ensure t)
+
+(use-package calfw-howm
+    :ensure t)
+
+(use-package deadgrep
+    :ensure t
+    :bind("C-c o SPC" . deadgrep))
+
+(use-package frog-jump-buffer
+    :ensure t
+    :bind("C-c SPC" . frog-jump-buffer))
+
+(use-package org-brain :ensure t
+  :init
+  (setq org-brain-path "~/.emacs.d/brain")
+  :config
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12))
+
+(use-package exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-(use-package exec-path-from-shell
-    :ensure t
-    :init (when (memq window-system '(mac ns x))
-            (exec-path-from-shell-initialize)))
-;; DO NOT EDIT THIS SHIT ends here
+(exec-path-from-shell-copy-env "GOPATH")
+
 (load custom-file)
 ;;; init.el ends here

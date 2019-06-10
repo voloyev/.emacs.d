@@ -1,6 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;; php module
+;;; Settings module
 ;;; Code:
 ;; here should be settings that can not be placed anywhere elese
 
@@ -67,12 +67,8 @@
 (use-package markdown-preview-mode
     :ensure t)
 
-(use-package nlinum
-    :bind (("C-c C-l" . nlinum-mode)))
-
-(use-package git-gutter-fringe
-    :config
-  (global-git-gutter-mode t))
+(use-package linum
+    :bind (("C-c C-l" . linum-mode)))
 
 ;; calendar app
 (use-package calfw
@@ -100,6 +96,10 @@
 
 (use-package es-mode
     :ensure t)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((elasticsearch . t)))
 
 (use-package yaml-mode
     :mode ("\\.yml\\'" . yaml-mode))
@@ -149,6 +149,22 @@
 (add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
+
+(global-auto-revert-mode t)
+
+(use-package diff-hl
+  :ensure t
+  :config
+  (diff-hl-margin-mode +1)
+  (diff-hl-dired-mode +1)
+  (global-diff-hl-mode +1)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+(use-package volatile-highlights
+  :ensure t
+  :config
+  (volatile-highlights-mode +1))
 
 ;; Easy transition between buffers: M-arrow-keys
 ;; (if (equal nil (equal major-mode 'org-mode))

@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Lisp settings
 ;;; Code:
+;; (load (expand-file-name "~/.roswell/helper.el"))
 
 (use-package slime
     :ensure t

@@ -11,16 +11,10 @@
     (load-theme 'sexy-monochrome t)
     (enable-theme 'sexy-monochrome))
 
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'zenburn t)
-;;   (enable-theme 'zenburn))
-
-;; (use-package grayscale-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'grayscale t))
+;; (use-package eclipse-theme
+;;     :ensure t
+;;     :init
+;;     (load-theme 'eclipse t))
 
 (provide 'themes-module)
 ;;; themes-module ends here

@@ -2,7 +2,9 @@
 ;;; Code:
 ;;; Commentary:
 ;; yanisppet
-(require 'yasnippet)
+(use-package yasnippet
+    :ensure t)
+
 (defun enable-yas-mode ()
   (yas-minor-mode t))
 (eval-after-load 'rspec-mode

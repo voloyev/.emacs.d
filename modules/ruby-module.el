@@ -2,7 +2,14 @@
 ;;; Commentary:
 ;;; ruby module
 ;;; Code:
-"if you use rvm
+"
+For propper usage of lsp mode in ruby
+you should generate documentation for projects gems.
+#+BEGIN_SRC bash
+yard gems
+#+END_SRC
+"
+"if you use rvm or rbenv
 you should uncomment
 this section.
 ;;(use-package rvm
@@ -10,34 +17,33 @@ this section.
 ;;(rvm-use-default)
 ;;(rvm-activate-corresponding-ruby))
 "
+
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+
 (use-package ruby-mode
-  :config
+    :config
   (setq ruby-insert-encoding-magic-comment nil)
   :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
   :hook (robe-mode)
   :hook (yard-mode)
-  :bind(("C-c r a"      . chruby-use-corresponding)
-	("C-c r r"      . inf-ruby-console-auto)
-	("C-c & h r"    . enh-ruby-mode)))
-
-;;rbenv
-(use-package rbenv
-  :ensure t)
+  :bind(("C-c r r"      . inf-ruby-console-auto)
+        ("C-c & h r"    . enh-ruby-mode)))
 
 (use-package chruby
-  :ensure t)
+    :ensure t)
 
 (use-package ruby-tools
-  :init
+    :ensure t
+    :init
   (setq ruby-indent-level 2)
   (setq ruby-deep-indent-paren nil))
 
 (use-package robe
-  :ensure t
-  :bind(("C-c C-c r s"  . robe-start)))
+    :ensure t
+    :bind(("C-c C-c r s"  . robe-start)))
 
 (use-package bundler
-  :ensure t)
+    :ensure t)
 
 (defadvice inf-ruby-console-auto (before activate)
   "Activate corespongeting ruby when use inf-ruby."
@@ -50,24 +56,30 @@ this section.
 
 ;; rinari
 (use-package rinari
-  :ensure t
-  :init
-  (setq rinari-tags-file-name "TAGS"))
+    :ensure t
+    :init
+    (setq rinari-tags-file-name "TAGS"))
 
 ;; slim-mode
 (use-package slim-mode
-  :ensure t
-  :mode ("\\.slim\\'" . slim-mode))
+    :ensure t
+    :mode ("\\.slim\\'" . slim-mode))
 
 (use-package minitest
-  :ensure t
-  :config
-  :hook (ruby-mode)
-  :hook (enh-ruby-mode))
+    :ensure t
+    :config
+    :hook (ruby-mode)
+    :hook (enh-ruby-mode))
 
 ;; hyde jekyll mode
 (use-package hyde
-  :ensure t)
+    :ensure t)
+
+(use-package rspec-mode
+    :ensure t)
+
+(add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
+(add-hook 'ruby-mode-hook #'lsp-deferred)
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
