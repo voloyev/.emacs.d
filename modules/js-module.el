@@ -54,7 +54,7 @@
 
 (use-package elm-mode
     :ensure t
-    :mode ("\\.elm\\" . elm-mode)
+    :mode ("\\.elm\\'" . elm-mode)
     :config (elm-format-on-save-mode t))
 
 (provide 'js-module)
