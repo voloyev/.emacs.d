@@ -40,6 +40,7 @@
 (require 'indent-module)
 (require 'hydra-module)
 (require 'lsp-module)
+(require 'elfeed-module)
 
 ;; custom plugins path
 (add-to-list 'load-path "~/.emacs.d/plugins/")
@@ -234,6 +235,15 @@
 
 (use-package multi-term
     :ensure t)
+
+(use-package irony
+    :ensure t)
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 ;;(load (expand-file-name "~/.roswell/helper.el"))
 
