@@ -126,9 +126,7 @@
           ("C-c n v" . vimish-fold-delete)))
 
 (use-package magit
-    :bind("C-x g" . magit-status)
-    :config
-    (global-auto-revert-mode t))
+    :bind("C-x g" . magit-status))
 
 (use-package undo-tree
     :ensure t
@@ -244,6 +242,21 @@
 (add-hook 'objc-mode-hook 'irony-mode)
 
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(use-package calfw-cal
+    :ensure t)
+
+(use-package calfw
+    :ensure t)
+
+(use-package calfw-org
+    :ensure t)
+
+(use-package howm
+    :ensure t)
+
+(use-package calfw-howm
+    :ensure t)
 
 ;;(load (expand-file-name "~/.roswell/helper.el"))
 

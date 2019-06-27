@@ -39,5 +39,9 @@
             emacs-lisp-mode-hook
             clojure-mode-hook)
     (add-hook it 'turn-on-smartparens-mode)))
+
+;; deal with escaping
+(setq sp-escape-quotes-after-insert nil)
+
 (provide 'smartparens-module)
 ;;; smartparens-module ends here

@@ -37,18 +37,17 @@
   "
  Buffer^^               Server^^                   Symbol
 -------------------------------------------------------------------------------------
- [_f_] format           [_M-r_] restart            [_D_] declaration  [_i_] implementation  [_o_] documentation
- [_m_] imenu            [_S_]   shutdown           [_d_] definition   [_t_] type            [_R_] rename
- [_x_] execute action   [_M-s_] describe session   [_r_] references   [_s_] signature"
-  ("D" lsp-find-declaration)
-  ("d" lsp-ui-peek-find-definitions)
-  ("r" lsp-ui-peek-find-references)
+ [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+ [_m_] imenu            [_S_]   shutdown           [_._] definition   [_t_] type            [_R_] rename
+ [_x_] execute action   [_M-s_] describe session   [_/_] references   [_s_] signature"
+  ("d" lsp-find-declaration)
+  ("." lsp-ui-peek-find-definitions)
+  ("/" lsp-ui-peek-find-references)
   ("i" lsp-ui-peek-find-implementation)
   ("t" lsp-find-type-definition)
   ("s" lsp-signature-help)
   ("o" lsp-describe-thing-at-point)
   ("R" lsp-rename)
-
   ("f" lsp-format-buffer)
   ("m" lsp-ui-imenu)
   ("x" lsp-execute-code-action)

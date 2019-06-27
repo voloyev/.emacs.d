@@ -67,8 +67,8 @@
 (use-package markdown-preview-mode
     :ensure t)
 
-(use-package nlinum
-    :bind (("C-c C-l" . nlinum-mode)))
+(use-package linum
+    :bind (("C-c C-l" . linum-mode)))
 
 (use-package git-gutter-fringe
     :config
@@ -150,6 +150,7 @@
 (add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
+(global-auto-revert-mode t)
 ;; Easy transition between buffers: M-arrow-keys
 ;; (if (equal nil (equal major-mode 'org-mode))
 ;;     (windmove-default-keybindings 'meta))

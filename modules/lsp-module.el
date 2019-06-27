@@ -6,12 +6,7 @@
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
     (setq flymake-fringe-indicator-position 'right-fringe)
-    :hook
-    (js2-mode . lsp)
-    (js2-jsx-mode . lsp)
-    (vue-mode . lsp)
-    (ruby-mode . lsp)
-    :commands lsp)
+    :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
     :commands lsp-ui-mode
