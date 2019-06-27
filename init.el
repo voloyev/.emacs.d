@@ -258,6 +258,9 @@
 (use-package calfw-howm
     :ensure t)
 
+(use-package deadgrep
+    :ensure t
+    :bind("C-c o SPC" . deadgrep))
 ;;(load (expand-file-name "~/.roswell/helper.el"))
 
 ;; exec shell
