@@ -70,9 +70,9 @@
 (use-package linum
     :bind (("C-c C-l" . linum-mode)))
 
-(use-package git-gutter-fringe
-    :config
-  (global-git-gutter-mode t))
+;; (use-package git-gutter-fringe
+;;     :config
+;;   (global-git-gutter-mode t))
 
 ;; calendar app
 (use-package calfw
@@ -151,6 +151,21 @@
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
 (global-auto-revert-mode t)
+
+(use-package diff-hl
+  :ensure t
+  :config
+  (diff-hl-margin-mode +1)
+  (diff-hl-dired-mode +1)
+  (global-diff-hl-mode +1)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+(use-package volatile-highlights
+  :ensure t
+  :config
+  (volatile-highlights-mode +1))
+
 ;; Easy transition between buffers: M-arrow-keys
 ;; (if (equal nil (equal major-mode 'org-mode))
 ;;     (windmove-default-keybindings 'meta))

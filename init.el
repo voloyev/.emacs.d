@@ -131,7 +131,11 @@
 (use-package undo-tree
     :ensure t
     :config
-    (global-undo-tree-mode t))
+    (global-undo-tree-mode t)
+    ;; autosave the undo-tree history
+    (setq undo-tree-history-directory-alist
+          `((".*" . ,temporary-file-directory)))
+    (setq undo-tree-auto-save-history t))
 
 ;; c-mode settings
 (setq c-default-style "linux")
