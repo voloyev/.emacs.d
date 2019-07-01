@@ -2,7 +2,7 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts and general looks
-(when (memq window-system '(mac))
+(when (memq window-system '(ns mac))
   (set-face-attribute 'default nil :font "Source Code Pro 15")
   (set-frame-font "Source Code Pro 15"))
 
