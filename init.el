@@ -265,6 +265,10 @@
 (use-package deadgrep
     :ensure t
     :bind("C-c o SPC" . deadgrep))
+
+(use-package frog-jump-buffer
+    :ensure t
+    :bind("C-c SPC" . frog-jump-buffer))
 ;;(load (expand-file-name "~/.roswell/helper.el"))
 
 ;; exec shell

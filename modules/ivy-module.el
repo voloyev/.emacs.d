@@ -16,7 +16,7 @@
     :bind(("C-c p s s" . counsel-projectile-ag)
           ("C-c p s r" . counsel-projectile-rg)
           ("C-c p p"   . counsel-projectile-switch-project)
-          ("C-c SPC"   . counsel-projectile)))
+          ("C-c p SPC"   . counsel-projectile)))
 
 (use-package counsel-etags
     :ensure t)
