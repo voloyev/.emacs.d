@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(ns mac))
-  (set-face-attribute 'default nil :font "Source Code Pro 15")
-  (set-frame-font "Source Code Pro 15"))
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono 15")
+  (set-frame-font "DejaVu Sans Mono 15"))
 
 (when (memq window-system '(x))
   (set-face-attribute 'default nil :font "DejaVu Sans Mono 14")
