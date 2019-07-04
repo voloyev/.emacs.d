@@ -13,8 +13,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # GO
+export GOROOT="$HOME/bin/go"
+export GOPATH="$HOME/workspace/go"
+
 export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:$GOROOT/bin"
+export PATH="$GOROOT/bin:$PATH"
 
 # rowel
 export PATH="$PATH:$HOME/.roswell/bin"
