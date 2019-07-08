@@ -23,7 +23,6 @@
 (require 'helm-module)
 (require 'ivy-module)
 (require 'python-module)
-;; (require 'lpy-module)
 (require 'highlight-indentation-mode-module)
 (require 'looks-module)
 (require 'themes-module)

@@ -140,14 +140,15 @@
     :mode ("\\.epub\\'" . nov-mode))
 
 (use-package auto-highlight-symbol
-    :ensure t
-    :hook (js2-mode-hook
-           js2-jsx-mode-hook
-           elixir-mode-hook
-           ruby-mode-hook
-           rust-mode-hook
-           emacs-lisp-mode
-           python-mode-hook))
+    :ensure t)
+
+(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
 (global-auto-revert-mode t)
 
