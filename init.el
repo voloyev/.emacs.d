@@ -23,6 +23,7 @@
 (require 'helm-module)
 (require 'ivy-module)
 (require 'python-module)
+;; (require 'lpy-module)
 (require 'highlight-indentation-mode-module)
 (require 'looks-module)
 (require 'themes-module)
@@ -270,6 +271,18 @@
     :ensure t
     :bind("C-c SPC" . frog-jump-buffer))
 
+(use-package org-brain :ensure t
+  :init
+  (setq org-brain-path "~/.emacs.d/brain")
+  :config
+  (setq org-id-track-globally t)
+  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
+  (push '("b" "Brain" plain (function org-brain-goto-end)
+          "* %i%?" :empty-lines 1)
+        org-capture-templates)
+  (setq org-brain-visualize-default-choices 'all)
+  (setq org-brain-title-max-length 12))
+
 (use-package exec-path-from-shell
     :ensure t
     :config
@@ -280,7 +293,6 @@
   (exec-path-from-shell-initialize))
 
 (exec-path-from-shell-copy-env "GOPATH")
-;; (exec-path-from-shell-copy-env "PATH")
 
 (load custom-file)
 ;;; init.el ends here

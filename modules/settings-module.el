@@ -1,6 +1,6 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;; php module
+;;; Settings module
 ;;; Code:
 ;; here should be settings that can not be placed anywhere elese
 
@@ -70,10 +70,6 @@
 (use-package linum
     :bind (("C-c C-l" . linum-mode)))
 
-;; (use-package git-gutter-fringe
-;;     :config
-;;   (global-git-gutter-mode t))
-
 ;; calendar app
 (use-package calfw
     :ensure t)
@@ -100,6 +96,10 @@
 
 (use-package es-mode
     :ensure t)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((elasticsearch . t)))
 
 (use-package yaml-mode
     :mode ("\\.yml\\'" . yaml-mode))
@@ -140,15 +140,14 @@
     :mode ("\\.epub\\'" . nov-mode))
 
 (use-package auto-highlight-symbol
-    :ensure t)
-
-(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
+    :ensure t
+    :hook (js2-mode-hook
+           js2-jsx-mode-hook
+           elixir-mode-hook
+           ruby-mode-hook
+           rust-mode-hook
+           emacs-lisp-mode
+           python-mode-hook))
 
 (global-auto-revert-mode t)
 
