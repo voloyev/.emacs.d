@@ -28,9 +28,23 @@
 (use-package company-tern
     :ensure t)
 
+(use-package js2-mode
+    :ensure t
+    :mode ("\\.js\\'"   . js2-jsx-mode)
+    :hook (js2-jsx-mode . tern-mode)
+    :hook (js2-jsx-mode . company-mode)
+    :hook (js2-jsx-mode . smartparense-mode))
+
 (use-package rjsx-mode
     :ensure t
-    :mode ("\\.js\\'"  . rjsx-mode)
+    ;; :mode ("\\.js\\'"  . rjsx-mode)
+    :hook (rjsx-mode   . tern-mode)
+    :hook (rjsx-mode   . company-mode))
+
+
+(use-package rjsx-mode
+    :ensure t
+    ;; :mode ("\\.js\\'"  . rjsx-mode)
     :hook (rjsx-mode   . tern-mode)
     :hook (rjsx-mode   . company-mode))
 
