@@ -4,6 +4,7 @@
 ;;; Code:
 
 (use-package smartparens
+    :ensure t
     :config
   (show-smartparens-global-mode 1)
 

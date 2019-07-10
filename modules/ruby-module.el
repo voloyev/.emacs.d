@@ -33,6 +33,7 @@ this section.
     :ensure t)
 
 (use-package ruby-tools
+    :ensure t
     :init
   (setq ruby-indent-level 2)
   (setq ruby-deep-indent-paren nil))
