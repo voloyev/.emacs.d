@@ -20,6 +20,7 @@
     (setq rust-format-on-save t))
 
 (use-package flycheck-rust
+    :ensure t
     :after flycheck
     :commands flycheck-rust-setup
     :init
