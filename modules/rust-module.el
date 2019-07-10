@@ -45,19 +45,6 @@
 (use-package rust-playground
     :ensure t
     :bind(("C-c C-r e" . rust-playground-exec)))
-;;; change config end
-;; (use-package rust-mode
-;;     :mode "\\.rs\\'"
-;;     :init
-;;     (setq rust-format-on-save t))
-;; (use-package lsp-mode
-;;     :init
-;;     (add-hook 'prog-mode-hook 'lsp-mode)
-;;     :config
-;;     (use-package lsp-flycheck
-;;         :ensure f ; comes with lsp-mode
-;;         :after flycheck))
-;; (use-package lsp-rust
-;;     :after lsp-mode)
+
 (provide 'rust-module)
 ;;; rust-module.el ends here
