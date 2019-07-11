@@ -10,40 +10,43 @@
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
+(add-to-list 'load-path "~/.emacs.d/plugins/")
+(add-to-list 'load-path "~/.emacs.d/modules")
+;; use bash
+(setq shell-file-name "/bin/zsh")
+
 ;; activate installed packages
 (package-initialize)
 (require 'use-package)
 
 ;;; List of required modules
-(add-to-list 'load-path "~/.emacs.d/modules")
-(require 'ruby-module)
-(require 'smartparens-module)
-(require 'web-mode-module)
-(require 'yasnippet-module)
-(require 'helm-module)
-(require 'ivy-module)
-(require 'python-module)
-(require 'highlight-indentation-mode-module)
-(require 'looks-module)
-(require 'themes-module)
-(require 'js-module)
-(require 'rust-module)
-(require 'crystal-module)
-(require 'elixir-module)
-(require 'settings-module)
-(require 'go-module)
-(require 'clojure-module)
-(require 'avy-module)
-(require 'org-module)
-(require 'evil-module)
-(require 'lisp-module)
-(require 'indent-module)
-(require 'hydra-module)
-(require 'lsp-module)
-(require 'elfeed-module)
+(use-package ruby-module)
+(use-package smartparens-module)
+(use-package web-mode-module)
+(use-package yasnippet-module)
+(use-package helm-module)
+(use-package ivy-module)
+(use-package python-module)
+(use-package highlight-indentation-mode-module)
+(use-package looks-module)
+(use-package themes-module)
+(use-package js-module)
+(use-package rust-module)
+(use-package crystal-module)
+(use-package elixir-module)
+(use-package settings-module)
+(use-package go-module)
+(use-package clojure-module)
+(use-package avy-module)
+(use-package org-module)
+(use-package evil-module)
+(use-package lisp-module)
+(use-package indent-module)
+(use-package hydra-module)
+(use-package lsp-module)
+(use-package elfeed-module)
 
 ;; custom plugins path
-(add-to-list 'load-path "~/.emacs.d/plugins/")
 
 ;; Emacs server
 (require 'server)
@@ -53,8 +56,6 @@
 ;; Delete selection
 (delete-selection-mode t)
 
-;; use bash
-(setq shell-file-name "/bin/bash")
 
 ;; desktop-save-mode
 (desktop-save-mode 0)

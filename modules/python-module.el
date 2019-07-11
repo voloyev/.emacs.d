@@ -2,13 +2,20 @@
 ;;; Code:
 ;;; Commentary:
 ;; python module
+(add-to-list 'load-path "~/.emacs.d/modules")
+
+(use-package blacken
+    :config
+  (setq blacken-skip-string-normalization t))
 
 (use-package python-mode
     :ensure t
     :init
     (elpy-enable)
     (setq python-shell-interpreter "python3"
-          python-shell-interpreter-args "-i"))
+          python-shell-interpreter-args "-i")
+    :config
+    (add-hook 'python-mode-hook 'blacken-mode))
 
 (use-package elpy
     :ensure t)
