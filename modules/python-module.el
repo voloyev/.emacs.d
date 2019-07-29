@@ -6,19 +6,14 @@
 
 (use-package blacken
     :config
-  (setq blacken-skip-string-normalization t))
+  (setq blacken-skip-string-normalization t)
+  (setq blacken-line-length 80))
 
 (use-package python-mode
     :ensure t
     :init
-    (elpy-enable)
-    (setq python-shell-interpreter "python3"
-          python-shell-interpreter-args "-i")
     :config
     (add-hook 'python-mode-hook 'blacken-mode))
-
-(use-package elpy
-    :ensure t)
 
 (use-package anaconda-mode
     :ensure t
