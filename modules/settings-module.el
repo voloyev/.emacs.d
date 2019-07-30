@@ -95,11 +95,12 @@
           ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :ensure t)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((elasticsearch . t)))
+    :ensure t
+    :init
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((elasticsearch . t)))
+    :config (setq es-always-pretty-print t))
 
 (use-package yaml-mode
     :mode ("\\.yml\\'" . yaml-mode))

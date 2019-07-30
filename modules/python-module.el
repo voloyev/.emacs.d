@@ -7,7 +7,7 @@
 (use-package blacken
     :config
   (setq blacken-skip-string-normalization t)
-  (setq blacken-line-length 80))
+  (setq blacken-line-length 100))
 
 (use-package python-mode
     :ensure t
