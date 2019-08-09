@@ -41,6 +41,8 @@ alias mongosrv="mongod --dbpath=$HOME/mongodb"
 alias dockstop="(docker stop $(docker ps -a -q))"
 alias dockrm="(docker rm $(docker ps -a -q))"
 
+alias ela="exa --group-directories-first -la"
+
 ### fzf in history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
