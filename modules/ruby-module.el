@@ -42,6 +42,9 @@ this section.
     :ensure t
     :bind(("C-c C-c r s"  . robe-start)))
 
+(use-package rcodetools
+    :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
+
 (use-package bundler
     :ensure t)
 
