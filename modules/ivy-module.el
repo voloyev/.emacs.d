@@ -9,7 +9,9 @@
     (setq ivy-count-format "(%d/%d) ")
     :bind(("C-s"   . swiper)
           ("M-y"   . counsel-yank-pop)
-          ("C-x b" . ivy-switch-buffer)))
+          ("C-x b" . ivy-switch-buffer)
+          ("C-c i d f" . counsel-describe-function)
+          ("C-c i d v" . counsel-describe-variable)))
 
 (use-package counsel-projectile
     :ensure t
