@@ -27,7 +27,14 @@
  '((emacs-lisp . t)
    (ruby . t)
    (dot . t)
-   (gnuplot . t)))
+   (gnuplot . t)
+   (lisp . t)
+   (scheme . t)
+   (clojure . t)
+   (python . t)))
 
+(setq org-log-done 'time)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 (provide 'org-module)
 ;;; org-module ends here
