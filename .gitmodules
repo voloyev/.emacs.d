@@ -1,0 +1,3 @@
+[submodule "plugins/snails"]
+	path = plugins/snails
+	url = git@github.com:manateelazycat/snails.git

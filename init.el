@@ -10,14 +10,17 @@
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
-(add-to-list 'load-path "~/.emacs.d/plugins/")
+(add-to-list 'load-path "~/.emacs.d/plugins/snails/") ; remove when it will appear in melpa
 (add-to-list 'load-path "~/.emacs.d/modules")
-;; use bash
-(setq shell-file-name "/bin/zsh")
 
+;; use zsh
+(setq shell-file-name "/bin/zsh")
 ;; activate installed packages
 (package-initialize)
+
+(package-install 'use-package)
 (require 'use-package)
+(use-package snails)
 
 ;;; List of required modules
 (use-package ruby-module)
