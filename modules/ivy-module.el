@@ -15,10 +15,9 @@
 
 (use-package counsel-projectile
     :ensure t
-    :bind(("C-c p s s" . counsel-projectile-ag)
-          ("C-c p s r" . counsel-projectile-rg)
-          ("C-c p p"   . counsel-projectile-switch-project)
-          ("C-c p SPC"   . counsel-projectile)))
+    :bind(("C-c p SPC s" . counsel-projectile-ag)
+          ("C-c p SPC r" . counsel-projectile-rg)
+          ("C-c p SPC SPC"   . counsel-projectile)))
 
 (use-package counsel-etags
     :ensure t)
