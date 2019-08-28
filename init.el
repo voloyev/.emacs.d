@@ -9,9 +9,9 @@
              '("melpa" . "http://melpa.org/packages/")t)
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-
-(add-to-list 'load-path "~/.emacs.d/plugins/snails/") ; remove when it will appear in melpa
 (add-to-list 'load-path "~/.emacs.d/modules")
+(add-to-list 'load-path "~/.emacs.d/plugins")
+(add-to-list 'load-path "~/.emacs.d/plugins/snails") ; remove when it will appear in melpa
 
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
@@ -273,18 +273,6 @@
 (use-package frog-jump-buffer
     :ensure t
     :bind("C-c SPC" . frog-jump-buffer))
-
-(use-package org-brain :ensure t
-  :init
-  (setq org-brain-path "~/.emacs.d/brain")
-  :config
-  (setq org-id-track-globally t)
-  (setq org-id-locations-file "~/.emacs.d/.org-id-locations")
-  (push '("b" "Brain" plain (function org-brain-goto-end)
-          "* %i%?" :empty-lines 1)
-        org-capture-templates)
-  (setq org-brain-visualize-default-choices 'all)
-  (setq org-brain-title-max-length 12))
 
 (use-package exec-path-from-shell
     :ensure t
