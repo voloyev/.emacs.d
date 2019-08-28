@@ -4,11 +4,16 @@
 ;;; Code:
 ;; (load (expand-file-name "~/.roswell/helper.el"))
 
-(use-package slime
+(use-package sly
     :ensure t
     :init
-    (setq inferior-lisp-program "ros -Q run")
-    (setq slime-contribs '(slime-fancy slime-company)))
+    (setq inferior-lisp-program "ros -Q run"))
+
+;; (use-package slime
+;;     :ensure t
+;;     :init
+;;     (setq inferior-lisp-program "ros -Q run")
+;;     (setq slime-contribs '(slime-fancy slime-company)))
 
 (use-package elisp-slime-nav
     :ensure t
@@ -34,5 +39,8 @@
 
 (add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
+(use-package geiser
+             :init
+             (setq geiser-default-implementation 'guile))
 (provide 'lisp-module)
 ;;; lisp-module ends here
