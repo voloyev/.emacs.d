@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: rit
+# key: rit
+# --
+
+it $1 do
+   $2
+end
