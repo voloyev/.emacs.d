@@ -17,6 +17,7 @@
    (simplenote2-set-markdown)))
          
 (add-hook 'simplenote2-note-mode-hook 'markdown-mode)
+(add-hook 'simplenote2-note-mode-hook 'smartparens-strict-mode)
 
 (provide 'simplenotes-module)
 ;;; simplenotes-module.el ends here
