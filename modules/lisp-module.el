@@ -7,6 +7,7 @@
 (use-package sly
     :ensure t
     :init
+    (setq org-babel-lisp-eval-fn 'sly-eval)
     (setq inferior-lisp-program "ros -Q run"))
 
 (use-package elisp-slime-nav
@@ -34,7 +35,7 @@
 
 (use-package geiser
     :init
-  (setq geiser-default-implementation 'racket))
+    (setq geiser-default-implementation 'racket))
 
 
 (add-hook 'lisp-mode-hook 'sly-editing-mode)
