@@ -48,7 +48,7 @@
 (use-package hydra-module)
 (use-package lsp-module)
 (use-package elfeed-module)
-
+(use-package simplenotes-module)
 ;; custom plugins path
 
 ;; Emacs server
