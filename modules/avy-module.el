@@ -13,7 +13,7 @@
  [_m_] move   [_M_] move      [_w_] word        [_W_] any word
  [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line"
   ("c" avy-goto-char-timer)
-  ("C" avy-goto-char)
+  (";" avy-goto-char)
   ("w" avy-goto-word-1)
   ("W" avy-goto-word-0)
   ("l" avy-goto-line)
