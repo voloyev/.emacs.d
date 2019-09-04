@@ -59,7 +59,6 @@
 ;; Delete selection
 (delete-selection-mode t)
 
-
 ;; desktop-save-mode
 (desktop-save-mode 0)
 
@@ -171,10 +170,10 @@
   (flyspell-mode t))
 
 ;; resize buffers
-(global-set-key (kbd "<C-c C-c up>") 'shrink-window)
-(global-set-key (kbd "<C-c C-c down>") 'enlarge-window)
-(global-set-key (kbd "<C-c C-c left>") 'shrink-window-horizontally)
-(global-set-key (kbd "<C-c C-c right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-c C-c <up>") 'shrink-window)
+(global-set-key (kbd "C-c C-c <down>") 'enlarge-window)
+(global-set-key (kbd "C-c C-c <left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
 (use-package dumb-jump
     :bind (("M-g o" . dumb-jump-go-other-window)
