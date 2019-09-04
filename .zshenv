@@ -26,3 +26,5 @@ export PATH="$PATH:$HOME/.roswell/bin"
 export PATH="$PATH:$HOME/bin/flutter/bin"
 
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+# nimble
+export PATH="$HOME/.nimble/bin:$PATH"

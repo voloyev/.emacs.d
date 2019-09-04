@@ -54,9 +54,6 @@ export RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"
 export GOROOT="$HOME/bin/go"
 export GOPATH="$HOME/workspace/go"
 
-# nim
-export PATH=/home/voloyev/.nimble/bin:$PATH
-
 export CARP_DIR=~/.Carp/
 
 # ansible
