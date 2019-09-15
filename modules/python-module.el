@@ -10,16 +10,22 @@
   (setq blacken-line-length 100))
 
 (use-package python-mode
-    :ensure t
-    :init
-    :config
-    (add-hook 'python-mode-hook 'blacken-mode))
+    :ensure t)
 
-(use-package anaconda-mode
+(use-package py-autopep8
+    :ensure t)
+
+(use-package ein
+    :ensure t)
+
+(use-package elpy
     :ensure t
     :init
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+    (elpy-enable)
+    (elpy-use-ipython)
+    (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook 'flycheck-mode)
+    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
 
 (use-package pipenv
     :ensure t
@@ -29,6 +35,8 @@
      pipenv-projectile-after-switch-function
      #'pipenv-projectile-after-switch-extended))
 
+(use-package pyvenv
+    :ensure t)
 
 (provide 'python-module)
 ;;; python-module ends here
