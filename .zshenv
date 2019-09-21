@@ -28,3 +28,19 @@ export PATH="$PATH:$HOME/bin/flutter/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 # nimble
 export PATH="$HOME/.nimble/bin:$PATH"
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+export WORKON_HOME="$HOME/.virtualenvs"
+
+# rust src
+export RUST_SRC_PATH="$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"
+
+export CARP_DIR=~/.Carp/
+
+# ansible
+export ANSIBLE_INVENTORY="/home/voloyev/workspace/ansible/hosts"
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"

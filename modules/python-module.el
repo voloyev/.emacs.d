@@ -22,10 +22,12 @@
     :ensure t
     :init
     (elpy-enable)
-    (elpy-use-ipython)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (add-hook 'elpy-mode-hook 'flycheck-mode)
-    (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+    (setq python-shell-interpreter "python"
+          python-shell-interpreter-args "-i")
+    :hook (elpy-mode . flycheck-mode)
+    :hook (elpy-mode . py-autopep8-enable-on-save)
+    :bind(("M-." . elpy-goto-definition)))
 
 (use-package pipenv
     :ensure t

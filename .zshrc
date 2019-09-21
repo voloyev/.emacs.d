@@ -18,6 +18,7 @@ source /usr/share/chruby/auto.sh
 
 ### Aliases
 # editor
+alias vim='nvim'
 alias emc='emacsclient -c'
 alias emt='emacsclient -t'
 alias enw="emacs -nw"
@@ -47,22 +48,6 @@ alias ela="exa --group-directories-first -la"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ### Exports
-# rust src
-export RUST_SRC_PATH="~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu"
-
-# go
-export GOROOT="$HOME/bin/go"
-export GOPATH="$HOME/workspace/go"
-
-export CARP_DIR=~/.Carp/
-
-# ansible
-export ANSIBLE_INVENTORY="/home/voloyev/workspace/ansible/hosts"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/zsh_completion" ] && \. "$NVM_DIR/zsh_completion"
-
 # pipenv
 eval "$(pipenv --completion)"
+source /usr/bin/virtualenvwrapper.sh

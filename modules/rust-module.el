@@ -27,11 +27,9 @@
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package racer
-    :ensure t
     :commands racer-mode
     :diminish racer-mode
-    :init
-    :bind (("M-." . racer-find-definition)))
+    :ensure t)
 
 (use-package cargo
     :commands cargo-minor-mode

@@ -18,4 +18,4 @@
 (evil-set-initial-state 'eshell-mode 'emacs)
 
 (provide 'evil-module)
-;;; evil-module ends here
+;;; evil-module.el ends here
