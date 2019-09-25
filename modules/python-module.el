@@ -26,8 +26,7 @@
     (setq python-shell-interpreter "python"
           python-shell-interpreter-args "-i")
     :hook (elpy-mode . flycheck-mode)
-    :hook (elpy-mode . py-autopep8-enable-on-save)
-    :bind(("M-." . elpy-goto-definition)))
+    :hook (elpy-mode . py-autopep8-enable-on-save))
 
 (use-package pipenv
     :ensure t
