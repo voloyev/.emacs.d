@@ -47,7 +47,9 @@ alias ela="exa --group-directories-first -la"
 ### fzf in history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-### Exports
 # pipenv
 eval "$(pipenv --completion)"
+# luarocks
+eval $(luarocks path --bin)
+
 source /usr/bin/virtualenvwrapper.sh
