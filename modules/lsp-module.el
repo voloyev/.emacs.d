@@ -8,9 +8,9 @@
     (setq flymake-fringe-indicator-position 'right-fringe)
     :commands (lsp lsp-deferred))
 
-(use-package lsp-ui
-    :commands lsp-ui-mode
-    :ensure t)
+;; (use-package lsp-ui
+;;     :commands lsp-ui-mode
+;;     :ensure t)
 
 (use-package company-lsp
     :commands company-lsp
