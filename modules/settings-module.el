@@ -39,15 +39,25 @@
     :config
     (editorconfig-mode 1))
 
+(use-package flycheck-pos-tip
+    :ensure t)
+
 (use-package flycheck
     :ensure t
     :init
-    (global-flycheck-mode))
+    (global-flycheck-mode)
+    :config
+    (flycheck-pos-tip-mode))
 
 (use-package flycheck-inline
     :ensure t
     :init
     (global-flycheck-inline-mode t))
+
+(use-package flycheck-mix
+    :ensure t
+    :init
+  (flycheck-mix-setup))
 
 (use-package flycheck-pycheckers
     :ensure t)

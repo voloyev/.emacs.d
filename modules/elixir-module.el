@@ -33,6 +33,7 @@
 
 (eval-after-load 'flycheck
   '(flycheck-credo-setup))
+
 (add-hook 'elixir-mode-hook 'flycheck-mode)
 
 (provide 'elixir-module)
