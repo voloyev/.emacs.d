@@ -57,22 +57,16 @@ this section.
 (setq inf-ruby-first-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)> *")
 (setq inf-ruby-prompt-pattern "^\\[[0-9]+\\] pry\\((.*)\\)[>*\"'] *")
 
-;; rinari
-(use-package rinari
-    :ensure t
-    :init
-    (setq rinari-tags-file-name "TAGS"))
-
 ;; slim-mode
 (use-package slim-mode
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
-(use-package minitest
-    :ensure t
-    :config
-    :hook (ruby-mode)
-    :hook (enh-ruby-mode))
+;; (use-package minitest
+;;     :ensure t
+;;     :config
+;;     :hook (ruby-mode)
+;;     :hook (enh-ruby-mode))
 
 ;; hyde jekyll mode
 (use-package hyde
@@ -82,7 +76,7 @@ this section.
     :ensure t)
 
 (add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
-(add-hook 'ruby-mode-hook #'lsp-deferred)
+;; (add-hook 'ruby-mode-hook #'lsp-deferred)
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
