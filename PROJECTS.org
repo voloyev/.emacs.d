@@ -1,0 +1,22 @@
+* TODO Write a compiler
+  https://norasandler.com/2017/11/29/Write-a-Compiler.html
+* TODO Write a malloc allocator
+  https://danluu.com/malloc-tutorial/
+* TODO Write a GC
+  https://maplant.com/gc.html
+* TODO Write a DB
+  https://cstack.github.io/db_tutorial/
+* TODO Write a VM
+  https://justinmeiners.github.io/lc3-vm/
+* TODO Write a chat
+  https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
+* TODO Write a texteditor
+  https://viewsourcecode.org/snaptoken/kilo/index.html
+* TODO Write a http server
+  https://medium.com/from-the-scratch/http-server-what-do-you-need-to-know-to-build-a-simple-http-server-from-scratch-d1ef8945e4fa
+* TODO Write a shell
+  https://brennan.io/2015/01/16/write-a-shell-in-c/
+* TODO Write a js framework
+  https://mfrachet.github.io/create-frontend-framework/intro.html
+* TODO TiKV (rust)
+  https://github.com/pingcap/talent-plan

@@ -51,5 +51,5 @@ alias ela="exa --group-directories-first -la"
 eval "$(pipenv --completion)"
 # luarocks
 eval $(luarocks path --bin)
-
+export MAGICK_OCL_DEVICE="OFF"
 source /usr/bin/virtualenvwrapper.sh
