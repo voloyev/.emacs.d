@@ -280,6 +280,18 @@
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
 
+(use-package ivy-posframe
+    :ensure t
+    :config
+    ;; display at `ivy-posframe-style'
+    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-center)))
+    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
+    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+    (ivy-posframe-mode t))
+
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (when (memq window-system '(mac ns x))

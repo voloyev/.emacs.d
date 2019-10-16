@@ -10,6 +10,7 @@
     :bind(("C-s"   . swiper)
           ("M-y"   . counsel-yank-pop)
           ("C-x b" . ivy-switch-buffer)
+          ("M-x "  . counsel-M-x)
           ("C-c i d f" . counsel-describe-function)
           ("C-c i d v" . counsel-describe-variable)))
 
