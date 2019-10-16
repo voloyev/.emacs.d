@@ -4,6 +4,9 @@
 ;;; Code:
 ;; here should be settings that can not be placed anywhere elese
 
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+
 (use-package ibuffer
     :bind ("C-x C-b" . ibuffer)
     :init
@@ -77,8 +80,8 @@
 (use-package markdown-preview-mode
     :ensure t)
 
-(use-package linum
-    :bind (("C-c C-l" . linum-mode)))
+;; (use-package linum
+;;     :bind (("C-c C-l" . linum-mode)))
 
 ;; calendar app
 (use-package calfw
