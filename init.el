@@ -91,8 +91,10 @@
     :config
     (projectile-global-mode)
     (projectile-rails-global-mode)
-    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-    (define-key projectile-rails-mode-map (kbd "C-c r") 'hydra-projectile-rails/body)
+    (define-key projectile-mode-map
+        (kbd "C-c p") 'projectile-command-map)
+    (define-key projectile-rails-mode-map
+        (kbd "C-c r") 'hydra-projectile-rails/body)
     (setq projectile-indexing-method 'alien)
     (setq projectile-enable-caching t)
     (setq projectile-completion-system 'ivy)
@@ -212,7 +214,8 @@
            ("C-C C-c 4" . langtool-show-message-at-point)
            ("C-C C-c c" . langtool-correct-buffer))
     :config
-    (setq langtool-language-tool-jar "~/bin/LanguageTool/languagetool-commandline.jar")
+    (setq langtool-language-tool-jar
+          "~/bin/LanguageTool/languagetool-commandline.jar")
     langtool-default-language "en-US"
     langtool-disabled-rules '("WHITESPACE_RULE"
                               "EN_UNPAIRED_BRACKETS"
@@ -283,14 +286,14 @@
 (use-package ivy-posframe
     :ensure t
     :config
-    ;; display at `ivy-posframe-style'
-    (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-center)))
-    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
-    ;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+    (setq ivy-posframe-display-functions-alist
+          '((t . ivy-posframe-display)))
     (ivy-posframe-mode t))
+
+(use-package dimmer
+    :ensure t
+    :config
+    (dimmer-mode t))
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 

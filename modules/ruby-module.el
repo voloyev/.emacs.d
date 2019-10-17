@@ -1,23 +1,20 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;; ruby module
-;;; Code:
-"
-For propper usage of lsp mode in ruby
+;;;; ruby module
+"For propper usage of lsp mode in ruby
 you should generate documentation for projects gems.
 #+BEGIN_SRC bash
 yard gems
 #+END_SRC
-"
-"if you use rvm or rbenv
+if you use rvm or rbenv
 you should uncomment
 this section.
-;;(use-package rvm
+(use-package rvm
 ;;:init
-;;(rvm-use-default)
-;;(rvm-activate-corresponding-ruby))
+  (rvm-use-default)
+  (rvm-activate-corresponding-ruby))
 "
-
+;;; Code:
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 (use-package ruby-mode

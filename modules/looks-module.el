@@ -3,16 +3,16 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(ns mac))
-  (set-face-attribute 'default nil :font "Source Code Pro 15")
-  (set-frame-font "Source Code Pro 15"))
+  (set-face-attribute 'default nil :font "Inconsolata 16")
+  (set-frame-font "Inconsolata 16"))
 
 (when (memq window-system '(x))
-  (set-face-attribute 'default nil :font "DejaVu Sans Mono 14")
-  (set-frame-font "DejaVu Sans Mono 14"))
+  (set-face-attribute 'default nil :font "Inconsolata 16")
+  (set-frame-font "Inconsolata 16"))
 
-(unless (memq window-system '(mac ns))
-  (set-face-attribute 'default nil :font "Source Code Pro 15")
-  (set-frame-font "Source Code Pro 15"))
+(unless (memq window-system '(mac ns x))
+  (set-face-attribute 'default nil :font "Ubuntu Mono 16")
+  (set-frame-font "Ubuntu Mono 15"))
 
 (setq ring-bell-function 'ignore)
 
