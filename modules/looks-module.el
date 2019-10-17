@@ -3,8 +3,8 @@
 ;;; Commentary:
 ;;; fonts and general looks
 (when (memq window-system '(ns mac))
-  (set-face-attribute 'default nil :font "Inconsolata 16")
-  (set-frame-font "Inconsolata 16"))
+  (set-face-attribute 'default nil :font "TerminessTTF Nerd Font 19")
+  (set-frame-font "TerminessTTF Nerd Font 19"))
 
 (when (memq window-system '(x))
   (set-face-attribute 'default nil :font "Inconsolata 16")
