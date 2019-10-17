@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: rdebugger
+# key: rdebugger
+# --
+
+require 'pry_remote'; binding.pry_remote # FIXME <<<<<<<<<<<<<<<<<<<< REMOVE
