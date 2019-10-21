@@ -7,8 +7,8 @@
   (set-frame-font "TerminessTTF Nerd Font 19"))
 
 (when (memq window-system '(x))
-  (set-face-attribute 'default nil :font "Inconsolata 16")
-  (set-frame-font "Inconsolata 16"))
+  (set-face-attribute 'default nil :font "TerminessTTF Nerd Font 18")
+  (set-frame-font "TerminessTTF Nerd Font 18"))
 
 (unless (memq window-system '(mac ns x))
   (set-face-attribute 'default nil :font "Ubuntu Mono 16")

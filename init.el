@@ -80,7 +80,8 @@
     (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
 
 ;; multiple cursors
-(use-package multiple-cursors :ensure t)
+(use-package multiple-cursors
+    :ensure t)
 
 ;;global line mode
 (global-hl-line-mode)
@@ -122,16 +123,19 @@
 
 (use-package emmet-mode
     :ensure t
-    :hook (web-mode-hook)
-    :hook (css-mode-hook))
+    :hook (web-mode)
+    :hook (css-mode)
+    :hook (scss-mode))
 
 (use-package vimish-fold
+    :ensure t
     :bind(("C-c n f" . vimish-fold)
           ("C-c n t" . vimish-fold-toggle)
           ("C-c n u" . vimish-fold-unfold)
           ("C-c n v" . vimish-fold-delete)))
 
 (use-package magit
+    :ensure t
     :bind("C-x g" . magit-status))
 
 (use-package undo-tree
@@ -145,10 +149,6 @@
 
 ;; c-mode settings
 (setq c-default-style "linux")
-
-;; expand region mode
-(use-package expand-region
-    :bind("C-=" . er/expand-region))
 
 (use-package quickrun
     :ensure t)
@@ -222,11 +222,6 @@
                               "COMMA_PARENTHESIS_WHITESPACE"
                               "EN_QUOTES"))
 
-;; emacs surround
-(use-package emacs-surround
-    ;;:ensure t
-    :bind((("C-q" . emacs-surround))))
-
 ;; Emacs key bindings
 (use-package evil-nerd-commenter
     :ensure t
@@ -242,17 +237,12 @@
 (use-package htmlize
     :ensure t)
 
-(use-package multi-term
-    :ensure t)
-
 (use-package irony
-    :ensure t)
-
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    :ensure t
+    :hook (c++-mode)
+    :hook (c-mode)
+    :hook (objc-mode)
+    :hook (irony-mode . irony-cdb-autosetup-compile-options))
 
 (use-package calfw-cal
     :ensure t)
@@ -287,6 +277,13 @@
     :ensure t
     :config
     (dimmer-mode t))
+
+
+(use-package easy-kill
+    :ensure t
+    :config
+    (global-set-key [remap kill-ring-save] 'easy-kill)
+    (global-set-key [remap mark-sexp] 'easy-mark))
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
