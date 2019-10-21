@@ -2,17 +2,13 @@
 ;;; Code:
 ;;; Commentary:
 ;;; fonts and general looks
-(when (memq window-system '(ns mac))
-  (set-face-attribute 'default nil :font "Hack 16")
-  (set-frame-font "Hack 16"))
+(defun set-font ()
+  "Set font for operating system."
+  (cond ((memq window-system '(ns mac)) "Hack 16")
+        ((memq window-system '(x)) "Hack 15")))
 
-(when (memq window-system '(x))
-  (set-face-attribute 'default nil :font "TerminessTTF Nerd Font 18")
-  (set-frame-font "TerminessTTF Nerd Font 18"))
-
-(unless (memq window-system '(mac ns x))
-  (set-face-attribute 'default nil :font "Ubuntu Mono 16")
-  (set-frame-font "Ubuntu Mono 15"))
+(set-face-attribute 'default nil :font (set-font))
+(set-frame-font (set-font))
 
 (setq ring-bell-function 'ignore)
 
