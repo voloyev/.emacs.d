@@ -23,8 +23,6 @@
     :init
     (elpy-enable)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-    (setq python-shell-interpreter "python"
-          python-shell-interpreter-args "-i")
     :hook (elpy-mode . flycheck-mode)
     :hook (elpy-mode . py-autopep8-enable-on-save))
 

@@ -32,6 +32,5 @@
 (use-package golint
     :ensure t)
 
-
 (provide 'go-module)
 ;;; go-module.el ends here

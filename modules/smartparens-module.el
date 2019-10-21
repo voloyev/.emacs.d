@@ -38,7 +38,12 @@
             web-mode-hook
             conf-mode-hook
             emacs-lisp-mode-hook
-            clojure-mode-hook)
+            clojure-mode-hook
+            conf-mode-hook
+            dockerfile-mode-hook
+            haskell-mode-hook
+            erlang-mode-hook
+            irony-mode-hook)
     (add-hook it 'turn-on-smartparens-mode)))
 
 ;; deal with escaping

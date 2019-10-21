@@ -4,8 +4,8 @@
 ;;; Code:
 ;; here should be settings that can not be placed anywhere elese
 
-(global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
+;; (global-display-line-numbers-mode t)
+;; (setq display-line-numbers-type 'relative)
 
 (use-package ibuffer
     :bind ("C-x C-b" . ibuffer)

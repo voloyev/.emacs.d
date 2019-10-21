@@ -283,13 +283,6 @@
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
 
-(use-package ivy-posframe
-    :ensure t
-    :config
-    (setq ivy-posframe-display-functions-alist
-          '((t . ivy-posframe-display)))
-    (ivy-posframe-mode t))
-
 (use-package dimmer
     :ensure t
     :config
