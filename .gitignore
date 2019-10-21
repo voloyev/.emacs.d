@@ -27,6 +27,8 @@ themes/
 project-explorer-cache/
 persp-confs/
 backup.Cask/
+elpy/*
+
 # Files
 .ac-comphist.dat
 places
@@ -59,4 +61,4 @@ GPATH
 GRTAGS
 GTAGS
 TAGS
-elpy/*
+org-clock-save.el
