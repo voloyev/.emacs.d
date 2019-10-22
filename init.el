@@ -273,12 +273,6 @@
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
 
-(use-package dimmer
-    :ensure t
-    :config
-    (dimmer-mode t))
-
-
 (use-package easy-kill
     :ensure t
     :config

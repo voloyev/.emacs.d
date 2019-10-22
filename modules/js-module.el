@@ -28,25 +28,16 @@
 (use-package company-tern
     :ensure t)
 
-(use-package js2-mode
-    :ensure t
-    :mode ("\\.js\\'"   . js2-jsx-mode)
-    :hook (js2-jsx-mode . tern-mode)
-    :hook (js2-jsx-mode . company-mode)
-    :hook (js2-jsx-mode . smartparense-mode))
+(use-package js-mode
+    :mode ("\\.js\\'" . js-mode)
+    :hook (js-mode    . tern-mode)
+    :hook (js-mode    . company-mode)
+    :hook (js-mode    . smartparense-mode))
 
-(use-package rjsx-mode
-    :ensure t
-    ;; :mode ("\\.js\\'"  . rjsx-mode)
-    :hook (rjsx-mode   . tern-mode)
-    :hook (rjsx-mode   . company-mode))
+(use-package js-mode
+    :mode ("\\.jsx\\'" . js-mode)
+    :hook (js-mode     . j2-minore-mode))
 
-
-(use-package rjsx-mode
-    :ensure t
-    ;; :mode ("\\.js\\'"  . rjsx-mode)
-    :hook (rjsx-mode   . tern-mode)
-    :hook (rjsx-mode   . company-mode))
 
 (use-package elm-mode
     :ensure t
@@ -63,10 +54,6 @@
 (setq js-indent-level 2)
 (setq js2-indent-level 2)
 (setq vue-indent-level 2)
-
-(add-hook 'js2-mode-hook  #'lsp-deferred)
-(add-hook 'js2-jsx-mode-hook  #'lsp-deferred)
-(add-hook 'vue-mode-hook  #'lsp-deferred)
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)

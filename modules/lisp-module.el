@@ -19,15 +19,6 @@
 (use-package racket-mode
     :ensure t)
 
-(use-package smartparens
-    :ensure t
-    :hook(smartparens-strict-mode . lisp-mode)
-    :hook(smartparens-strict-mode . emacs-lisp-mode)
-    :hook(smartparens-strict-mode . clojure-mode)
-    :hook(smartparens-strict-mode . racket-mode)
-    :hook(smartparens-strict-mode . slime-mode)
-    :hook(smartparens-strict-mode . sly-mode)
-    :hook(smartparens-strict-mode . cider-mode))
 
 (use-package lispy
     :ensure t
