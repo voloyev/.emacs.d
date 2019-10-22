@@ -4,7 +4,7 @@
 ;;; fonts and general looks
 (defun set-font ()
   "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Hack 16")
+  (cond ((memq window-system '(ns mac)) "Hack 15")
         ((memq window-system '(x)) "Hack 15")))
 
 (set-face-attribute 'default nil :font (set-font))

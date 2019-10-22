@@ -198,5 +198,9 @@
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
+(when (memq window-system '(ns mac))
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta))
+
 (provide 'settings-module)
 ;;; settings-module.el ends here
