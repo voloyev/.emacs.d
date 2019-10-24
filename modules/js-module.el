@@ -16,33 +16,32 @@
 (use-package prettier-js
     :ensure t
     :init
-    (add-hook 'js2-mode-hook 'prettier-js-mode)
-    (add-hook 'js-mode-hook 'prettier-js-mode)
-    (add-hook 'vue-mode-hook 'prettier-js-mode)
-    (add-hook 'js2-jsx-mode-hook 'prettier-js-mode)
-    (add-hook 'rjsx-mode-hook 'prettier-js-mode)
     (add-hook 'web-mode-hook #'(lambda ()
                                  (enable-minor-mode
-                                  '("\\.vue?\\'" . prettier-js-mode)))))
+                                  '("\\.vue?\\'" . prettier-js-mode))))
+    :hook (js2-mode     . prettier-js-mode)
+    :hook (js-mode      . prettier-js-mode)
+    :hook (vue-mode     . prettier-js-mode)
+    :hook (js2-jsx-mode . prettier-js-mode)
+    :hook (rjsx-mode    . prettier-js-mode))
 
 (use-package company-tern
     :ensure t)
 
 (use-package js-mode
     :mode ("\\.js\\'" . js-mode)
-    :hook (js-mode    . tern-mode)
-    :hook (js-mode    . company-mode)
-    :hook (js-mode    . smartparense-mode))
+    :hook (tern-mode . js-mode)
+    :hook (smartparense-mode . js-mode))
 
 (use-package js-mode
     :mode ("\\.jsx\\'" . js-mode)
-    :hook (js-mode     . j2-minore-mode))
-
+    :hook (j2-minore-mode . js-mode))
 
 (use-package elm-mode
     :ensure t
     :mode ("\\.elm\\'" . elm-mode)
-    :config (elm-format-on-save-mode t))
+    :config (elm-format-on-save-mode t)
+    :hook (smartparens-mode))
 
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))
