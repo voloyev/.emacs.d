@@ -6,8 +6,7 @@
 (use-package company-racer
     :ensure t)
 
-(with-eval-after-load 'company
-  (add-to-list 'company-backends 'company-racer))
+(add-to-list 'company-backends 'company-racer)
 
 (use-package rust-mode
     :mode "\\.rs\\'"
@@ -39,10 +38,6 @@
 
 (use-package toml-mode
     :mode (("\\.toml\\'" . toml-mode)))
-
-(use-package rust-playground
-    :ensure t
-    :bind(("C-c C-r e" . rust-playground-exec)))
 
 (provide 'rust-module)
 ;;; rust-module.el ends here

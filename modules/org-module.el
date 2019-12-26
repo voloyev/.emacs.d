@@ -50,5 +50,9 @@
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
+
+(add-to-list 'load-path "~/.emacs.d/plugins/org-cv")
+(require 'ox-moderncv)
+
 (provide 'org-module)
 ;;; org-module ends here

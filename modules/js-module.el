@@ -56,8 +56,9 @@
 (setq company-tooltip-align-annotations t)
 
 ;; elm-mode
-(add-hook 'elm-mode-hook 'smartparens-mode-hook)
+(add-hook 'elm-mode-hook 'smartparens-mode-hook)
 (setq elm-format-on-save t)
+
 ;; tern setup
 (add-to-list 'company-backends 'company-tern)
 (add-to-list 'company-backends 'company-elm)

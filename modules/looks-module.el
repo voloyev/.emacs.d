@@ -81,13 +81,13 @@
         '((space-mark 32 [183] [46])
           (newline-mark 10 [8629 10])
           (tab-mark 9 [9655 9] [92 9])))
-  :config
-  (set-face-attribute 'whitespace-space nil
-                      :background nil
-                      :foreground "gray30")
-  (set-face-attribute 'whitespace-newline
-                      nil :background nil
-                      :foreground "gray30")
+  ;; :config
+  ;; (set-face-attribute 'whitespace-space nil
+  ;;                     :background nil
+  ;;                     :foreground "gray30")
+  ;; (set-face-attribute 'whitespace-newline
+  ;;                     nil :background nil
+  ;;                     :foreground "gray30")
   :bind(("<f5>" . whitespace-mode)
         ("C-c <f5>" . whitespace-cleanup)))
 

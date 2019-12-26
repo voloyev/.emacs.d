@@ -28,10 +28,6 @@
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
     :bind(("M-o" . ace-window)))
 
-(use-package focus
-    :ensure t
-    :bind(("C-c m f" . focus-mode)))
-
 (use-package rainbow-delimiters
     :ensure t
     :init
@@ -80,14 +76,20 @@
 (use-package markdown-preview-mode
     :ensure t)
 
-;; (use-package linum
-;;     :bind (("C-c C-l" . linum-mode)))
-
 ;; calendar app
 (use-package calfw
     :ensure t)
 
 (use-package calfw-org
+    :ensure t)
+
+(use-package calfw-cal
+    :ensure t)
+
+(use-package howm
+    :ensure t)
+
+(use-package calfw-howm
     :ensure t)
 
 (use-package which-key
@@ -136,12 +138,6 @@
 (use-package nasm-mode
     :ensure t)
 
-;; (use-package dired
-;;     :commands dired
-;;     :init
-;;     (setq dired-listing-switches
-;;           "-laGh1v --group-directories-first"))
-;; work mouse in terminal
 (xterm-mouse-mode t)
 
 (use-package eyebrowse
@@ -179,10 +175,6 @@
   :ensure t
   :config
   (volatile-highlights-mode +1))
-
-;; Easy transition between buffers: M-arrow-keys
-;; (if (equal nil (equal major-mode 'org-mode))
-;;     (windmove-default-keybindings 'meta))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)

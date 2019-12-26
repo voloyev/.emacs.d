@@ -2,7 +2,6 @@
 ;;; Code:
 ;;; Commentary:
 ;; python module
-(add-to-list 'load-path "~/.emacs.d/modules")
 
 (use-package blacken
     :config
@@ -34,8 +33,14 @@
      pipenv-projectile-after-switch-function
      #'pipenv-projectile-after-switch-extended))
 
+(use-package poetry
+    :ensure t
+    :config (poetry-tracking-mode t))
+
 (use-package pyvenv
     :ensure t)
+
+(add-to-list 'company-backends 'company-jedi)
 
 (provide 'python-module)
 ;;; python-module ends here

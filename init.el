@@ -4,13 +4,22 @@
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
 
+;; save customization in separate file
+(setq custom-file "~/.emacs.d/.emacs-custom.el")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(exec-path-from-shell-copy-env "GOPATH")
+
+
 (require 'package)
+(setq gc-cons-threshold 100000000)
+
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/")t)
 
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
+(add-to-list 'load-path "~/.emacs.d/plugins/org-cv")
 (add-to-list 'load-path "~/.emacs.d/plugins/snails") ; remove when it will appear in melpa
 
 ;; use zsh
@@ -22,56 +31,29 @@
 (require 'use-package)
 (use-package snails)
 
-;;; List of required modules
-(use-package ruby-module)
-(use-package smartparens-module)
-(use-package web-mode-module)
-(use-package yasnippet-module)
-(use-package helm-module)
-(use-package ivy-module)
-(use-package python-module)
-(use-package highlight-indentation-mode-module)
-(use-package looks-module)
-(use-package themes-module)
-(use-package js-module)
-(use-package rust-module)
-(use-package crystal-module)
-(use-package elixir-module)
-(use-package settings-module)
-(use-package go-module)
-(use-package clojure-module)
-(use-package avy-module)
-(use-package org-module)
-(use-package evil-module)
-(use-package lisp-module)
-(use-package indent-module)
-(use-package hydra-module)
-(use-package lsp-module)
-(use-package elfeed-module)
-(use-package simplenotes-module)
-;; custom plugins path
-
-;; Emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-;; Delete selection
-(delete-selection-mode t)
-
-;; desktop-save-mode
-(desktop-save-mode 0)
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; company mode
 (use-package company
     :ensure t
     :init
     (global-company-mode t)
-    (with-eval-after-load 'company
-      (add-hook 'after-init-hook 'global-company-mode)
-      (add-to-list 'company-backends 'company-robe)
-      (add-to-list 'company-backends 'company-jedi))
     :bind("C-<tab>" . company-complete))
+
+;; Emacs server
+;; (require 'server)
+;; (unless (server-running-p)
+;;   (server-start))
+
+;; Delete selection
+(delete-selection-mode t)
+
+;; desktop-save-mode
+(desktop-save-mode 0)
 
 (use-package company-quickhelp          ; Documentation popups for Company
     :ensure t
@@ -82,9 +64,6 @@
 ;; multiple cursors
 (use-package multiple-cursors
     :ensure t)
-
-;;global line mode
-(global-hl-line-mode)
 
 ;;projectile
 (use-package projectile
@@ -147,15 +126,8 @@
           `((".*" . ,temporary-file-directory)))
     (setq undo-tree-auto-save-history t))
 
-;; c-mode settings
-(setq c-default-style "linux")
-
 (use-package quickrun
     :ensure t)
-
-(use-package golden-ratio
-    :ensure t
-    :bind("C-c & g" . golden-ratio-mode))
 
 (use-package toggle-quotes
     :ensure t
@@ -205,34 +177,12 @@
               (company-mode 0)
               (flycheck-mode 0))))
 
-;; language tool
-(use-package langtool
-    :ensure t
-    :bind (("C-C C-c w" . langtool-check)
-           ("C-C C-c W" . langtool-check-done)
-           ("C-C C-c l" . langtool-switch-default-language)
-           ("C-C C-c 4" . langtool-show-message-at-point)
-           ("C-C C-c c" . langtool-correct-buffer))
-    :config
-    (setq langtool-language-tool-jar
-          "~/bin/LanguageTool/languagetool-commandline.jar")
-    langtool-default-language "en-US"
-    langtool-disabled-rules '("WHITESPACE_RULE"
-                              "EN_UNPAIRED_BRACKETS"
-                              "COMMA_PARENTHESIS_WHITESPACE"
-                              "EN_QUOTES"))
-
-;; Emacs key bindings
 (use-package evil-nerd-commenter
     :ensure t
     :bind (( "M-;" .  evilnc-comment-or-uncomment-lines)
            ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
-
-;; save customization in separate file
-(setq custom-file "~/.emacs.d/.emacs-custom.el")
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 (use-package htmlize
     :ensure t)
@@ -244,20 +194,7 @@
     :hook (objc-mode)
     :hook (irony-mode . irony-cdb-autosetup-compile-options))
 
-(use-package calfw-cal
-    :ensure t)
-
-(use-package calfw
-    :ensure t)
-
-(use-package calfw-org
-    :ensure t)
-
-(use-package howm
-    :ensure t)
-
-(use-package calfw-howm
-    :ensure t)
+(setq c-default-style "linux")
 
 (use-package deadgrep
     :ensure t
@@ -281,10 +218,34 @@
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-(exec-path-from-shell-copy-env "GOPATH")
+;;; List of required modules
+(use-package ruby-module)
+(use-package smartparens-module)
+(use-package web-mode-module)
+(use-package yasnippet-module)
+;(use-package helm-module)
+(use-package ivy-module)
+(use-package python-module)
+(use-package highlight-indentation-mode-module)
+(use-package looks-module)
+(use-package themes-module)
+(use-package js-module)
+(use-package rust-module)
+(use-package crystal-module)
+(use-package elixir-module)
+(use-package settings-module)
+(use-package go-module)
+(use-package clojure-module)
+(use-package avy-module)
+(use-package org-module)
+(use-package evil-module)
+(use-package lisp-module)
+(use-package indent-module)
+(use-package hydra-module)
+(use-package lsp-module)
+(use-package elfeed-module)
+(use-package simplenotes-module)
+;; custom plugins path
 
 (load custom-file)
 ;;; init.el ends here

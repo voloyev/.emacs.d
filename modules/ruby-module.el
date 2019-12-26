@@ -69,6 +69,7 @@ this section.
 
 (add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
 ;; (add-hook 'ruby-mode-hook #'lsp-deferred)
+(add-to-list 'company-backends 'company-robe)
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here
