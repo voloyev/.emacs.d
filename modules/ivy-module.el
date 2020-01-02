@@ -10,15 +10,14 @@
     :bind(("C-s"       . swiper)
           ("M-y"       . counsel-yank-pop)
           ("C-x b"     . ivy-switch-buffer)
-          ;; ("M-x "  . counsel-M-x)
           ("C-c i d f" . counsel-describe-function)
           ("C-c i d v" . counsel-describe-variable)))
 
 (use-package counsel-projectile
     :ensure t
-    :bind(("C-c p SPC s"     . counsel-projectile-ag)
-          ("C-c p SPC r"     . counsel-projectile-rg)
-          ("C-c p SPC SPC"   . counsel-projectile)))
+    :bind(("C-c C-c SPC s"     . counsel-projectile-ag)
+          ("C-c C-c SPC r"     . counsel-projectile-rg)
+          ("C-c C-c SPC SPC"   . counsel-projectile)))
 
 (counsel-projectile-mode t)
 

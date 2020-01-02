@@ -11,10 +11,5 @@
     (load-theme 'sexy-monochrome t)
     (enable-theme 'sexy-monochrome))
 
-;; (use-package eclipse-theme
-;;     :ensure t
-;;     :init
-;;     (load-theme 'eclipse t))
-
 (provide 'themes-module)
 ;;; themes-module ends here

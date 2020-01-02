@@ -179,7 +179,7 @@
 
 (use-package evil-nerd-commenter
     :ensure t
-    :bind (( "M-;" .  evilnc-comment-or-uncomment-lines)
+    :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
            ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))

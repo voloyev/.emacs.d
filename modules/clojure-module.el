@@ -15,8 +15,8 @@
     :config
     (setq clojure-indent-style 'always-indent))
 
-;;lein exec path
-(add-to-list 'exec-path "~/bin")
+;; ;;lein exec path
+;; (add-to-list 'exec-path "~/bin")
 
 (provide 'clojure-module)
 ;;; clojure-module.el ends here
