@@ -92,22 +92,6 @@ o - maximize current window
 (use-package markdown-preview-mode
     :ensure t)
 
-;; calendar app
-(use-package calfw
-    :ensure t)
-
-(use-package calfw-org
-    :ensure t)
-
-(use-package calfw-cal
-    :ensure t)
-
-(use-package howm
-    :ensure t)
-
-(use-package calfw-howm
-    :ensure t)
-
 (use-package which-key
     :config
   (which-key-mode t))
@@ -155,15 +139,6 @@ o - maximize current window
     :ensure t)
 
 (xterm-mouse-mode t)
-
-(use-package eyebrowse
-    :ensure t
-    :config
-    (eyebrowse-mode t))
-
-(use-package nov
-    :ensure t
-    :mode ("\\.epub\\'" . nov-mode))
 
 (use-package auto-highlight-symbol
     :ensure t)

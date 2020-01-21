@@ -106,13 +106,6 @@
     :hook (css-mode)
     :hook (scss-mode))
 
-(use-package vimish-fold
-    :ensure t
-    :bind(("C-c n f" . vimish-fold)
-          ("C-c n t" . vimish-fold-toggle)
-          ("C-c n u" . vimish-fold-unfold)
-          ("C-c n v" . vimish-fold-delete)))
-
 (use-package magit
     :ensure t
     :bind("C-x g" . magit-status))
@@ -243,7 +236,6 @@
 (use-package indent-module)
 (use-package hydra-module)
 (use-package lsp-module)
-(use-package elfeed-module)
 (use-package simplenotes-module)
 ;; custom plugins path
 
