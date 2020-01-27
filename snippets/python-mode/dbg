@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dbg
+# key: dbg
+# --
+import pdb; pdb.set_trace() #  FIXME remove debugger entry point!
+$0

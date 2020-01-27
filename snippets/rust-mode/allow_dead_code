@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: allow dead code
+# key: a_dead
+# --
+
+#[allow(dead_code)]
+$0
