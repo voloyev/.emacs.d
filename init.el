@@ -25,8 +25,6 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(add-to-list 'load-path "~/.emacs.d/plugins/org-cv")
-(add-to-list 'load-path "~/.emacs.d/plugins/snails") ; remove when it will appear in melpa
 
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
@@ -37,13 +35,28 @@
   (package-install 'use-package))
 
 (require 'use-package)
-(use-package snails)
 
 (use-package benchmark-init
   :ensure t
   :config
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+(defun er-byte-compile-init-dir ()
+  "Byte-compile all your dotfiles."
+  (interactive)
+  (byte-recompile-directory user-emacs-directory 0))
+
+(defun er-remove-elc-on-save ()
+  "If you're saving an Emacs Lisp file, likely the .elc is no longer valid."
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))
+            nil
+            t))
+
+(add-hook 'emacs-lisp-mode-hook 'er-remove-elc-on-save)
 
 ;; company mode
 (use-package company
