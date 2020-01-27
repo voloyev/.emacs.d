@@ -8,7 +8,7 @@
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (exec-path-from-shell-copy-env "GOPATH")
-
+(setq message-log-max t)
 
 (require 'package)
 
@@ -33,7 +33,9 @@
 ;; activate installed packages
 (package-initialize)
 
-(package-install 'use-package)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
 (require 'use-package)
 (use-package snails)
 

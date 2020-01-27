@@ -156,6 +156,8 @@ o - maximize current window
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
+(setq redisplay-dont-pause t)
+
 (use-package volatile-highlights
   :ensure t
   :config
