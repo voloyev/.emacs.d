@@ -7,6 +7,13 @@
 ;; (global-display-line-numbers-mode t)
 ;; (setq display-line-numbers-type 'relative)
 
+;; general configs
+(xterm-mouse-mode t)
+(global-auto-revert-mode t)
+(global-set-key (kbd "C-c ]") 'next-buffer)
+(global-set-key (kbd "C-c [") 'previous-buffer)
+(setq redisplay-dont-pause t)
+
 (use-package ibuffer
     :bind ("C-x C-b" . ibuffer)
     :init
@@ -87,8 +94,7 @@ o - maximize current window
     :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-    :config
-  (which-key-mode t))
+    :config s(which-key-mode t))
 
 (use-package company-nginx
     :ensure t
@@ -132,20 +138,15 @@ o - maximize current window
 (use-package nasm-mode
     :ensure t)
 
-(xterm-mouse-mode t)
-
 (use-package auto-highlight-symbol
-    :ensure t)
-;; FIXME move to macro above
-(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
-
-(global-auto-revert-mode t)
+    :ensure t
+    :hook 'js2-mode
+    :hook 'js2-jsx-mode
+    :hook 'elixir-mode
+    :hook 'ruby-mode
+    :hook 'rust-mode
+    :hook 'emacs-lisp-mode
+    :hook 'python-mode)
 
 (use-package diff-hl
   :ensure t
@@ -153,10 +154,8 @@ o - maximize current window
   (diff-hl-margin-mode +1)
   (diff-hl-dired-mode +1)
   (global-diff-hl-mode +1)
-  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
-
-(setq redisplay-dont-pause t)
+  :hook (dired-mode . diff-hl-dired-mode)
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package volatile-highlights
   :ensure t
