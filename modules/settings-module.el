@@ -20,9 +20,6 @@
                 (ibuffer-projectile-set-filter-groups)
                 (unless (eq ibuffer-sorting-mode 'alphabetic)
                   (ibuffer-do-sort-by-alphabetic)))))
-
-
-
 "
 x - delete window
 m - swap windows
@@ -36,7 +33,6 @@ v - split window vertically
 b - split window horizontally
 o - maximize current window
 ? - show these command bindings"
-
 (use-package ace-window
     :ensure t
     :config
@@ -72,7 +68,7 @@ o - maximize current window
 (use-package flycheck-mix
     :ensure t
     :init
-  (flycheck-mix-setup))
+    (flycheck-mix-setup))
 
 (use-package flycheck-pycheckers
     :ensure t)
@@ -81,16 +77,14 @@ o - maximize current window
     :ensure t
     :config
     ;; (setq super-save-auto-save-when-idle t)
-    (super-save-mode +1))
+    (super-save-mode +1)
+    (setq auto-save-default nil))
 
 (use-package markdown-mode
     :init (setq markdown-command "mark")
     :mode ("\\.text\\'" . markdown-mode)
     :mode ("\\.markdown\\'" . markdown-mode)
     :mode ("\\.md\\'" . markdown-mode))
-
-(use-package markdown-preview-mode
-    :ensure t)
 
 (use-package which-key
     :config
@@ -142,7 +136,7 @@ o - maximize current window
 
 (use-package auto-highlight-symbol
     :ensure t)
-
+;; FIXME move to macro above
 (add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
