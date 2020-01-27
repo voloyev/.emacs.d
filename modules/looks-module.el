@@ -9,6 +9,7 @@
 
 (set-face-attribute 'default nil :font (set-font))
 (set-frame-font (set-font))
+(setq line-spacing 0.2)
 
 (setq ring-bell-function 'ignore)
 
