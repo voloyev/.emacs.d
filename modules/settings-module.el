@@ -94,7 +94,7 @@ o - maximize current window
     :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-    :config s(which-key-mode t))
+    :config (which-key-mode t))
 
 (use-package company-nginx
     :ensure t
@@ -140,13 +140,13 @@ o - maximize current window
 
 (use-package auto-highlight-symbol
     :ensure t
-    :hook 'js2-mode
-    :hook 'js2-jsx-mode
-    :hook 'elixir-mode
-    :hook 'ruby-mode
-    :hook 'rust-mode
-    :hook 'emacs-lisp-mode
-    :hook 'python-mode)
+    :hook js2-mode
+    :hook js2-jsx-mode
+    :hook elixir-mode
+    :hook ruby-mode
+    :hook rust-mode
+    :hook emacs-lisp-mode
+    :hook python-mode)
 
 (use-package diff-hl
   :ensure t
