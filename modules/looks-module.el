@@ -92,12 +92,12 @@
   :bind(("<f5>" . whitespace-mode)
         ("C-c <f5>" . whitespace-cleanup)))
 
-(use-package smart-mode-line
-    :ensure t
-    :init
-    (setq sml/no-confirm-load-theme t)
-    (setq sml/theme 'dark)
-    (sml/setup))
+;; (use-package smart-mode-line
+;;     :ensure t
+;;     :init
+;;     (setq sml/no-confirm-load-theme t)
+;;     (setq sml/theme 'dark)
+;;     (sml/setup))
 
 (provide 'looks-module)
 ;;; looks-module ends here
