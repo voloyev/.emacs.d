@@ -35,10 +35,6 @@ this section.
   (setq ruby-indent-level 2)
   (setq ruby-deep-indent-paren nil))
 
-(use-package robe
-    :ensure t
-    :bind(("C-c C-c r s"  . robe-start)))
-
 (use-package rcodetools
     :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
 
@@ -54,12 +50,6 @@ this section.
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
-;; (use-package minitest
-;;     :ensure t
-;;     :config
-;;     :hook (ruby-mode)
-;;     :hook (enh-ruby-mode))
-
 ;; hyde jekyll mode
 (use-package hyde
     :ensure t)
@@ -68,8 +58,8 @@ this section.
     :ensure t)
 
 (add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
-;; (add-hook 'ruby-mode-hook #'lsp-deferred)
-(add-to-list 'company-backends 'company-robe)
+
+;; (add-to-list 'company-backends 'company-robe)
 
 (provide 'ruby-module)
 ;;; ruby-module.el ends here

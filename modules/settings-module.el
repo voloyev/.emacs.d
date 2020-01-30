@@ -21,7 +21,7 @@
     (defalias 'list-buffers 'ibuffer)
     (add-hook 'ibuffer-mode-hook
               '(lambda ()
-                (ibuffer-auto-mode 1)))
+                (ibuffer-auto-mode t)))
     (add-hook 'ibuffer-hook
               (lambda ()
                 (ibuffer-projectile-set-filter-groups)
@@ -39,7 +39,8 @@ c - split window fairly, either vertically or horizontally
 v - split window vertically
 b - split window horizontally
 o - maximize current window
-? - show these command bindings"
+? - show these command bindings
+"
 (use-package ace-window
     :ensure t
     :config
@@ -55,7 +56,7 @@ o - maximize current window
 (use-package editorconfig
     :ensure t
     :config
-    (editorconfig-mode 1))
+    (editorconfig-mode t))
 
 (use-package flycheck-pos-tip
     :ensure t)
@@ -94,7 +95,8 @@ o - maximize current window
     :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-    :config s(which-key-mode t))
+    :ensure t
+    :config (which-key-mode t))
 
 (use-package company-nginx
     :ensure t

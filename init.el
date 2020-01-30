@@ -120,10 +120,7 @@
 (use-package undo-tree
     :ensure t
     :config
-    (global-undo-tree-mode t)
-    (setq undo-tree-visualizer-diff t)
-    (setq undo-tree-visualizer-timestamps t)
-    (setq undo-tree-auto-save-history t))
+    (global-undo-tree-mode t))
 
 (use-package quickrun
     :ensure t)
