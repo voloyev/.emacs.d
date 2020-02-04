@@ -1,12 +1,12 @@
 ;; evil mode
 (use-package evil
-    :ensure t
+    :straight t
     :bind
     (("C-c e e"   . evil-local-mode)
      ("<f2> <f2>" . evil-mode)))
 
 (use-package evil-matchit
-    :ensure t
+    :straight t
     :config
     (add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
     (add-hook 'evil-mode 'turn-on-evil-matchit-mode))

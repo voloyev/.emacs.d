@@ -2,11 +2,13 @@
 ;;; Commentary:
 ;;; Org module
 ;;; Code:
+;; (use-package org-plus-contrib
+;;     :straight t)
+
 (use-package org-install
     :init
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (setq org-agenda-files (list "~/.emacs.d/todo.org"))
-  ;; "~/Dropbox/org/todo.org" "~/Dropbox/org/tasks.org"))
   (add-hook 'org-mode-hook 'toggle-truncate-lines)
   (setq org-src-fontify-natively nil)
   (setq org-html-htmlize-output-type nil) ;; output without
@@ -19,8 +21,7 @@
         ("\C-cb" . org-iswitchb)))
 
 (use-package ox-reveal
-    :ensure t)
-
+    :straight t)
 
 ;; eval langs in go
 (org-babel-do-load-languages

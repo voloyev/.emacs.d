@@ -6,26 +6,27 @@
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
 (use-package sly
-    :ensure t
+    :straight t
     :init
     (setq org-babel-lisp-eval-fn 'sly-eval)
     (setq inferior-lisp-program "ros -Q run")
     :hook (lisp-mode . sly-editing))
 
 ;; (use-package elisp-slime-nav
-;;     :ensure t
+;;     :straight t
 ;;     :init
 ;;     (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
 ;;       (add-hook hook 'elisp-slime-nav-mode)))
 
 (use-package racket-mode
-    :ensure t)
+    :straight t)
 
 (use-package lispy
-    :ensure t
+    :straight t
     :bind(("C-c C-v l" . lispy-mode)))
 
 (use-package geiser
+    :straight t
     :init
     (setq geiser-default-implementation 'racket))
 

@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; haskell module
 (use-package intero
-    :ensure t
+    :straight t
     :init (intero-global-mode 1))
 
 (provide 'haskell-module)

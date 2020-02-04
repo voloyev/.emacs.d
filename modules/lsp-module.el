@@ -1,5 +1,5 @@
 (use-package lsp-mode
-    :ensure t
+    :straight t
     :init
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
@@ -11,11 +11,11 @@
 
 (use-package lsp-ui
     :commands lsp-ui-mode
-    :ensure t)
+    :straight t)
 
 (use-package company-lsp
     :commands company-lsp
-    :ensure t)
+    :straight t)
 
 (provide 'lsp-module)
 ;;; lsp-module ends here

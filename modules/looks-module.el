@@ -12,15 +12,11 @@
 (setq line-spacing 0.2)
 
 (setq ring-bell-function 'ignore)
-
+(setq-default with-editor-emacsclient-executable "emacsclient")
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
 (setq auto-save-default        nil)
 (setq auto-save-list-file-name nil)
-
-;; move backups
-;; uncomment if you really need this
-;; (setq backup-directory-alist '(("." . "~/.saves")))
 
 ;; Inhibit startup/splash screen
 (setq inhibit-splash-screen   0)
@@ -58,19 +54,19 @@
 
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
-    :ensure t
+    :straight t
     :init
     (fci-mode 1)
     (setq fci-rule-width 3))
 
 (use-package nyan-mode
-    :ensure t
+    :straight t
     :init
     (nyan-mode t)
     (nyan-start-animation))
 
 (use-package fixmee
-    :ensure t
+    :straight t
     :init (require 'button-lock)
     :config (global-fixmee-mode 1))
 
@@ -82,22 +78,15 @@
         '((space-mark 32 [183] [46])
           (newline-mark 10 [8629 10])
           (tab-mark 9 [9655 9] [92 9])))
-  ;; :config
-  ;; (set-face-attribute 'whitespace-space nil
-  ;;                     :background nil
-  ;;                     :foreground "gray30")
-  ;; (set-face-attribute 'whitespace-newline
-  ;;                     nil :background nil
-  ;;                     :foreground "gray30")
-  :bind(("<f5>" . whitespace-mode)
-        ("C-c <f5>" . whitespace-cleanup)))
+  :bind(("C-c SPC w s" . whitespace-mode)
+        ("C-c SPC w c" . whitespace-cleanup)))
 
-;; (use-package smart-mode-line
-;;     :ensure t
-;;     :init
-;;     (setq sml/no-confirm-load-theme t)
-;;     (setq sml/theme 'dark)
-;;     (sml/setup))
+(use-package smart-mode-line
+    :straight t
+    :init
+    (setq sml/no-confirm-load-theme t)
+    (setq sml/theme 'dark)
+    (sml/setup))
 
 (provide 'looks-module)
 ;;; looks-module ends here

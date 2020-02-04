@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package smartparens
-    :ensure t
+    :straight t
     :config
   (show-smartparens-global-mode 1)
 
@@ -14,7 +14,6 @@
             vue-mode-hook
             js2-mode-hook
             python-mode-hook
-            web-mode-hook
             ruby-mode-hook
             markdown-mode-hook
             org-mode-hook
@@ -22,7 +21,6 @@
             toml-mode-hook
             cc-mode-hook
             lisp-mode-hook
-            emacs-lisp-mode-hook
             haml-mode-hook
             c-mode-hook
             go-mode-hook
@@ -30,13 +28,10 @@
             enh-ruby-mode-hook
             crystal-mode-hook
             slim-mode-hook
-            haml-mode-hook
-            rust-mode-hook
             yaml-mode-hook
             nginx-mode-hook
             scss-mode-hook
             web-mode-hook
-            conf-mode-hook
             emacs-lisp-mode-hook
             clojure-mode-hook
             conf-mode-hook

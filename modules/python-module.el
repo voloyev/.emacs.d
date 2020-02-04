@@ -9,16 +9,16 @@
   (setq blacken-line-length 100))
 
 (use-package python-mode
-    :ensure t)
+    :straight t)
 
 (use-package py-autopep8
-    :ensure t)
+    :straight t)
 
 (use-package ein
-    :ensure t)
+    :straight t)
 
 (use-package elpy
-    :ensure t
+    :straight t
     :init
     (elpy-enable)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
@@ -30,7 +30,7 @@
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (use-package pipenv
-    :ensure t
+    :straight t
     :hook (python-mode . pipenv-mode)
     :init
     (setq
@@ -38,14 +38,14 @@
      #'pipenv-projectile-after-switch-extended))
 
 (use-package poetry
-    :ensure t
+    :straight t
     :config (poetry-tracking-mode t))
 
 (use-package pyvenv
-    :ensure t)
+    :straight t)
 
 (use-package auto-virtualenv
-    :ensure t
+    :straight t
     :config
     ;; Activate on changing buffers
     (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)

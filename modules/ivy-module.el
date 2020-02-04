@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; ivy module
 (use-package ivy
-    :ensure t
+    :straight t
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
@@ -14,7 +14,7 @@
           ("C-c i d v" . counsel-describe-variable)))
 
 (use-package counsel-projectile
-    :ensure t
+    :straight t
     :bind(("C-c C-c SPC s"     . counsel-projectile-ag)
           ("C-c C-c SPC r"     . counsel-projectile-rg)
           ("C-c C-c SPC SPC"   . counsel-projectile)))

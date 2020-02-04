@@ -5,7 +5,7 @@
 
 ;; Highlights *.elixir2 as well
 (use-package elixir-mode
-    :ensure t
+    :straight t
     :init
     (add-hook 'elixir-mode-hook
               (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
@@ -15,7 +15,7 @@
     (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
 (use-package alchemist
-    :ensure t
+    :straight t
     :init
     ;; (setq alchemist-mix-command "mix")
     ;; (setq alchemist-mix-test-task "espec")
@@ -29,7 +29,7 @@
     (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
 (use-package flycheck-credo
-    :ensure t)
+    :straight t)
 
 (eval-after-load 'flycheck
   '(flycheck-credo-setup))

@@ -42,47 +42,47 @@ o - maximize current window
 ? - show these command bindings
 "
 (use-package ace-window
-    :ensure t
+    :straight t
     :config
     (setq aw-dispatch-always t)
     (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
     :bind(("M-o" . ace-window)))
 
 (use-package rainbow-delimiters
-    :ensure t
+    :straight t
     :init
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-    :ensure t
+    :straight t
     :config
     (editorconfig-mode t))
 
 (use-package flycheck-pos-tip
-    :ensure t)
+    :straight t)
 
 (use-package flycheck
-    :ensure t
+    :straight t
     :init
     (global-flycheck-mode)
     :config
     (flycheck-pos-tip-mode))
 
-(use-package flycheck-inline
-    :ensure t
-    :init
-    (global-flycheck-inline-mode t))
+;; (use-package flycheck-inline
+;;     :straight t
+;;     :init
+;;     (global-flycheck-inline-mode t))
 
 (use-package flycheck-mix
-    :ensure t
+    :straight t
     :init
     (flycheck-mix-setup))
 
 (use-package flycheck-pycheckers
-    :ensure t)
+    :straight t)
 
 (use-package super-save
-    :ensure t
+    :straight t
     :config
     ;; (setq super-save-auto-save-when-idle t)
     (super-save-mode +1)
@@ -95,24 +95,24 @@ o - maximize current window
     :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-    :ensure t
+    :straight t
     :config (which-key-mode t))
 
 (use-package company-nginx
-    :ensure t
+    :straight t
     :config
     (eval-after-load 'nginx-mode
       '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
-    :ensure t
+    :straight t
     :bind(("M-u" . fix-word-upcase)
           ("M-l" . fix-word-downcase)
           ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :ensure t
+    :straight t
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -126,22 +126,22 @@ o - maximize current window
     :mode ("\\.haml\\'" . haml-mode))
 
 (use-package restclient
-    :ensure t
+    :straight t
     :mode ("\\.restc\\'" . restclient-mode))
 
 (use-package bfbuilder
-    :ensure t
+    :straight t
     :mode ("\\.bf\\'" . bfbuilder-mode))
 
 (use-package fsharp-mode
-    :ensure t
+    :straight t
     :mode ("\\.fs[iylx]?$" . fsharp-mode))
 
 (use-package nasm-mode
-    :ensure t)
+    :straight t)
 
 (use-package auto-highlight-symbol
-    :ensure t)
+    :straight t)
 
 (add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
@@ -152,7 +152,7 @@ o - maximize current window
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
 (use-package diff-hl
-  :ensure t
+  :straight t
   :config
   (diff-hl-margin-mode +1)
   (diff-hl-dired-mode +1)
@@ -161,9 +161,33 @@ o - maximize current window
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package volatile-highlights
-  :ensure t
+  :straight t
   :config
   (volatile-highlights-mode +1))
+
+(use-package rich-minority
+    :straight t
+    :config
+    (rich-minority-mode t))
+
+(use-package projectile-rails
+    :straight t)
+
+(use-package projectile
+    :straight t
+    :config
+    (projectile-global-mode)
+    (projectile-rails-global-mode)
+    (define-key projectile-mode-map
+        (kbd "C-c p") 'projectile-command-map)
+    (define-key projectile-rails-mode-map
+        (kbd "C-c r") 'hydra-projectile-rails/body)
+    (setq projectile-indexing-method 'alien)
+    (setq projectile-enable-caching t)
+    (setq projectile-completion-system 'ivy)
+    (setq projectile-mode-line
+          '(:eval (format " Projectile[%s]"
+                   (projectile-project-name)))))
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)

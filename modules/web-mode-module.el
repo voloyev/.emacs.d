@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;;web-mode
 (use-package web-mode
-    :ensure t
+    :straight t
     :config
     (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))

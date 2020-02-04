@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; highlight indentation
 (use-package highlight-indentation
-    :ensure t
+    :straight t
     :bind (("<f9>" . highlight-indentation-mode)
            ("M-<f9>" . highlight-indentation-current-column-mode)))
 

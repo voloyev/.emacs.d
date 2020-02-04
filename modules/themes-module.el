@@ -4,9 +4,9 @@
 ;;; cursor-active-mark-init doing this
 ;; themes
 ;; (setq custom-safe-themes t)
-(add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs-lisp/sexy-monochrome-theme")
+;; (add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs-lisp/sexy-monochrome-theme")
 (use-package sexy-monochrome-theme
-    ;; :ensure t
+    :straight t
     :init
     (load-theme 'sexy-monochrome t)
     (enable-theme 'sexy-monochrome))

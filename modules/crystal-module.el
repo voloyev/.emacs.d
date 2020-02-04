@@ -5,7 +5,7 @@
 
 ;; crystal mode
 (use-package crystal-mode
-    :ensure t)
+    :straight t)
 
 (provide 'crystal-module)
 ;;; crystal-module.el ends here

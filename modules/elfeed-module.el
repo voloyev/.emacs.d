@@ -18,11 +18,11 @@
         ("http://feed.rutracker.org/atom/f/995.atom" rutracker philosophy)))
 
 (use-package elfeed
-    :ensure t
+    :straight t
     :bind ("C-x w" . elfeed))
 
 (use-package elfeed-web
-    :ensure t)
+    :straight t)
 ;; (elfeed-load-opml "~/.emacs.d/feedly.opml")
 
 (provide 'elfeed-module)

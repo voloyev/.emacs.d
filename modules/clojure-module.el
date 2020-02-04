@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; clojure module
 (use-package cider
-    :ensure t
+    :straight t
     :init
     (add-hook 'cider-repl-mode-hook #'company-mode)
     (add-hook 'cider-mode-hook #'company-mode)
@@ -11,7 +11,7 @@
     (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
 
 (use-package clojure-mode
-    :ensure t
+    :straight t
     :config
     (setq clojure-indent-style 'always-indent))
 

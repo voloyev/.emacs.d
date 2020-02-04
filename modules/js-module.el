@@ -5,7 +5,7 @@
 ;; js2-mode
 
 (use-package vue-mode
-    :ensure t
+    :straight t
     :mode ("\\.vue\\'" . vue-mode)
     :config
     (add-hook 'mmm-mode-hook
@@ -14,7 +14,7 @@
 
 ;;pretier
 (use-package prettier-js
-    :ensure t
+    :straight t
     :init
     (add-hook 'web-mode-hook #'(lambda ()
                                  (enable-minor-mode
@@ -26,7 +26,7 @@
     :hook (rjsx-mode    . prettier-js-mode))
 
 (use-package company-tern
-    :ensure t)
+    :straight t)
 
 (use-package js-mode
     :mode ("\\.js\\'" . js-mode)
@@ -38,7 +38,7 @@
     :hook (j2-minore-mode . js-mode))
 
 ;; (use-package elm-mode
-;;     :ensure t
+;;     :straight t
 ;;     :config (setq elm-format-on-save t)
 ;;     :hook (smartparens-mode . elm-mode))
 (custom-set-variables '(coffee-tab-width 2))

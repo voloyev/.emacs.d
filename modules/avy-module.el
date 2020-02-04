@@ -3,9 +3,9 @@
 ;;; Commentary:
 ;; avy module
 (use-package avy
-    :ensure t)
+    :straight t)
 
-(defhydra hydra-avy (global-map "C-;" :exit t :hint nil)
+(defhydra hydra-avy (global-map "C-c ;" :exit t :hint nil)
  ;; ^Line^       ^Region^        ^Goto^
  ;; ----------------------------------------------------------
  ;; [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char

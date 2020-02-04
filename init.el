@@ -3,16 +3,30 @@
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+;; (require 'package)
+;; (add-to-list 'package-archives
 
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(package-initialize)
+;;              '("melpa" . "http://melpa.org/packages/") t)
+
+;; (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+;; (package-initialize)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(straight-use-package 'org-plus-contrib)
 
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
-
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -28,66 +42,34 @@
 
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
-;; activate installed packages
-
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-
-(use-package benchmark-init
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
-
-;; company mode
-(use-package company
-    :ensure t
-    :init
-    (global-company-mode t)
-    :bind("C-<tab>" . company-complete))
+(straight-use-package 'use-package)
 
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
 ;; Delete selection
 (delete-selection-mode t)
-
 ;; desktop-save-mode
 (desktop-save-mode 0)
 
-(use-package company-quickhelp          ; Documentation popups for Company
-    :ensure t
+;; company mode
+(use-package company
+    :straight t
+    :init
+    (global-company-mode t)
+    :bind("C-<tab>" . company-complete))
+
+(use-package company-quickhelp
+    :straight t
     :defer t
     :init
     (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
+(straight-use-package 'inflections)
 
 ;; multiple cursors
 (use-package multiple-cursors
-    :ensure t)
-
-(use-package projectile-rails
-    :ensure t)
-
-;;projectile
-(use-package projectile
-    :ensure t
-    :config
-    (projectile-global-mode)
-    (projectile-rails-global-mode)
-    (define-key projectile-mode-map
-        (kbd "C-c p") 'projectile-command-map)
-    (define-key projectile-rails-mode-map
-        (kbd "C-c r") 'hydra-projectile-rails/body)
-    (setq projectile-indexing-method 'alien)
-    (setq projectile-enable-caching t)
-    (setq projectile-completion-system 'ivy)
-    (setq projectile-mode-line
-          '(:eval (format " Projectile[%s]"
-                   (projectile-project-name)))))
+    :straight t)
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -108,25 +90,22 @@
         ("<f4>"      . bookmark-bmenu-list)))
 
 (use-package emmet-mode
-    :ensure t
+    :straight t
     :hook (web-mode)
     :hook (css-mode)
     :hook (scss-mode))
 
 (use-package magit
-    :ensure t
+    :straight t
     :bind("C-x g" . magit-status))
 
 (use-package undo-tree
-    :ensure t
+    :straight t
     :config
     (global-undo-tree-mode t))
 
-(use-package quickrun
-    :ensure t)
-
 (use-package toggle-quotes
-    :ensure t
+    :straight t
     :bind("C-'" . toggle-quotes))
 
 (defvar paradox-token
@@ -134,10 +113,6 @@
 
 (setq paradox-github-token 'paradox-token)
 
-;; flyspell
-(use-package flyspell
-    :config
-  (flyspell-mode t))
 
 ;; resize buffers
 (global-set-key (kbd "C-c C-c <up>") 'shrink-window)
@@ -156,35 +131,26 @@
     :config
     (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
     (setq dumb-jump-force-searcher 'rg)
-    :ensure t)
+    :straight t)
 
 ;; fzf
 (use-package fzf
-    :ensure t
+    :straight t
     :bind
     (("C-x f" . fzf)))
 
-;; disable modes for big files
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (when (> (buffer-size) 40000)
-              (turn-off-smartparens-mode)
-              (turn-off-show-smartparens-mode)
-              (company-mode 0)
-              (flycheck-mode 0))))
-
 (use-package evil-nerd-commenter
-    :ensure t
+    :straight t
     :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
            ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
 (use-package htmlize
-    :ensure t)
+    :straight t)
 
 (use-package irony
-    :ensure t
+    :straight t
     :hook (c++-mode)
     :hook (c-mode)
     :hook (objc-mode)
@@ -193,21 +159,21 @@
 (setq c-default-style "linux")
 
 (use-package deadgrep
-    :ensure t
-    :bind("C-c o SPC" . deadgrep))
+    :straight t
+    :bind("C-c SPC d" . deadgrep))
 
 (use-package frog-jump-buffer
-    :ensure t
-    :bind("C-c SPC" . frog-jump-buffer))
+    :straight t
+    :bind("C-c SPC j" . frog-jump-buffer))
 
 (use-package exec-path-from-shell
-    :ensure t
+    :straight t
     :config
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)))
 
 (use-package easy-kill
-    :ensure t
+    :straight t
     :config
     (global-set-key [remap kill-ring-save] 'easy-kill)
     (global-set-key [remap mark-sexp] 'easy-mark))
@@ -219,7 +185,6 @@
 (use-package smartparens-module)
 (use-package web-mode-module)
 (use-package yasnippet-module)
-;(use-package helm-module)
 (use-package ivy-module)
 (use-package python-module)
 (use-package highlight-indentation-mode-module)

@@ -3,7 +3,7 @@
 ;;;; hydra module
 ;;; Code:
 (use-package hydra
-    :ensure t)
+    :straight t)
 
 (defhydra hydra-zoom (global-map "C-<f2>")
   "zoom"

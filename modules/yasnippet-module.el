@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; yanisppet
 (use-package yasnippet
-    :ensure t)
+    :straight t)
 
 (defun enable-yas-mode ()
   (yas-minor-mode t))
