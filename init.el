@@ -25,6 +25,8 @@
   (load bootstrap-file nil 'nomessage))
 (straight-use-package 'org-plus-contrib)
 
+(setq load-prefer-newer t)
+
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 ;; save customization in separate file
@@ -33,12 +35,8 @@
 ;;(exec-path-from-shell-copy-env "GOPATH")
 (setq message-log-max t)
 
-(let ((normal-gc-cons-threshold (* 20 1024 1024))
-      (init-gc-cons-threshold (* 128 1024 1024)))
-  (setq gc-cons-threshold init-gc-cons-threshold)
-
-  (add-hook 'emacs-startup-hook
-            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+(setq gc-cons-threshold 50000000)
+(setq large-file-warning-threshold 100000000)
 
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
@@ -108,11 +106,7 @@
     :straight t
     :bind("C-'" . toggle-quotes))
 
-(defvar paradox-token
-  (getenv "PARADOX"))
-
-(setq paradox-github-token 'paradox-token)
-
+(setq paradox-github-token (getenv "PARADOX"))
 
 ;; resize buffers
 (global-set-key (kbd "C-c C-c <up>") 'shrink-window)

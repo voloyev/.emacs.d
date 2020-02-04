@@ -68,11 +68,6 @@ o - maximize current window
     :config
     (flycheck-pos-tip-mode))
 
-;; (use-package flycheck-inline
-;;     :straight t
-;;     :init
-;;     (global-flycheck-inline-mode t))
-
 (use-package flycheck-mix
     :straight t
     :init
@@ -84,7 +79,7 @@ o - maximize current window
 (use-package super-save
     :straight t
     :config
-    ;; (setq super-save-auto-save-when-idle t)
+    (setq super-save-auto-save-when-idle t)
     (super-save-mode +1)
     (setq auto-save-default nil))
 
