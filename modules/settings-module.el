@@ -174,9 +174,9 @@ o - maximize current window
     (projectile-global-mode)
     (projectile-rails-global-mode)
     (define-key projectile-mode-map
-        (kbd "C-c p") 'projectile-command-map)
+        (kbd "C-c SPC p") 'projectile-command-map)
     (define-key projectile-rails-mode-map
-        (kbd "C-c r") 'hydra-projectile-rails/body)
+        (kbd "C-c SPC r") 'hydra-projectile-rails/body)
     (setq projectile-indexing-method 'alien)
     (setq projectile-enable-caching t)
     (setq projectile-completion-system 'ivy)

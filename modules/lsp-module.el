@@ -13,18 +13,20 @@
 
 
 (use-package lsp-ivy
-    :ensure t
+    :straight t
     :commands lsp-ivy-workspace-symbol)
 
 (use-package lsp-treemacs
-    :ensure t
+    :straight t
     :commands lsp-treemacs-errors-list)
 
 (use-package lsp-ui
+    :straight t
     :commands lsp-ui-mode
     :straight t)
 
 (use-package company-lsp
+    :straight t
     :commands company-lsp
     :straight t)
 
