@@ -5,31 +5,36 @@
 
 ;; Highlights *.elixir2 as well
 (use-package elixir-mode
-    :straight t
-    :init
-    (add-hook 'elixir-mode-hook
-              (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-    :config
-    (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
+  :straight t
+  :init
+  (add-hook 'elixir-mode-hook
+            (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  :config
+  (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
+  (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
+  (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
 (use-package alchemist
-    :straight t
-    :init
-    ;; (setq alchemist-mix-command "mix")
-    ;; (setq alchemist-mix-test-task "espec")
-    (setq alchemist-key-command-prefix (kbd "C-c ."))
-    (setq alchemist-mix-test-default-options '()) ;; default
-    (setq alchemist-iex-program-name "iex") ;; default: iex
-    (setq alchemist-execute-command "elixir") ;; default: elixir
-    (setq alchemist-compile-command "elixirc") ;; default: elixirc
-    (setq alchemist-hooks-compile-on-save t)
-    (setq alchemist-goto-erlang-source-dir "~/source/otp")
-    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
+  :straight t
+  :init
+  ;; (setq alchemist-mix-command "mix")
+  ;; (setq alchemist-mix-test-task "espec")
+  (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
+  (setq alchemist-mix-test-default-options '()) ;; default
+  (setq alchemist-iex-program-name "iex") ;; default: iex
+  (setq alchemist-execute-command "elixir") ;; default: elixir
+  (setq alchemist-compile-command "elixirc") ;; default: elixirc
+  (setq alchemist-hooks-compile-on-save t)
+  (setq alchemist-goto-erlang-source-dir "~/source/otp")
+  (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
 (use-package flycheck-credo
-    :straight t)
+  :straight t)
+
+(use-package flycheck-mix
+  :straight t
+  :init
+  (flycheck-mix-setup))
 
 (eval-after-load 'flycheck
   '(flycheck-credo-setup))

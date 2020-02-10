@@ -13,6 +13,7 @@
 
 (setq ring-bell-function 'ignore)
 (setq-default with-editor-emacsclient-executable "emacsclient")
+
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
 (setq auto-save-default        nil)
@@ -87,6 +88,22 @@
     (setq sml/no-confirm-load-theme t)
     (setq sml/theme 'dark)
     (sml/setup))
+
+(use-package cider
+    :straight t
+    :init
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode)
+    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+
+(use-package clojure-mode
+    :straight t
+    :config
+    (setq clojure-indent-style 'always-indent))
+
+;; ;;lein exec path
+;; (add-to-list 'exec-path "~/bin")
 
 (provide 'looks-module)
 ;;; looks-module ends here

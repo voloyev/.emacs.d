@@ -11,6 +11,15 @@
     (add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
     (add-hook 'evil-mode 'turn-on-evil-matchit-mode))
 
+;; themes
+;; (setq custom-safe-themes t)
+;; (add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs-lisp/sexy-monochrome-theme")
+(use-package sexy-monochrome-theme
+    :straight t
+    :init
+    (load-theme 'sexy-monochrome t)
+    (enable-theme 'sexy-monochrome))
+
 ;; use emacs keybindings in insert mode
 (setcdr evil-insert-state-map nil)
 

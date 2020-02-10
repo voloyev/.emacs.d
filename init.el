@@ -53,21 +53,21 @@
 
 ;; company mode
 (use-package company
-    :straight t
-    :init
-    (global-company-mode t)
-    :bind("C-<tab>" . company-complete))
+  :straight t
+  :init
+  (global-company-mode t)
+  :bind("C-<tab>" . company-complete))
 
 (use-package company-quickhelp
-    :straight t
-    :defer t
-    :init
-    (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
+  :straight t
+  :defer t
+  :init
+  (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
 (straight-use-package 'inflections)
 
 ;; multiple cursors
 (use-package multiple-cursors
-    :straight t)
+  :straight t)
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
@@ -78,7 +78,7 @@
 " | C-M-. | pop-tag-mark     | Jumps back                 |"
 
 (use-package bookmark
-    :init
+  :init
   (setq bookmark-save-flag t)
   (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
   (when (file-exists-p (concat user-emacs-directory "bookmarks"))
@@ -88,23 +88,23 @@
         ("<f4>"      . bookmark-bmenu-list)))
 
 (use-package emmet-mode
-    :straight t
-    :hook (web-mode)
-    :hook (css-mode)
-    :hook (scss-mode))
+  :straight t
+  :hook (web-mode)
+  :hook (css-mode)
+  :hook (scss-mode))
 
 (use-package magit
-    :straight t
-    :bind("C-x g" . magit-status))
+  :straight t
+  :bind("C-x g" . magit-status))
 
 (use-package undo-tree
-    :straight t
-    :config
-    (global-undo-tree-mode t))
+  :straight t
+  :config
+  (global-undo-tree-mode t))
 
 (use-package toggle-quotes
-    :straight t
-    :bind("C-'" . toggle-quotes))
+  :straight t
+  :bind("C-'" . toggle-quotes))
 
 (setq paradox-github-token (getenv "PARADOX"))
 
@@ -115,90 +115,81 @@
 (global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
 (use-package dumb-jump
-    :bind (("M-g o" . dumb-jump-go-other-window)
-           ("M-g j" . dumb-jump-go)
-           ("M-g q" . dumb-jump-quick-look)
-           ("M-g i" . dumb-jump-go-prompt)
-           ("M-g x" . dumb-jump-go-prefer-external)
-           ("M-g z" . dumb-jump-go-prefer-external-other-window)
-           ("M-g b" . dumb-jump-back))
-    :config
-    (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-    (setq dumb-jump-force-searcher 'rg)
-    :straight t)
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g q" . dumb-jump-quick-look)
+         ("M-g i" . dumb-jump-go-prompt)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window)
+         ("M-g b" . dumb-jump-back))
+  :config
+  (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+  (setq dumb-jump-force-searcher 'rg)
+  :straight t)
 
 ;; fzf
 (use-package fzf
-    :straight t
-    :bind
-    (("C-x f" . fzf)))
+  :straight t
+  :bind
+  (("C-x f" . fzf)))
 
 (use-package evil-nerd-commenter
-    :straight t
-    :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
-           ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
-           ( "C-c e c" . evilnc-copy-and-comment-lines)
-           ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
+  :straight t
+  :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
+         ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
+         ( "C-c e c" . evilnc-copy-and-comment-lines)
+         ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
 (use-package htmlize
-    :straight t)
+  :straight t)
 
 (use-package irony
-    :straight t
-    :hook (c++-mode)
-    :hook (c-mode)
-    :hook (objc-mode)
-    :hook (irony-mode . irony-cdb-autosetup-compile-options))
+  :straight t
+  :hook (c++-mode)
+  :hook (c-mode)
+  :hook (objc-mode)
+  :hook (irony-mode . irony-cdb-autosetup-compile-options))
 
 (setq c-default-style "linux")
 
 (use-package deadgrep
-    :straight t
-    :bind("C-c SPC d" . deadgrep))
+  :straight t
+  :bind("C-c SPC d" . deadgrep))
 
 (use-package frog-jump-buffer
-    :straight t
-    :bind("C-c SPC j" . frog-jump-buffer))
+  :straight t
+  :bind("C-c SPC j" . frog-jump-buffer))
 
 (use-package exec-path-from-shell
-    :straight t
-    :config
-    (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize)))
+  :straight t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (use-package easy-kill
-    :straight t
-    :config
-    (global-set-key [remap kill-ring-save] 'easy-kill)
-    (global-set-key [remap mark-sexp] 'easy-mark))
+  :straight t
+  :config
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark))
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;;; List of required modules
 (use-package ruby-module)
 (use-package smartparens-module)
-(use-package web-mode-module)
-(use-package yasnippet-module)
-(use-package ivy-module)
 (use-package python-module)
-(use-package highlight-indentation-mode-module)
 (use-package looks-module)
-(use-package themes-module)
 (use-package js-module)
 (use-package rust-module)
-(use-package crystal-module)
 (use-package elixir-module)
 (use-package settings-module)
 (use-package go-module)
-(use-package clojure-module)
 (use-package avy-module)
 (use-package org-module)
 (use-package evil-module)
 (use-package lisp-module)
 (use-package indent-module)
-(use-package hydra-module)
 (use-package lsp-module)
-(use-package simplenotes-module)
 ;; custom plugins path
 
 (load custom-file)

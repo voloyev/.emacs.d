@@ -10,23 +10,23 @@
 ;; general configs
 (xterm-mouse-mode t)
 (global-auto-revert-mode t)
-(global-set-key (kbd "C-c ]") 'next-buffer)
-(global-set-key (kbd "C-c [") 'previous-buffer)
+(global-set-key (kbd "C-c SPC ]") 'next-buffer)
+(global-set-key (kbd "C-c SPC [") 'previous-buffer)
 (setq redisplay-dont-pause t)
 
 (use-package ibuffer
-    :bind ("C-x C-b" . ibuffer)
-    :init
-    (autoload 'ibuffer "ibuffer" "List buffers." t)
-    (defalias 'list-buffers 'ibuffer)
-    (add-hook 'ibuffer-mode-hook
-              '(lambda ()
-                (ibuffer-auto-mode t)))
-    (add-hook 'ibuffer-hook
-              (lambda ()
-                (ibuffer-projectile-set-filter-groups)
-                (unless (eq ibuffer-sorting-mode 'alphabetic)
-                  (ibuffer-do-sort-by-alphabetic)))))
+  :bind ("C-x C-b" . ibuffer)
+  :init
+  (autoload 'ibuffer "ibuffer" "List buffers." t)
+  (defalias 'list-buffers 'ibuffer)
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+              (ibuffer-auto-mode t)))
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-projectile-set-filter-groups)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 "
 x - delete window
 m - swap windows
@@ -42,98 +42,90 @@ o - maximize current window
 ? - show these command bindings
 "
 (use-package ace-window
-    :straight t
-    :config
-    (setq aw-dispatch-always t)
-    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-    :bind(("M-o" . ace-window)))
+  :straight t
+  :config
+  (setq aw-dispatch-always t)
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind(("M-o" . ace-window)))
 
 (use-package rainbow-delimiters
-    :straight t
-    :init
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+  :straight t
+  :init
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-    :straight t
-    :config
-    (editorconfig-mode t))
+  :straight t
+  :config
+  (editorconfig-mode t))
 
 (use-package flycheck-pos-tip
-    :straight t)
+  :straight t)
 
 (use-package flycheck
-    :straight t
-    :init
-    (global-flycheck-mode)
-    :config
-    (flycheck-pos-tip-mode))
-
-(use-package flycheck-mix
-    :straight t
-    :init
-    (flycheck-mix-setup))
+  :straight t
+  :init
+  (global-flycheck-mode)
+  :config
+  (flycheck-pos-tip-mode))
 
 (use-package flycheck-pycheckers
-    :straight t)
+  :straight t)
 
 (use-package super-save
-    :straight t
-    :config
-    (setq super-save-auto-save-when-idle t)
-    (super-save-mode +1)
-    (setq auto-save-default nil))
+  :straight t
+  :config
+  (setq super-save-auto-save-when-idle t)
+  (super-save-mode +1)
+  (setq auto-save-default nil))
 
 (use-package markdown-mode
-    :init (setq markdown-command "mark")
-    :mode ("\\.text\\'" . markdown-mode)
-    :mode ("\\.markdown\\'" . markdown-mode)
-    :mode ("\\.md\\'" . markdown-mode))
+  :init (setq markdown-command "mark")
+  :mode ("\\.text\\'" . markdown-mode)
+  :mode ("\\.markdown\\'" . markdown-mode)
+  :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-    :straight t
-    :config (which-key-mode t))
+  :straight t
+  :config (which-key-mode t))
 
 (use-package company-nginx
-    :straight t
-    :config
-    (eval-after-load 'nginx-mode
-      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
+  :straight t
+  :config
+  (eval-after-load 'nginx-mode
+    '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
-    :straight t
-    :bind(("M-u" . fix-word-upcase)
-          ("M-l" . fix-word-downcase)
-          ("M-c" . fix-word-capitalize)))
+  :straight t
+  :bind(("M-u" . fix-word-upcase)
+        ("M-l" . fix-word-downcase)
+        ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :straight t
-    :init
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((elasticsearch . t)))
-    :config (setq es-always-pretty-print t))
+  :straight t
+  :init
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((elasticsearch . t)))
+  :config (setq es-always-pretty-print t))
 
 (use-package yaml-mode
-    :mode ("\\.yml\\'" . yaml-mode))
-
-(use-package haml-mode
-    :mode ("\\.haml\\'" . haml-mode))
+  :mode ("\\.yml\\'" . yaml-mode))
 
 (use-package restclient
-    :straight t
-    :mode ("\\.restc\\'" . restclient-mode))
+  :straight t
+  :mode ("\\.restc\\'" . restclient-mode))
 
 (use-package bfbuilder
-    :straight t
-    :mode ("\\.bf\\'" . bfbuilder-mode))
+  :straight t
+  :mode ("\\.bf\\'" . bfbuilder-mode))
 
 (use-package fsharp-mode
-    :straight t
-    :mode ("\\.fs[iylx]?$" . fsharp-mode))
+  :straight t
+  :mode ("\\.fs[iylx]?$" . fsharp-mode))
 
 (use-package nasm-mode
-    :straight t)
+  :straight t)
 
 (use-package auto-highlight-symbol
     :straight t)
@@ -161,28 +153,107 @@ o - maximize current window
   (volatile-highlights-mode +1))
 
 (use-package rich-minority
-    :straight t
-    :config
-    (rich-minority-mode t))
+  :straight t
+  :config
+  (rich-minority-mode t))
 
 (use-package projectile-rails
-    :straight t)
+  :straight t)
 
 (use-package projectile
+  :straight t
+  :config
+  (projectile-global-mode)
+  (projectile-rails-global-mode)
+  (define-key projectile-mode-map
+      (kbd "C-c SPC SPC") 'projectile-command-map)
+  (define-key projectile-rails-mode-map
+      (kbd "C-c SPC r") 'hydra-projectile-rails/body)
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-mode-line
+        '(:eval (format " Projectile[%s]"
+                 (projectile-project-name)))))
+
+(add-hook 'php-mode-hook (lambda () c-basic-offset 2))
+(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
+
+(use-package yasnippet
+    :straight t)
+
+(defun enable-yas-mode ()
+  (yas-minor-mode t))
+(eval-after-load 'rspec-mode
+  '(rspec-install-snippets))
+
+;; ;; yas-mode for my modes
+;; (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
+;; (add-hook 'rust-mode-hook '(lambda () (yas-minor-mode 1)))
+;; (add-hook 'python-mode-hook '(lambda () (yas-minor-mode 1)))
+;; (add-hook 'web-mode-hook '(lambda () (yas-minor-mode 1)))
+;; (add-hook 'html-mode-hook '(lambda () (yas-minor-mode 1)))
+;; (add-hook 'js2-mode-hook '(lambda () (yas-minor-mode 1)))
+
+(add-to-list 'load-path
+             "~/.emacs.d/snippets")
+(yas-load-directory "~/.emacs.d/snippets")
+(yas-global-mode t)
+
+(use-package highlight-indentation
+    :straight t
+    :bind (("<f9>" . highlight-indentation-mode)
+           ("M-<f9>" . highlight-indentation-current-column-mode)))
+
+(use-package ivy
     :straight t
     :config
-    (projectile-global-mode)
-    (projectile-rails-global-mode)
-    (define-key projectile-mode-map
-        (kbd "C-c SPC p") 'projectile-command-map)
-    (define-key projectile-rails-mode-map
-        (kbd "C-c SPC r") 'hydra-projectile-rails/body)
-    (setq projectile-indexing-method 'alien)
-    (setq projectile-enable-caching t)
-    (setq projectile-completion-system 'ivy)
-    (setq projectile-mode-line
-          '(:eval (format " Projectile[%s]"
-                   (projectile-project-name)))))
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    :bind(("C-s"       . swiper)
+          ("M-y"       . counsel-yank-pop)
+          ("C-x b"     . ivy-switch-buffer)
+          ("C-c SPC i d f" . counsel-describe-function)
+          ("C-c SPC i d v" . counsel-describe-variable)))
+
+(use-package counsel-projectile
+    :straight t)
+
+(counsel-projectile-mode t)
+
+
+(use-package web-mode
+    :straight t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
+
+    (setq web-mode-enable-auto-pairing t)
+    ;;web-mode indent
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-php-indent-offset 2)
+
+    ;;snippets fo autoclose tags
+    (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
+    (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
+    (setq web-mode-enable-auto-indentation nil)
+    (setq web-mode-content-types-alist
+          '(("jsx" . "\\.js[x]?\\'"))))
+
+;; crystal mode
+(use-package crystal-mode
+    :straight t)
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)

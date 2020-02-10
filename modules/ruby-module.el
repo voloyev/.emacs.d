@@ -19,43 +19,45 @@ this section.
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 (use-package ruby-mode
-    :init   (setq ruby-insert-encoding-magic-comment nil)
-    :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
-    :hook (robe-mode)
-    :hook (yard-mode)
-    :bind(("C-c r r"      . inf-ruby-console-auto)
-          ("C-c & h r"    . enh-ruby-mode)))
+  :init   (setq ruby-insert-encoding-magic-comment nil)
+  :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
+  :hook (robe-mode)
+  :hook (yard-mode)
+  :bind(("C-c r r"      . inf-ruby-console-auto)
+        ("C-c & h r"    . enh-ruby-mode)))
 
 (use-package chruby
-    :straight t)
+  :straight t)
 
 (use-package ruby-tools
-    :straight t
-    :init
+  :straight t
+  :init
   (setq ruby-indent-level 2)
   (setq ruby-deep-indent-paren nil))
 
 (use-package rcodetools
-    :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
+  :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
 
 (use-package bundler
-    :straight t)
+  :straight t)
 
 (defadvice inf-ruby-console-auto (before activate)
   "Activate corespongeting ruby when use inf-ruby."
   (chruby-use-corresponding))
 
-;; slim-mode
 (use-package slim-mode
-    :straight t
-    :mode ("\\.slim\\'" . slim-mode))
+  :straight t
+  :mode ("\\.slim\\'" . slim-mode))
 
-;; hyde jekyll mode
+(use-package haml-mode
+  :mode ("\\.haml\\'" . haml-mode))
+
+;; jekyll mode
 (use-package hyde
-    :straight t)
+  :straight t)
 
 (use-package rspec-mode
-    :straight t)
+  :straight t)
 
 (add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
 
