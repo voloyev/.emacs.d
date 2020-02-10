@@ -3,10 +3,10 @@
 ;;; Commentary:
 ;; python module
 
-(use-package blacken
-    :config
-  (setq blacken-skip-string-normalization t)
-  (setq blacken-line-length 100))
+(use-package python-black
+    :demand t
+    :ensure t
+    :after python)
 
 (use-package python-mode
     :ensure t)
