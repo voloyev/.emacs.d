@@ -6,7 +6,8 @@
 (use-package python-black
     :demand t
     :ensure t
-    :after python)
+    :after python
+    :bind("C-c SPC p b r" . python-black-region))
 
 (use-package python-mode
     :ensure t)

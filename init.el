@@ -174,7 +174,8 @@
   :ensure t
   :config
   (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-envs '("LANG" "GPG_AGENT_INFO" "SSH_AUTH_SOCK"))))
 
 (use-package easy-kill
   :ensure t
@@ -186,13 +187,14 @@
 
 ;;; List of required modules
 (use-package looks-module)
+(use-package settings-module)
+;;(use-package prog-mode-settings-module) FIXME add all modules bellow
 (use-package ruby-module)
 (use-package smartparens-module)
 (use-package python-module)
 (use-package js-module)
 (use-package rust-module)
 (use-package elixir-module)
-(use-package settings-module)
 (use-package go-module)
 (use-package avy-module)
 (use-package org-module)
