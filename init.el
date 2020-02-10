@@ -18,8 +18,9 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 ;; Performance hacks
 (setq message-log-max t)
-(setq gc-cons-threshold 50000000)
+(setq gc-cons-threshold most-positive-fixnum)
 (setq large-file-warning-threshold 100000000)
+(setq idle-update-delay 1)
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 ;; Restore `file-name-handler-alist', because it is needed for handling
@@ -34,6 +35,7 @@
 (setq fast-but-imprecise-scrolling t)
 (setq frame-inhibit-implied-resize t)
 (setq ffap-machine-p-known 'reject)
+
 ;; end of performance hacks
 ;; use zsh
 (setq shell-file-name "/bin/zsh")

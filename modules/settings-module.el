@@ -14,6 +14,9 @@
 (global-set-key (kbd "C-c SPC [") 'previous-buffer)
 (setq redisplay-dont-pause t)
 
+(use-package ibuffer-projectile
+    :ensure t)
+
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :init
