@@ -1,5 +1,5 @@
 (use-package lsp-mode
-    :straight t
+    :ensure t
     :init
     (setq lsp-keymap-prefix "C-c C-c l")
     (setq lsp-auto-guess-root t)       ; Detect project root
@@ -13,22 +13,22 @@
 
 
 (use-package lsp-ivy
-    :straight t
+    :ensure t
     :commands lsp-ivy-workspace-symbol)
 
 (use-package lsp-treemacs
-    :straight t
+    :ensure t
     :commands lsp-treemacs-errors-list)
 
 (use-package lsp-ui
-    :straight t
+    :ensure t
     :commands lsp-ui-mode
-    :straight t)
+    :ensure t)
 
 (use-package company-lsp
-    :straight t
+    :ensure t
     :commands company-lsp
-    :straight t)
+    :ensure t)
 
 (provide 'lsp-module)
 ;;; lsp-module ends here

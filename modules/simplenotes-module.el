@@ -4,7 +4,7 @@
 ;;; Code:
 (use-package
     simplenote2
-    :straight t
+    :ensure t
     :init
     (setq simplenote2-email
           (getenv "SIMPLENOTE2_EMAIL"))

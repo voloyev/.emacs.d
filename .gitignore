@@ -63,3 +63,4 @@ GTAGS
 TAGS
 org-clock-save.el
 straight/*
+.cache/*

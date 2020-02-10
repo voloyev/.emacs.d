@@ -4,13 +4,13 @@
 ;; rust module
 
 (use-package company-racer
-    :straight t)
+    :ensure t)
 
 (add-to-list 'company-backends 'company-racer)
 
 (use-package rust-mode
     :mode "\\.rs\\'"
-    :straight t
+    :ensure t
     :init
     (add-hook 'rust-mode-hook #'racer-mode)
     (add-hook 'racer-mode-hook #'eldoc-mode)
@@ -18,7 +18,7 @@
     (setq rust-format-on-save t))
 
 (use-package flycheck-rust
-    :straight t
+    :ensure t
     :after flycheck
     :commands flycheck-rust-setup
     :init
@@ -27,7 +27,7 @@
 (use-package racer
     :commands racer-mode
     :diminish racer-mode
-    :straight t)
+    :ensure t)
 
 (use-package cargo
     :commands cargo-minor-mode

@@ -9,7 +9,7 @@
 
 (set-face-attribute 'default nil :font (set-font))
 (set-frame-font (set-font))
-(setq line-spacing 0.2)
+(setq-default line-spacing 2)
 
 (setq ring-bell-function 'ignore)
 (setq-default with-editor-emacsclient-executable "emacsclient")
@@ -55,19 +55,19 @@
 
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
-    :straight t
+    :ensure t
     :init
     (fci-mode 1)
     (setq fci-rule-width 3))
 
 (use-package nyan-mode
-    :straight t
+    :ensure t
     :init
     (nyan-mode t)
     (nyan-start-animation))
 
 (use-package fixmee
-    :straight t
+    :ensure t
     :init (require 'button-lock)
     :config (global-fixmee-mode 1))
 
@@ -83,27 +83,11 @@
         ("C-c SPC w c" . whitespace-cleanup)))
 
 (use-package smart-mode-line
-    :straight t
+    :ensure t
     :init
     (setq sml/no-confirm-load-theme t)
     (setq sml/theme 'dark)
     (sml/setup))
-
-(use-package cider
-    :straight t
-    :init
-    (add-hook 'cider-repl-mode-hook #'company-mode)
-    (add-hook 'cider-mode-hook #'company-mode)
-    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
-
-(use-package clojure-mode
-    :straight t
-    :config
-    (setq clojure-indent-style 'always-indent))
-
-;; ;;lein exec path
-;; (add-to-list 'exec-path "~/bin")
 
 (provide 'looks-module)
 ;;; looks-module ends here

@@ -3,10 +3,10 @@
 ;;;; hydra module
 ;;; Code:
 (use-package hydra
-    :straight t)
+    :ensure t)
 
 (use-package avy
-    :straight t)
+    :ensure t)
 
 (defhydra hydra-avy (global-map "C-c ;" :exit t :hint nil)
  ;; ^Line^       ^Region^        ^Goto^

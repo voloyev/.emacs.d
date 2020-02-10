@@ -3,7 +3,7 @@
 ;;; ruby module
 ;;; Code:
 (use-package flycheck-gometalinter
-    :straight t
+    :ensure t
     :config
     (progn
       (flycheck-gometalinter-setup)))
@@ -21,7 +21,7 @@
 
 ;; gorepl-mode
 (use-package gorepl-mode
-    :straight t
+    :ensure t
     :init
     (add-hook 'go-mode-hook #'gorepl-mode))
 
@@ -30,7 +30,7 @@
                          "/src/github.com/golang/lint/misc/emacs"))
 
 (use-package golint
-    :straight t)
+    :ensure t)
 
 (provide 'go-module)
 ;;; go-module.el ends here

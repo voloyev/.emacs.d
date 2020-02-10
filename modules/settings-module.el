@@ -42,37 +42,37 @@ o - maximize current window
 ? - show these command bindings
 "
 (use-package ace-window
-  :straight t
+  :ensure t
   :config
   (setq aw-dispatch-always t)
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind(("M-o" . ace-window)))
 
 (use-package rainbow-delimiters
-  :straight t
+  :ensure t
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-  :straight t
+  :ensure t
   :config
   (editorconfig-mode t))
 
 (use-package flycheck-pos-tip
-  :straight t)
+  :ensure t)
 
 (use-package flycheck
-  :straight t
+  :ensure t
   :init
   (global-flycheck-mode)
   :config
   (flycheck-pos-tip-mode))
 
 (use-package flycheck-pycheckers
-  :straight t)
+  :ensure t)
 
 (use-package super-save
-  :straight t
+  :ensure t
   :config
   (setq super-save-auto-save-when-idle t)
   (super-save-mode +1)
@@ -85,24 +85,24 @@ o - maximize current window
   :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-  :straight t
+  :ensure t
   :config (which-key-mode t))
 
 (use-package company-nginx
-  :straight t
+  :ensure t
   :config
   (eval-after-load 'nginx-mode
     '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
-  :straight t
+  :ensure t
   :bind(("M-u" . fix-word-upcase)
         ("M-l" . fix-word-downcase)
         ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-  :straight t
+  :ensure t
   :init
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -113,22 +113,22 @@ o - maximize current window
   :mode ("\\.yml\\'" . yaml-mode))
 
 (use-package restclient
-  :straight t
+  :ensure t
   :mode ("\\.restc\\'" . restclient-mode))
 
 (use-package bfbuilder
-  :straight t
+  :ensure t
   :mode ("\\.bf\\'" . bfbuilder-mode))
 
 (use-package fsharp-mode
-  :straight t
+  :ensure t
   :mode ("\\.fs[iylx]?$" . fsharp-mode))
 
 (use-package nasm-mode
-  :straight t)
+  :ensure t)
 
 (use-package auto-highlight-symbol
-    :straight t)
+    :ensure t)
 
 (add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
 (add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
@@ -139,7 +139,7 @@ o - maximize current window
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
 (use-package diff-hl
-  :straight t
+  :ensure t
   :config
   (diff-hl-margin-mode +1)
   (diff-hl-dired-mode +1)
@@ -148,20 +148,20 @@ o - maximize current window
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package volatile-highlights
-  :straight t
+  :ensure t
   :config
   (volatile-highlights-mode +1))
 
 (use-package rich-minority
-  :straight t
+  :ensure t
   :config
   (rich-minority-mode t))
 
 (use-package projectile-rails
-  :straight t)
+    :ensure t)
 
 (use-package projectile
-  :straight t
+  :ensure t
   :config
   (projectile-global-mode)
   (projectile-rails-global-mode)
@@ -180,7 +180,7 @@ o - maximize current window
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 (use-package yasnippet
-    :straight t)
+    :ensure t)
 
 (defun enable-yas-mode ()
   (yas-minor-mode t))
@@ -199,14 +199,26 @@ o - maximize current window
              "~/.emacs.d/snippets")
 (yas-load-directory "~/.emacs.d/snippets")
 (yas-global-mode t)
+;;Indent settings
+(setq-default indent-tabs-mode nil)
+(setq tab-width                  2)
+(setq-default tab-width          2)
+(setq-default standart-indent    2)
+(setq-default lisp-body-indent   2)
+
+;; css and sccs indent level
+(setq css-indent-offset 2)
+(setq scss-indent-offset 2)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(setq lisp-indent-function  'common-lisp-indent-function)
 
 (use-package highlight-indentation
-    :straight t
+    :ensure t
     :bind (("<f9>" . highlight-indentation-mode)
            ("M-<f9>" . highlight-indentation-current-column-mode)))
 
 (use-package ivy
-    :straight t
+    :ensure t
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
@@ -217,13 +229,12 @@ o - maximize current window
           ("C-c SPC i d v" . counsel-describe-variable)))
 
 (use-package counsel-projectile
-    :straight t)
+    :ensure t)
 
 (counsel-projectile-mode t)
 
-
 (use-package web-mode
-    :straight t
+    :ensure t
     :config
     (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -253,7 +264,23 @@ o - maximize current window
 
 ;; crystal mode
 (use-package crystal-mode
-    :straight t)
+    :ensure t)
+
+(use-package cider
+    :ensure t
+    :init
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode)
+    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+
+(use-package clojure-mode
+    :ensure t
+    :config
+    (setq clojure-indent-style 'always-indent))
+
+;; ;;lein exec path
+;; (add-to-list 'exec-path "~/bin")
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)

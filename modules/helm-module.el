@@ -3,12 +3,12 @@
 ;;; Commentary:
 ;; helm
 (use-package helm
-    :straight t)
+    :ensure t)
 
 (use-package helm-config)
 
 (use-package helm-git-grep
-    :straight t)
+    :ensure t)
 
 (global-set-key (kbd "C-c m a") 'helm-projectile-ag)
 (global-set-key (kbd "C-c h g") 'helm-git-grep)

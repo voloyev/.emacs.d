@@ -3,7 +3,7 @@
 ;;; Org module
 ;;; Code:
 ;; (use-package org-plus-contrib
-;;     :straight t)
+;;     :ensure t)
 
 (use-package org-install
     :init
@@ -21,7 +21,7 @@
         ("\C-cb" . org-iswitchb)))
 
 (use-package ox-reveal
-    :straight t)
+    :ensure t)
 
 ;; eval langs in go
 (org-babel-do-load-languages

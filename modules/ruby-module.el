@@ -15,7 +15,8 @@ this section.
   (rvm-activate-corresponding-ruby))
 "
 ;;; Code:
-(straight-use-package 'rake)
+(use-package rake
+    :ensure t)
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 (use-package ruby-mode
@@ -27,10 +28,10 @@ this section.
         ("C-c & h r"    . enh-ruby-mode)))
 
 (use-package chruby
-  :straight t)
+  :ensure t)
 
 (use-package ruby-tools
-  :straight t
+  :ensure t
   :init
   (setq ruby-indent-level 2)
   (setq ruby-deep-indent-paren nil))
@@ -39,14 +40,14 @@ this section.
   :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
 
 (use-package bundler
-  :straight t)
+  :ensure t)
 
 (defadvice inf-ruby-console-auto (before activate)
   "Activate corespongeting ruby when use inf-ruby."
   (chruby-use-corresponding))
 
 (use-package slim-mode
-  :straight t
+  :ensure t
   :mode ("\\.slim\\'" . slim-mode))
 
 (use-package haml-mode
@@ -54,10 +55,10 @@ this section.
 
 ;; jekyll mode
 (use-package hyde
-  :straight t)
+  :ensure t)
 
 (use-package rspec-mode
-  :straight t)
+  :ensure t)
 
 (add-hook 'projectile-after-switch-project-hook #'chruby-use-corresponding)
 

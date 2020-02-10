@@ -9,16 +9,16 @@
   (setq blacken-line-length 100))
 
 (use-package python-mode
-    :straight t)
+    :ensure t)
 
 (use-package py-autopep8
-    :straight t)
+    :ensure t)
 
 (use-package ein
-    :straight t)
+    :ensure t)
 
 (use-package elpy
-    :straight t
+    :ensure t
     :init
     (elpy-enable)
     (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
@@ -30,7 +30,7 @@
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (use-package pipenv
-    :straight t
+    :ensure t
     :hook (python-mode . pipenv-mode)
     :init
     (setq
@@ -38,19 +38,22 @@
      #'pipenv-projectile-after-switch-extended))
 
 (use-package poetry
-    :straight t
+    :ensure t
     :config (poetry-tracking-mode t))
 
 (use-package pyvenv
-    :straight t)
+    :ensure t)
 
 (use-package auto-virtualenv
-    :straight t
+    :ensure t
     :config
     ;; Activate on changing buffers
     (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
     ;; Activate on focus in
     (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
+
+(use-package company-jedi
+    :ensure t)
 
 (add-to-list 'company-backends 'company-jedi)
 
