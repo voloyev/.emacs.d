@@ -58,19 +58,6 @@ o - maximize current window
   :config
   (editorconfig-mode t))
 
-(use-package flycheck-pos-tip
-  :ensure t)
-
-(use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode)
-  :config
-  (flycheck-pos-tip-mode))
-
-(use-package flycheck-pycheckers
-  :ensure t)
-
 (use-package super-save
   :ensure t
   :config

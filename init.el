@@ -64,16 +64,16 @@
 
 ;; company mode
 (use-package company
-  :ensure t
-  :init
-  (global-company-mode t)
-  :bind("C-<tab>" . company-complete))
+    :ensure t
+    :init
+    (global-company-mode t)
+    :bind("C-<tab>" . company-complete))
 
 (use-package company-quickhelp
-  :ensure t
-  :defer t
-  :init
-  (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
+    :ensure t
+    :defer t
+    :init
+    (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
 
 (use-package hydra
     :ensure t)
@@ -84,7 +84,8 @@
 ;; multiple cursors
 (use-package multiple-cursors
     :ensure t)
-(defhydra hydra-multiple-cursors (global-map "C-c SPC m c" :hint nil)
+
+(defhydra hydra-multiple-cursors ()
   "
  Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
 ------------------------------------------------------------------
@@ -108,43 +109,39 @@
   ("<down-mouse-1>" ignore)
   ("<drag-mouse-1>" ignore)
   ("q" nil))
+(global-set-key (kbd "C-c SPC m") 'hydra-multiple-cursors/body)
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
-" | Combo | Function         | Description                |"
-" |-------+------------------+----------------------------|"
-" | <f8>  | visit-tags-table | Loads tags                 |"
-" | M-.   | find-tag         | Jumps to the specified tag |"
-" | C-M-. | pop-tag-mark     | Jumps back                 |"
 
 (use-package bookmark
-  :init
+    :init
   (setq bookmark-save-flag t)
   (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
   (when (file-exists-p (concat user-emacs-directory "bookmarks"))
     (bookmark-load bookmark-default-file t))
-  :bind(("C-c & M-b" . bookmark-set)
-        ("C-c & b"   . bookmark-jump)
-        ("<f4>"      . bookmark-bmenu-list)))
+  :bind(("C-c SPC b s" . bookmark-set)
+        ("C-c SPC b j" . bookmark-jump)
+        ("C-c SPC b l" . bookmark-bmenu-list)))
 
 (use-package emmet-mode
-  :ensure t
-  :hook (web-mode)
-  :hook (css-mode)
-  :hook (scss-mode))
+    :ensure t
+    :hook (web-mode)
+    :hook (css-mode)
+    :hook (scss-mode))
 
 (use-package magit
     :ensure t
     :bind("C-c SPC g" . magit-status))
 
 (use-package undo-tree
-  :ensure t
-  :config
-  (global-undo-tree-mode t))
+    :ensure t
+    :config
+    (global-undo-tree-mode t))
 
 (use-package toggle-quotes
-  :ensure t
-  :bind("C-'" . toggle-quotes))
+    :ensure t
+    :bind("C-'" . toggle-quotes))
 
 (use-package paradox
     :ensure t
@@ -158,68 +155,91 @@
 (global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
 (use-package dumb-jump
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g q" . dumb-jump-quick-look)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window)
-         ("M-g b" . dumb-jump-back))
-  :config
-  (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-  (setq dumb-jump-force-searcher 'rg)
-  :ensure t)
+    :bind (("C-c SPC j o" . dumb-jump-go-other-window)
+           ("C-c SPC j j" . dumb-jump-go)
+           ("C-c SPC j q" . dumb-jump-quick-look)
+           ("C-c SPC j i" . dumb-jump-go-prompt)
+           ("C-c SPC j x" . dumb-jump-go-prefer-external)
+           ("C-c SPC j z" . dumb-jump-go-prefer-external-other-window)
+           ("C-c SPC j b" . dumb-jump-back))
+    :config
+    (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+    (setq dumb-jump-force-searcher 'rg)
+    :ensure t)
+
+(defhydra hydra-dump-jump (:exit t)
+  ("o" dumb-jump-go-other-window)
+  ("j" dumb-jump-go)
+  ("q" dumb-jump-quick-look)
+  ("i" dumb-jump-go-prompt)
+  ("x" dumb-jump-go-prefer-external)
+  ("z" dumb-jump-go-prefer-external-other-window)
+  ("b" dumb-jump-back))
+(global-set-key (kbd "C-c SPC j") 'hydra-dump-jump/body)
 
 ;; fzf
 (use-package fzf
-  :ensure t
-  :bind
-  (("C-x f" . fzf)))
+    :ensure t
+    :bind
+    (("C-c SPC f" . fzf)))
 
 (use-package evil-nerd-commenter
-  :ensure t
-  :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
-         ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
-         ( "C-c e c" . evilnc-copy-and-comment-lines)
-         ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
+    :ensure t
+    :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
+           ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
+           ( "C-c e c" . evilnc-copy-and-comment-lines)
+           ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
 (use-package htmlize
-  :ensure t)
+    :ensure t)
 
 (use-package irony
-  :ensure t
-  :hook (c++-mode)
-  :hook (c-mode)
-  :hook (objc-mode)
-  :hook (irony-mode . irony-cdb-autosetup-compile-options))
+    :ensure t
+    :hook (c++-mode)
+    :hook (c-mode)
+    :hook (objc-mode)
+    :hook (irony-mode . irony-cdb-autosetup-compile-options))
 
 (setq c-default-style "linux")
 
 (use-package deadgrep
-  :ensure t
-  :bind("C-c SPC d" . deadgrep))
+    :ensure t
+    :bind("C-c SPC d" . deadgrep))
 
 (use-package frog-jump-buffer
-  :ensure t
-  :bind("C-c SPC j" . frog-jump-buffer))
+    :ensure t
+    :bind("C-c SPC f" . frog-jump-buffer))
 
 (use-package exec-path-from-shell
-  :ensure t
-  :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-envs '("LANG" "GPG_AGENT_INFO" "SSH_AUTH_SOCK"))))
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)
+      (exec-path-from-shell-copy-envs '("LANG" "GPG_AGENT_INFO" "SSH_AUTH_SOCK"))))
 
 (use-package easy-kill
-  :ensure t
-  :config
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
+    :ensure t
+    :config
+    (global-set-key [remap kill-ring-save] 'easy-kill)
+    (global-set-key [remap mark-sexp] 'easy-mark))
+
+(use-package flycheck
+    :ensure t
+    :init
+    (global-flycheck-mode)
+    :config
+    (flycheck-pos-tip-mode)
+    (setq flycheck-checker-error-threshold nil))
+
+(use-package flycheck-pos-tip
+    :ensure t)
+
+(use-package flycheck-pycheckers
+    :ensure t)
 
 (use-package lsp-mode
     :ensure t
     :init
-    ;; (setq lsp-keymap-prefix "C-c C-c l")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
@@ -228,7 +248,6 @@
     :hook (vue-mode  . lsp-deferred)
     :hook (ruby-mode . lsp-deferred)
     :commands (lsp lsp-deferred))
-
 
 (use-package lsp-ivy
     :ensure t
@@ -271,11 +290,11 @@
   ("S" lsp-shutdown-workspace))
 
 (defhydra hydra-avy (global-map "C-c SPC ;" :exit t :hint nil)
- ;; ^Line^       ^Region^        ^Goto^
- ;; ----------------------------------------------------------
- ;; [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
- ;; [_m_] move   [_M_] move      [_w_] word        [_W_] any word
- ;; [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line
+  ;; ^Line^       ^Region^        ^Goto^
+  ;; ----------------------------------------------------------
+  ;; [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
+  ;; [_m_] move   [_M_] move      [_w_] word        [_W_] any word
+  ;; [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line
 
   ("c" avy-goto-char-timer)
   (";" avy-goto-char)
@@ -295,7 +314,7 @@
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 
-(defhydra hydra-yasnippet (:color blue :hint nil)
+(defhydra hydra-yasnippet ()
   "
               ^YASnippets^
 --------------------------------------------
@@ -316,6 +335,7 @@
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all))
+(global-set-key (kbd "C-c SPC y") 'hydra-yasnippet/body)
 
 ;; haskell
 (use-package intero
@@ -325,40 +345,41 @@
 (use-package smartparens
     :ensure t
     :config
-  (show-smartparens-global-mode 1)
+    (show-smartparens-global-mode 1)
 
-  (require 'smartparens-config)
-  (--each '(restclient-mode-hook
-            js-mode-hook
-            vue-mode-hook
-            js2-mode-hook
-            python-mode-hook
-            ruby-mode-hook
-            markdown-mode-hook
-            org-mode-hook
-            rust-mode-hook
-            toml-mode-hook
-            cc-mode-hook
-            lisp-mode-hook
-            haml-mode-hook
-            c-mode-hook
-            go-mode-hook
-            elixir-mode-hook
-            enh-ruby-mode-hook
-            crystal-mode-hook
-            slim-mode-hook
-            yaml-mode-hook
-            nginx-mode-hook
-            scss-mode-hook
-            web-mode-hook
-            emacs-lisp-mode-hook
-            clojure-mode-hook
-            conf-mode-hook
-            dockerfile-mode-hook
-            haskell-mode-hook
-            erlang-mode-hook
-            irony-mode-hook)
-    (add-hook it 'turn-on-smartparens-mode)))
+    (require 'smartparens-config)
+    (--each '(restclient-mode-hook
+              js-mode-hook
+              vue-mode-hook
+              js2-mode-hook
+              python-mode-hook
+              ruby-mode-hook
+              markdown-mode-hook
+              org-mode-hook
+              rust-mode-hook
+              toml-mode-hook
+              cc-mode-hook
+              lisp-mode-hook
+              haml-mode-hook
+              c-mode-hook
+              go-mode-hook
+              elixir-mode-hook
+              enh-ruby-mode-hook
+              crystal-mode-hook
+              slim-mode-hook
+              yaml-mode-hook
+              nginx-mode-hook
+              scss-mode-hook
+              web-mode-hook
+              emacs-lisp-mode-hook
+              clojure-mode-hook
+              conf-mode-hook
+              dockerfile-mode-hook
+              haskell-mode-hook
+              erlang-mode-hook
+              irony-mode-hook
+              geiser-mode-hook)
+      (add-hook it 'turn-on-smartparens-mode)))
 
 ;; deal with escaping
 (setq sp-escape-quotes-after-insert nil)
@@ -424,36 +445,36 @@
 ;;;;; elixir module
 ;; Highlights *.elixir2 as well
 (use-package elixir-mode
-  :ensure t
-  :init
-  (add-hook 'elixir-mode-hook
-            (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-  (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
-  (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
+    :ensure t
+    :init
+    (add-hook 'elixir-mode-hook
+              (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+    :config
+    (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
+    (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
+    (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
 (use-package alchemist
-  :ensure t
-  :init
-  ;; (setq alchemist-mix-command "mix")
-  ;; (setq alchemist-mix-test-task "espec")
-  (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
-  (setq alchemist-mix-test-default-options '()) ;; default
-  (setq alchemist-iex-program-name "iex") ;; default: iex
-  (setq alchemist-execute-command "elixir") ;; default: elixir
-  (setq alchemist-compile-command "elixirc") ;; default: elixirc
-  (setq alchemist-hooks-compile-on-save t)
-  (setq alchemist-goto-erlang-source-dir "~/source/otp")
-  (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
+    :ensure t
+    :init
+    ;; (setq alchemist-mix-command "mix")
+    ;; (setq alchemist-mix-test-task "espec")
+    (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
+    (setq alchemist-mix-test-default-options '()) ;; default
+    (setq alchemist-iex-program-name "iex") ;; default: iex
+    (setq alchemist-execute-command "elixir") ;; default: elixir
+    (setq alchemist-compile-command "elixirc") ;; default: elixirc
+    (setq alchemist-hooks-compile-on-save t)
+    (setq alchemist-goto-erlang-source-dir "~/source/otp")
+    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
 (use-package flycheck-credo
-  :ensure t)
+    :ensure t)
 
 (use-package flycheck-mix
-  :ensure t
-  :init
-  (flycheck-mix-setup))
+    :ensure t
+    :init
+    (flycheck-mix-setup))
 
 (eval-after-load 'flycheck
   '(flycheck-credo-setup))

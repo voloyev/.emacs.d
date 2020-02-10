@@ -82,12 +82,17 @@
   :bind(("C-c SPC w s" . whitespace-mode)
         ("C-c SPC w c" . whitespace-cleanup)))
 
-(use-package smart-mode-line
+(use-package all-the-icons
+    :ensure t)
+
+(use-package doom-modeline
     :ensure t
-    :init
-    (setq sml/no-confirm-load-theme t)
-    (setq sml/theme 'dark)
-    (sml/setup))
+    :hook (after-init . doom-modeline-mode)
+    ;; :init(setq doom-modeline-height 15)
+    :config
+    (setq doom-modeline-height 1)
+    (set-face-attribute 'mode-line nil :height 140)
+    (set-face-attribute 'mode-line-inactive nil :height 140))
 
 (provide 'looks-module)
 ;;; looks-module ends here
