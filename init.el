@@ -23,11 +23,14 @@
 (setq idle-update-delay 1)
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
+
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
 (defun voloyev-reset-file-handler-alist-h ()
   (setq file-name-handler-alist voloyev--initial-file-name-handler-alist))
+
 (add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
+
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right)
 (setq-default cursor-in-non-selected-windows nil)
