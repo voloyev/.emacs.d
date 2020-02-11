@@ -143,13 +143,10 @@ o - maximize current window
     :config
     (volatile-highlights-mode +1))
 
-(use-package rich-minority
-    :ensure t
-    :config
-    (rich-minority-mode t))
-
 (use-package projectile-rails
-    :ensure t)
+    :ensure t
+    :after projectile
+    :hook (after-init . projectile-rails-global-mode))
 
 (use-package projectile
     :ensure t

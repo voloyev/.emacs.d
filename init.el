@@ -415,6 +415,12 @@
     (enable-theme 'sexy-monochrome))
 
 ;;;; go settings
+(use-package go-mode
+    :ensure t)
+
+(use-package company-go
+    :ensure t)
+
 (use-package flycheck-gometalinter
     :ensure t
     :config

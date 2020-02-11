@@ -60,11 +60,11 @@
     (fci-mode 1)
     (setq fci-rule-width 3))
 
-(use-package nyan-mode
-    :ensure t
-    :init
-    (nyan-mode t)
-    (nyan-start-animation))
+;; (use-package nyan-mode
+;;     :ensure t
+;;     :init
+;;     (nyan-mode t)
+;;     (nyan-start-animation))
 
 (use-package fixmee
     :ensure t

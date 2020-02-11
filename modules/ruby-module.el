@@ -17,6 +17,7 @@ this section.
 ;;; Code:
 (use-package rake
     :ensure t)
+
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
 
 (use-package ruby-mode
