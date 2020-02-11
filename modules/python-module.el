@@ -12,9 +12,6 @@
 (use-package python-mode
     :ensure t)
 
-(use-package py-autopep8
-    :ensure t)
-
 (use-package ein
     :ensure t)
 
