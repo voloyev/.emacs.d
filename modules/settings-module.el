@@ -18,18 +18,18 @@
     :ensure t)
 
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
-  :init
-  (autoload 'ibuffer "ibuffer" "List buffers." t)
-  (defalias 'list-buffers 'ibuffer)
-  (add-hook 'ibuffer-mode-hook
-            '(lambda ()
-              (ibuffer-auto-mode t)))
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-projectile-set-filter-groups)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
+    :bind ("C-x C-b" . ibuffer)
+    :init
+    (autoload 'ibuffer "ibuffer" "List buffers." t)
+    (defalias 'list-buffers 'ibuffer)
+    (add-hook 'ibuffer-mode-hook
+              '(lambda ()
+                (ibuffer-auto-mode t)))
+    (add-hook 'ibuffer-hook
+              (lambda ()
+                (ibuffer-projectile-set-filter-groups)
+                (unless (eq ibuffer-sorting-mode 'alphabetic)
+                  (ibuffer-do-sort-by-alphabetic)))))
 "
 x - delete window
 m - swap windows
@@ -45,77 +45,78 @@ o - maximize current window
 ? - show these command bindings
 "
 (use-package ace-window
-  :ensure t
-  :config
-  (setq aw-dispatch-always t)
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind(("M-o" . ace-window)))
+    :ensure t
+    :config
+    (setq aw-dispatch-always t)
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    :bind(("M-o" . ace-window)))
 
 (use-package rainbow-delimiters
-  :ensure t
-  :init
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode t))
+    :ensure t
+    :config
+    (editorconfig-mode t))
 
 (use-package super-save
-  :ensure t
-  :config
-  (setq super-save-auto-save-when-idle t)
-  (super-save-mode +1)
-  (setq auto-save-default nil))
+    :ensure t
+    :config
+    (setq super-save-auto-save-when-idle t)
+    (super-save-mode +1)
+    (setq auto-save-default nil))
 
 (use-package markdown-mode
-  :init (setq markdown-command "mark")
-  :mode ("\\.text\\'" . markdown-mode)
-  :mode ("\\.markdown\\'" . markdown-mode)
-  :mode ("\\.md\\'" . markdown-mode))
+    :init (setq markdown-command "mark")
+    :mode ("\\.text\\'" . markdown-mode)
+    :mode ("\\.markdown\\'" . markdown-mode)
+    :mode ("\\.md\\'" . markdown-mode))
 
 (use-package which-key
-  :ensure t
-  :config (which-key-mode t))
+    :ensure t
+    :config (which-key-mode t))
 
 (use-package company-nginx
-  :ensure t
-  :config
-  (eval-after-load 'nginx-mode
-    '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
+    :ensure t
+    :config
+    (eval-after-load 'nginx-mode
+      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
-  :ensure t
-  :bind(("M-u" . fix-word-upcase)
-        ("M-l" . fix-word-downcase)
-        ("M-c" . fix-word-capitalize)))
+    :ensure t
+    :bind(("M-u" . fix-word-upcase)
+          ("M-l" . fix-word-downcase)
+          ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-  :ensure t
-  :init
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((elasticsearch . t)))
-  :config (setq es-always-pretty-print t))
+    :ensure t
+    :init
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((elasticsearch . t)))
+    :config (setq es-always-pretty-print t))
 
 (use-package yaml-mode
-  :mode ("\\.yml\\'" . yaml-mode))
+    :ensure t
+    :mode ("\\.yml\\'" . yaml-mode))
 
 (use-package restclient
-  :ensure t
-  :mode ("\\.restc\\'" . restclient-mode))
+    :ensure t
+    :mode ("\\.restc\\'" . restclient-mode))
 
 (use-package bfbuilder
-  :ensure t
-  :mode ("\\.bf\\'" . bfbuilder-mode))
+    :ensure t
+    :mode ("\\.bf\\'" . bfbuilder-mode))
 
 (use-package fsharp-mode
-  :ensure t
-  :mode ("\\.fs[iylx]?$" . fsharp-mode))
+    :ensure t
+    :mode ("\\.fs[iylx]?$" . fsharp-mode))
 
 (use-package nasm-mode
-  :ensure t)
+    :ensure t)
 
 (use-package auto-highlight-symbol
     :ensure t)
@@ -129,42 +130,42 @@ o - maximize current window
 (add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
 
 (use-package diff-hl
-  :ensure t
-  :config
-  (diff-hl-margin-mode +1)
-  (diff-hl-dired-mode +1)
-  (global-diff-hl-mode +1)
-  :hook (dired-mode . diff-hl-dired-mode)
-  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
+    :ensure t
+    :config
+    (diff-hl-margin-mode +1)
+    (diff-hl-dired-mode +1)
+    (global-diff-hl-mode +1)
+    :hook (dired-mode . diff-hl-dired-mode)
+    :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package volatile-highlights
-  :ensure t
-  :config
-  (volatile-highlights-mode +1))
+    :ensure t
+    :config
+    (volatile-highlights-mode +1))
 
 (use-package rich-minority
-  :ensure t
-  :config
-  (rich-minority-mode t))
+    :ensure t
+    :config
+    (rich-minority-mode t))
 
 (use-package projectile-rails
     :ensure t)
 
 (use-package projectile
-  :ensure t
-  :config
-  (projectile-global-mode)
-  (projectile-rails-global-mode)
-  (define-key projectile-mode-map
-      (kbd "C-c SPC SPC") 'projectile-command-map)
-  (define-key projectile-rails-mode-map
-      (kbd "C-c SPC r") 'hydra-projectile-rails/body)
-  (setq projectile-indexing-method 'alien)
-  (setq projectile-enable-caching t)
-  (setq projectile-completion-system 'ivy)
-  (setq projectile-mode-line
-        '(:eval (format " Projectile[%s]"
-                 (projectile-project-name)))))
+    :ensure t
+    :config
+    (projectile-global-mode)
+    (projectile-rails-global-mode)
+    (define-key projectile-mode-map
+        (kbd "C-c SPC SPC") 'projectile-command-map)
+    (define-key projectile-rails-mode-map
+        (kbd "C-c SPC r") 'hydra-projectile-rails/body)
+    (setq projectile-indexing-method 'alien)
+    (setq projectile-enable-caching t)
+    (setq projectile-completion-system 'ivy)
+    (setq projectile-mode-line
+          '(:eval (format " Projectile[%s]"
+                   (projectile-project-name)))))
 
 (add-hook 'php-mode-hook (lambda () c-basic-offset 2))
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
