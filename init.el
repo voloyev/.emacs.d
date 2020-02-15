@@ -254,6 +254,8 @@
     :hook (ruby-mode . lsp-deferred)
     :commands (lsp lsp-deferred))
 
+(add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
+
 (use-package lsp-ivy
     :ensure t
     :commands lsp-ivy-workspace-symbol)
