@@ -7,6 +7,13 @@
   (cond ((memq window-system '(ns mac)) "Hack 14")
         ((memq window-system '(x)) "Hack 14")))
 
+(if (memq window-system '(ns mac))
+    (progn
+      (add-to-list 'default-frame-alist
+                   '(ns-transparent-titlebar . t))
+      (add-to-list 'default-frame-alist
+                   '(ns-appearance . light))))
+
 (set-face-attribute 'default nil :font (set-font))
 (set-frame-font (set-font))
 (setq-default line-spacing 2)

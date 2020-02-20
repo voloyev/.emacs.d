@@ -14,9 +14,6 @@
 (global-set-key (kbd "C-c SPC [") 'previous-buffer)
 (setq redisplay-dont-pause t)
 
-(use-package ibuffer-projectile
-    :ensure t)
-
 (use-package ibuffer
     :bind ("C-x C-b" . ibuffer)
     :init
@@ -27,9 +24,9 @@
                 (ibuffer-auto-mode t)))
     (add-hook 'ibuffer-hook
               (lambda ()
-                (ibuffer-projectile-set-filter-groups)
                 (unless (eq ibuffer-sorting-mode 'alphabetic)
-                  (ibuffer-do-sort-by-alphabetic)))))
+                  (ibuffer-do-sort-by-recency)))))
+
 "
 x - delete window
 m - swap windows
@@ -132,16 +129,16 @@ o - maximize current window
 (use-package diff-hl
     :ensure t
     :config
-    (diff-hl-margin-mode +1)
-    (diff-hl-dired-mode +1)
-    (global-diff-hl-mode +1)
+    (diff-hl-margin-mode t)
+    (diff-hl-dired-mode t)
+    (global-diff-hl-mode t)
     :hook (dired-mode . diff-hl-dired-mode)
     :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package volatile-highlights
     :ensure t
     :config
-    (volatile-highlights-mode +1))
+    (volatile-highlights-mode t))
 
 (use-package projectile-rails
     :ensure t
@@ -151,7 +148,7 @@ o - maximize current window
 (use-package projectile
     :ensure t
     :config
-    (projectile-global-mode)
+    (projectile-mode t)
     (projectile-rails-global-mode)
     (define-key projectile-mode-map
         (kbd "C-c SPC SPC") 'projectile-command-map)
@@ -168,12 +165,13 @@ o - maximize current window
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 (use-package yasnippet
-    :ensure t)
-
-(defun enable-yas-mode ()
-  (yas-minor-mode t))
-(eval-after-load 'rspec-mode
-  '(rspec-install-snippets))
+    :ensure t
+    :config
+    (add-to-list 'load-path
+             "~/.emacs.d/snippets")
+    (yas-load-directory "~/.emacs.d/snippets")
+    (yas-reload-all)
+    (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 ;; ;; yas-mode for my modes
 ;; (add-hook 'ruby-mode-hook '(lambda () (yas-minor-mode 1)))
@@ -183,10 +181,6 @@ o - maximize current window
 ;; (add-hook 'html-mode-hook '(lambda () (yas-minor-mode 1)))
 ;; (add-hook 'js2-mode-hook '(lambda () (yas-minor-mode 1)))
 
-(add-to-list 'load-path
-             "~/.emacs.d/snippets")
-(yas-load-directory "~/.emacs.d/snippets")
-(yas-global-mode t)
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
 (setq tab-width                  2)
@@ -210,9 +204,9 @@ o - maximize current window
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
-    :bind(("C-s"       . swiper)
-          ("M-y"       . counsel-yank-pop)
-          ("C-x b"     . ivy-switch-buffer)
+    :bind(("C-s"           . swiper)
+          ("M-y"           . counsel-yank-pop)
+          ("C-x b"         . ivy-switch-buffer)
           ("C-c SPC i d f" . counsel-describe-function)
           ("C-c SPC i d v" . counsel-describe-variable)))
 
@@ -235,9 +229,7 @@ o - maximize current window
     (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
-
     (setq web-mode-enable-auto-pairing t)
-    ;;web-mode indent
     (setq web-mode-markup-indent-offset 2)
     (setq web-mode-css-indent-offset 2)
     (setq web-mode-code-indent-offset 2)
