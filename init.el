@@ -13,13 +13,16 @@
 
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
+
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
 ;; Performance hacks
 (setq message-log-max t)
 (setq gc-cons-threshold most-positive-fixnum)
 (setq large-file-warning-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq idle-update-delay 1)
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
@@ -385,7 +388,8 @@
               haskell-mode-hook
               erlang-mode-hook
               irony-mode-hook
-              geiser-mode-hook)
+              geiser-mode-hook
+              sh-mode-hook)
       (add-hook it 'turn-on-smartparens-mode)))
 
 ;; deal with escaping
