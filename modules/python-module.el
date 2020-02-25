@@ -33,13 +33,14 @@
 (use-package pyvenv
     :ensure t)
 
-(use-package auto-virtualenv
-    :ensure t
-    :config
-    ;; Activate on changing buffers
-    (add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
-    ;; Activate on focus in
-    (add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv))
+(use-package auto-virtualenvwrapper
+    :ensure t)
+
+(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+;; Activate on changing buffers
+(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'python-mode-hook 'highlight-indentation-mode)
 
 (provide 'python-module)
 ;;; python-module ends here
