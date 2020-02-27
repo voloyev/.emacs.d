@@ -26,6 +26,9 @@
 (setq idle-update-delay 1)
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
+(xterm-mouse-mode t)
+(global-auto-revert-mode t)
+(setq redisplay-dont-pause t)
 
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
@@ -41,6 +44,10 @@
 (setq fast-but-imprecise-scrolling t)
 (setq frame-inhibit-implied-resize t)
 (setq ffap-machine-p-known 'reject)
+
+(when (memq window-system '(ns mac))
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta))
 
 ;; end of performance hacks
 ;; use zsh
@@ -69,6 +76,105 @@
 (setq scss-indent-offset 2)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
+
+(defun set-font ()
+  "Set font for operating system."
+  (cond ((memq window-system '(ns mac)) "Hack 14")
+        ((memq window-system '(x)) "Hack 14")))
+
+(if (memq window-system '(ns mac))
+    (progn
+      (add-to-list 'default-frame-alist
+                   '(ns-transparent-titlebar . t))
+      (add-to-list 'default-frame-alist
+                   '(ns-appearance . light))))
+
+(set-face-attribute 'default nil :font (set-font))
+(set-frame-font (set-font))
+(setq-default line-spacing 2)
+
+(setq ring-bell-function 'ignore)
+(setq-default with-editor-emacsclient-executable "emacsclient")
+
+;; Disable backup/autosave files
+(setq make-backup-files        nil)
+(setq auto-save-default        nil)
+(setq auto-save-list-file-name nil)
+
+;; Inhibit startup/splash screen
+(setq inhibit-splash-screen   0)
+(setq ingibit-startup-message 0)
+
+(setq auto-window-vscroll nil)
+
+;; toolbar and menu
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+
+;;disable scrollbar
+(scroll-bar-mode   -1)
+
+;; scrolling
+(setq scroll-step 1)
+
+;; short answer
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Clipboard settings
+(setq x-select-enable-clipboard t)
+
+;; Highlight search result
+(setq search-highlight        t)
+(setq query-replace-highlight t)
+(setq frame-title-format "GNU Emacs: %b")
+
+;; Use visual-line-mode in gfm-mode
+(defun my-gfm-mode-hook ()
+  (visual-line-mode 1))
+
+(add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
+;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;;Display the name of the current buffer in the title bar
+(use-package fill-column-indicator
+    :ensure t
+    :init
+    (fci-mode 1)
+    (setq fci-rule-width 3))
+
+;; (use-package nyan-mode
+;;     :ensure t
+;;     :init
+;;     (nyan-mode t)
+;;     (nyan-start-animation))
+
+(use-package fixmee
+    :ensure t
+    :init (require 'button-lock)
+    :config (global-fixmee-mode 1))
+
+;;whitespace
+(use-package whitespace
+    :init
+  (setq whitespace-line-column 250)
+  (setq whitespace-display-mappings
+        '((space-mark 32 [183] [46])
+          (newline-mark 10 [8629 10])
+          (tab-mark 9 [9655 9] [92 9])))
+  :bind(("C-c SPC w s" . whitespace-mode)
+        ("C-c SPC w c" . whitespace-cleanup)))
+
+(use-package all-the-icons
+    :ensure t)
+
+(use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode)
+    ;; :init(setq doom-modeline-height 15)
+    :config
+    (setq doom-modeline-height 1)
+    (set-face-attribute 'mode-line nil :height 140)
+    (set-face-attribute 'mode-line-inactive nil :height 140))
 
 ;; company mode
 (use-package company
@@ -145,17 +251,15 @@
 (use-package undo-tree
     :ensure t
     :init
-    (setq undo-tree-visualizer-diff t
-          undo-tree-history-directory-alist
-          `((".*" . ,temporary-file-directory))
-          undo-tree-auto-save-history t
-          undo-tree-enable-undo-in-region t
+    (setq undo-tree-visualizer-diff nil
+          undo-tree-auto-save-history nil
+          undo-tree-enable-undo-in-region nil
           ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
           ;; truncating the undo history and corrupting the tree. See
           ;; https://github.com/syl20bnr/spacemacs/issues/12110
           undo-limit 800000
-          undo-strong-limit 12000000
-          undo-outer-limit 120000000)
+          undo-strong-limit 1200000
+          undo-outer-limit 12000000)
     :config
     (global-undo-tree-mode t))
 
@@ -268,20 +372,13 @@
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
     (setq lsp-enable-indentation nil)
-    :hook (js-mode   . lsp-deferred)
-    :hook (vue-mode  . lsp-deferred)
-    :hook (ruby-mode . lsp-deferred)
+    ;; :hook (js-mode   . lsp-deferred)
+    :hook ((vue-mode  . lsp-deferred)
+           (ruby-mode . lsp-deferred)
+           (lsp-mode . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
-
+(setq lsp-prefer-capf t)
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
-
-(use-package lsp-ivy
-    :ensure t
-    :commands lsp-ivy-workspace-symbol)
-
-(use-package lsp-treemacs
-    :ensure t
-    :commands lsp-treemacs-errors-list)
 
 (use-package lsp-ui
     :ensure t
@@ -312,8 +409,8 @@
   ("m" lsp-ui-imenu)
   ("x" lsp-execute-code-action)
   ("M-s" lsp-describe-session)
-  ("M-r" lsp-restart-workspace)
-  ("S" lsp-shutdown-workspace))
+  ("M-r" lsp-workspace-restart)
+  ("S" lsp-workspace-shutdown))
 
 (defhydra hydra-avy (global-map "C-c SPC ;" :exit t :hint nil)
   ;; ^Line^       ^Region^        ^Goto^
@@ -545,18 +642,54 @@
 (use-package cargo
     :commands cargo-minor-mode
     :diminish cargo-minor-mode
+    :ensure t
     :init
     (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package toml-mode
     :mode (("\\.toml\\'" . toml-mode)))
 
-;;;; Lisp settings
-;;; package -- Summary
-;;; Commentary:
-;;; Lisp settings
-;;; Code:
-;; (load (expand-file-name "~/.roswell/helper.el"))
+;;;;; python
+(use-package python-black
+    :demand t
+    :ensure t
+    :after python
+    :bind("C-c SPC p b r" . python-black-region))
+
+(use-package python-mode
+    :ensure t)
+
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms)
+                          (lsp-deferred))))
+
+(use-package pipenv
+    :ensure t
+    :hook (python-mode . pipenv-mode)
+    :init
+    (setq
+     pipenv-projectile-after-switch-function
+     #'pipenv-projectile-after-switch-extended))
+
+(use-package poetry
+    :ensure t
+    :config (poetry-tracking-mode t))
+
+(use-package pyvenv
+    :ensure t)
+
+(use-package auto-virtualenvwrapper
+    :ensure t)
+
+(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+;; Activate on changing buffers
+(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'python-mode-hook 'highlight-indentation-mode)
+
+;;;;;;; lisp
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
 (use-package sly
@@ -583,17 +716,379 @@
     :ensure t
     :init
     (setq geiser-default-implementation 'racket))
+;;;; ruby
+;;; Code:
+(use-package rake
+    :ensure t)
 
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+
+(use-package ruby-mode
+    :init   (setq ruby-insert-encoding-magic-comment nil)
+    :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
+    :hook (robe-mode)
+    :hook (yard-mode)
+    :bind(("C-c r r"      . inf-ruby-console-auto)
+          ("C-c & h r"    . enh-ruby-mode)))
+
+(use-package chruby
+    :ensure t)
+
+(use-package ruby-tools
+    :ensure t
+    :init
+    (setq ruby-indent-level 2)
+    (setq ruby-deep-indent-paren nil))
+
+(use-package rcodetools
+    :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
+
+(use-package bundler
+    :ensure t)
+
+(use-package slim-mode
+    :ensure t
+    :mode ("\\.slim\\'" . slim-mode))
+
+(use-package haml-mode
+    :mode ("\\.haml\\'" . haml-mode))
+
+;; jekyll mode
+(use-package hyde
+    :ensure t)
+
+(use-package rspec-mode
+    :ensure t)
+
+(add-hook 'inf-ruby-mode-hook 'chruby-use-corresponding)
+
+;;;; js mode
+(use-package vue-mode
+    :ensure t
+    :mode ("\\.vue\\'" . vue-mode)
+    :config
+    (add-hook 'mmm-mode-hook
+              (lambda ()
+                (set-face-background 'mmm-default-submode-face nil))))
+
+;;pretier
+(use-package prettier-js
+    :ensure t
+    :init
+    (add-hook 'web-mode-hook #'(lambda ()
+                                 (enable-minor-mode
+                                  '("\\.vue?\\'" . prettier-js-mode))))
+    :hook (js2-mode     . prettier-js-mode)
+    :hook (js-mode      . prettier-js-mode)
+    :hook (vue-mode     . prettier-js-mode)
+    :hook (js2-jsx-mode . prettier-js-mode)
+    :hook (rjsx-mode    . prettier-js-mode))
+
+(use-package js-mode
+    :mode ("\\.js\\'" . js-mode)
+    :hook (tern-mode . js-mode)
+    :hook (smartparense-mode . js-mode))
+
+(use-package js-mode
+    :mode ("\\.jsx\\'" . js-mode)
+    :hook (j2-minore-mode . js-mode))
+
+;; (use-package elm-mode
+;;     :ensure t
+;;     :mode "\\.elm\\'"
+;;     :config (setq elm-format-on-save t)
+;;     :hook (smartparens-mode . elm-mode))
+
+(custom-set-variables '(coffee-tab-width 2))
+(custom-set-variables '(js2-basic-offset 2))
+(custom-set-variables '(js-basic-offset 2))
+(custom-set-variables '(jsx-basic-offset 2))
+(custom-set-variables '(rjsx-basic-offset 2))
+(custom-set-variables '(vue-basic-offset 2))
+
+(setq js-indent-level 2)
+(setq js2-indent-level 2)
+(setq vue-indent-level 2)
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-;;; List of required modules
-(use-package looks-module)
-(use-package settings-module)
-(use-package ruby-module)
-(use-package python-module)
-(use-package js-module)
-(use-package org-module)
-;; custom plugins path
+(global-set-key (kbd "C-c SPC ]") 'next-buffer)
+(global-set-key (kbd "C-c SPC [") 'previous-buffer)
+
+(use-package ibuffer
+    :bind ("C-x C-b" . ibuffer)
+    :init
+    (autoload 'ibuffer "ibuffer" "List buffers." t)
+    (defalias 'list-buffers 'ibuffer)
+    (add-hook 'ibuffer-mode-hook
+              '(lambda ()
+                (ibuffer-auto-mode t)))
+    (add-hook 'ibuffer-hook
+              (lambda ()
+                (unless (eq ibuffer-sorting-mode 'alphabetic)
+                  (ibuffer-do-sort-by-recency)))))
+
+"
+x - delete window
+m - swap windows
+M - move window
+c - copy window
+j - select buffer
+n - select the previous window
+u - select buffer in the other window
+c - split window fairly, either vertically or horizontally
+v - split window vertically
+b - split window horizontally
+o - maximize current window
+? - show these command bindings
+"
+(use-package ace-window
+    :ensure t
+    :config
+    (setq aw-dispatch-always t)
+    (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+    :bind(("M-o" . ace-window)))
+
+(use-package rainbow-delimiters
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(use-package editorconfig
+    :ensure t
+    :config
+    (editorconfig-mode t))
+
+(use-package super-save
+    :ensure t
+    :config
+    (setq super-save-auto-save-when-idle t)
+    (super-save-mode +1)
+    (setq auto-save-default nil))
+
+(use-package markdown-mode
+    :init (setq markdown-command "mark")
+    :mode ("\\.text\\'" . markdown-mode)
+    :mode ("\\.markdown\\'" . markdown-mode)
+    :mode ("\\.md\\'" . markdown-mode))
+
+(use-package which-key
+    :ensure t
+    :config (which-key-mode t))
+
+(use-package company-nginx
+    :ensure t
+    :config
+    (eval-after-load 'nginx-mode
+      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
+
+;; upcase region
+(use-package fix-word
+    :ensure t
+    :bind(("M-u" . fix-word-upcase)
+          ("M-l" . fix-word-downcase)
+          ("M-c" . fix-word-capitalize)))
+
+(use-package es-mode
+    :ensure t
+    :init
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((elasticsearch . t)))
+    :config (setq es-always-pretty-print t))
+
+(use-package yaml-mode
+    :ensure t
+    :mode ("\\.yml\\'" . yaml-mode))
+
+(use-package restclient
+    :ensure t
+    :mode ("\\.restc\\'" . restclient-mode))
+
+(use-package bfbuilder
+    :ensure t
+    :mode ("\\.bf\\'" . bfbuilder-mode))
+
+(use-package fsharp-mode
+    :ensure t
+    :mode ("\\.fs[iylx]?$" . fsharp-mode))
+
+(use-package nasm-mode
+    :ensure t)
+
+(use-package auto-highlight-symbol
+    :ensure t)
+
+(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
+(add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
+
+(use-package diff-hl
+    :ensure t
+    :config
+    (diff-hl-margin-mode t)
+    (diff-hl-dired-mode t)
+    (global-diff-hl-mode t)
+    :hook (dired-mode . diff-hl-dired-mode)
+    :hook (magit-post-refresh . diff-hl-magit-post-refresh))
+
+(use-package volatile-highlights
+    :ensure t
+    :config
+    (volatile-highlights-mode t))
+
+(use-package projectile
+    :ensure t
+    :config
+    (projectile-mode t)
+    (define-key projectile-mode-map
+        (kbd "C-c SPC SPC") 'projectile-command-map)
+    (setq projectile-indexing-method 'alien)
+    (setq projectile-enable-caching t)
+    (setq projectile-completion-system 'ivy)
+    (setq projectile-mode-line
+          '(:eval (format " Projectile[%s]"
+                   (projectile-project-name)))))
+
+(add-hook 'php-mode-hook (lambda () c-basic-offset 2))
+(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
+
+(use-package yasnippet
+    :ensure t
+    :config
+    (add-to-list 'load-path
+             "~/.emacs.d/snippets")
+    (yas-load-directory "~/.emacs.d/snippets")
+    (yas-reload-all)
+    (add-hook 'prog-mode-hook #'yas-minor-mode))
+
+;;Indent settings
+(setq-default indent-tabs-mode nil)
+(setq tab-width                  2)
+(setq-default tab-width          2)
+(setq-default standart-indent    2)
+(setq-default lisp-body-indent   2)
+
+;; css and sccs indent level
+(setq css-indent-offset 2)
+(setq scss-indent-offset 2)
+(global-set-key (kbd "RET") 'newline-and-indent)
+(setq lisp-indent-function  'common-lisp-indent-function)
+
+(use-package highlight-indentation
+    :ensure t
+    :bind (("<f9>" . highlight-indentation-mode)
+           ("M-<f9>" . highlight-indentation-current-column-mode)))
+
+(use-package ivy
+    :ensure t
+    :config
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    :bind(("C-s"           . swiper)
+          ("M-y"           . counsel-yank-pop)
+          ("C-x b"         . ivy-switch-buffer)
+          ("C-c SPC i d f" . counsel-describe-function)
+          ("C-c SPC i d v" . counsel-describe-variable)))
+
+
+(use-package web-mode
+    :ensure t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
+    (setq web-mode-enable-auto-pairing t)
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-php-indent-offset 2)
+
+    ;;snippets fo autoclose tags
+    (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
+    (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
+    (setq web-mode-enable-auto-indentation nil)
+    (setq web-mode-content-types-alist
+          '(("jsx" . "\\.js[x]?\\'"))))
+
+;; crystal mode
+(use-package crystal-mode
+    :ensure t)
+
+(use-package cider
+    :ensure t
+    :init
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode)
+    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
+    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+
+(use-package clojure-mode
+    :ensure t
+    :config
+    (setq clojure-indent-style 'always-indent))
+
+;; (use-package org-plus-contrib
+;;     :ensure t)
+
+(use-package org-install
+    :init
+  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+  (setq org-agenda-files (list "~/.emacs.d/todo.org"))
+  (add-hook 'org-mode-hook 'toggle-truncate-lines)
+  (setq org-src-fontify-natively nil)
+  (setq org-html-htmlize-output-type nil) ;; output without
+  (defface org-block
+      '((t (:background "#000000")))
+    "Face used for the source block background.")
+  :bind(("C-c SPC l" . org-store-link)
+        ("C-c SPC a" . org-agenda)
+        ("C-c SPC c" . org-capture)
+        ("C-c SPC b" . org-iswitchb)))
+
+(use-package ox-reveal
+    :ensure t)
+
+;; eval langs in go
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (ruby . t)
+   (dot . t)
+   (gnuplot . t)
+   (lisp . t)
+   (scheme . t)
+   (clojure . t)
+   (python . t)))
+
+(setq org-log-done 'time)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;;copy without selection
+(defadvice kill-ring-save (before slick-copy activate compile)
+  "When called interactively with no active region, copy a single line instead."
+  (interactive (if mark-active (list (region-beginning) (region-end))
+                 (message "Copied line")
+                 (list (line-beginning-position) (line-beginning-position 2)))))
+
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 (load custom-file)
 ;;; init.el ends here
