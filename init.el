@@ -18,16 +18,20 @@
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
+(xterm-mouse-mode t)
+(global-auto-revert-mode t)
+(delete-selection-mode t)
+(desktop-save-mode 0)
+
 ;; Performance hacks
 (setq message-log-max t)
 (setq gc-cons-threshold most-positive-fixnum)
 (setq large-file-warning-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq idle-update-delay 1)
+
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-(xterm-mouse-mode t)
-(global-auto-revert-mode t)
 (setq redisplay-dont-pause t)
 
 ;; Restore `file-name-handler-alist', because it is needed for handling
@@ -39,8 +43,10 @@
 
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right)
+
 (setq-default cursor-in-non-selected-windows nil)
 (setq highlight-nonselected-windows nil)
+
 (setq fast-but-imprecise-scrolling t)
 (setq frame-inhibit-implied-resize t)
 (setq ffap-machine-p-known 'reject)
@@ -48,7 +54,6 @@
 (when (memq window-system '(ns mac))
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta))
-
 ;; end of performance hacks
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
@@ -58,11 +63,6 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
-;; Delete selection
-(delete-selection-mode t)
-;; desktop-save-mode
-(desktop-save-mode 0)
 
 ;;Indent settings
 (setq-default indent-tabs-mode nil)
@@ -107,14 +107,9 @@
 
 (setq auto-window-vscroll nil)
 
-;; toolbar and menu
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-
-;;disable scrollbar
 (scroll-bar-mode   -1)
-
-;; scrolling
 (setq scroll-step 1)
 
 ;; short answer
@@ -128,12 +123,6 @@
 (setq query-replace-highlight t)
 (setq frame-title-format "GNU Emacs: %b")
 
-;; Use visual-line-mode in gfm-mode
-(defun my-gfm-mode-hook ()
-  (visual-line-mode 1))
-
-(add-hook 'gfm-mode-hook 'my-gfm-mode-hook)
-;;(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
@@ -141,12 +130,6 @@
     :init
     (fci-mode 1)
     (setq fci-rule-width 3))
-
-;; (use-package nyan-mode
-;;     :ensure t
-;;     :init
-;;     (nyan-mode t)
-;;     (nyan-start-animation))
 
 (use-package fixmee
     :ensure t
@@ -194,6 +177,12 @@
 
 (use-package avy
     :ensure t)
+
+(use-package company-nginx
+    :ensure t
+    :config
+    (eval-after-load 'nginx-mode
+      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -309,7 +298,7 @@
 (use-package fzf
     :ensure t
     :bind
-    (("C-c SPC f" . fzf)))
+    (("C-c SPC f f" . fzf)))
 
 (use-package evil-nerd-commenter
     :ensure t
@@ -333,10 +322,6 @@
 (use-package deadgrep
     :ensure t
     :bind("C-c SPC d" . deadgrep))
-
-(use-package frog-jump-buffer
-    :ensure t
-    :bind("C-c SPC f" . frog-jump-buffer))
 
 (use-package exec-path-from-shell
     :ensure t
@@ -647,6 +632,7 @@
     (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package toml-mode
+    :ensure t
     :mode (("\\.toml\\'" . toml-mode)))
 
 ;;;;; python
@@ -716,8 +702,8 @@
     :ensure t
     :init
     (setq geiser-default-implementation 'racket))
+
 ;;;; ruby
-;;; Code:
 (use-package rake
     :ensure t)
 
@@ -786,10 +772,6 @@
 
 (use-package js-mode
     :mode ("\\.js\\'" . js-mode)
-    :hook (tern-mode . js-mode)
-    :hook (smartparense-mode . js-mode))
-
-(use-package js-mode
     :mode ("\\.jsx\\'" . js-mode)
     :hook (j2-minore-mode . js-mode))
 
@@ -874,12 +856,6 @@ o - maximize current window
 (use-package which-key
     :ensure t
     :config (which-key-mode t))
-
-(use-package company-nginx
-    :ensure t
-    :config
-    (eval-after-load 'nginx-mode
-      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
 
 ;; upcase region
 (use-package fix-word
