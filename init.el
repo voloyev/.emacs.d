@@ -353,16 +353,19 @@
 (use-package lsp-mode
     :ensure t
     :init
+    :init (setq lsp-keymap-prefix "C-c SPC l")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
+    (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
     ;; :hook (js-mode   . lsp-deferred)
     :hook ((vue-mode  . lsp-deferred)
            (ruby-mode . lsp-deferred)
+           (rust-mode . lsp-deferred)
            (lsp-mode . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
-(setq lsp-prefer-capf t)
+
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 
 (use-package lsp-ui
@@ -375,27 +378,30 @@
     :commands company-lsp
     :ensure t)
 
-(defhydra hydra-lsp (global-map "C-c SPC l" :exit t)
-  "
- Buffer^^               Server^^                   Symbol
--------------------------------------------------------------------------------------
- [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
- [_m_] imenu            [_S_]   shutdown           [_._] definition   [_t_] type            [_R_] rename
- [_x_] execute action   [_M-s_] describe session   [_/_] references   [_s_] signature"
-  ("d" lsp-find-declaration)
-  ("." lsp-ui-peek-find-definitions)
-  ("/" lsp-ui-peek-find-references)
-  ("i" lsp-ui-peek-find-implementation)
-  ("t" lsp-find-type-definition)
-  ("s" lsp-signature-help)
-  ("o" lsp-describe-thing-at-point)
-  ("R" lsp-rename)
-  ("f" lsp-format-buffer)
-  ("m" lsp-ui-imenu)
-  ("x" lsp-execute-code-action)
-  ("M-s" lsp-describe-session)
-  ("M-r" lsp-workspace-restart)
-  ("S" lsp-workspace-shutdown))
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
+
+;; (defhydra hydra-lsp (global-map "C-c SPC l" :exit t)
+;;   "
+;;  Buffer^^               Server^^                   Symbol
+;; -------------------------------------------------------------------------------------
+;;  [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
+;;  [_m_] imenu            [_S_]   shutdown           [_._] definition   [_t_] type            [_R_] rename
+;;  [_x_] execute action   [_M-s_] describe session   [_/_] references   [_s_] signature"
+;;   ("d" lsp-find-declaration)
+;;   ("." lsp-ui-peek-find-definitions)
+;;   ("/" lsp-ui-peek-find-references)
+;;   ("i" lsp-ui-peek-find-implementation)
+;;   ("t" lsp-find-type-definition)
+;;   ("s" lsp-signature-help)
+;;   ("o" lsp-describe-thing-at-point)
+;;   ("R" lsp-rename)
+;;   ("f" lsp-format-buffer)
+;;   ("m" lsp-ui-imenu)
+;;   ("x" lsp-execute-code-action)
+;;   ("M-s" lsp-describe-session)
+;;   ("M-r" lsp-workspace-restart)
+;;   ("S" lsp-workspace-shutdown))
 
 (defhydra hydra-avy (global-map "C-c SPC ;" :exit t :hint nil)
   ;; ^Line^       ^Region^        ^Goto^
@@ -607,9 +613,6 @@
     :mode "\\.rs\\'"
     :ensure t
     :init
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'racer-mode-hook #'eldoc-mode)
-    (add-hook 'racer-mode-hook #'company-mode)
     (setq rust-format-on-save t))
 
 (use-package flycheck-rust
@@ -1028,10 +1031,10 @@ o - maximize current window
   (defface org-block
       '((t (:background "#000000")))
     "Face used for the source block background.")
-  :bind(("C-c SPC l" . org-store-link)
-        ("C-c SPC a" . org-agenda)
-        ("C-c SPC c" . org-capture)
-        ("C-c SPC b" . org-iswitchb)))
+  :bind(("C-c SPC o l" . org-store-link)
+        ("C-c SPC o a" . org-agenda)
+        ("C-c SPC o c" . org-capture)
+        ("C-c SPC o b" . org-iswitchb)))
 
 (use-package ox-reveal
     :ensure t)
