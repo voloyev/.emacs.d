@@ -90,8 +90,10 @@
                    '(ns-appearance . light))))
 
 (set-face-attribute 'default nil :font (set-font))
+(set-face-attribute 'mode-line nil :font "Hack 12")
+
 (set-frame-font (set-font))
-(setq-default line-spacing 2)
+(setq-default line-spacing 1)
 
 (setq ring-bell-function 'ignore)
 (setq-default with-editor-emacsclient-executable "emacsclient")
