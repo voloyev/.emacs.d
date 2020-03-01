@@ -381,28 +381,6 @@
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
-;; (defhydra hydra-lsp (global-map "C-c SPC l" :exit t)
-;;   "
-;;  Buffer^^               Server^^                   Symbol
-;; -------------------------------------------------------------------------------------
-;;  [_f_] format           [_M-r_] restart            [_d_] declaration  [_i_] implementation  [_o_] documentation
-;;  [_m_] imenu            [_S_]   shutdown           [_._] definition   [_t_] type            [_R_] rename
-;;  [_x_] execute action   [_M-s_] describe session   [_/_] references   [_s_] signature"
-;;   ("d" lsp-find-declaration)
-;;   ("." lsp-ui-peek-find-definitions)
-;;   ("/" lsp-ui-peek-find-references)
-;;   ("i" lsp-ui-peek-find-implementation)
-;;   ("t" lsp-find-type-definition)
-;;   ("s" lsp-signature-help)
-;;   ("o" lsp-describe-thing-at-point)
-;;   ("R" lsp-rename)
-;;   ("f" lsp-format-buffer)
-;;   ("m" lsp-ui-imenu)
-;;   ("x" lsp-execute-code-action)
-;;   ("M-s" lsp-describe-session)
-;;   ("M-r" lsp-workspace-restart)
-;;   ("S" lsp-workspace-shutdown))
-
 (defhydra hydra-avy (global-map "C-c SPC ;" :exit t :hint nil)
   ;; ^Line^       ^Region^        ^Goto^
   ;; ----------------------------------------------------------
@@ -614,18 +592,6 @@
     :ensure t
     :init
     (setq rust-format-on-save t))
-
-(use-package flycheck-rust
-    :ensure t
-    :after flycheck
-    :commands flycheck-rust-setup
-    :init
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
-(use-package racer
-    :commands racer-mode
-    :diminish racer-mode
-    :ensure t)
 
 (use-package cargo
     :commands cargo-minor-mode
@@ -1035,6 +1001,11 @@ o - maximize current window
         ("C-c SPC o a" . org-agenda)
         ("C-c SPC o c" . org-capture)
         ("C-c SPC o b" . org-iswitchb)))
+
+(use-package walkman
+    :ensure t
+    :config
+    (setq walkman-keep-headers t))
 
 (use-package ox-reveal
     :ensure t)
