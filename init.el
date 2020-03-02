@@ -584,10 +584,9 @@
 
 
 ;;;; rust settings
-(use-package company-racer
+(use-package company-lsp
     :ensure t)
-
-(add-to-list 'company-backends 'company-racer)
+(push 'company-lsp company-backends)
 
 (use-package rust-mode
     :mode "\\.rs\\'"
