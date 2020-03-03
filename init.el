@@ -34,6 +34,7 @@
 (setq file-name-handler-alist nil)
 (setq redisplay-dont-pause t)
 
+(global-undo-tree-mode nil)
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
 (defun voloyev-reset-file-handler-alist-h ()
@@ -239,24 +240,32 @@
     :ensure t
     :bind("C-c SPC g" . magit-status))
 
-(use-package undo-tree
-    :ensure t
-    :init
-    (setq undo-tree-visualizer-diff nil
-          undo-tree-auto-save-history nil
-          undo-tree-enable-undo-in-region nil
-          ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
-          ;; truncating the undo history and corrupting the tree. See
-          ;; https://github.com/syl20bnr/spacemacs/issues/12110
-          undo-limit 800000
-          undo-strong-limit 1200000
-          undo-outer-limit 12000000)
-    :config
-    (global-undo-tree-mode t))
+(use-package undo-fu
+  :config
+  (global-undo-tree-mode nil)
+  (global-unset-key (kbd "C-z"))
+  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
+  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
 
-(defadvice undo-tree-make-history-save-file-name
-    (after undo-tree activate)
-  (setq ad-return-value (concat ad-return-value ".gz")))
+
+;; (use-package undo-tree
+;;     :ensure t
+;;     :init
+;;     (setq undo-tree-visualizer-diff nil
+;;           undo-tree-auto-save-history nil
+;;           undo-tree-enable-undo-in-region nil
+;;           ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
+;;           ;; truncating the undo history and corrupting the tree. See
+;;           ;; https://github.com/syl20bnr/spacemacs/issues/12110
+;;           undo-limit 800000
+;;           undo-strong-limit 1200000
+;;           undo-outer-limit 12000000)
+;;     :config
+;;     (global-undo-tree-mode t))
+
+;; (defadvice undo-tree-make-history-save-file-name
+;;     (after undo-tree activate)
+;;   (setq ad-return-value (concat ad-return-value ".gz")))
 
 (use-package toggle-quotes
     :ensure t
@@ -661,8 +670,8 @@
 ;;     (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
 ;;       (add-hook hook 'elisp-slime-nav-mode)))
 
-(use-package racket-mode
-    :ensure t)
+;; (use-package racket-mode
+;;     :ensure t)
 
 (use-package lispy
     :ensure t
@@ -875,11 +884,12 @@ o - maximize current window
 (use-package diff-hl
     :ensure t
     :config
-    (diff-hl-margin-mode t)
-    (diff-hl-dired-mode t)
-    (global-diff-hl-mode t)
     :hook (dired-mode . diff-hl-dired-mode)
     :hook (magit-post-refresh . diff-hl-magit-post-refresh))
+
+(diff-hl-margin-mode t)
+(diff-hl-dired-mode t)
+(global-diff-hl-mode t)
 
 (use-package volatile-highlights
     :ensure t
