@@ -35,6 +35,8 @@
 (setq redisplay-dont-pause t)
 
 (global-undo-tree-mode nil)
+(undo-tree-mode -1)
+
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
 (defun voloyev-reset-file-handler-alist-h ()
@@ -241,11 +243,15 @@
     :bind("C-c SPC g" . magit-status))
 
 (use-package undo-fu
-  :config
-  (global-undo-tree-mode nil)
-  (global-unset-key (kbd "C-z"))
-  (global-set-key (kbd "C-z")   'undo-fu-only-undo)
-  (global-set-key (kbd "C-S-z") 'undo-fu-only-redo))
+    :init((undo-tree-mode -1)
+          (global-undo-tree-mode -1))
+    :config
+    (global-undo-tree-mode nil)
+    (global-unset-key (kbd "C-z"))
+    (global-unset-key (kbd "C-x u"))
+    (global-set-key (kbd "C-x u")   'undo-fu-only-undo)
+    (global-set-key (kbd "C-z")     'undo-fu-only-undo)
+    (global-set-key (kbd "C-S-z")   'undo-fu-only-redo))
 
 
 ;; (use-package undo-tree
