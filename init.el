@@ -243,8 +243,6 @@
     :bind("C-c SPC g" . magit-status))
 
 (use-package undo-fu
-    :init((undo-tree-mode -1)
-          (global-undo-tree-mode -1))
     :config
     (global-undo-tree-mode nil)
     (global-unset-key (kbd "C-z"))
