@@ -80,7 +80,7 @@
 
 (defun set-font ()
   "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Hack 14")
+  (cond ((memq window-system '(ns mac)) "Hack 15")
         ((memq window-system '(x)) "Hack 14")))
 
 (if (memq window-system '(ns mac))
@@ -97,7 +97,7 @@
 (setq-default line-spacing 1)
 
 (setq ring-bell-function 'ignore)
-(setq-default with-editor-emacsclient-executable "emacsclient")
+;; (setq-default with-editor-emacsclient-executable "emacsclient")
 
 ;; Disable backup/autosave files
 (setq make-backup-files        nil)
