@@ -1,4 +1,5 @@
-;;; package --- My emaacs init-file --- Load the full configuration -*- lexical-binding: t -*-
+;;; -*- lexical-binding: t -*-
+;;; package --- My emaacs init-file --- Load the full configuration
 ;;; Commentary:
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
@@ -73,10 +74,9 @@
 (setq-default tab-width          2)
 (setq-default standart-indent    2)
 (setq-default lisp-body-indent   2)
+(setq-default css-indent-offset  2)
+(setq-default scss-indent-offset 2)
 
-;; css and sccs indent level
-(setq css-indent-offset 2)
-(setq scss-indent-offset 2)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
@@ -152,17 +152,17 @@
   :bind(("C-c SPC w s" . whitespace-mode)
         ("C-c SPC w c" . whitespace-cleanup)))
 
-(use-package all-the-icons
-    :ensure t)
+;; (use-package all-the-icons
+;;     :ensure t)
 
-(use-package doom-modeline
-    :ensure t
-    :hook (after-init . doom-modeline-mode)
-    ;; :init(setq doom-modeline-height 15)
-    :config
-    (setq doom-modeline-height 1)
-    (set-face-attribute 'mode-line nil :height 140)
-    (set-face-attribute 'mode-line-inactive nil :height 140))
+;; (use-package doom-modeline
+;;     :ensure t
+;;     :hook (after-init . doom-modeline-mode)
+;;     ;; :init(setq doom-modeline-height 15)
+;;     :config
+;;     (setq doom-modeline-height 1)
+;;     (set-face-attribute 'mode-line nil :height 140)
+;;     (set-face-attribute 'mode-line-inactive nil :height 140))
 
 ;; company mode
 (use-package company
@@ -251,26 +251,6 @@
     (global-set-key (kbd "C-z")     'undo-fu-only-undo)
     (global-set-key (kbd "C-S-z")   'undo-fu-only-redo))
 
-
-;; (use-package undo-tree
-;;     :ensure t
-;;     :init
-;;     (setq undo-tree-visualizer-diff nil
-;;           undo-tree-auto-save-history nil
-;;           undo-tree-enable-undo-in-region nil
-;;           ;; Increase undo-limits by a factor of ten to avoid emacs prematurely
-;;           ;; truncating the undo history and corrupting the tree. See
-;;           ;; https://github.com/syl20bnr/spacemacs/issues/12110
-;;           undo-limit 800000
-;;           undo-strong-limit 1200000
-;;           undo-outer-limit 12000000)
-;;     :config
-;;     (global-undo-tree-mode t))
-
-;; (defadvice undo-tree-make-history-save-file-name
-;;     (after undo-tree activate)
-;;   (setq ad-return-value (concat ad-return-value ".gz")))
-
 (use-package toggle-quotes
     :ensure t
     :bind("C-'" . toggle-quotes))
@@ -317,7 +297,7 @@
 
 (use-package evil-nerd-commenter
     :ensure t
-    :bind (( "M-;"     .  evilnc-comment-or-uncomment-lines)
+    :bind (( "M-;"     . evilnc-comment-or-uncomment-lines)
            ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
@@ -378,7 +358,7 @@
     :hook ((vue-mode  . lsp-deferred)
            (ruby-mode . lsp-deferred)
            (rust-mode . lsp-deferred)
-           (lsp-mode . lsp-enable-which-key-integration))
+           (lsp-mode  . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
@@ -392,6 +372,8 @@
     :ensure t
     :commands company-lsp
     :ensure t)
+
+(push 'company-lsp company-backends)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
@@ -544,11 +526,6 @@
             (setq tab-width 4)
             (setq indent-tabs-mode 1)))
 
-;; gorepl-mode
-(use-package gorepl-mode
-    :ensure t
-    :init
-    (add-hook 'go-mode-hook #'gorepl-mode))
 
 (add-to-list 'load-path (concat
                          (getenv "GOPATH")
@@ -595,12 +572,7 @@
 
 (add-hook 'elixir-mode-hook 'flycheck-mode)
 
-
 ;;;; rust settings
-(use-package company-lsp
-    :ensure t)
-(push 'company-lsp company-backends)
-
 (use-package rust-mode
     :mode "\\.rs\\'"
     :ensure t
@@ -925,18 +897,6 @@ o - maximize current window
     (yas-reload-all)
     (add-hook 'prog-mode-hook #'yas-minor-mode))
 
-;;Indent settings
-(setq-default indent-tabs-mode nil)
-(setq tab-width                  2)
-(setq-default tab-width          2)
-(setq-default standart-indent    2)
-(setq-default lisp-body-indent   2)
-
-;; css and sccs indent level
-(setq css-indent-offset 2)
-(setq scss-indent-offset 2)
-(global-set-key (kbd "RET") 'newline-and-indent)
-(setq lisp-indent-function  'common-lisp-indent-function)
 
 (use-package highlight-indentation
     :ensure t
