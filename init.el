@@ -4,6 +4,12 @@
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
+
+(defvar doom--file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -11,7 +17,6 @@
 (package-initialize)
 
 (setq load-prefer-newer t)
-
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 
@@ -26,7 +31,6 @@
 
 ;; Performance hacks
 (setq message-log-max t)
-(setq gc-cons-threshold most-positive-fixnum)
 (setq large-file-warning-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq idle-update-delay 1)
@@ -35,9 +39,26 @@
 (setq file-name-handler-alist nil)
 (setq redisplay-dont-pause t)
 
-(global-undo-tree-mode nil)
-(undo-tree-mode -1)
+(add-hook 'emacs-startup-hook
+  (lambda ()
+    (setq gc-cons-threshold 16777216 ; 16mb
+          gc-cons-percentage 0.1)))
 
+(defun doom-defer-garbage-collection-h ()
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun doom-restore-garbage-collection-h ()
+  "Defer it so that commands launched immediately after will enjoy the benefits."
+  (run-at-time
+   1 nil (lambda () (setq gc-cons-threshold doom-gc-cons-threshold))))
+
+(add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
+(add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
+(add-hook 'emacs-startup-hook
+  (lambda ()
+    (setq file-name-handler-alist doom--file-name-handler-alist)))
+
+(package-quickstart-refresh)
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
 (defun voloyev-reset-file-handler-alist-h ()
@@ -83,7 +104,7 @@
 (defun set-font ()
   "Set font for operating system."
   (cond ((memq window-system '(ns mac)) "Hack 15")
-        ((memq window-system '(x)) "Hack 14")))
+        ((memq window-system '(x)) "Inconsolata 16")))
 
 (if (memq window-system '(ns mac))
     (progn
@@ -93,7 +114,7 @@
                    '(ns-appearance . light))))
 
 (set-face-attribute 'default nil :font (set-font))
-(set-face-attribute 'mode-line nil :font "Hack 12")
+(set-face-attribute 'mode-line nil :font "Inconsolata 14")
 
 (set-frame-font (set-font))
 (setq-default line-spacing 1)
@@ -243,6 +264,7 @@
     :bind("C-c SPC g" . magit-status))
 
 (use-package undo-fu
+    :ensure t
     :config
     (global-undo-tree-mode nil)
     (global-unset-key (kbd "C-z"))
@@ -336,7 +358,7 @@
     :init
     (global-flycheck-mode)
     :config
-    (flycheck-pos-tip-mode)
+    (flycheck-pos-tip-mode nil)
     (setq flycheck-checker-error-threshold nil))
 
 (use-package flycheck-pos-tip
@@ -348,7 +370,7 @@
 (use-package lsp-mode
     :ensure t
     :init
-    :init (setq lsp-keymap-prefix "C-c SPC l")
+    :init (setq lsp-keymap-prefix "C-c SPC SPC l")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
@@ -378,7 +400,7 @@
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
-(defhydra hydra-avy (global-map "C-c SPC ;" :exit t :hint nil)
+(defhydra hydra-avy (global-map "C-c ;" :exit t :hint nil)
   ;; ^Line^       ^Region^        ^Goto^
   ;; ----------------------------------------------------------
   ;; [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
@@ -424,7 +446,7 @@
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all))
-(global-set-key (kbd "C-c SPC y") 'hydra-yasnippet/body)
+(global-set-key (kbd "C-c SPC SPC y") 'hydra-yasnippet/body)
 
 ;; haskell
 (use-package intero
@@ -477,8 +499,8 @@
 (use-package evil
     :ensure t
     :bind
-    (("C-c SPC e l" . evil-local-mode)
-     ("C-c SPC e g" . evil-mode)))
+    (("C-c SPC SPC e l" . evil-local-mode)
+     ("C-c SPC SPC e g" . evil-mode)))
 
 (use-package evil-matchit
     :ensure t
@@ -595,7 +617,7 @@
     :demand t
     :ensure t
     :after python
-    :bind("C-c SPC p b r" . python-black-region))
+    :bind("C-c SPC SPC p b r" . python-black-region))
 
 (use-package python-mode
     :ensure t)
@@ -622,7 +644,9 @@
     :ensure t)
 
 (use-package auto-virtualenvwrapper
-    :ensure t)
+    :ensure t
+    :init
+    (setq auto-virtualenvwrapper-verbose nil))
 
 (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
 ;; Activate on changing buffers
@@ -651,7 +675,7 @@
 
 (use-package lispy
     :ensure t
-    :bind(("C-c SPC e i" . lispy-mode)))
+    :bind(("C-c SPC SPC e i" . lispy-mode)))
 
 (use-package geiser
     :ensure t
@@ -669,8 +693,8 @@
     :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
     :hook (robe-mode)
     :hook (yard-mode)
-    :bind(("C-c r r"      . inf-ruby-console-auto)
-          ("C-c & h r"    . enh-ruby-mode)))
+    :bind(("C-c SPC SPC r r"      . inf-ruby-console-auto)
+          ("C-c SPC SPC r h r"    . enh-ruby-mode)))
 
 (use-package chruby
     :ensure t)
@@ -680,9 +704,6 @@
     :init
     (setq ruby-indent-level 2)
     (setq ruby-deep-indent-paren nil))
-
-(use-package rcodetools
-    :init(define-key ruby-mode-map (kbd "C-c C-u C-c") 'xmp))
 
 (use-package bundler
     :ensure t)
@@ -877,7 +898,7 @@ o - maximize current window
     :config
     (projectile-mode t)
     (define-key projectile-mode-map
-        (kbd "C-c SPC SPC") 'projectile-command-map)
+        (kbd "C-c SPC") 'projectile-command-map)
     (setq projectile-indexing-method 'alien)
     (setq projectile-enable-caching t)
     (setq projectile-completion-system 'ivy)
