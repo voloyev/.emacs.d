@@ -19,6 +19,11 @@
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
+(package-install 'use-package)
+(use-package gcmh
+    :ensure t)
+
+(gcmh-mode 1)
 
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
@@ -39,21 +44,6 @@
 (setq file-name-handler-alist nil)
 (setq redisplay-dont-pause t)
 
-(add-hook 'emacs-startup-hook
-  (lambda ()
-    (setq gc-cons-threshold 16777216 ; 16mb
-          gc-cons-percentage 0.1)))
-
-(defun doom-defer-garbage-collection-h ()
-  (setq gc-cons-threshold most-positive-fixnum))
-
-(defun doom-restore-garbage-collection-h ()
-  "Defer it so that commands launched immediately after will enjoy the benefits."
-  (run-at-time
-   1 nil (lambda () (setq gc-cons-threshold doom-gc-cons-threshold))))
-
-(add-hook 'minibuffer-setup-hook #'doom-defer-garbage-collection-h)
-(add-hook 'minibuffer-exit-hook #'doom-restore-garbage-collection-h)
 (add-hook 'emacs-startup-hook
   (lambda ()
     (setq file-name-handler-alist doom--file-name-handler-alist)))
@@ -79,7 +69,7 @@
 (when (memq window-system '(ns mac))
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta))
-;; end of performance hacks
+
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
 (package-install 'use-package)
@@ -103,7 +93,7 @@
 
 (defun set-font ()
   "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Hack 15")
+  (cond ((memq window-system '(ns mac)) "Inconsolata 17")
         ((memq window-system '(x)) "Inconsolata 16")))
 
 (if (memq window-system '(ns mac))
@@ -172,18 +162,6 @@
           (tab-mark 9 [9655 9] [92 9])))
   :bind(("C-c SPC w s" . whitespace-mode)
         ("C-c SPC w c" . whitespace-cleanup)))
-
-;; (use-package all-the-icons
-;;     :ensure t)
-
-;; (use-package doom-modeline
-;;     :ensure t
-;;     :hook (after-init . doom-modeline-mode)
-;;     ;; :init(setq doom-modeline-height 15)
-;;     :config
-;;     (setq doom-modeline-height 1)
-;;     (set-face-attribute 'mode-line nil :height 140)
-;;     (set-face-attribute 'mode-line-inactive nil :height 140))
 
 ;; company mode
 (use-package company
@@ -624,9 +602,7 @@
 
 (use-package lsp-python-ms
   :ensure t
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms)
-                          (lsp-deferred))))
+  :hook (python-mode . lsp-deferred))
 
 (use-package pipenv
     :ensure t
@@ -898,7 +874,7 @@ o - maximize current window
     :config
     (projectile-mode t)
     (define-key projectile-mode-map
-        (kbd "C-c SPC") 'projectile-command-map)
+        (kbd "C-c SPC p") 'projectile-command-map)
     (setq projectile-indexing-method 'alien)
     (setq projectile-enable-caching t)
     (setq projectile-completion-system 'ivy)
@@ -982,11 +958,10 @@ o - maximize current window
 
 ;; (use-package org-plus-contrib
 ;;     :ensure t)
-
 (use-package org-install
     :init
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-  (setq org-agenda-files (list "~/.emacs.d/todo.org"))
+  (setq org-agenda-files (list (getenv "ORG_TODO_PATH")))
   (add-hook 'org-mode-hook 'toggle-truncate-lines)
   (setq org-src-fontify-natively nil)
   (setq org-html-htmlize-output-type nil) ;; output without
