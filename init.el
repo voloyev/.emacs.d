@@ -20,9 +20,9 @@
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
 (package-install 'use-package)
+
 (use-package gcmh
     :ensure t)
-
 (gcmh-mode 1)
 
 ;; save customization in separate file
