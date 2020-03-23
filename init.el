@@ -56,6 +56,18 @@
 
 (add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
 
+(defun set-font ()
+  "Set font for operating system."
+  (cond ((memq window-system '(ns mac)) "Inconsolata 17")
+        ((memq window-system '(x)) "Inconsolata 16")))
+
+(if (memq window-system '(ns mac))
+    (progn
+      (add-to-list 'default-frame-alist
+                   '(ns-transparent-titlebar . t))
+      (add-to-list 'default-frame-alist
+                   '(ns-appearance . light))))
+
 (setq-default bidi-display-reordering 'left-to-right
               bidi-paragraph-direction 'left-to-right)
 
@@ -80,28 +92,16 @@
   (server-start))
 
 ;;Indent settings
-(setq-default indent-tabs-mode nil)
-(setq tab-width                  2)
-(setq-default tab-width          2)
-(setq-default standart-indent    2)
-(setq-default lisp-body-indent   2)
-(setq-default css-indent-offset  2)
-(setq-default scss-indent-offset 2)
-
+(setq-default indent-tabs-mode   nil)
+(setq tab-width                    2)
+(setq-default tab-width            2)
+(setq-default standart-indent      2)
+(setq-default lisp-body-indent     2)
+(setq-default css-indent-offset    2)
+(setq-default scss-indent-offset   2)
+(setq-default python-indent-offset 4)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
-
-(defun set-font ()
-  "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Inconsolata 17")
-        ((memq window-system '(x)) "Inconsolata 16")))
-
-(if (memq window-system '(ns mac))
-    (progn
-      (add-to-list 'default-frame-alist
-                   '(ns-transparent-titlebar . t))
-      (add-to-list 'default-frame-alist
-                   '(ns-appearance . light))))
 
 (set-face-attribute 'default nil :font (set-font))
 (set-face-attribute 'mode-line nil :font "Inconsolata 14")
@@ -345,39 +345,6 @@
 (use-package flycheck-pycheckers
     :ensure t)
 
-(use-package lsp-mode
-    :ensure t
-    :init
-    :init (setq lsp-keymap-prefix "C-c SPC SPC l")
-    (setq lsp-auto-guess-root t)       ; Detect project root
-    (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
-    (setq lsp-enable-xref t)
-    (setq lsp-prefer-capf t)
-    (setq lsp-enable-indentation nil)
-    ;; :hook (js-mode   . lsp-deferred)
-    :hook ((vue-mode  . lsp-deferred)
-           (ruby-mode . lsp-deferred)
-           (rust-mode . lsp-deferred)
-           (lsp-mode  . lsp-enable-which-key-integration))
-    :commands (lsp lsp-deferred))
-
-(add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
-
-(use-package lsp-ui
-    :ensure t
-    :commands lsp-ui-mode
-    :ensure t)
-
-(use-package company-lsp
-    :ensure t
-    :commands company-lsp
-    :ensure t)
-
-(push 'company-lsp company-backends)
-
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
-
 (defhydra hydra-avy (global-map "C-c ;" :exit t :hint nil)
   ;; ^Line^       ^Region^        ^Goto^
   ;; ----------------------------------------------------------
@@ -595,26 +562,11 @@
     :demand t
     :ensure t
     :after python
-    :bind("C-c SPC SPC p b r" . python-black-region))
+    :bind("C-c SPC SPC p b r" . python-black-region)
+    :bind("C-c SPC SPC p b b" . python-black))
 
 (use-package python-mode
     :ensure t)
-
-(use-package lsp-python-ms
-  :ensure t
-  :hook (python-mode . lsp-deferred))
-
-(use-package pipenv
-    :ensure t
-    :hook (python-mode . pipenv-mode)
-    :init
-    (setq
-     pipenv-projectile-after-switch-function
-     #'pipenv-projectile-after-switch-extended))
-
-(use-package poetry
-    :ensure t
-    :config (poetry-tracking-mode t))
 
 (use-package pyvenv
     :ensure t)
@@ -978,8 +930,54 @@ o - maximize current window
     :config
     (setq walkman-keep-headers t))
 
+(use-package systemd
+    :ensure t)
+ 
 (use-package ox-reveal
     :ensure t)
+
+(use-package lsp-python-ms
+  :ensure t)
+
+(use-package lsp-mode
+    :ensure t
+    :init
+    (setq lsp-auto-guess-root t)       ; Detect project root
+    (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
+    (setq lsp-enable-xref t)
+    (setq lsp-prefer-capf t)
+    (setq lsp-enable-indentation nil)
+    :config
+    (setq lsp-keymap-prefix "C-c SPC SPC l")
+    ;; :hook (js-mode   . lsp-deferred)
+    :hook ((vue-mode  . lsp-deferred)
+           (ruby-mode . lsp-deferred)
+           (rust-mode . lsp-deferred)
+           (python-mode . lsp-deferred)
+           (lsp-mode  . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred))
+
+(use-package lsp-python-ms
+  :ensure t
+  :hook (python-mode . lsp-deferred))
+
+(add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
+
+(use-package lsp-ui
+    :ensure t
+    :commands lsp-ui-mode
+    :ensure t)
+
+(use-package company-lsp
+    :ensure t
+    :commands company-lsp
+    :ensure t)
+
+(push 'company-lsp company-backends)
+
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
+
 
 ;; eval langs in go
 (org-babel-do-load-languages
