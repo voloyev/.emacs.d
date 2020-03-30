@@ -58,8 +58,8 @@
 
 (defun set-font ()
   "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Inconsolata 17")
-        ((memq window-system '(x)) "Inconsolata 16")))
+  (cond ((memq window-system '(ns mac)) "Hack 17")
+        ((memq window-system '(x)) "Hack 14")))
 
 (if (memq window-system '(ns mac))
     (progn
@@ -104,7 +104,7 @@
 (setq lisp-indent-function  'common-lisp-indent-function)
 
 (set-face-attribute 'default nil :font (set-font))
-(set-face-attribute 'mode-line nil :font "Inconsolata 14")
+(set-face-attribute 'mode-line nil :font "Hack 12")
 
 (set-frame-font (set-font))
 (setq-default line-spacing 1)
@@ -399,44 +399,42 @@
     :init (intero-global-mode 1))
 
 (use-package smartparens
-    :ensure t
-    :config
-    (show-smartparens-global-mode 1)
+    :ensure t)
 
-    (require 'smartparens-config)
-    (--each '(restclient-mode-hook
-              js-mode-hook
-              vue-mode-hook
-              js2-mode-hook
-              python-mode-hook
-              ruby-mode-hook
-              markdown-mode-hook
-              org-mode-hook
-              rust-mode-hook
-              toml-mode-hook
-              cc-mode-hook
-              lisp-mode-hook
-              haml-mode-hook
-              c-mode-hook
-              go-mode-hook
-              elixir-mode-hook
-              enh-ruby-mode-hook
-              crystal-mode-hook
-              slim-mode-hook
-              yaml-mode-hook
-              nginx-mode-hook
-              scss-mode-hook
-              web-mode-hook
-              emacs-lisp-mode-hook
-              clojure-mode-hook
-              conf-mode-hook
-              dockerfile-mode-hook
-              haskell-mode-hook
-              erlang-mode-hook
-              irony-mode-hook
-              geiser-mode-hook
-              sh-mode-hook)
-      (add-hook it 'turn-on-smartparens-mode)))
+(require 'smartparens-config)
+(--each '(restclient-mode-hook
+          js-mode-hook
+          vue-mode-hook
+          js2-mode-hook
+          python-mode-hook
+          ruby-mode-hook
+          markdown-mode-hook
+          org-mode-hook
+          rust-mode-hook
+          toml-mode-hook
+          cc-mode-hook
+          lisp-mode-hook
+          haml-mode-hook
+          c-mode-hook
+          go-mode-hook
+          elixir-mode-hook
+          enh-ruby-mode-hook
+          crystal-mode-hook
+          slim-mode-hook
+          yaml-mode-hook
+          nginx-mode-hook
+          scss-mode-hook
+          web-mode-hook
+          emacs-lisp-mode-hook
+          clojure-mode-hook
+          conf-mode-hook
+          dockerfile-mode-hook
+          haskell-mode-hook
+          erlang-mode-hook
+          irony-mode-hook
+          geiser-mode-hook
+          sh-mode-hook)
+  (add-hook it #'smartparens-mode))
 
 ;; deal with escaping
 (setq sp-escape-quotes-after-insert nil)
@@ -947,8 +945,6 @@ o - maximize current window
     (setq lsp-enable-xref t)
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
-    :config
-    (setq lsp-keymap-prefix "C-c SPC SPC l")
     ;; :hook (js-mode   . lsp-deferred)
     :hook ((vue-mode  . lsp-deferred)
            (ruby-mode . lsp-deferred)
@@ -956,6 +952,10 @@ o - maximize current window
            (python-mode . lsp-deferred)
            (lsp-mode  . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
+
+(setq lsp-keymap-prefix "C-c SPC SPC l")
+(setq company-minimum-prefix-length 1
+      company-idle-delay 0.0) ;; default is 0.2
 
 (use-package lsp-python-ms
   :ensure t
@@ -977,7 +977,6 @@ o - maximize current window
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
-
 
 ;; eval langs in go
 (org-babel-do-load-languages
