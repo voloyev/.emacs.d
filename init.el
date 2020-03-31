@@ -58,7 +58,7 @@
 
 (defun set-font ()
   "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Hack 17")
+  (cond ((memq window-system '(ns mac)) "Hack 15")
         ((memq window-system '(x)) "Hack 14")))
 
 (if (memq window-system '(ns mac))
@@ -956,10 +956,6 @@ o - maximize current window
 (setq lsp-keymap-prefix "C-c SPC SPC l")
 (setq company-minimum-prefix-length 1
       company-idle-delay 0.0) ;; default is 0.2
-
-(use-package lsp-python-ms
-  :ensure t
-  :hook (python-mode . lsp-deferred))
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 
