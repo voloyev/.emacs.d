@@ -139,7 +139,6 @@
 (setq query-replace-highlight t)
 (setq frame-title-format "GNU Emacs: %b")
 
-
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
     :ensure t
@@ -233,9 +232,9 @@
 
 (use-package emmet-mode
     :ensure t
-    :hook (web-mode)
-    :hook (css-mode)
-    :hook (scss-mode))
+    :hook (web-mode  . emmet-mode)
+    :hook (css-mode  . emmet-mode)
+    :hook (scss-mode . emmet-mode))
 
 (use-package magit
     :ensure t
@@ -336,10 +335,13 @@
     :init
     (global-flycheck-mode)
     :config
-    (flycheck-pos-tip-mode nil)
+    ;; (flycheck-pos-tip-mode nil)
     (setq flycheck-checker-error-threshold nil))
 
 (use-package flycheck-pos-tip
+    :ensure t)
+
+(use-package flycheck-popup-tip
     :ensure t)
 
 (use-package flycheck-pycheckers
@@ -393,51 +395,6 @@
   ("a" yas-reload-all))
 (global-set-key (kbd "C-c SPC SPC y") 'hydra-yasnippet/body)
 
-;; haskell
-(use-package intero
-    :ensure t
-    :init (intero-global-mode 1))
-
-(use-package smartparens
-    :ensure t)
-
-(require 'smartparens-config)
-(--each '(restclient-mode-hook
-          js-mode-hook
-          vue-mode-hook
-          js2-mode-hook
-          python-mode-hook
-          ruby-mode-hook
-          markdown-mode-hook
-          org-mode-hook
-          rust-mode-hook
-          toml-mode-hook
-          cc-mode-hook
-          lisp-mode-hook
-          haml-mode-hook
-          c-mode-hook
-          go-mode-hook
-          elixir-mode-hook
-          enh-ruby-mode-hook
-          crystal-mode-hook
-          slim-mode-hook
-          yaml-mode-hook
-          nginx-mode-hook
-          scss-mode-hook
-          web-mode-hook
-          emacs-lisp-mode-hook
-          clojure-mode-hook
-          conf-mode-hook
-          dockerfile-mode-hook
-          haskell-mode-hook
-          erlang-mode-hook
-          irony-mode-hook
-          geiser-mode-hook
-          sh-mode-hook)
-  (add-hook it #'smartparens-mode))
-
-;; deal with escaping
-(setq sp-escape-quotes-after-insert nil)
 
 (use-package evil
     :ensure t
@@ -466,138 +423,6 @@
     :init
     (load-theme 'sexy-monochrome t)
     (enable-theme 'sexy-monochrome))
-
-;;;; go settings
-(use-package go-mode
-    :ensure t)
-
-(use-package company-go
-    :ensure t)
-
-(use-package flycheck-gometalinter
-    :ensure t
-    :config
-    (progn
-      (flycheck-gometalinter-setup)))
-
-;; company mode
-(add-hook 'go-mode-hook
-          (lambda ()
-            (set (make-local-variable 'company-backends)
-                 '(company-go))
-            (company-mode)
-            (setq gofmt-command "goimports")
-            (add-hook 'before-save-hook 'gofmt-before-save)
-            (setq tab-width 4)
-            (setq indent-tabs-mode 1)))
-
-
-(add-to-list 'load-path (concat
-                         (getenv "GOPATH")
-                         "/src/github.com/golang/lint/misc/emacs"))
-(use-package golint
-    :ensure t)
-
-;;;;; elixir module
-;; Highlights *.elixir2 as well
-(use-package elixir-mode
-    :ensure t
-    :init
-    (add-hook 'elixir-mode-hook
-              (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-    :config
-    (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
-
-(use-package alchemist
-    :ensure t
-    :init
-    ;; (setq alchemist-mix-command "mix")
-    ;; (setq alchemist-mix-test-task "espec")
-    (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
-    (setq alchemist-mix-test-default-options '()) ;; default
-    (setq alchemist-iex-program-name "iex") ;; default: iex
-    (setq alchemist-execute-command "elixir") ;; default: elixir
-    (setq alchemist-compile-command "elixirc") ;; default: elixirc
-    (setq alchemist-hooks-compile-on-save t)
-    (setq alchemist-goto-erlang-source-dir "~/source/otp")
-    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
-
-(use-package flycheck-credo
-    :ensure t)
-
-(use-package flycheck-mix
-    :ensure t
-    :init
-    (flycheck-mix-setup))
-
-(eval-after-load 'flycheck
-  '(flycheck-credo-setup))
-
-(add-hook 'elixir-mode-hook 'flycheck-mode)
-
-;;;; rust settings
-(use-package rust-mode
-    :mode "\\.rs\\'"
-    :ensure t
-    :init
-    (setq rust-format-on-save t))
-
-(use-package cargo
-    :commands cargo-minor-mode
-    :diminish cargo-minor-mode
-    :ensure t
-    :init
-    (add-hook 'rust-mode-hook 'cargo-minor-mode))
-
-(use-package toml-mode
-    :ensure t
-    :mode (("\\.toml\\'" . toml-mode)))
-
-;;;;; python
-(use-package python-black
-    :demand t
-    :ensure t
-    :after python
-    :bind("C-c SPC SPC p b r" . python-black-region)
-    :bind("C-c SPC SPC p b b" . python-black))
-
-(use-package python-mode
-    :ensure t)
-
-(use-package pyvenv
-    :ensure t)
-
-(use-package auto-virtualenvwrapper
-    :ensure t
-    :init
-    (setq auto-virtualenvwrapper-verbose nil))
-
-(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
-;; Activate on changing buffers
-(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
-(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
-(add-hook 'python-mode-hook 'highlight-indentation-mode)
-
-;;;;;;; lisp
-(remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
-
-(use-package sly
-    :ensure t
-    :init
-    (setq org-babel-lisp-eval-fn 'sly-eval)
-    (setq inferior-lisp-program "ros -Q run")
-    :hook (lisp-mode . sly-editing))
-
-;; (use-package elisp-slime-nav
-;;     :ensure t
-;;     :init
-;;     (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
-;;       (add-hook hook 'elisp-slime-nav-mode)))
-
-;; (use-package racket-mode
-;;     :ensure t)
 
 (use-package lispy
     :ensure t
@@ -666,16 +491,12 @@
     (add-hook 'web-mode-hook #'(lambda ()
                                  (enable-minor-mode
                                   '("\\.vue?\\'" . prettier-js-mode))))
-    :hook (js2-mode     . prettier-js-mode)
     :hook (js-mode      . prettier-js-mode)
-    :hook (vue-mode     . prettier-js-mode)
-    :hook (js2-jsx-mode . prettier-js-mode)
-    :hook (rjsx-mode    . prettier-js-mode))
+    :hook (vue-mode     . prettier-js-mode))
 
 (use-package js-mode
     :mode ("\\.js\\'" . js-mode)
-    :mode ("\\.jsx\\'" . js-mode)
-    :hook (j2-minore-mode . js-mode))
+    :mode ("\\.jsx\\'" . js-mode))
 
 ;; (use-package elm-mode
 ;;     :ensure t
@@ -746,7 +567,7 @@ o - maximize current window
     :ensure t
     :config
     (setq super-save-auto-save-when-idle t)
-    (super-save-mode +1)
+    (super-save-mode t)
     (setq auto-save-default nil))
 
 (use-package markdown-mode
@@ -793,17 +614,6 @@ o - maximize current window
 (use-package nasm-mode
     :ensure t)
 
-(use-package auto-highlight-symbol
-    :ensure t)
-
-(add-hook 'js2-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'js2-jsx-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'elixir-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'ruby-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'rust-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'emacs-lisp-mode-hook 'auto-highlight-symbol-mode)
-(add-hook 'python-mode-hook 'auto-highlight-symbol-mode)
-
 (use-package diff-hl
     :ensure t
     :config
@@ -831,6 +641,12 @@ o - maximize current window
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
                    (projectile-project-name)))))
+(add-hook 'projectile-mode-hook 'chruby-use-corresponding)
+
+(use-package easy-jekyll
+    :ensure t)
+
+(setq easy-jekyll-markdown-extension "markdown")
 
 (add-hook 'php-mode-hook (lambda () c-basic-offset 2))
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
@@ -860,7 +676,6 @@ o - maximize current window
           ("C-x b"         . ivy-switch-buffer)
           ("C-c SPC i d f" . counsel-describe-function)
           ("C-c SPC i d v" . counsel-describe-variable)))
-
 
 (use-package web-mode
     :ensure t
@@ -940,20 +755,25 @@ o - maximize current window
 (use-package lsp-mode
     :ensure t
     :init
+    (setq lsp-keymap-prefix "C-c SPC .")
+    (add-to-list 'exec-path "/home/voloyev/w/elixir/elixir-ls/release")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
-    ;; :hook (js-mode   . lsp-deferred)
-    :hook ((vue-mode  . lsp-deferred)
-           (ruby-mode . lsp-deferred)
-           (rust-mode . lsp-deferred)
+    :hook ((vue-mode    . lsp-deferred)
+           (ruby-mode   . lsp-deferred)
+           (rust-mode   . lsp-deferred)
            (python-mode . lsp-deferred)
-           (lsp-mode  . lsp-enable-which-key-integration))
+           (js-mode     . lsp-deferred)
+           ;; (elixir-mode . lsp-deferred)
+           (go-mode     . lsp-deferred)
+           (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
 
-(setq lsp-keymap-prefix "C-c SPC SPC l")
+(define-key lsp-mode-map (kbd "C-c SPC .") lsp-command-map)
+
 (setq company-minimum-prefix-length 1
       company-idle-delay 0.0) ;; default is 0.2
 
@@ -961,18 +781,166 @@ o - maximize current window
 
 (use-package lsp-ui
     :ensure t
-    :commands lsp-ui-mode
-    :ensure t)
+    :commands lsp-ui-mode)
+
+(setq lsp-ui-doc-enable nil)
+
+(global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
+(global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
+
+;; (add-hook 'lsp-mode-hook (lambda () ((lsp-ui-sideline-mode -1)
+;;                                      (lsp-ui-doc-mode -1))))
 
 (use-package company-lsp
     :ensure t
-    :commands company-lsp
-    :ensure t)
+    :commands company-lsp)
 
 (push 'company-lsp company-backends)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
+
+(setq treemacs-no-png-images t)
+;;;; go settings
+(use-package go-mode
+    :ensure t)
+
+;; lsp go hook
+(add-hook 'go-mode-hook
+          (lambda ()
+             (add-hook 'before-save-hook 'lsp-format-buffer)))
+
+;;;;; elixir module
+(use-package elixir-mode
+    :ensure t
+    :init
+    (add-hook 'elixir-mode-hook
+              (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+    :config
+    (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
+    (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
+    (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
+
+(use-package alchemist
+    :ensure t
+    :init
+    ;; (setq alchemist-mix-command "mix")
+    ;; (setq alchemist-mix-test-task "espec")
+    (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
+    (setq alchemist-mix-test-default-options '()) ;; default
+    (setq alchemist-iex-program-name "iex") ;; default: iex
+    (setq alchemist-execute-command "elixir") ;; default: elixir
+    (setq alchemist-compile-command "elixirc") ;; default: elixirc
+    (setq alchemist-hooks-compile-on-save t)
+    (setq alchemist-goto-erlang-source-dir "~/source/otp")
+    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
+
+;; haskell
+(use-package intero
+    :ensure t
+    :init (intero-global-mode 1))
+
+;;;; rust settings
+(use-package rust-mode
+    :mode "\\.rs\\'"
+    :ensure t
+    :init
+    (setq rust-format-on-save t))
+
+(use-package cargo
+    :commands cargo-minor-mode
+    :diminish cargo-minor-mode
+    :ensure t
+    :init
+    (add-hook 'rust-mode-hook 'cargo-minor-mode))
+
+(use-package toml-mode
+    :ensure t
+    :mode (("\\.toml\\'" . toml-mode)))
+
+;;;;; python
+(use-package python-black
+    :demand t
+    :ensure t
+    :after python
+    :bind("C-c SPC SPC p b r" . python-black-region)
+    :bind("C-c SPC SPC p b b" . python-black))
+
+(use-package python-mode
+    :ensure t)
+
+(use-package pyvenv
+    :ensure t)
+
+(use-package auto-virtualenvwrapper
+    :ensure t
+    :init
+    (setq auto-virtualenvwrapper-verbose nil))
+
+(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+;; Activate on changing buffers
+(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'python-mode-hook 'highlight-indentation-mode)
+
+;;;;;;; lisp
+(remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+
+(use-package sly
+    :ensure t
+    :init
+    (setq org-babel-lisp-eval-fn 'sly-eval)
+    (setq inferior-lisp-program "ros -Q run")
+    :hook (lisp-mode . sly-editing))
+
+;; (use-package racket-mode
+;;     :ensure t)
+
+(use-package smartparens
+    :ensure t)
+
+(require 'smartparens-config)
+(--each '(restclient-mode-hook
+          js-mode-hook
+          vue-mode-hook
+          js2-mode-hook
+          python-mode-hook
+          ruby-mode-hook
+          markdown-mode-hook
+          org-mode-hook
+          rust-mode-hook
+          toml-mode-hook
+          cc-mode-hook
+          lisp-mode-hook
+          haml-mode-hook
+          c-mode-hook
+          go-mode-hook
+          elixir-mode-hook
+          enh-ruby-mode-hook
+          crystal-mode-hook
+          slim-mode-hook
+          yaml-mode-hook
+          nginx-mode-hook
+          scss-mode-hook
+          web-mode-hook
+          emacs-lisp-mode-hook
+          clojure-mode-hook
+          conf-mode-hook
+          dockerfile-mode-hook
+          haskell-mode-hook
+          erlang-mode-hook
+          irony-mode-hook
+          geiser-mode-hook
+          sh-mode-hook)
+  (add-hook it #'smartparens-mode))
+
+;; deal with escaping
+(setq sp-escape-quotes-after-insert nil)
+
+(eval-after-load 'flycheck
+  (if (display-graphic-p)
+      (flycheck-popup-tip-mode)
+      (flycheck-pos-tip-mode)))
 
 ;; eval langs in go
 (org-babel-do-load-languages
