@@ -56,10 +56,10 @@
 
 (add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
 
-(defun set-font ()
-  "Set font for operating system."
-  (cond ((memq window-system '(ns mac)) "Hack 15")
-        ((memq window-system '(x)) "Hack 14")))
+(cond ((memq window-system '(ns mac)) (set-face-attribute 'default nil :font "Hack 15"))
+      ((memq window-system '(x)) (set-face-attribute 'default nil :font "Hack 14")))
+(set-face-attribute 'mode-line nil :font "Hack 12")
+(setq-default line-spacing 1)
 
 (if (memq window-system '(ns mac))
     (progn
@@ -102,12 +102,6 @@
 (setq-default python-indent-offset 4)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
-
-(set-face-attribute 'default nil :font (set-font))
-(set-face-attribute 'mode-line nil :font "Hack 12")
-
-(set-frame-font (set-font))
-(setq-default line-spacing 1)
 
 (setq ring-bell-function 'ignore)
 ;; (setq-default with-editor-emacsclient-executable "emacsclient")
