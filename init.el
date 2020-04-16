@@ -743,13 +743,10 @@ o - maximize current window
 (use-package ox-reveal
     :ensure t)
 
-(use-package lsp-python-ms
-  :ensure t)
-
+(setq lsp-keymap-prefix "C-c SPC .")
 (use-package lsp-mode
     :ensure t
     :init
-    (setq lsp-keymap-prefix "C-c SPC .")
     (add-to-list 'exec-path "/home/voloyev/w/elixir/elixir-ls/release")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
