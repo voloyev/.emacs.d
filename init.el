@@ -776,7 +776,7 @@ o - maximize current window
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
     :hook ((vue-mode    . lsp-deferred)
-           (ruby-mode   . lsp-deferred)
+           ;; (ruby-mode   . lsp-deferred)
            (rust-mode   . lsp-deferred)
            (python-mode . lsp-deferred)
            (js-mode     . lsp-deferred)
