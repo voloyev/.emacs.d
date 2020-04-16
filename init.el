@@ -526,6 +526,13 @@
                 (unless (eq ibuffer-sorting-mode 'alphabetic)
                   (ibuffer-do-sort-by-recency)))))
 
+(use-package ibuffer-vc :ensure t)
+
+(add-hook 'ibuffer-hook
+          (lambda ()
+            (ibuffer-vc-set-filter-groups-by-vc-root)
+            (unless (eq ibuffer-sorting-mode 'alphabetic)
+              (ibuffer-do-sort-by-alphabetic))))
 "
 x - delete window
 m - swap windows
@@ -743,7 +750,6 @@ o - maximize current window
 (use-package ox-reveal
     :ensure t)
 
-(setq lsp-keymap-prefix "C-c SPC .")
 (use-package lsp-mode
     :ensure t
     :init
@@ -754,7 +760,7 @@ o - maximize current window
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
     :hook ((vue-mode    . lsp-deferred)
-           ;; (ruby-mode   . lsp-deferred)
+           (ruby-mode   . lsp-deferred)
            (rust-mode   . lsp-deferred)
            (python-mode . lsp-deferred)
            (js-mode     . lsp-deferred)
@@ -762,36 +768,26 @@ o - maximize current window
            (go-mode     . lsp-deferred)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
-
-(define-key lsp-mode-map (kbd "C-c SPC .") lsp-command-map)
+(setq lsp-keymap-prefix "C-c SPC .")
+(global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
 (setq company-minimum-prefix-length 1
       company-idle-delay 0.0) ;; default is 0.2
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
-
-(use-package lsp-ui
-    :ensure t
-    :commands lsp-ui-mode)
-
-(setq lsp-ui-doc-enable nil)
+(use-package lsp-ui :ensure t :commands lsp-ui-mode)
 
 (global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
 (global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
 
-;; (add-hook 'lsp-mode-hook (lambda () ((lsp-ui-sideline-mode -1)
-;;                                      (lsp-ui-doc-mode -1))))
-
-(use-package company-lsp
-    :ensure t
-    :commands company-lsp)
-
+(use-package company-lsp :ensure t :commands company-lsp)
 (push 'company-lsp company-backends)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
 (setq treemacs-no-png-images t)
+
 ;;;; go settings
 (use-package go-mode
     :ensure t)
@@ -860,6 +856,9 @@ o - maximize current window
 (use-package python-mode
     :ensure t)
 
+(add-hook 'python-mode-hook (lambda ()
+                               (setq flycheck-checker 'python-pylint
+                                     flycheck-checker-error-threshold 900)))
 (use-package pyvenv
     :ensure t)
 
@@ -924,6 +923,8 @@ o - maximize current window
           geiser-mode-hook
           sh-mode-hook)
   (add-hook it #'smartparens-mode))
+
+(show-smartparens-global-mode +1)
 
 ;; deal with escaping
 (setq sp-escape-quotes-after-insert nil)
