@@ -777,6 +777,10 @@ o - maximize current window
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 (use-package lsp-ui :ensure t :commands lsp-ui-mode)
 
+(require 'lsp-ui-flycheck)
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-after-open-hook (lambda () (lsp-flycheck-enable 1))))
+
 (global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
 (global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
 
@@ -834,6 +838,9 @@ o - maximize current window
     :init
     (setq rust-format-on-save t))
 
+(use-package smart-semicolon :ensure t)
+(add-hook #'rust-mode-hook 'smart-semicolon-mode)
+
 (use-package cargo
     :commands cargo-minor-mode
     :diminish cargo-minor-mode
@@ -856,9 +863,9 @@ o - maximize current window
 (use-package python-mode
     :ensure t)
 
-(add-hook 'python-mode-hook (lambda ()
-                               (setq flycheck-checker 'python-pylint
-                                     flycheck-checker-error-threshold 900)))
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (setq-local flycheck-checker 'python-flake8)))
+
 (use-package pyvenv
     :ensure t)
 

@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: derive Debug
-# key: ddebug
+# key: dD!
 # --
 
-#[derive(Debug)]
+#[derive($1)]
 $0
