@@ -14,7 +14,7 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(package-initialize)
+;; (package-initialize)
 
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/modules")
@@ -132,6 +132,15 @@
 (setq search-highlight        t)
 (setq query-replace-highlight t)
 (setq frame-title-format "GNU Emacs: %b")
+
+(use-package simple-modeline
+    :ensure t
+    :hook(after-init . simple-modeline-mode))
+
+(use-package direnv
+    :ensure t
+    :config
+    (direnv-mode))
 
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
@@ -467,7 +476,7 @@
 (use-package rspec-mode
     :ensure t)
 
-(add-hook 'inf-ruby-mode-hook 'chruby-use-corresponding)
+(add-hook 'ruby-mode-hook 'chruby-use-corresponding)
 
 ;;;; js mode
 (use-package vue-mode
@@ -523,16 +532,11 @@
                 (ibuffer-auto-mode t)))
     (add-hook 'ibuffer-hook
               (lambda ()
+                (ibuffer-vc-set-filter-groups-by-vc-root)
                 (unless (eq ibuffer-sorting-mode 'alphabetic)
-                  (ibuffer-do-sort-by-recency)))))
+                  (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package ibuffer-vc :ensure t)
-
-(add-hook 'ibuffer-hook
-          (lambda ()
-            (ibuffer-vc-set-filter-groups-by-vc-root)
-            (unless (eq ibuffer-sorting-mode 'alphabetic)
-              (ibuffer-do-sort-by-alphabetic))))
 "
 x - delete window
 m - swap windows
@@ -589,7 +593,7 @@ o - maximize current window
           ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :ensure t
+    :ensure T
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -678,6 +682,18 @@ o - maximize current window
           ("C-c SPC i d f" . counsel-describe-function)
           ("C-c SPC i d v" . counsel-describe-variable)))
 
+(use-package ivy-xref
+  :ensure t
+  :init
+  ;; xref initialization is different in Emacs 27 - there are two different
+  ;; variables which can be set rather than just one
+  (when (>= emacs-major-version 27)
+    (setq xref-show-definitions-function #'ivy-xref-show-defs))
+  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
+  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
+  ;; as well
+  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+
 (use-package web-mode
     :ensure t
     :config
@@ -752,8 +768,8 @@ o - maximize current window
 
 (use-package lsp-mode
     :ensure t
+    :diminish lsp-mode
     :init
-    (add-to-list 'exec-path "/home/voloyev/w/elixir/elixir-ls/release")
     (setq lsp-auto-guess-root t)       ; Detect project root
     (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
@@ -764,10 +780,11 @@ o - maximize current window
            (rust-mode   . lsp-deferred)
            (python-mode . lsp-deferred)
            (js-mode     . lsp-deferred)
-           ;; (elixir-mode . lsp-deferred)
            (go-mode     . lsp-deferred)
+           (latex-mode  . lsp-deferred)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
+
 (setq lsp-keymap-prefix "C-c SPC .")
 (global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
@@ -811,20 +828,6 @@ o - maximize current window
     (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
     (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
     (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
-
-(use-package alchemist
-    :ensure t
-    :init
-    ;; (setq alchemist-mix-command "mix")
-    ;; (setq alchemist-mix-test-task "espec")
-    (setq alchemist-key-command-prefix (kbd "C-c SPC e"))
-    (setq alchemist-mix-test-default-options '()) ;; default
-    (setq alchemist-iex-program-name "iex") ;; default: iex
-    (setq alchemist-execute-command "elixir") ;; default: elixir
-    (setq alchemist-compile-command "elixirc") ;; default: elixirc
-    (setq alchemist-hooks-compile-on-save t)
-    (setq alchemist-goto-erlang-source-dir "~/source/otp")
-    (setq alchemist-goto-elixir-source-dir "~/source/elixir"))
 
 ;; haskell
 (use-package intero
