@@ -19,11 +19,18 @@
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/modules")
 (add-to-list 'load-path "~/.emacs.d/plugins")
-(package-install 'use-package)
 
-(use-package gcmh
-    :ensure t)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(use-package gcmh :ensure t)
 (gcmh-mode 1)
+
+;; Performance hacks
+(setq message-log-max t)
+(setq large-file-warning-threshold 100000000)
+(setq read-process-output-max (* 1024 1024)) ;; 1mb
+(setq idle-update-delay 1)
 
 ;; save customization in separate file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
@@ -34,15 +41,9 @@
 (delete-selection-mode t)
 (desktop-save-mode 0)
 
-;; Performance hacks
-(setq message-log-max t)
-(setq large-file-warning-threshold 100000000)
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
-(setq idle-update-delay 1)
-
 (defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
-(setq redisplay-dont-pause t)
+;; (setq redisplay-dont-pause t)
 
 (add-hook 'emacs-startup-hook
   (lambda ()
@@ -56,8 +57,11 @@
 
 (add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
 
-(cond ((memq window-system '(ns mac)) (set-face-attribute 'default nil :font "Hack 15"))
-      ((memq window-system '(x)) (set-face-attribute 'default nil :font "Hack 14")))
+(cond ((memq window-system '(ns mac))
+       (set-face-attribute 'default nil :font "Hack 15"))
+      ((memq window-system '(x))
+       (set-face-attribute 'default nil :font "Hack 14")))
+
 (set-face-attribute 'mode-line nil :font "Hack 12")
 (setq-default line-spacing 1)
 
@@ -84,7 +88,6 @@
 
 ;; use zsh
 (setq shell-file-name "/bin/zsh")
-(package-install 'use-package)
 
 ;; Emacs server
 (require 'server)
@@ -100,6 +103,7 @@
 (setq-default css-indent-offset    2)
 (setq-default scss-indent-offset   2)
 (setq-default python-indent-offset 4)
+
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
@@ -269,19 +273,20 @@
 (global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
 (use-package dumb-jump
-    :bind (("C-c SPC j o" . dumb-jump-go-other-window)
-           ("C-c SPC j j" . dumb-jump-go)
-           ("C-c SPC j q" . dumb-jump-quick-look)
-           ("C-c SPC j i" . dumb-jump-go-prompt)
-           ("C-c SPC j x" . dumb-jump-go-prefer-external)
-           ("C-c SPC j z" . dumb-jump-go-prefer-external-other-window)
-           ("C-c SPC j b" . dumb-jump-back))
     :config
     (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
     (setq dumb-jump-force-searcher 'rg)
     :ensure t)
 
-(defhydra hydra-dump-jump (:exit t)
+(defhydra hydra-dump-jump (:exit t :hint nil)
+  "
+   ^Goto^                    ^Config^
+   ----------------------------------------------------------
+   [_o_] goto other window   [_z_] dumb-jump-go-prefer-external-other-window
+   [_j_] goto                [_b_] dumb-jump-back
+   [_q_] quick look          [_x_] dumb-jump-go-prefer-external
+   [_i_] goto prompt
+"
   ("o" dumb-jump-go-other-window)
   ("j" dumb-jump-go)
   ("q" dumb-jump-quick-look)
@@ -289,13 +294,13 @@
   ("x" dumb-jump-go-prefer-external)
   ("z" dumb-jump-go-prefer-external-other-window)
   ("b" dumb-jump-back))
-(global-set-key (kbd "C-c SPC j") 'hydra-dump-jump/body)
+(global-set-key (kbd "C-, j") 'hydra-dump-jump/body)
 
 ;; fzf
 (use-package fzf
     :ensure t
     :bind
-    (("C-c SPC f f" . fzf)))
+    (("C-, f f" . fzf)))
 
 (use-package evil-nerd-commenter
     :ensure t
@@ -338,25 +343,23 @@
     :init
     (global-flycheck-mode)
     :config
-    ;; (flycheck-pos-tip-mode nil)
     (setq flycheck-checker-error-threshold nil))
 
-(use-package flycheck-pos-tip
-    :ensure t)
+(use-package flycheck-pos-tip :ensure t)
+(use-package flycheck-popup-tip :ensure t)
+(use-package flycheck-pycheckers :ensure t)
 
-(use-package flycheck-popup-tip
-    :ensure t)
-
-(use-package flycheck-pycheckers
-    :ensure t)
-
-(defhydra hydra-avy (global-map "C-c ;" :exit t :hint nil)
-  ;; ^Line^       ^Region^        ^Goto^
-  ;; ----------------------------------------------------------
-  ;; [_y_] yank   [_Y_] yank      [_c_] timed char  [_C_] char
-  ;; [_m_] move   [_M_] move      [_w_] word        [_W_] any word
-  ;; [_k_] kill   [_K_] kill      [_l_] line        [_L_] end of line
-
+(defhydra hydra-avy (global-map "C-;" :exit t :hint nil)
+  "
+  ^Line^       ^Region^        ^Goto^
+  ----------------------------------------------------------
+  [_y_] yank   [_Y_] yank      [_c_] timed char
+  [_m_] move   [_M_] move      [_w_] word
+  [_k_] kill   [_K_] kill      [_l_] line
+                               [_;_] char
+                               [_W_] any word
+                               [_L_] end of line
+"
   ("c" avy-goto-char-timer)
   (";" avy-goto-char)
   ("w" avy-goto-word-1)
@@ -370,7 +373,7 @@
   ("y" avy-copy-line)
   ("Y" avy-copy-region))
 
-(defhydra hydra-zoom (global-map "C-c SPC z")
+(defhydra hydra-zoom (global-map "C-, SPC z")
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
@@ -384,7 +387,7 @@
  _g_lobal  _d_irectory    _i_nsert
  _m_inor   _f_ile         _t_ryout
  _e_xtra   _l_ist         _n_ew
-         _a_ll
+           _a_ll
 "
   ("d" yas-load-directory)
   ("e" yas-activate-extra-mode)
@@ -396,7 +399,7 @@
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all))
-(global-set-key (kbd "C-c SPC SPC y") 'hydra-yasnippet/body)
+(global-set-key (kbd "C-, SPC y") 'hydra-yasnippet/body)
 
 
 (use-package evil
@@ -469,12 +472,11 @@
 (use-package haml-mode
     :mode ("\\.haml\\'" . haml-mode))
 
-;; jekyll mode
-(use-package hyde
-    :ensure t)
+(use-package hyde :ensure t)
+(use-package easy-jekyll :ensure t)
+(setq easy-jekyll-markdown-extension "markdown")
 
-(use-package rspec-mode
-    :ensure t)
+(use-package rspec-mode :ensure t)
 
 (add-hook 'ruby-mode-hook 'chruby-use-corresponding)
 
@@ -537,21 +539,20 @@
                   (ibuffer-do-sort-by-alphabetic)))))
 
 (use-package ibuffer-vc :ensure t)
-"
-x - delete window
-m - swap windows
-M - move window
-c - copy window
-j - select buffer
-n - select the previous window
-u - select buffer in the other window
-c - split window fairly, either vertically or horizontally
-v - split window vertically
-b - split window horizontally
-o - maximize current window
-? - show these command bindings
-"
+
 (use-package ace-window
+    ;; x - delete window
+    ;; m - swap windows
+    ;; M - move window
+    ;; c - copy window
+    ;; j - select buffer
+    ;; n - select the previous window
+    ;; u - select buffer in the other window
+    ;; c - split window fairly, either vertically or horizontally
+    ;; v - split window vertically
+    ;; b - split window horizontally
+    ;; o - maximize current window
+    ;; ? - show these command bindings
     :ensure t
     :config
     (setq aw-dispatch-always t)
@@ -648,10 +649,6 @@ o - maximize current window
                    (projectile-project-name)))))
 (add-hook 'projectile-mode-hook 'chruby-use-corresponding)
 
-(use-package easy-jekyll
-    :ensure t)
-
-(setq easy-jekyll-markdown-extension "markdown")
 
 (add-hook 'php-mode-hook (lambda () c-basic-offset 2))
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
@@ -713,7 +710,6 @@ o - maximize current window
     (setq web-mode-css-indent-offset 2)
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-php-indent-offset 2)
-
     ;;snippets fo autoclose tags
     (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
     (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
@@ -762,7 +758,7 @@ o - maximize current window
 
 (use-package systemd
     :ensure t)
- 
+
 (use-package ox-reveal
     :ensure t)
 
