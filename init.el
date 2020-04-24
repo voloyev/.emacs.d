@@ -49,7 +49,7 @@
   (lambda ()
     (setq file-name-handler-alist doom--file-name-handler-alist)))
 
-(package-quickstart-refresh)
+;; (package-quickstart-refresh)
 ;; Restore `file-name-handler-alist', because it is needed for handling
 ;; encrypted or compressed files, among other things.
 (defun voloyev-reset-file-handler-alist-h ()
@@ -261,10 +261,10 @@
     :ensure t
     :bind("C-'" . toggle-quotes))
 
-(use-package paradox
-    :ensure t
-    :init
-    (paradox-enable))
+;; (use-package paradox
+;;     :ensure t
+;;     :init
+;;     (paradox-enable))
 
 ;; resize buffers
 (global-set-key (kbd "C-c C-c <up>") 'shrink-window)
@@ -424,11 +424,17 @@
 ;; themes
 ;; (setq custom-safe-themes t)
 ;; (add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs-lisp/sexy-monochrome-theme")
-(use-package sexy-monochrome-theme
+;; (use-package sexy-monochrome-theme
+;;     :ensure t
+;;     :init
+;;     (load-theme 'sexy-monochrome t)
+;;     (enable-theme 'sexy-monochrome))
+
+(use-package zenburn-theme
     :ensure t
     :init
-    (load-theme 'sexy-monochrome t)
-    (enable-theme 'sexy-monochrome))
+    (load-theme 'zenburn t)
+    (enable-theme 'zenburn))
 
 (use-package lispy
     :ensure t
@@ -594,7 +600,7 @@
           ("M-c" . fix-word-capitalize)))
 
 (use-package es-mode
-    :ensure T
+    :ensure t
     :init
     (org-babel-do-load-languages
      'org-babel-load-languages
@@ -766,8 +772,8 @@
     :ensure t
     :diminish lsp-mode
     :init
-    (setq lsp-auto-guess-root t)       ; Detect project root
-    (setq lsp-prefer-flymake nil)      ; Use lsp-ui and flycheck
+    (setq lsp-auto-guess-root t)            ; Detect project root
+    (setq lsp-diagnostic-package 'flycheck) ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
@@ -789,6 +795,11 @@
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 (use-package lsp-ui :ensure t :commands lsp-ui-mode)
+
+(setq lsp-ui-sideline-show-code-actions nil)
+(setq lsp-ui-sideline-show-diagnostics nil)
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-ui-doc-enable nil)
 
 (require 'lsp-ui-flycheck)
 (with-eval-after-load 'lsp-mode
@@ -825,6 +836,10 @@
     (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
     (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
+(use-package flycheck-credo
+    :ensure t)
+(add-hook 'flycheck-mode-hook #'flycheck-credo-setup)
+
 ;; haskell
 (use-package intero
     :ensure t
@@ -838,7 +853,9 @@
     (setq rust-format-on-save t))
 
 (use-package smart-semicolon :ensure t)
+
 (add-hook #'rust-mode-hook 'smart-semicolon-mode)
+(add-hook #'rust-mode-hook 'company-mode)
 
 (use-package cargo
     :commands cargo-minor-mode
@@ -850,6 +867,10 @@
 (use-package toml-mode
     :ensure t
     :mode (("\\.toml\\'" . toml-mode)))
+
+(use-package flycheck-rust
+    :ensure t
+    :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;;; python
 (use-package python-black
@@ -878,7 +899,7 @@
 (add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
 (add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
-
+(add-to-list 'flycheck-checkers 'python-pylint)
 ;;;;;;; lisp
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
