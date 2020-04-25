@@ -60,9 +60,9 @@
 (cond ((memq window-system '(ns mac))
        (set-face-attribute 'default nil :font "Hack 15"))
       ((memq window-system '(x))
-       (set-face-attribute 'default nil :font "Hack 14")))
+       (set-face-attribute 'default nil :font "Inconsolata 15")))
 
-(set-face-attribute 'mode-line nil :font "Hack 12")
+(set-face-attribute 'mode-line nil :font "Inconsolata 13")
 (setq-default line-spacing 1)
 
 (if (memq window-system '(ns mac))
@@ -430,11 +430,17 @@
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
 
-(use-package zenburn-theme
+;; (use-package zenburn-theme
+;;     :ensure t
+;;     :init
+;;     (load-theme 'zenburn t)
+;;     (enable-theme 'zenburn))
+
+(use-package gruvbox-theme
     :ensure t
     :init
-    (load-theme 'zenburn t)
-    (enable-theme 'zenburn))
+    (load-theme 'gruvbox-dark-soft t)
+    (enable-theme 'gruvbox-dark-soft))
 
 (use-package lispy
     :ensure t
@@ -815,6 +821,10 @@
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
 (setq treemacs-no-png-images t)
+
+(use-package lsp-dart 
+  :ensure t 
+  :hook (dart-mode . lsp))
 
 ;;;; go settings
 (use-package go-mode
