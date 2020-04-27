@@ -58,7 +58,7 @@
 (add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
 
 (cond ((memq window-system '(ns mac))
-       (set-face-attribute 'default nil :font "Hack 15"))
+       (set-face-attribute 'default nil :font "Inconsolata 18"))
       ((memq window-system '(x))
        (set-face-attribute 'default nil :font "Inconsolata 15")))
 
