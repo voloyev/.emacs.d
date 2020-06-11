@@ -4,11 +4,12 @@
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6)
+;; -(setq gc-cons-threshold most-positive-fixnum
+;;       gc-cons-percentage 0.6)
 
-(defvar doom--file-name-handler-alist file-name-handler-alist)
-(setq file-name-handler-alist nil)
+;; save customization in separate file
+(setq custom-file "~/.emacs.d/.emacs-custom.el")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -31,37 +32,45 @@
 (setq large-file-warning-threshold 100000000)
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 (setq idle-update-delay 1)
+(setq scroll-step 1)
+(setq ring-bell-function 'ignore)
+(setq make-backup-files         nil)
+(setq auto-save-default         nil)
+(setq auto-save-list-file-name  nil)
+(setq inhibit-splash-screen       0)
+(setq ingibit-startup-message     0)
+(setq auto-window-vscroll       nil)
+(setq x-select-enable-clipboard   t)
+(setq search-highlight            t)
+(setq query-replace-highlight     t)
+(setq frame-title-format "GNU Emacs: %b")
+(setq-default bidi-display-reordering 'left-to-right
+              bidi-paragraph-direction 'left-to-right)
 
-;; save customization in separate file
-(setq custom-file "~/.emacs.d/.emacs-custom.el")
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+(setq fast-but-imprecise-scrolling t)
+(setq frame-inhibit-implied-resize t)
+(setq ffap-machine-p-known 'reject)
+(when (memq window-system '(ns mac))
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta))
+(setq shell-file-name "/bin/zsh")
 
-(xterm-mouse-mode t)
+(xterm-mouse-mode        t)
 (global-auto-revert-mode t)
-(delete-selection-mode t)
-(desktop-save-mode 0)
+(delete-selection-mode   t)
+(desktop-save-mode       0)
+(tool-bar-mode          -1)
+(menu-bar-mode          -1)
+(scroll-bar-mode        -1)
 
-(defvar voloyev--initial-file-name-handler-alist file-name-handler-alist)
-(setq file-name-handler-alist nil)
-;; (setq redisplay-dont-pause t)
-
-(add-hook 'emacs-startup-hook
-  (lambda ()
-    (setq file-name-handler-alist doom--file-name-handler-alist)))
-
-;; (package-quickstart-refresh)
-;; Restore `file-name-handler-alist', because it is needed for handling
-;; encrypted or compressed files, among other things.
-(defun voloyev-reset-file-handler-alist-h ()
-  (setq file-name-handler-alist voloyev--initial-file-name-handler-alist))
-
-(add-hook 'emacs-startup-hook #'voloyev-reset-file-handler-alist-h)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (cond ((memq window-system '(ns mac))
        (set-face-attribute 'default nil :font "Inconsolata 18"))
       ((memq window-system '(x))
        (set-face-attribute 'default nil :font "Inconsolata 15")))
-
 (set-face-attribute 'mode-line nil :font "Inconsolata 13")
 (setq-default line-spacing 1)
 
@@ -71,23 +80,6 @@
                    '(ns-transparent-titlebar . t))
       (add-to-list 'default-frame-alist
                    '(ns-appearance . light))))
-
-(setq-default bidi-display-reordering 'left-to-right
-              bidi-paragraph-direction 'left-to-right)
-
-(setq-default cursor-in-non-selected-windows nil)
-(setq highlight-nonselected-windows nil)
-
-(setq fast-but-imprecise-scrolling t)
-(setq frame-inhibit-implied-resize t)
-(setq ffap-machine-p-known 'reject)
-
-(when (memq window-system '(ns mac))
-  (setq mac-option-modifier 'super)
-  (setq mac-command-modifier 'meta))
-
-;; use zsh
-(setq shell-file-name "/bin/zsh")
 
 ;; Emacs server
 (require 'server)
@@ -107,39 +99,12 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
-(setq ring-bell-function 'ignore)
-;; (setq-default with-editor-emacsclient-executable "emacsclient")
+(use-package flycheck :ensure t)
+(global-flycheck-mode t)
 
-;; Disable backup/autosave files
-(setq make-backup-files        nil)
-(setq auto-save-default        nil)
-(setq auto-save-list-file-name nil)
-
-;; Inhibit startup/splash screen
-(setq inhibit-splash-screen   0)
-(setq ingibit-startup-message 0)
-
-(setq auto-window-vscroll nil)
-
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode   -1)
-(setq scroll-step 1)
-
-;; short answer
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Clipboard settings
-(setq x-select-enable-clipboard t)
-
-;; Highlight search result
-(setq search-highlight        t)
-(setq query-replace-highlight t)
-(setq frame-title-format "GNU Emacs: %b")
-
-(use-package simple-modeline
-    :ensure t
-    :hook(after-init . simple-modeline-mode))
+(use-package company :ensure t)
+(setq company-idle-delay 0.1)
+(add-hook 'after-init-hook 'global-company-mode)
 
 (use-package direnv
     :ensure t
@@ -158,7 +123,6 @@
     :init (require 'button-lock)
     :config (global-fixmee-mode 1))
 
-;;whitespace
 (use-package whitespace
     :init
   (setq whitespace-line-column 250)
@@ -169,34 +133,9 @@
   :bind(("C-c SPC w s" . whitespace-mode)
         ("C-c SPC w c" . whitespace-cleanup)))
 
-;; company mode
-(use-package company
-    :ensure t
-    :init
-    (global-company-mode t)
-    :bind("C-<tab>" . company-complete))
-
-(use-package company-quickhelp
-    :ensure t
-    :defer t
-    :init
-    (add-hook 'global-company-mode-hook #'company-quickhelp-mode))
-
-(use-package hydra
-    :ensure t)
-
-(use-package avy
-    :ensure t)
-
-(use-package company-nginx
-    :ensure t
-    :config
-    (eval-after-load 'nginx-mode
-      '(add-hook 'nginx-mode-hook #'company-nginx-keywords)))
-
-;; multiple cursors
-(use-package multiple-cursors
-    :ensure t)
+(use-package hydra            :ensure t)
+(use-package avy              :ensure t)
+(use-package multiple-cursors :ensure t)
 
 (defhydra hydra-multiple-cursors ()
   "
@@ -261,11 +200,6 @@
     :ensure t
     :bind("C-'" . toggle-quotes))
 
-;; (use-package paradox
-;;     :ensure t
-;;     :init
-;;     (paradox-enable))
-
 ;; resize buffers
 (global-set-key (kbd "C-c C-c <up>") 'shrink-window)
 (global-set-key (kbd "C-c C-c <down>") 'enlarge-window)
@@ -309,8 +243,7 @@
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
-(use-package htmlize
-    :ensure t)
+(use-package htmlize :ensure t)
 
 (use-package irony
     :ensure t
@@ -337,17 +270,6 @@
     :config
     (global-set-key [remap kill-ring-save] 'easy-kill)
     (global-set-key [remap mark-sexp] 'easy-mark))
-
-(use-package flycheck
-    :ensure t
-    :init
-    (global-flycheck-mode)
-    :config
-    (setq flycheck-checker-error-threshold nil))
-
-(use-package flycheck-pos-tip :ensure t)
-(use-package flycheck-popup-tip :ensure t)
-(use-package flycheck-pycheckers :ensure t)
 
 (defhydra hydra-avy (global-map "C-;" :exit t :hint nil)
   "
@@ -401,26 +323,6 @@
   ("a" yas-reload-all))
 (global-set-key (kbd "C-, SPC y") 'hydra-yasnippet/body)
 
-
-(use-package evil
-    :ensure t
-    :bind
-    (("C-c SPC SPC e l" . evil-local-mode)
-     ("C-c SPC SPC e g" . evil-mode)))
-
-(use-package evil-matchit
-    :ensure t
-    :config
-    (add-hook 'evil-local-mode 'turn-on-evil-matchit-mode)
-    (add-hook 'evil-mode 'turn-on-evil-matchit-mode))
-
-;; use emacs keybindings in insert mode
-(setcdr evil-insert-state-map nil)
-
-;; but [escape] should switch back to normal state
-(define-key evil-insert-state-map [escape] 'evil-normal-state)
-(evil-set-initial-state 'eshell-mode 'emacs)
-
 ;; themes
 ;; (setq custom-safe-themes t)
 ;; (add-to-list 'custom-theme-load-path "~/workspace/lisp/emacs-lisp/sexy-monochrome-theme")
@@ -429,12 +331,6 @@
 ;;     :init
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
-
-;; (use-package zenburn-theme
-;;     :ensure t
-;;     :init
-;;     (load-theme 'zenburn t)
-;;     (enable-theme 'zenburn))
 
 (use-package gruvbox-theme
     :ensure t
@@ -451,11 +347,12 @@
     :init
     (setq geiser-default-implementation 'racket))
 
-;;;; ruby
-(use-package rake
-    :ensure t)
-
-(add-hook 'after-init-hook 'inf-ruby-switch-setup)
+(use-package chruby :ensure t)
+(use-package rake :ensure t)
+(use-package bundler :ensure t)
+(use-package rspec-mode :ensure t)
+(use-package hyde :ensure t)
+(use-package easy-jekyll :ensure t)
 
 (use-package ruby-mode
     :init   (setq ruby-insert-encoding-magic-comment nil)
@@ -465,31 +362,22 @@
     :bind(("C-c SPC SPC r r"      . inf-ruby-console-auto)
           ("C-c SPC SPC r h r"    . enh-ruby-mode)))
 
-(use-package chruby
-    :ensure t)
-
 (use-package ruby-tools
     :ensure t
     :init
     (setq ruby-indent-level 2)
     (setq ruby-deep-indent-paren nil))
 
-(use-package bundler
-    :ensure t)
-
 (use-package slim-mode
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
 (use-package haml-mode
+    :ensure t
     :mode ("\\.haml\\'" . haml-mode))
 
-(use-package hyde :ensure t)
-(use-package easy-jekyll :ensure t)
 (setq easy-jekyll-markdown-extension "markdown")
-
-(use-package rspec-mode :ensure t)
-
+(add-hook 'after-init-hook 'inf-ruby-switch-setup)
 (add-hook 'ruby-mode-hook 'chruby-use-corresponding)
 
 ;;;; js mode
@@ -514,12 +402,6 @@
 (use-package js-mode
     :mode ("\\.js\\'" . js-mode)
     :mode ("\\.jsx\\'" . js-mode))
-
-;; (use-package elm-mode
-;;     :ensure t
-;;     :mode "\\.elm\\'"
-;;     :config (setq elm-format-on-save t)
-;;     :hook (smartparens-mode . elm-mode))
 
 (custom-set-variables '(coffee-tab-width 2))
 (custom-set-variables '(js2-basic-offset 2))
@@ -581,13 +463,6 @@
     :config
     (editorconfig-mode t))
 
-(use-package super-save
-    :ensure t
-    :config
-    (setq super-save-auto-save-when-idle t)
-    (super-save-mode t)
-    (setq auto-save-default nil))
-
 (use-package markdown-mode
     :init (setq markdown-command "mark")
     :mode ("\\.text\\'" . markdown-mode)
@@ -598,7 +473,6 @@
     :ensure t
     :config (which-key-mode t))
 
-;; upcase region
 (use-package fix-word
     :ensure t
     :bind(("M-u" . fix-word-upcase)
@@ -624,10 +498,6 @@
 (use-package bfbuilder
     :ensure t
     :mode ("\\.bf\\'" . bfbuilder-mode))
-
-(use-package fsharp-mode
-    :ensure t
-    :mode ("\\.fs[iylx]?$" . fsharp-mode))
 
 (use-package nasm-mode
     :ensure t)
@@ -730,16 +600,11 @@
           '(("jsx" . "\\.js[x]?\\'"))))
 
 ;; crystal mode
-(use-package crystal-mode
-    :ensure t)
+(use-package crystal-mode :ensure t)
 
 (use-package cider
     :ensure t
-    :init
-    (add-hook 'cider-repl-mode-hook #'company-mode)
-    (add-hook 'cider-mode-hook #'company-mode)
-    (add-hook 'cider-repl-mode-hook #'cider-company-enable-fuzzy-completion)
-    (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion))
+    :init)
 
 (use-package clojure-mode
     :ensure t
@@ -768,11 +633,8 @@
     :config
     (setq walkman-keep-headers t))
 
-(use-package systemd
-    :ensure t)
-
-(use-package ox-reveal
-    :ensure t)
+(use-package systemd :ensure t)
+(use-package ox-reveal :ensure t)
 
 (use-package lsp-mode
     :ensure t
@@ -784,7 +646,7 @@
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
     :hook ((vue-mode    . lsp-deferred)
-           ;; (ruby-mode   . lsp-deferred)
+           (ruby-mode   . lsp-deferred)
            (rust-mode   . lsp-deferred)
            (python-mode . lsp-deferred)
            (js-mode     . lsp-deferred)
@@ -796,9 +658,6 @@
 (setq lsp-keymap-prefix "C-c SPC .")
 (global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
-(setq company-minimum-prefix-length 1
-      company-idle-delay 0.0) ;; default is 0.2
-
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 (use-package lsp-ui :ensure t :commands lsp-ui-mode)
 
@@ -807,33 +666,26 @@
 (setq lsp-ui-sideline-show-hover nil)
 (setq lsp-ui-doc-enable nil)
 
-(require 'lsp-ui-flycheck)
-(with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-after-open-hook (lambda () (lsp-flycheck-enable 1))))
-
 (global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
 (global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
-
-(use-package company-lsp :ensure t :commands company-lsp)
-(push 'company-lsp company-backends)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
 
 (setq treemacs-no-png-images t)
 
-(use-package lsp-dart 
+(use-package lsp-dart
   :ensure t 
   :hook (dart-mode . lsp))
 
 ;;;; go settings
-(use-package go-mode
-    :ensure t)
+(use-package go-mode :ensure t)
 
 ;; lsp go hook
 (add-hook 'go-mode-hook
           (lambda ()
              (add-hook 'before-save-hook 'lsp-format-buffer)))
+(setq gofmt-before-save t)
 
 ;;;;; elixir module
 (use-package elixir-mode
@@ -846,10 +698,6 @@
     (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
     (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
-(use-package flycheck-credo
-    :ensure t)
-(add-hook 'flycheck-mode-hook #'flycheck-credo-setup)
-
 ;; haskell
 (use-package intero
     :ensure t
@@ -858,14 +706,12 @@
 ;;;; rust settings
 (use-package rust-mode
     :mode "\\.rs\\'"
-    :ensure t
-    :init
-    (setq rust-format-on-save t))
+    :ensure t)
+
+(add-hook 'before-save-hook (lambda () (when (eq 'rust-mode major-mode)
+                                           (rust-format-buffer))))
 
 (use-package smart-semicolon :ensure t)
-
-(add-hook #'rust-mode-hook 'smart-semicolon-mode)
-(add-hook #'rust-mode-hook 'company-mode)
 
 (use-package cargo
     :commands cargo-minor-mode
@@ -877,11 +723,7 @@
 (use-package toml-mode
     :ensure t
     :mode (("\\.toml\\'" . toml-mode)))
-
-(use-package flycheck-rust
-    :ensure t
-    :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
+ 
 ;;;;; python
 (use-package python-black
     :demand t
@@ -893,11 +735,10 @@
 (use-package python-mode
     :ensure t)
 
-;; (add-hook 'python-mode-hook (lambda ()
-;;                               (setq-local flycheck-checker 'python-flake8)))
+(add-hook 'python-mode-hook (lambda ()
+                              (setq-local flycheck-checker 'python-flake8)))
 
-(use-package pyvenv
-    :ensure t)
+(use-package pyvenv :ensure t)
 
 (use-package auto-virtualenvwrapper
     :ensure t
@@ -909,7 +750,7 @@
 (add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
 (add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
-(add-to-list 'flycheck-checkers 'python-pylint)
+
 ;;;;;;; lisp
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
