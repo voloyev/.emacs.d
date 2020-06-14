@@ -56,6 +56,8 @@
   (setq mac-option-modifier 'super)
   (setq mac-command-modifier 'meta))
 (setq shell-file-name "/bin/zsh")
+(setq ls-lisp-use-insert-directory-program nil)
+(setq ls-lisp-dirs-first t)
 
 (xterm-mouse-mode        t)
 (global-auto-revert-mode t)
@@ -675,9 +677,14 @@
 (setq treemacs-no-png-images t)
 
 (use-package lsp-dart
-  :ensure t 
-  :hook (dart-mode . lsp))
+  :ensure t
+  :hook (dart-mode . lsp-deferred))
 
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-python-ms))))
 ;;;; go settings
 (use-package go-mode :ensure t)
 
