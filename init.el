@@ -185,6 +185,7 @@
     :hook (scss-mode . emmet-mode))
 
 (use-package magit
+    :defer t
     :ensure t
     :bind("C-c SPC g" . magit-status))
 
@@ -248,6 +249,7 @@
 (use-package htmlize :ensure t)
 
 (use-package irony
+    :defer t
     :ensure t
     :hook (c++-mode)
     :hook (c-mode)
@@ -357,6 +359,7 @@
 (use-package easy-jekyll :ensure t)
 
 (use-package ruby-mode
+    :defer t
     :init   (setq ruby-insert-encoding-magic-comment nil)
     :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
     :hook (robe-mode)
@@ -371,10 +374,12 @@
     (setq ruby-deep-indent-paren nil))
 
 (use-package slim-mode
+    :defer t
     :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
 (use-package haml-mode
+    :defer t
     :ensure t
     :mode ("\\.haml\\'" . haml-mode))
 
@@ -384,6 +389,7 @@
 
 ;;;; js mode
 (use-package vue-mode
+    :defer t
     :ensure t
     :mode ("\\.vue\\'" . vue-mode)
     :config
@@ -393,6 +399,7 @@
 
 ;;pretier
 (use-package prettier-js
+    :defer t
     :ensure t
     :init
     (add-hook 'web-mode-hook #'(lambda ()
@@ -490,18 +497,22 @@
     :config (setq es-always-pretty-print t))
 
 (use-package yaml-mode
+    :defer t
     :ensure t
     :mode ("\\.yml\\'" . yaml-mode))
 
 (use-package restclient
+    :defer t
     :ensure t
     :mode ("\\.restc\\'" . restclient-mode))
 
 (use-package bfbuilder
+    :defer t
     :ensure t
     :mode ("\\.bf\\'" . bfbuilder-mode))
 
 (use-package nasm-mode
+    :defer t
     :ensure t)
 
 (use-package diff-hl
@@ -530,14 +541,17 @@
     (setq projectile-completion-system 'ivy)
     (setq projectile-mode-line
           '(:eval (format " Projectile[%s]"
-                   (projectile-project-name)))))
+                   (projectile-project-name))))
+    (setq projectile-require-project-root t))
 (add-hook 'projectile-mode-hook 'chruby-use-corresponding)
 
+(setq projectile-project-root-files (remove "WORKSPACE" projectile-project-root-files))
 
 (add-hook 'php-mode-hook (lambda () c-basic-offset 2))
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 (use-package yasnippet
+    :defer t
     :ensure t
     :config
     (add-to-list 'load-path
@@ -576,6 +590,7 @@
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
 (use-package web-mode
+    :defer t
     :ensure t
     :config
     (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
@@ -605,10 +620,12 @@
 (use-package crystal-mode :ensure t)
 
 (use-package cider
+    :defer t
     :ensure t
     :init)
 
 (use-package clojure-mode
+    :defer t
     :ensure t
     :config
     (setq clojure-indent-style 'always-indent))
@@ -639,6 +656,7 @@
 (use-package ox-reveal :ensure t)
 
 (use-package lsp-mode
+    :defer t
     :ensure t
     :diminish lsp-mode
     :init
@@ -677,8 +695,9 @@
 (setq treemacs-no-png-images t)
 
 (use-package lsp-dart
-  :ensure t
-  :hook (dart-mode . lsp-deferred))
+    :defer t
+    :ensure t
+    :hook (dart-mode . lsp-deferred))
 
 (use-package lsp-python-ms
   :ensure t
