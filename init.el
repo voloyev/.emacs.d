@@ -236,7 +236,7 @@
 (use-package fzf
     :ensure t
     :bind
-    (("C-, f f" . fzf)))
+    (("C-c SPC f f" . fzf)))
 
 (use-package evil-nerd-commenter
     :ensure t
@@ -337,8 +337,8 @@
 (use-package gruvbox-theme
     :ensure t
     :init
-    (load-theme 'gruvbox-dark-soft t)
-    (enable-theme 'gruvbox-dark-soft))
+    (load-theme 'gruvbox-light-soft t)
+    (enable-theme 'gruvbox-light-soft))
 
 (use-package lispy
     :ensure t
@@ -766,7 +766,7 @@
     :init
     (setq org-babel-lisp-eval-fn 'sly-eval)
     (setq inferior-lisp-program "ros -Q run")
-    :hook (lisp-mode . sly-editing))
+    :hook (lisp-mode . sly-editing-mode))
 
 ;; (use-package racket-mode
 ;;     :ensure t)
@@ -834,6 +834,8 @@
 (setq org-log-done 'time)
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
+
+(require 'dap-python)
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
