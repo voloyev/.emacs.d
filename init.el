@@ -339,8 +339,8 @@
 (use-package gruvbox-theme
     :ensure t
     :init
-    (load-theme 'gruvbox-light-soft t)
-    (enable-theme 'gruvbox-light-soft))
+    (load-theme 'gruvbox-dark-soft t)
+    (enable-theme 'gruvbox-dark-soft))
 
 (use-package lispy
     :ensure t
@@ -589,32 +589,34 @@
   ;; as well
   (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
-(use-package web-mode
-    :defer t
-    :ensure t
-    :config
-    (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
-    (setq web-mode-enable-auto-pairing t)
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2)
-    (setq web-mode-php-indent-offset 2)
-    ;;snippets fo autoclose tags
-    (setq web-mode-extra-snippets '(("erb" . (("name" . ("beg" . "end"))))))
-    (setq web-mode-extra-auto-pairs '(("erb" . (("open" "close")))))
-    (setq web-mode-enable-auto-indentation nil)
-    (setq web-mode-content-types-alist
-          '(("jsx" . "\\.js[x]?\\'"))))
+(use-package web-mode :defer t :ensure t)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq web-mode-php-indent-offset 2)
+;;snippets fo autoclose tags
+(setq web-mode-extra-snippets
+      '(("erb" . (("name" . ("beg" . "end"))))))
+(setq web-mode-extra-auto-pairs
+      '(("erb" . (("open" "close")))))
+(setq web-mode-enable-auto-indentation nil)
+(setq web-mode-content-types-alist
+          '(("jsx" . "\\.js[x]?\\'")))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+(add-hook 'web-mode-hook 'emmet-mode)
 
 ;; crystal mode
 (use-package crystal-mode :ensure t)
@@ -655,12 +657,13 @@
 (use-package systemd :ensure t)
 (use-package ox-reveal :ensure t)
 
+(add-to-list 'exec-path "/home/voloyev/elixir-ls/release")
 (use-package lsp-mode
     :defer t
     :ensure t
     :diminish lsp-mode
     :init
-    (setq lsp-auto-guess-root t)            ; Detect project root
+    (setq lsp-auto-guess-root t)
     (setq lsp-diagnostic-package 'flycheck) ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
     (setq lsp-prefer-capf t)
@@ -672,6 +675,7 @@
            (js-mode     . lsp-deferred)
            (go-mode     . lsp-deferred)
            (latex-mode  . lsp-deferred)
+           (elixir-mode . lsp-deferred)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
 
@@ -680,7 +684,8 @@
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 (use-package lsp-ui :ensure t :commands lsp-ui-mode)
-
+(setq lsp-rust-server 'rust-analyzer)
+(setq lsp-rust-analyzer-server-display-inlay-hints 1)
 (setq lsp-ui-sideline-show-code-actions nil)
 (setq lsp-ui-sideline-show-diagnostics nil)
 (setq lsp-ui-sideline-show-hover nil)
@@ -701,16 +706,15 @@
 
 (use-package lsp-python-ms
   :ensure t
-  :init (setq lsp-python-ms-auto-install-server t)
-  :hook (python-mode . (lambda ()
-                          (require 'lsp-python-ms))))
+  :init (setq lsp-python-ms-auto-install-server t))
+(require 'lsp-python-ms)
 ;;;; go settings
 (use-package go-mode :ensure t)
 
 ;; lsp go hook
-(add-hook 'go-mode-hook
-          (lambda ()
-             (add-hook 'before-save-hook 'lsp-format-buffer)))
+;; (add-hook 'go-mode-hook
+;;           (lambda ()
+;;              (add-hook 'before-save-hook 'lsp-format-buffer)))
 (setq gofmt-before-save t)
 
 ;;;;; elixir module
@@ -720,9 +724,12 @@
     (add-hook 'elixir-mode-hook
               (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
     :config
-    (add-to-list 'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
-    (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
+    (add-to-list
+     'auto-mode-alist '("\\.elixir2\\'" . elixir-mode))
+    (add-to-list
+     'auto-mode-alist '("\\.ex\\'" . elixir-mode))
+    (add-to-list
+     'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
 ;; haskell
 (use-package intero
@@ -734,8 +741,10 @@
     :mode "\\.rs\\'"
     :ensure t)
 
-(add-hook 'before-save-hook (lambda () (when (eq 'rust-mode major-mode)
-                                           (rust-format-buffer))))
+(add-hook 'before-save-hook
+          (lambda ()
+            (when (eq 'rust-mode major-mode)
+              (rust-format-buffer))))
 
 (use-package smart-semicolon :ensure t)
 
@@ -761,8 +770,9 @@
 (use-package python-mode
     :ensure t)
 
-(add-hook 'python-mode-hook (lambda ()
-                              (setq-local flycheck-checker 'python-flake8)))
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq-local flycheck-checker 'python-flake8)))
 
 (use-package pyvenv :ensure t)
 
@@ -773,7 +783,8 @@
 
 (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
 ;; Activate on changing buffers
-(add-hook 'window-configuration-change-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'window-configuration-change-hook
+ #'auto-virtualenvwrapper-activate)
 (add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
 
@@ -855,6 +866,12 @@
 (org-clock-persistence-insinuate)
 
 (require 'dap-python)
+
+(use-package tree-sitter :ensure t)
+(use-package tree-sitter-langs :ensure t)
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
 
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
