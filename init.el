@@ -70,10 +70,10 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (cond ((memq window-system '(ns mac))
-       (set-face-attribute 'default nil :font "Inconsolata 18"))
+       (set-face-attribute 'default nil :font "mononoki Nerd Font 18"))
       ((memq window-system '(x))
-       (set-face-attribute 'default nil :font "Inconsolata 15")))
-(set-face-attribute 'mode-line nil :font "Inconsolata 13")
+       (set-face-attribute 'default nil :font "mononoki Nerd Font 14")))
+(set-face-attribute 'mode-line nil :font "mononoki Nerd Font 13")
 (setq-default line-spacing 1)
 
 (if (memq window-system '(ns mac))
@@ -657,7 +657,7 @@
 (use-package systemd :ensure t)
 (use-package ox-reveal :ensure t)
 
-(add-to-list 'exec-path "/home/voloyev/elixir-ls/release")
+(add-to-list 'exec-path "~/.local/share/elixir-ls/release")
 (use-package lsp-mode
     :defer t
     :ensure t
@@ -872,7 +872,7 @@
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-
+(use-package dockerfile-mode :ensure t)
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single line instead."
