@@ -70,7 +70,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (cond ((memq window-system '(ns mac))
-       (set-face-attribute 'default nil :font "mononoki Nerd Font 18"))
+       (set-face-attribute 'default nil :font "mononoki Nerd Font 16"))
       ((memq window-system '(x))
        (set-face-attribute 'default nil :font "mononoki Nerd Font 14")))
 (set-face-attribute 'mode-line nil :font "mononoki Nerd Font 13")
@@ -427,8 +427,12 @@
 (global-set-key (kbd "C-c SPC ]") 'next-buffer)
 (global-set-key (kbd "C-c SPC [") 'previous-buffer)
 
+(use-package bufler
+  :ensure t
+  :bind ("C-x C-b" . bufler))
+
 (use-package ibuffer
-    :bind ("C-x C-b" . ibuffer)
+    ;; :bind ("C-x C-b" . ibuffer)
     :init
     (autoload 'ibuffer "ibuffer" "List buffers." t)
     (defalias 'list-buffers 'ibuffer)
