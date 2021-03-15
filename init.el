@@ -73,7 +73,7 @@
        (set-face-attribute 'default nil :font "mononoki Nerd Font 16"))
       ((memq window-system '(x))
        (set-face-attribute 'default nil :font "mononoki Nerd Font 14")))
-(set-face-attribute 'mode-line nil :font "mononoki Nerd Font 13")
+(set-face-attribute 'mode-line nil :font "mononoki Nerd Font" :height 120)
 (setq-default line-spacing 1)
 
 (if (memq window-system '(ns mac))
