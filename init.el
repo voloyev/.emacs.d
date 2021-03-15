@@ -84,9 +84,9 @@
                    '(ns-appearance . light))))
 
 ;; Emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+;; (require 'server)
+;; (unless (server-running-p)
+;;   (server-start))
 
 ;;Indent settings
 (setq-default indent-tabs-mode   nil)
@@ -97,6 +97,12 @@
 (setq-default css-indent-offset    2)
 (setq-default scss-indent-offset   2)
 (setq-default python-indent-offset 4)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 8))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
@@ -675,8 +681,8 @@
     :hook ((vue-mode    . lsp-deferred)
            (ruby-mode   . lsp-deferred)
            (rust-mode   . lsp-deferred)
-           (python-mode . lsp-deferred)
            (js-mode     . lsp-deferred)
+           (python-mode . lsp-deferred)
            (go-mode     . lsp-deferred)
            (latex-mode  . lsp-deferred)
            (elixir-mode . lsp-deferred)
@@ -708,10 +714,7 @@
     :ensure t
     :hook (dart-mode . lsp-deferred))
 
-(use-package lsp-python-ms
-  :ensure t
-  :init (setq lsp-python-ms-auto-install-server t))
-(require 'lsp-python-ms)
+
 ;;;; go settings
 (use-package go-mode :ensure t)
 
@@ -780,17 +783,15 @@
 
 (use-package pyvenv :ensure t)
 
-(use-package auto-virtualenvwrapper
-    :ensure t
-    :init
-    (setq auto-virtualenvwrapper-verbose nil))
-
-(add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate)
+(use-package auto-virtualenv :ensure t)
+(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 ;; Activate on changing buffers
-(add-hook 'window-configuration-change-hook
- #'auto-virtualenvwrapper-activate)
-(add-hook 'focus-in-hook #'auto-virtualenvwrapper-activate)
+(add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
+;; Activate on focus in
+(add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)
 (add-hook 'python-mode-hook 'highlight-indentation-mode)
+(add-hook 'python-mode-hook 'pyvenv-mode)
+
 
 ;;;;;;; lisp
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
