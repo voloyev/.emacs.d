@@ -342,11 +342,12 @@
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
 
-(use-package gruvbox-theme
+(use-package doom-themes
     :ensure t
     :init
-    (load-theme 'gruvbox-dark-soft t)
-    (enable-theme 'gruvbox-dark-soft))
+    (load-theme 'doom-gruvbox t)
+    (enable-theme 'doom-gruvbox)
+    (doom-themes-visual-bell-config))
 
 (use-package lispy
     :ensure t
