@@ -8,9 +8,19 @@
 ;;       gc-cons-percentage 0.6)
 
 ;; save customization in separate file
+(defun efs/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                   (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
+
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq default-directory "~/")
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -24,8 +34,12 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
-(use-package gcmh :ensure t)
-(gcmh-mode 1)
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+(use-package gcmh :init (gcmh-mode 1))
+
+(use-package no-littering)
 
 ;; Performance hacks
 (setq message-log-max t)
@@ -73,7 +87,7 @@
        (set-face-attribute 'default nil :font "mononoki Nerd Font 16"))
       ((memq window-system '(x))
        (set-face-attribute 'default nil :font "mononoki Nerd Font 14")))
-(set-face-attribute 'mode-line nil :font "mononoki Nerd Font" :height 120)
+
 (setq-default line-spacing 1)
 
 (if (memq window-system '(ns mac))
@@ -99,40 +113,38 @@
 (setq-default python-indent-offset 4)
 
 (use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-height 8))
+  (doom-modeline-mode 1)
+  (setq doom-modeline-height 12)
+  (set-face-attribute 'mode-line nil  :height 80)
+  (set-face-attribute 'mode-line-inactive nil :height 80))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
-(use-package flycheck :ensure t)
-(global-flycheck-mode t)
+(use-package flycheck :init (global-flycheck-mode t))
 
-(use-package company :ensure t)
-(setq company-idle-delay 0.1)
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+    :init
+  (setq company-idle-delay 0.1)
+  (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package direnv
-    :ensure t
-    :config
-    (direnv-mode))
+(use-package direnv :defer t :config (direnv-mode))
 
 ;;Display the name of the current buffer in the title bar
 (use-package fill-column-indicator
-    :ensure t
     :init
     (fci-mode 1)
     (setq fci-rule-width 3))
 
 (use-package fixmee
-    :ensure t
+    :defer t
     :init (require 'button-lock)
     :config (global-fixmee-mode 1))
 
 (use-package whitespace
-    :init
+    :defer t
+    :config
   (setq whitespace-line-column 250)
   (setq whitespace-display-mappings
         '((space-mark 32 [183] [46])
@@ -141,11 +153,11 @@
   :bind(("C-c SPC w s" . whitespace-mode)
         ("C-c SPC w c" . whitespace-cleanup)))
 
-(use-package hydra            :ensure t)
-(use-package avy              :ensure t)
-(use-package multiple-cursors :ensure t)
+(use-package hydra :defer t)
+(use-package avy :defer t)
+(use-package multiple-cursors :defer t)
 
-(defhydra hydra-multiple-cursors ()
+(defhydra hydra-multiple-cursors (global-map "C-c SPC m")
   "
  Up^^             Down^^           Miscellaneous           % 2(mc/num-cursors) cursor%s(if (> (mc/num-cursors) 1) \"s\" \"\")
 ------------------------------------------------------------------
@@ -169,44 +181,41 @@
   ("<down-mouse-1>" ignore)
   ("<drag-mouse-1>" ignore)
   ("q" nil))
-(global-set-key (kbd "C-c SPC m") 'hydra-multiple-cursors/body)
 
 ;; map of tagtables
 (global-set-key (kbd "<f8>") 'visit-tags-table)
 
 (use-package bookmark
-    :init
-  (setq bookmark-save-flag t)
-  (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
-  (when (file-exists-p (concat user-emacs-directory "bookmarks"))
-    (bookmark-load bookmark-default-file t))
-  :bind(("C-c SPC b s" . bookmark-set)
-        ("C-c SPC b j" . bookmark-jump)
-        ("C-c SPC b l" . bookmark-bmenu-list)))
+    :defer t
+    :ensure nil
+    :config
+    (setq bookmark-save-flag t)
+    (setq bookmark-default-file (concat user-emacs-directory "bookmarks"))
+    (when (file-exists-p (concat user-emacs-directory "bookmarks"))
+      (bookmark-load bookmark-default-file t))
+    :bind(("C-c SPC b s" . bookmark-set)
+          ("C-c SPC b j" . bookmark-jump)
+          ("C-c SPC b l" . bookmark-bmenu-list)))
 
 (use-package emmet-mode
-    :ensure t
+    :defer t
     :hook (web-mode  . emmet-mode)
     :hook (css-mode  . emmet-mode)
     :hook (scss-mode . emmet-mode))
 
 (use-package magit
     :defer t
-    :ensure t
     :bind("C-c SPC g" . magit-status))
 
 (use-package undo-fu
-    :ensure t
+    :defer t
     :config
     (global-undo-tree-mode nil)
     (global-unset-key (kbd "C-z"))
-    (global-unset-key (kbd "C-x u"))
-    (global-set-key (kbd "C-x u")   'undo-fu-only-undo)
     (global-set-key (kbd "C-z")     'undo-fu-only-undo)
     (global-set-key (kbd "C-S-z")   'undo-fu-only-redo))
 
 (use-package toggle-quotes
-    :ensure t
     :bind("C-'" . toggle-quotes))
 
 ;; resize buffers
@@ -216,12 +225,12 @@
 (global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
 (use-package dumb-jump
+    :defer t
     :config
     (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-    (setq dumb-jump-force-searcher 'rg)
-    :ensure t)
+    (setq dumb-jump-force-searcher 'rg))
 
-(defhydra hydra-dump-jump (:exit t :hint nil)
+(defhydra hydra-dump-jump (:exit t :hint nil global-map "C-, j")
   "
    ^Goto^                    ^Config^
    ----------------------------------------------------------
@@ -237,26 +246,24 @@
   ("x" dumb-jump-go-prefer-external)
   ("z" dumb-jump-go-prefer-external-other-window)
   ("b" dumb-jump-back))
-(global-set-key (kbd "C-, j") 'hydra-dump-jump/body)
 
 ;; fzf
 (use-package fzf
-    :ensure t
+    :defer t
     :bind
     (("C-c SPC f f" . fzf)))
 
 (use-package evil-nerd-commenter
-    :ensure t
+    :defer t
     :bind (( "M-;"     . evilnc-comment-or-uncomment-lines)
            ( "C-c e l" . evilnc-quick-comment-or-uncomment-to-the-line)
            ( "C-c e c" . evilnc-copy-and-comment-lines)
            ( "C-c e p" . evilnc-comment-or-uncomment-paragraphs)))
 
-(use-package htmlize :ensure t)
+(use-package htmlize)
 
 (use-package irony
     :defer t
-    :ensure t
     :hook (c++-mode)
     :hook (c-mode)
     :hook (objc-mode)
@@ -265,18 +272,17 @@
 (setq c-default-style "linux")
 
 (use-package deadgrep
-    :ensure t
+    :defer t
     :bind("C-c SPC d" . deadgrep))
 
 (use-package exec-path-from-shell
-    :ensure t
     :config
     (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize)
       (exec-path-from-shell-copy-envs '("LANG" "GPG_AGENT_INFO" "SSH_AUTH_SOCK"))))
 
 (use-package easy-kill
-    :ensure t
+    :defer t
     :config
     (global-set-key [remap kill-ring-save] 'easy-kill)
     (global-set-key [remap mark-sexp] 'easy-mark))
@@ -310,7 +316,7 @@
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 
-(defhydra hydra-yasnippet ()
+(defhydra hydra-yasnippet (global-map "C-, SPC y")
   "
               ^YASnippets^
 --------------------------------------------
@@ -331,7 +337,6 @@
   ("g" yas/global-mode)
   ("m" yas/minor-mode)
   ("a" yas-reload-all))
-(global-set-key (kbd "C-, SPC y") 'hydra-yasnippet/body)
 
 ;; themes
 ;; (setq custom-safe-themes t)
@@ -342,30 +347,27 @@
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
 
-(use-package doom-themes
-    :ensure t
-    :init
-    (load-theme 'doom-gruvbox t)
-    (enable-theme 'doom-gruvbox)
-    (doom-themes-visual-bell-config))
+(use-package gruvbox-theme
+    :init (load-theme 'gruvbox-dark-medium t))
 
 (use-package lispy
-    :ensure t
+    :defer t
     :bind(("C-c SPC SPC e i" . lispy-mode)))
 
 (use-package geiser
-    :ensure t
+    :defer t
     :init
     (setq geiser-default-implementation 'racket))
 
-(use-package chruby :ensure t)
-(use-package rake :ensure t)
-(use-package bundler :ensure t)
-(use-package rspec-mode :ensure t)
-(use-package hyde :ensure t)
-(use-package easy-jekyll :ensure t)
+(use-package chruby :defer t)
+(use-package rake :defer t)
+(use-package bundler :defer t)
+(use-package rspec-mode :defer t)
+(use-package hyde :defer t)
+(use-package easy-jekyll :defer t)
 
 (use-package ruby-mode
+    :ensure f
     :defer t
     :init   (setq ruby-insert-encoding-magic-comment nil)
     :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
@@ -375,19 +377,17 @@
           ("C-c SPC SPC r h r"    . enh-ruby-mode)))
 
 (use-package ruby-tools
-    :ensure t
+    :defer t
     :init
     (setq ruby-indent-level 2)
     (setq ruby-deep-indent-paren nil))
 
 (use-package slim-mode
     :defer t
-    :ensure t
     :mode ("\\.slim\\'" . slim-mode))
 
 (use-package haml-mode
     :defer t
-    :ensure t
     :mode ("\\.haml\\'" . haml-mode))
 
 (setq easy-jekyll-markdown-extension "markdown")
@@ -397,7 +397,6 @@
 ;;;; js mode
 (use-package vue-mode
     :defer t
-    :ensure t
     :mode ("\\.vue\\'" . vue-mode)
     :config
     (add-hook 'mmm-mode-hook
@@ -407,7 +406,6 @@
 ;;pretier
 (use-package prettier-js
     :defer t
-    :ensure t
     :init
     (add-hook 'web-mode-hook #'(lambda ()
                                  (enable-minor-mode
@@ -416,6 +414,7 @@
     :hook (vue-mode     . prettier-js-mode))
 
 (use-package js-mode
+    :ensure f
     :mode ("\\.js\\'" . js-mode)
     :mode ("\\.jsx\\'" . js-mode))
 
@@ -435,10 +434,12 @@
 (global-set-key (kbd "C-c SPC [") 'previous-buffer)
 
 (use-package bufler
-  :ensure t
-  :bind ("C-x C-b" . bufler))
+    :defer t
+    :bind ("C-x C-b" . bufler))
 
 (use-package ibuffer
+    :defer t
+    :ensure f
     ;; :bind ("C-x C-b" . ibuffer)
     :init
     (autoload 'ibuffer "ibuffer" "List buffers." t)
@@ -479,11 +480,13 @@
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (use-package editorconfig
+    :defer t
     :ensure t
     :config
     (editorconfig-mode t))
 
 (use-package markdown-mode
+    :defer t
     :init (setq markdown-command "mark")
     :mode ("\\.text\\'" . markdown-mode)
     :mode ("\\.markdown\\'" . markdown-mode)
@@ -563,8 +566,8 @@
 
 (use-package yasnippet
     :defer t
-    :ensure t
     :config
+    (message "Here!!!!")
     (add-to-list 'load-path
              "~/.emacs.d/snippets")
     (yas-load-directory "~/.emacs.d/snippets")
@@ -573,12 +576,11 @@
 
 
 (use-package highlight-indentation
-    :ensure t
+    :defer t
     :bind (("<f9>" . highlight-indentation-mode)
            ("M-<f9>" . highlight-indentation-current-column-mode)))
 
 (use-package ivy
-    :ensure t
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
@@ -588,90 +590,77 @@
           ("C-c SPC i d f" . counsel-describe-function)
           ("C-c SPC i d v" . counsel-describe-variable)))
 
-(use-package ivy-xref
-  :ensure t
-  :init
-  ;; xref initialization is different in Emacs 27 - there are two different
-  ;; variables which can be set rather than just one
-  (when (>= emacs-major-version 27)
-    (setq xref-show-definitions-function #'ivy-xref-show-defs))
-  ;; Necessary in Emacs <27. In Emacs 27 it will affect all xref-based
-  ;; commands other than xref-find-definitions (e.g. project-find-regexp)
-  ;; as well
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
-(use-package web-mode :defer t :ensure t)
-(setq web-mode-enable-auto-pairing t)
-(setq web-mode-markup-indent-offset 2)
-(setq web-mode-css-indent-offset 2)
-(setq web-mode-code-indent-offset 2)
-(setq web-mode-php-indent-offset 2)
-;;snippets fo autoclose tags
-(setq web-mode-extra-snippets
-      '(("erb" . (("name" . ("beg" . "end"))))))
-(setq web-mode-extra-auto-pairs
-      '(("erb" . (("open" "close")))))
-(setq web-mode-enable-auto-indentation nil)
-(setq web-mode-content-types-alist
+(use-package ivy-rich :after ivy :init (ivy-rich-mode 1))
+(use-package web-mode
+    :defer t
+    :config
+    (setq web-mode-enable-auto-pairing t)
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-php-indent-offset 2)
+    ;;snippets fo autoclose tags
+    (setq web-mode-extra-snippets
+          '(("erb" . (("name" . ("beg" . "end"))))))
+    (setq web-mode-extra-auto-pairs
+          '(("erb" . (("open" "close")))))
+    (setq web-mode-enable-auto-indentation nil)
+    (setq web-mode-content-types-alist
           '(("jsx" . "\\.js[x]?\\'")))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-(add-hook 'web-mode-hook 'emmet-mode)
+    (add-hook 'web-mode-hook 'emmet-mode))
 
 ;; crystal mode
-(use-package crystal-mode :ensure t)
+(use-package crystal-mode :defer t)
 
-(use-package cider
-    :defer t
-    :ensure t
-    :init)
+(use-package cider :defer t)
 
 (use-package clojure-mode
     :defer t
-    :ensure t
     :config
     (setq clojure-indent-style 'always-indent))
 
 ;; (use-package org-plus-contrib
 ;;     :ensure t)
-(use-package org-install
-    :init
-  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-  (setq org-agenda-files (list (getenv "ORG_TODO_PATH")))
-  (add-hook 'org-mode-hook 'toggle-truncate-lines)
-  (setq org-src-fontify-natively nil)
-  (setq org-html-htmlize-output-type nil) ;; output without
-  (defface org-block
-      '((t (:background "#000000")))
-    "Face used for the source block background.")
-  :bind(("C-c SPC o l" . org-store-link)
-        ("C-c SPC o a" . org-agenda)
-        ("C-c SPC o c" . org-capture)
-        ("C-c SPC o b" . org-iswitchb)))
+(use-package org
+    :defer f
+    :config
+    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+    (setq org-agenda-files (list (getenv "ORG_TODO_PATH")))
+    (add-hook 'org-mode-hook 'toggle-truncate-lines)
+    (setq org-src-fontify-natively nil)
+    (setq org-html-htmlize-output-type nil) ;; output without
+    (defface org-block
+        '((t (:background "#000000")))
+      "Face used for the source block background.")
+    :bind(("C-c SPC o l" . org-store-link)
+          ("C-c SPC o a" . org-agenda)
+          ("C-c SPC o c" . org-capture)
+          ("C-c SPC o b" . org-iswitchb)))
 
 (use-package walkman
-    :ensure t
+    :defer t
     :config
     (setq walkman-keep-headers t))
 
-(use-package systemd :ensure t)
-(use-package ox-reveal :ensure t)
+(use-package systemd :defer t)
+(use-package ox-reveal :defer t)
 
 (add-to-list 'exec-path "~/.local/share/elixir-ls/release")
 (use-package lsp-mode
     :defer t
-    :ensure t
     :diminish lsp-mode
     :init
     (setq lsp-auto-guess-root t)
@@ -679,6 +668,8 @@
     (setq lsp-enable-xref t)
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
+    (setq lsp-rust-server 'rust-analyzer)
+    (setq lsp-rust-analyzer-server-display-inlay-hints 1)
     :hook ((vue-mode    . lsp-deferred)
            (ruby-mode   . lsp-deferred)
            (rust-mode   . lsp-deferred)
@@ -694,36 +685,39 @@
 (global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
-(use-package lsp-ui :ensure t :commands lsp-ui-mode)
-(setq lsp-rust-server 'rust-analyzer)
-(setq lsp-rust-analyzer-server-display-inlay-hints 1)
-(setq lsp-ui-sideline-show-code-actions nil)
-(setq lsp-ui-sideline-show-diagnostics nil)
-(setq lsp-ui-sideline-show-hover nil)
-(setq lsp-ui-doc-enable nil)
+
+(use-package lsp-ui
+    :commands lsp-ui-mode
+    :after lsp-mode
+    :config
+    (setq lsp-ui-sideline-show-code-actions nil)
+    (setq lsp-ui-sideline-show-diagnostics nil)
+    (setq lsp-ui-sideline-show-hover nil)
+    (setq lsp-ui-doc-enable nil))
 
 (global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
 (global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list :ensure t)
-
-(setq treemacs-no-png-images t)
+(use-package lsp-treemacs
+    :commands lsp-treemacs-errors-list
+    :config
+    (setq treemacs-no-png-images t))
 
 (use-package lsp-dart
     :defer t
-    :ensure t
     :hook (dart-mode . lsp-deferred))
 
 
 ;;;; go settings
-(use-package go-mode :ensure t)
+(use-package go-mode
+    :defer t
+    :config (setq gofmt-before-save t))
 
 ;; lsp go hook
 ;; (add-hook 'go-mode-hook
 ;;           (lambda ()
 ;;              (add-hook 'before-save-hook 'lsp-format-buffer)))
-(setq gofmt-before-save t)
 
 ;;;;; elixir module
 (use-package elixir-mode
@@ -741,65 +735,54 @@
 
 ;; haskell
 (use-package intero
-    :ensure t
-    :init (intero-global-mode 1))
+    :hook (haskell-mode . intero-mode))
 
 ;;;; rust settings
 (use-package rust-mode
     :mode "\\.rs\\'"
-    :ensure t)
+    :config (setq rust-format-on-save t))
 
-(add-hook 'before-save-hook
-          (lambda ()
-            (when (eq 'rust-mode major-mode)
-              (rust-format-buffer))))
-
-(use-package smart-semicolon :ensure t)
+(use-package smart-semicolon :defer t)
 
 (use-package cargo
     :commands cargo-minor-mode
     :diminish cargo-minor-mode
     :ensure t
-    :init
-    (add-hook 'rust-mode-hook 'cargo-minor-mode))
+    :hook (rust-mode . cargo-minor-mode))
 
 (use-package toml-mode
-    :ensure t
     :mode (("\\.toml\\'" . toml-mode)))
- 
+
 ;;;;; python
 (use-package python-black
     :demand t
-    :ensure t
-    :after python
+    :after python-mode
     :bind("C-c SPC SPC p b r" . python-black-region)
     :bind("C-c SPC SPC p b b" . python-black))
 
-(use-package python-mode
-    :ensure t)
+(use-package python-mode)
 
 (add-hook 'python-mode-hook
           (lambda ()
             (setq-local flycheck-checker 'python-flake8)))
 
-(use-package pyvenv :ensure t)
-
-(use-package auto-virtualenv :ensure t)
-(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
-;; Activate on changing buffers
-(add-hook 'window-configuration-change-hook 'auto-virtualenv-set-virtualenv)
-;; Activate on focus in
-(add-hook 'focus-in-hook 'auto-virtualenv-set-virtualenv)
-(add-hook 'python-mode-hook 'highlight-indentation-mode)
-(add-hook 'python-mode-hook 'pyvenv-mode)
+(use-package pyvenv)
+(use-package auto-virtualenv
+    :hook ((python-mode . auto-virtualenv-set-virtualenv)
+           ;; Activate on changing buffers
+           (window-configuration-change . auto-virtualenv-set-virtualenv)
+           ;; Activate on focus in
+           (focus-in-hook . auto-virtualenv-set-virtualenv)
+           (python-mode . highlight-indentation-mode)
+           (python-mode . pyvenv-mode)))
 
 
 ;;;;;;; lisp
 (remove-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
 
 (use-package sly
-    :ensure t
-    :init
+    :defer t
+    :config
     (setq org-babel-lisp-eval-fn 'sly-eval)
     (setq inferior-lisp-program "ros -Q run")
     :hook (lisp-mode . sly-editing-mode))
@@ -856,20 +839,21 @@
       (flycheck-pos-tip-mode)))
 
 ;; eval langs in go
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (ruby . t)
-   (dot . t)
-   (gnuplot . t)
-   (lisp . t)
-   (scheme . t)
-   (clojure . t)
-   (python . t)))
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (ruby . t)
+     (dot . t)
+     (gnuplot . t)
+     (lisp . t)
+     (scheme . t)
+     (clojure . t)
+     (python . t)))
 
-(setq org-log-done 'time)
-(setq org-clock-persist 'history)
-(org-clock-persistence-insinuate)
+  (setq org-log-done 'time)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate))
 
 (require 'dap-python)
 
@@ -879,6 +863,21 @@
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 (use-package dockerfile-mode :ensure t)
+
+(use-package docker
+  :bind ("C-c SPC SPC d" . docker))
+
+(use-package helpful
+    :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-callable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
+
 ;;copy without selection
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy a single line instead."
