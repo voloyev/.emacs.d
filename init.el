@@ -104,7 +104,6 @@
 
 ;;Indent settings
 (setq-default indent-tabs-mode   nil)
-(setq tab-width                    2)
 (setq-default tab-width            2)
 (setq-default standart-indent      2)
 (setq-default lisp-body-indent     2)
@@ -125,9 +124,8 @@
 (use-package flycheck :init (global-flycheck-mode t))
 
 (use-package company
-    :init
-  (setq company-idle-delay 0.1)
-  (add-hook 'after-init-hook 'global-company-mode))
+    :init (setq company-idle-delay 0.1)
+    :hook (after-init . global-company-mode))
 
 (use-package direnv :defer t :config (direnv-mode))
 
@@ -139,19 +137,21 @@
 
 (use-package fixmee
     :defer t
-    :init (require 'button-lock)
-    :config (global-fixmee-mode 1))
+    :config
+    (require 'button-lock)
+    (global-fixmee-mode 1))
 
 (use-package whitespace
+    :ensure nil
     :defer t
     :config
-  (setq whitespace-line-column 250)
-  (setq whitespace-display-mappings
-        '((space-mark 32 [183] [46])
-          (newline-mark 10 [8629 10])
-          (tab-mark 9 [9655 9] [92 9])))
-  :bind(("C-c SPC w s" . whitespace-mode)
-        ("C-c SPC w c" . whitespace-cleanup)))
+    (setq whitespace-line-column 250)
+    (setq whitespace-display-mappings
+          '((space-mark 32 [183] [46])
+            (newline-mark 10 [8629 10])
+            (tab-mark 9 [9655 9] [92 9])))
+    :bind(("C-c SPC w s" . whitespace-mode)
+          ("C-c SPC w c" . whitespace-cleanup)))
 
 (use-package hydra :defer t)
 (use-package avy :defer t)
@@ -585,12 +585,17 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
     :bind(("C-s"           . swiper)
+          ("M-x"           . counsel-M-x)
           ("M-y"           . counsel-yank-pop)
           ("C-x b"         . ivy-switch-buffer)
           ("C-c SPC i d f" . counsel-describe-function)
           ("C-c SPC i d v" . counsel-describe-variable)))
 
 (use-package ivy-rich :after ivy :init (ivy-rich-mode 1))
+(use-package prescient :defer t)
+(use-package ivy-prescient :defer t :after ivy)
+(use-package company-prescient :defer t :after company)
+
 (use-package web-mode
     :defer t
     :config
@@ -669,15 +674,15 @@
     (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
     (setq lsp-rust-server 'rust-analyzer)
-    (setq lsp-rust-analyzer-server-display-inlay-hints 1)
-    :hook ((vue-mode    . lsp-deferred)
-           (ruby-mode   . lsp-deferred)
-           (rust-mode   . lsp-deferred)
-           (js-mode     . lsp-deferred)
-           (python-mode . lsp-deferred)
-           (go-mode     . lsp-deferred)
-           (latex-mode  . lsp-deferred)
-           (elixir-mode . lsp-deferred)
+    (setq lsp-rust-analyzer-server-display-inlay-hints t)
+    :hook ((vue-mode    . lsp)
+           (ruby-mode   . lsp)
+           (rust-mode   . lsp)
+           (js-mode     . lsp)
+           (python-mode . lsp)
+           (go-mode     . lsp)
+           (latex-mode  . lsp)
+           (elixir-mode . lsp)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
 
@@ -698,26 +703,26 @@
 (global-set-key (kbd "C-c SPC f d") 'lsp-ui-peek-find-definitions)
 (global-set-key (kbd "C-c SPC f r") 'lsp-ui-peek-find-references)
 
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol :ensure t)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol :after lsp)
 (use-package lsp-treemacs
+    :after lsp
     :commands lsp-treemacs-errors-list
     :config
     (setq treemacs-no-png-images t))
 
 (use-package lsp-dart
+    :after lsp
     :defer t
     :hook (dart-mode . lsp-deferred))
+
+(use-package dap-mode :defer t)
+(use-package dap-python :ensure nil :defer t :after dap-mode)
 
 
 ;;;; go settings
 (use-package go-mode
     :defer t
     :config (setq gofmt-before-save t))
-
-;; lsp go hook
-;; (add-hook 'go-mode-hook
-;;           (lambda ()
-;;              (add-hook 'before-save-hook 'lsp-format-buffer)))
 
 ;;;;; elixir module
 (use-package elixir-mode
@@ -760,7 +765,7 @@
     :bind("C-c SPC SPC p b r" . python-black-region)
     :bind("C-c SPC SPC p b b" . python-black))
 
-(use-package python-mode)
+(use-package python-mode :defer t) 
 
 (add-hook 'python-mode-hook
           (lambda ()
@@ -855,7 +860,6 @@
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate))
 
-(require 'dap-python)
 
 (use-package tree-sitter :ensure t)
 (use-package tree-sitter-langs :ensure t)
