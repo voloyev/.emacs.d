@@ -685,7 +685,7 @@
            (elixir-mode . lsp)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
-
+(setq lsp-log-io t)
 (setq lsp-keymap-prefix "C-c SPC .")
 (global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
@@ -715,9 +715,11 @@
     :defer t
     :hook (dart-mode . lsp-deferred))
 
-(use-package dap-mode :defer t)
-(use-package dap-python :ensure nil :defer t :after dap-mode)
-
+(use-package dap-mode
+    :defer t
+    :init
+    (require 'dap-python)
+    (require 'dap-ruby))
 
 ;;;; go settings
 (use-package go-mode
