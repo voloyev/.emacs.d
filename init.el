@@ -589,7 +589,7 @@
 
 (use-package ivy-rich :after ivy :init (ivy-rich-mode 1))
 (use-package prescient :defer t)
-(use-package ivy-prescient :defer t :after ivy)
+(use-package ivy-prescient :defer t)
 (use-package company-prescient :defer t :after company)
 
 (use-package web-mode
