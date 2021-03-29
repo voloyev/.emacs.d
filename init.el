@@ -347,8 +347,7 @@
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
 
-(use-package gruvbox-theme
-    :init (load-theme 'gruvbox-dark-medium t))
+(use-package zenburn-theme :init (load-theme 'zenburn t))
 
 (use-package lispy
     :defer t
@@ -568,9 +567,6 @@
     :defer t
     :config
     (message "Here!!!!")
-    (add-to-list 'load-path
-             "~/.emacs.d/snippets")
-    (yas-load-directory "~/.emacs.d/snippets")
     (yas-reload-all)
     (add-hook 'prog-mode-hook #'yas-minor-mode))
 
@@ -719,12 +715,19 @@
     :defer t
     :init
     (require 'dap-python)
-    (require 'dap-ruby))
+    (require 'dap-ruby)
+    (require 'dap-go))
 
 ;;;; go settings
-(use-package go-mode
-    :defer t
-    :config (setq gofmt-before-save t))
+(use-package go-mode)
+
+(defun voloyev/lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'voloyev/lsp-go-install-save-hooks)
+
+
+
 
 ;;;;; elixir module
 (use-package elixir-mode
