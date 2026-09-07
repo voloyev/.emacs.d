@@ -4,8 +4,8 @@
 ;;; Name: My Emacs config
 ;;; Autor: Volodymyr Yevtushenko
 ;;; Code:
-;; -(setq gc-cons-threshold most-positive-fixnum
-;;       gc-cons-percentage 0.6)
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
 
 ;; save customization in separate file
 (defun efs/display-startup-time ()
@@ -25,7 +25,7 @@
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-;; (package-initialize)
+(package-initialize)
 
 (setq load-prefer-newer t)
 (add-to-list 'load-path "~/.emacs.d/modules")
@@ -52,7 +52,7 @@
 (setq auto-save-default         nil)
 (setq auto-save-list-file-name  nil)
 (setq inhibit-splash-screen       0)
-(setq ingibit-startup-message     0)
+(setq inhibit-startup-message     0)
 (setq auto-window-vscroll       nil)
 (setq x-select-enable-clipboard   t)
 (setq search-highlight            t)
@@ -83,10 +83,11 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(cond ((memq window-system '(ns mac))
-       (set-face-attribute 'default nil :font "mononoki Nerd Font 16"))
-      ((memq window-system '(x))
-       (set-face-attribute 'default nil :font "mononoki Nerd Font 14")))
+(when (find-font (font-spec :name "Hack Nerd Font"))
+  (cond ((memq window-system '(ns mac))
+         (set-face-attribute 'default nil :font "Hack Nerd Font 13"))
+        ((memq window-system '(x))
+         (set-face-attribute 'default nil :font "Hack Nerd Font 14"))))
 
 (setq-default line-spacing 1)
 
@@ -105,19 +106,19 @@
 ;;Indent settings
 (setq-default indent-tabs-mode   nil)
 (setq-default tab-width            2)
-(setq-default standart-indent      2)
+(setq-default standard-indent      2)
 (setq-default lisp-body-indent     2)
 (setq-default css-indent-offset    2)
 (setq-default scss-indent-offset   2)
 (setq-default python-indent-offset 4)
 
-(use-package doom-modeline
-  :config
-  (doom-modeline-mode 1)
-  (setq doom-modeline-height 12)
-  (set-face-attribute 'mode-line nil  :height 80)
-  (set-face-attribute 'mode-line-inactive nil :height 80))
-
+;; (use-package doom-modeline
+;;   :config
+;;   (doom-modeline-mode 1)
+;;   (setq doom-modeline-height 12)
+;;   (set-face-attribute 'mode-line nil  :height 80)
+;;   (set-face-attribute 'mode-line-inactive nil :height 80))
+;; FIXME dsds
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq lisp-indent-function  'common-lisp-indent-function)
 
@@ -151,7 +152,7 @@
             (newline-mark 10 [8629 10])
             (tab-mark 9 [9655 9] [92 9])))
     :bind(("C-c SPC w s" . whitespace-mode)
-          ("C-c SPC w c" . whitespace-cleanup)))
+           ("C-c SPC w c" . whitespace-cleanup)))
 
 (use-package hydra :defer t)
 (use-package avy :defer t)
@@ -210,10 +211,15 @@
 (use-package undo-fu
     :defer t
     :config
-    (global-undo-tree-mode nil)
-    (global-unset-key (kbd "C-z"))
-    (global-set-key (kbd "C-z")     'undo-fu-only-undo)
-    (global-set-key (kbd "C-S-z")   'undo-fu-only-redo))
+    (global-unset-key (kbd "C-c z"))
+    (global-set-key (kbd "C-c z")     'undo-fu-only-undo)
+    (global-set-key (kbd "C-c Z")   'undo-fu-only-redo))
+
+(use-package vundo
+    :defer t
+    :bind ("C-c u" . vundo)
+    :config
+    (setq vundo-glyph-alist vundo-unicode-symbols))
 
 (use-package toggle-quotes
     :bind("C-'" . toggle-quotes))
@@ -224,28 +230,6 @@
 (global-set-key (kbd "C-c C-c <left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-c C-c <right>") 'enlarge-window-horizontally)
 
-(use-package dumb-jump
-    :defer t
-    :config
-    (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-    (setq dumb-jump-force-searcher 'rg))
-
-(defhydra hydra-dump-jump (:exit t :hint nil global-map "C-, j")
-  "
-   ^Goto^                    ^Config^
-   ----------------------------------------------------------
-   [_o_] goto other window   [_z_] dumb-jump-go-prefer-external-other-window
-   [_j_] goto                [_b_] dumb-jump-back
-   [_q_] quick look          [_x_] dumb-jump-go-prefer-external
-   [_i_] goto prompt
-"
-  ("o" dumb-jump-go-other-window)
-  ("j" dumb-jump-go)
-  ("q" dumb-jump-quick-look)
-  ("i" dumb-jump-go-prompt)
-  ("x" dumb-jump-go-prefer-external)
-  ("z" dumb-jump-go-prefer-external-other-window)
-  ("b" dumb-jump-back))
 
 ;; fzf
 (use-package fzf
@@ -334,8 +318,8 @@
   ("n" yas-new-snippet)
   ("t" yas-tryout-snippet)
   ("l" yas-describe-tables)
-  ("g" yas/global-mode)
-  ("m" yas/minor-mode)
+  ("g" yas-global-mode)
+  ("m" yas-minor-mode)
   ("a" yas-reload-all))
 
 ;; themes
@@ -346,8 +330,9 @@
 ;;     :init
 ;;     (load-theme 'sexy-monochrome t)
 ;;     (enable-theme 'sexy-monochrome))
+;; (use-package zenburn-theme :init (load-theme 'zenburn t))
+(use-package gruvbox-theme :init (load-theme 'gruvbox-dark-soft t))
 
-(use-package zenburn-theme :init (load-theme 'zenburn t))
 
 (use-package lispy
     :defer t
@@ -360,13 +345,16 @@
 
 (use-package chruby :defer t)
 (use-package rake :defer t)
-(use-package bundler :defer t)
 (use-package rspec-mode :defer t)
 (use-package hyde :defer t)
 (use-package easy-jekyll :defer t)
+(use-package robe :defer t)
+(use-package yard-mode :defer t)
+(use-package inf-ruby :defer t)
+(use-package enh-ruby-mode :defer t)
 
 (use-package ruby-mode
-    :ensure f
+    :ensure nil
     :defer t
     :init   (setq ruby-insert-encoding-magic-comment nil)
     :mode ("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'" . ruby-mode)
@@ -413,7 +401,7 @@
     :hook (vue-mode     . prettier-js-mode))
 
 (use-package js-mode
-    :ensure f
+    :ensure nil
     :mode ("\\.js\\'" . js-mode)
     :mode ("\\.jsx\\'" . js-mode))
 
@@ -438,7 +426,7 @@
 
 (use-package ibuffer
     :defer t
-    :ensure f
+    :ensure nil
     ;; :bind ("C-x C-b" . ibuffer)
     :init
     (autoload 'ibuffer "ibuffer" "List buffers." t)
@@ -560,7 +548,7 @@
 
 (setq projectile-project-root-files (remove "WORKSPACE" projectile-project-root-files))
 
-(add-hook 'php-mode-hook (lambda () c-basic-offset 2))
+(add-hook 'php-mode-hook (lambda () (setq c-basic-offset 2)))
 (add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 (use-package yasnippet
@@ -577,17 +565,25 @@
            ("M-<f9>" . highlight-indentation-current-column-mode)))
 
 (use-package ivy
+    :init
+    (ivy-mode 1)
     :config
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
-    :bind(("C-s"           . swiper)
-          ("M-x"           . counsel-M-x)
-          ("M-y"           . counsel-yank-pop)
-          ("C-x b"         . ivy-switch-buffer)
-          ("C-c SPC i d f" . counsel-describe-function)
-          ("C-c SPC i d v" . counsel-describe-variable)))
+    :bind(("C-x b" . ivy-switch-buffer)))
 
-(use-package ivy-rich :after ivy :init (ivy-rich-mode 1))
+(use-package swiper
+    :after ivy
+    :bind ("C-s" . swiper))
+
+(use-package counsel
+    :after ivy
+    :bind (("M-x"           . counsel-M-x)
+           ("M-y"           . counsel-yank-pop)
+           ("C-c SPC i d f" . counsel-describe-function)
+           ("C-c SPC i d v" . counsel-describe-variable)))
+
+(use-package ivy-rich :after (ivy counsel) :init (ivy-rich-mode 1))
 (use-package prescient :defer t)
 (use-package ivy-prescient :defer t)
 (use-package company-prescient :defer t :after company)
@@ -636,7 +632,7 @@
 ;; (use-package org-plus-contrib
 ;;     :ensure t)
 (use-package org
-    :defer f
+    :defer t
     :config
     (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
     (setq org-agenda-files (list (getenv "ORG_TODO_PATH")))
@@ -664,26 +660,25 @@
     :defer t
     :diminish lsp-mode
     :init
+    (setq lsp-keymap-prefix "C-c SPC .")
     (setq lsp-auto-guess-root t)
-    (setq lsp-diagnostic-package 'flycheck) ; Use lsp-ui and flycheck
+    (setq lsp-diagnostics-provider :flycheck) ; Use lsp-ui and flycheck
     (setq lsp-enable-xref t)
-    (setq lsp-prefer-capf t)
     (setq lsp-enable-indentation nil)
+    (setq lsp-idle-delay 0.5)
     (setq lsp-rust-server 'rust-analyzer)
     (setq lsp-rust-analyzer-server-display-inlay-hints t)
-    :hook ((vue-mode    . lsp)
-           (ruby-mode   . lsp)
-           (rust-mode   . lsp)
-           (js-mode     . lsp)
-           (python-mode . lsp)
-           (go-mode     . lsp)
-           (latex-mode  . lsp)
-           (elixir-mode . lsp)
+    :hook ((vue-mode    . lsp-deferred)
+           (ruby-mode   . lsp-deferred)
+           (rust-mode   . lsp-deferred)
+           (js-mode     . lsp-deferred)
+           (python-mode . lsp-deferred)
+           (go-mode     . lsp-deferred)
+           (latex-mode  . lsp-deferred)
+           (elixir-mode . lsp-deferred)
+           (haskell-mode . lsp-deferred)
            (lsp-mode    . lsp-enable-which-key-integration))
     :commands (lsp lsp-deferred))
-(setq lsp-log-io t)
-(setq lsp-keymap-prefix "C-c SPC .")
-(global-set-key (kbd "C-c SPC .") 'lsp-mode-map)
 
 (add-hook 'lsp-before-initialize-hook 'chruby-use-corresponding)
 
@@ -706,17 +701,12 @@
     :config
     (setq treemacs-no-png-images t))
 
+(use-package dart-mode :defer t)
+
 (use-package lsp-dart
     :after lsp
     :defer t
     :hook (dart-mode . lsp-deferred))
-
-(use-package dap-mode
-    :defer t
-    :init
-    (require 'dap-python)
-    (require 'dap-ruby)
-    (require 'dap-go))
 
 ;;;; go settings
 (use-package go-mode)
@@ -744,8 +734,9 @@
      'auto-mode-alist '("\\.exs\\'" . elixir-mode)))
 
 ;; haskell
-(use-package intero
-    :hook (haskell-mode . intero-mode))
+(use-package haskell-mode
+    :defer t
+    :mode ("\\.hs\\'" . haskell-mode))
 
 ;;;; rust settings
 (use-package rust-mode
@@ -770,7 +761,7 @@
     :bind("C-c SPC SPC p b r" . python-black-region)
     :bind("C-c SPC SPC p b b" . python-black))
 
-(use-package python-mode :defer t) 
+(use-package python-mode :defer t)
 
 (add-hook 'python-mode-hook
           (lambda ()
@@ -778,13 +769,10 @@
 
 (use-package pyvenv)
 (use-package auto-virtualenv
-    :hook ((python-mode . auto-virtualenv-set-virtualenv)
-           ;; Activate on changing buffers
-           (window-configuration-change . auto-virtualenv-set-virtualenv)
-           ;; Activate on focus in
-           (focus-in-hook . auto-virtualenv-set-virtualenv)
-           (python-mode . highlight-indentation-mode)
-           (python-mode . pyvenv-mode)))
+    :hook ((python-mode . highlight-indentation-mode)
+           (python-mode . pyvenv-mode))
+    :config
+    (auto-virtualenv-setup))
 
 
 ;;;;;;; lisp
@@ -843,10 +831,15 @@
 ;; deal with escaping
 (setq sp-escape-quotes-after-insert nil)
 
-(eval-after-load 'flycheck
-  (if (display-graphic-p)
-      (flycheck-popup-tip-mode)
-      (flycheck-pos-tip-mode)))
+(use-package flycheck-popup-tip
+    :if (display-graphic-p)
+    :after flycheck
+    :hook (flycheck-mode . flycheck-popup-tip-mode))
+
+(use-package flycheck-pos-tip
+    :if (not (display-graphic-p))
+    :after flycheck
+    :hook (flycheck-mode . flycheck-pos-tip-mode))
 
 ;; eval langs in go
 (with-eval-after-load 'org
